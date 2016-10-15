@@ -1,0 +1,57 @@
+$fontColor: #fff;
+$backgroundCol: #000;
+$tech-font: Monospace;
+$brand-font: Sans-serif;
+$text-lrg: 40px;
+$text-med: 24px;
+
+body {
+  text-align: center;
+  font-family: $brand-font;
+  background-color: $backgroundCol;
+  color: $fontColor;
+  margin: 0px;
+  font-size: $text-med;
+  overflow: hidden;
+}
+
+.align-vert-center{
+  top:18%;
+  position: relative;
+  vertical-align: middle;
+}
+
+.text-lrg{
+  font-size: $text-lrg;
+}
+
+#info {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  display: block;
+}
+
+#info a {
+  color: #f00;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer
+}
+
+h1{
+  color: $fontColor
+}
+
+
+
+.full-screen{
+  position: absolute;
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left:0px;
+}
