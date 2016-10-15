@@ -5,7 +5,8 @@ body {
   color: #fff;
   margin: 0px;
   font-size: 24px;
-  overflow: hidden; }
+  overflow: hidden;
+  text-shadow: black; }
 
 .align-vert-center {
   top: 18%;
@@ -13,7 +14,11 @@ body {
   vertical-align: middle; }
 
 .text-lrg {
-  font-size: 40px; }
+  font-size: 50px; }
+
+#splash-bg {
+  background-color: black;
+  opacity: .7; }
 
 #info {
   position: absolute;

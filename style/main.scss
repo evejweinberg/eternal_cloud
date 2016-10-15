@@ -2,8 +2,9 @@ $fontColor: #fff;
 $backgroundCol: #000;
 $tech-font: Monospace;
 $brand-font: Sans-serif;
-$text-lrg: 40px;
-$text-med: 24px;
+$text-lrg: 50px;
+$text-med: 34px;
+$text-sm: 24px;
 
 body {
   text-align: center;
@@ -11,8 +12,9 @@ body {
   background-color: $backgroundCol;
   color: $fontColor;
   margin: 0px;
-  font-size: $text-med;
+  font-size: $text-sm;
   overflow: hidden;
+  text-shadow: black;
 }
 
 .align-vert-center{
@@ -23,6 +25,11 @@ body {
 
 .text-lrg{
   font-size: $text-lrg;
+}
+
+#splash-bg{
+  background-color: black;
+  opacity: .7;
 }
 
 #info {
