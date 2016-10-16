@@ -1,8 +1,9 @@
 $fontColor: #fff;
 $backgroundCol: #000;
 $tech-font: Monospace;
-$brand-font: Sans-serif;
-$text-lrg: 50px;
+$brand-font: Poppins;
+// font-family: 'Poppins', sans-serif;
+$text-lrg: 80px;
 $text-med: 34px;
 $text-sm: 24px;
 
@@ -14,22 +15,61 @@ body {
   margin: 0px;
   font-size: $text-sm;
   overflow: hidden;
-  text-shadow: black;
+  text-shadow: 3px 3px 12px rgba(0,0,0,.6);
+  // padding: 20px;
+
+}
+
+#hex-video{
+  background-blend-mode: color-dodge;
+
 }
 
 .align-vert-center{
-  top:18%;
+  top:13%;
   position: relative;
   vertical-align: middle;
+}
+
+#date{
+    margin-top: -24px;
+}
+
+#splash-tagline{
+    margin-top: -24px;
+
+}
+
+button{
+  background-color: black;
+  color: white;
+  font-size: $text-med;
+}
+
+button:hover{
+  background-color: #14cec2;
 }
 
 .text-lrg{
   font-size: $text-lrg;
 }
 
+.text-med{
+  font-size: $text-med;
+}
+
+.text-sm{
+  font-size: $text-sm;
+}
+
+mark {
+    background-color: black;
+    color: white;
+}
+
 #splash-bg{
-  background-color: black;
-  opacity: .7;
+  background-color: blue;
+  opacity: 0;
 }
 
 #info {

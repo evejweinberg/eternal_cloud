@@ -15,22 +15,22 @@ if(dd<10) {
     dd='0'+dd
 }
 
-// if(mm<10) {
-//     mm='0'+mm
-// }
 
-today = monthNames[mm]+', '+dd+', '+yyyy;
+today = '<mark>' +monthNames[mm]+' '+dd+', '+yyyy + + '</mark>';
 
 document.getElementById('date').innerHTML = today
 var tickup = setInterval(function(){
 
-  document.getElementById('date').innerHTML = monthNames[mm]+', '+dd+', '+ goUp
+  document.getElementById('date').innerHTML = '<mark>' + monthNames[mm]+' '+dd+', '+ goUp + '</mark>'
   goUp ++
   if (goUp == 2045){
     clearInterval(tickup)
-    document.getElementById('date').innerHTML = monthNames[mm]+', '+dd+', '+ 2045
+    document.getElementById('date').innerHTML = '<mark>' + monthNames[mm]+' '+dd+', '+ 2045 + '</mark>'
 
   }
 },300)
 // document.write(today);
-console.log(today)
+// console.log(today)
+
+
+document.getElementById("enter-button").addEventListener("click", enterEC);

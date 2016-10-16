@@ -9,34 +9,44 @@
     <meta property="og:image" content="https://worlds2.marpi.pl/assets/image.jpg" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="style/main.css" media="screen" title="no title">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:500" rel="stylesheet">
 
 </head>
 
 <body>
     <div class="splash full-screen">
         <div class="splash full-screen" id="splash-bg"></div>
+        <!-- <div class="splash full-screen" id="hex-video"><video src="assets/bg.mp4" autoplay loop>    </video></div> -->
         <div class="align-vert-center">
 
-
             <p>
+                <mark>
                 TODAY'S DATE
+              </mark>
             </p>
             <p id='date' class="text-lrg">
+                <mark>
+                </mark>
 
             </p>
             <br><br>
             <div class="splash-brand">
-                <p id="splash-name">
+                <p id="splash-name" class="text-med">
+                    <mark>
                     Eternal Cloud <sup>&#174</sup>
+                  </mark>
                 </p>
-                <p>
+                <p class="text-sm" id="splash-tagline">
+                    <mark>
                     Your new neural neighborhood
+                  </mark>
                 </p>
 
             </div>
             <br><br><br>
             <div class="splash-enter">
-                Scroll to enter
+                <button type="button" id="enter-button" name="button">ENTER</button>
+
                 <br>
                 <p class="text-lrg">
                     <!-- &darr -->
@@ -58,6 +68,8 @@
     <script src="js/third-party/TweenMax.min.js"></script>
 
     <script src="js/utils/helpers.js"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/scene1.js"></script>
     <script src="js/main.js"></script>
     <script src="js/splash.js"></script>
 </body>

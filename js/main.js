@@ -7,7 +7,7 @@ var mouseEvent = {
 var raycaster = new THREE.Raycaster();
 var target = new THREE.Object3D();
 var orgGeometry, object
-var pointLight
+var pointLight, light2;
 
 init();
 setup();
@@ -38,9 +38,9 @@ function init() {
 
     controls = new THREE.OrbitControls(camera);
     controls.autoRotate = true;
-    controls.autoRotateSpeed = -1
-    controls.maxPolarAngle = Math.PI / 2
-    controls.maxDistance = 30
+    controls.autoRotateSpeed = -.5
+    // controls.maxPolarAngle = Math.PI / 2
+    // controls.maxDistance = 30
 
     if (WEBVR.isAvailable() === true) {
         controls = new THREE.VRControls(camera);
@@ -131,14 +131,15 @@ function setup() {
     });
     object = new THREE.Mesh(geometry, material);
     object.position.y = 6
-    scene.add(object);
+    // scene.add(object);
 
 
 
     // cubes
-
-    var geo = new THREE.BoxGeometry(.3, .1, .1, 1, 1, 1)
+var geo = new THREE.SphereBufferGeometry( .2, 8, 8 );
+    // var geo = new THREE.BoxGeometry(.3, .1, .1, 1, 1, 1)
     group = new THREE.Object3D();
+      for (var _b = 0; _b < 3; _b++) {
     for (var _x = -13; _x <= 13; _x++) {
         for (var _y = -0; _y <= 0; _y++) {
             for (var _z = -13; _z <= 13; _z++) {
@@ -153,13 +154,14 @@ function setup() {
                 mesh.rotation.z = 0;
 
                 mesh.position.x = _x
-                mesh.position.y = _y - 2
+                mesh.position.y = _y - 2 + (_b*5)+ (Math.random(24))
                 mesh.position.z = _z
 
                 mesh.lookAt(scene.position)
 
                 group.add(mesh);
             }
+          }
         }
     }
 
@@ -177,10 +179,11 @@ function setup() {
 
     var light = new THREE.DirectionalLight(0xffffff);
     light.position.set(-1, 1.5, 0.5);
-    //scene.add(light);
+    scene.add(light);
 
-    //pointLight = new THREE.PointLight()
-    //target.add(pointLight)
+    pointLight = new THREE.PointLight()
+    pointLight.position.set(1,2,2)
+    target.add(pointLight)
 
     scene.add(target)
 
@@ -209,23 +212,40 @@ function jumpCam() {
 var time = 0;
 
 function render() {
-    time += 0.1
+
+  if (scene1Transition){
+    var moveupCam = setInterval(function(){
+        camera.position.y -= .02
+        console.log(camera.position.y)
+        if (camera.position.y < -6){
+          console.log('low enough')
+          clearInterval(moveupCam)
+          scene1Transition = false
+        }
+
+    },1000)
+
+  }
+    time += .02
     requestAnimationFrame(render);
 
     var i = 0
+      for (var _b = 0; _b < 3; _b++) {
     for (var _x = -13; _x <= 13; _x++) {
         for (var _y = -0; _y <= 0; _y++) {
             for (var _z = -13; _z <= 13; _z++) {
                 var mesh = group.children[i]
 
-                mesh.scale.x = 10;
-                mesh.scale.y = 50 * (1 + Math.sin(-6 * (time / 10) + _x / 2) * Math.sin(0 + _z / 2)) / 2;
+                mesh.scale.x = 1;
+                mesh.scale.z = 1;
+                mesh.scale.y = .5+ 1 * (1 + Math.sin(-6 * (time / 10) + _x / 2) * Math.sin(0 + _z / 2)) / 2;
                 //mesh.scale.z = 10;
 
                 mesh.lookAt(target.position)
 
                 i++
             }
+          }
         }
     }
 
@@ -250,8 +270,7 @@ function render() {
 
     controls.update();
 
-
-    //camera.lookAt(scene.position)
+    // camera.lookAt(scene.position)
 
     if (mobile) {
         camera.position.set(0, 0, 0)
