@@ -1,14 +1,15 @@
-var camera, scene, renderer, group;
-var mobile = false;
-var mouseEvent = {
-    screenX: 0,
-    screenY: 0
-};
-var raycaster = new THREE.Raycaster();
-var target = new THREE.Object3D();
-var orgGeometry, object
-var pointLight, light2;
+var renderer, camera, scene;
 
+
+// image0.onload = function() {
+//     context.drawImage(image0, 0, 0);
+// };
+// image0.src = 'textures/nx.jpg';
+
+
+
+
+console.log('main loaded')
 init();
 setup();
 render();
@@ -34,6 +35,13 @@ function init() {
     camera.position.set(0, 4, 10);
     camera.focalLength = camera.position.distanceTo(scene.position);
 
+      cameraTarget = new THREE.Mesh( new THREE.CubeGeometry(0,0,0));
+      camera.lookAt(cameraTarget.position)
+
+      var light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( 0.5, 1, 1 ).normalize();
+				scene.add( light );
+
     // controls
 
     controls = new THREE.OrbitControls(camera);
@@ -56,6 +64,41 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
 
     window.addEventListener('mousemove', onMouseMove, false);
+
+
+    var bitmap = document.createElement('canvas');
+    var g = bitmap.getContext('2d');
+    bitmap.width = 900;
+    bitmap.height = 900;
+    g.font = 'Bold 90px Arial';
+
+    g.fillStyle = 'blue';
+    g.fillText("text", 0, 20);
+    g.strokeStyle = 'black';
+    g.strokeText("text", 0, 20);
+
+    // canvas contents will be used for a texture
+    var texture = new THREE.Texture(bitmap)
+    texture.needsUpdate = true;
+    var Geo = new THREE.BoxGeometry( 20,20,2 );
+    var Mtl = new THREE.MeshPhongMaterial( parameters );
+    // Mtl.opacity = .4
+    var MMesh = new THREE.Mesh( Geo, Mtl );
+    scene.add( MMesh );
+
+
+
+    var canvas = document.getElementById("it");
+    var context = canvas.getContext("2d");
+    var canvasTexture = new THREE.Texture(canvas);
+    canvasTexture.format = THREE.RGBFormat;
+    var parameters = { color: 0xb3b3b3, map: canvasTexture,transparent: true };
+    var canvasIntroGeo = new THREE.BoxGeometry( 8,8,1 );
+    var canvasIntroMtl = new THREE.MeshPhongMaterial( parameters );
+    canvasIntroMtl.opacity = .4
+    var canvasMesh = new THREE.Mesh( canvasIntroGeo, canvasIntroMtl );
+    scene.add( canvasMesh );
+    canvasTexture.needsUpdate = true;
 
 }
 
@@ -89,6 +132,18 @@ function onMouseMove(event) {
 }
 
 function setup() {
+
+  var geometry = new THREE.CylinderGeometry( 15, 15, 20, 32 );
+  var material = new THREE.MeshPhongMaterial( {color: 0xffff00} );
+  firstTube = new THREE.Mesh( geometry, material );
+  firstTube.rotation.y = 90
+  firstTube.position.y = -20
+  scene.add( firstTube );
+
+  var insideLight = new THREE.PointLight()
+  insideLight.position.set(1,-10,2)
+  scene.add(insideLight)
+
     // beginning of cubemap
 
     var cubeMap = getCubeMap(2)
@@ -190,17 +245,11 @@ var geo = new THREE.SphereBufferGeometry( .2, 8, 8 );
     var ambient = new THREE.AmbientLight(0xaaaaaa)
     scene.add(ambient)
 
+
     jumpCam()
 }
 
 function jumpCam() {
-    /*TweenMax.to(camera.position, 1, {
-     x: (Math.random() - .5) * 10,
-     y: (Math.random()) * 5,
-     z: (Math.random() - .5) * 10,
-     onComplete: jumpCam
-     });*/
-
     TweenMax.to(target.position, 1, {
         x: (Math.random() - .5) * 10,
         y: (Math.random()) * 5,
@@ -215,9 +264,16 @@ function render() {
 
   if (scene1Transition){
     var moveupCam = setInterval(function(){
+      cameraTarget.position.y -= .02
         camera.position.y -= .02
-        console.log(camera.position.y)
-        if (camera.position.y < -6){
+        if (camera.position.z > 0){
+
+          camera.position.z -= .1
+        }
+
+
+        console.log(camera.position.z)
+        if (camera.position.y < -26){
           console.log('low enough')
           clearInterval(moveupCam)
           scene1Transition = false
@@ -270,7 +326,6 @@ function render() {
 
     controls.update();
 
-    // camera.lookAt(scene.position)
 
     if (mobile) {
         camera.position.set(0, 0, 0)

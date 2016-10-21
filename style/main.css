@@ -20,12 +20,12 @@ body {
   margin-top: -24px; }
 
 #splash-tagline {
-  margin-top: -24px; }
+  margin-top: -40px; }
 
 button {
   background-color: black;
   color: white;
-  font-size: 34px; }
+  font-size: 40px; }
 
 button:hover {
   background-color: #14cec2; }
@@ -34,7 +34,7 @@ button:hover {
   font-size: 80px; }
 
 .text-med {
-  font-size: 34px; }
+  font-size: 40px; }
 
 .text-sm {
   font-size: 24px; }

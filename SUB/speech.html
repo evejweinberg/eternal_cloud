@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        var recognition = new SpeechRecognition();
+        recognition.onresult = function(event) {
+            if (event.results.length > 0) {
+                q.value = event.results[0][0].transcript;
+                q.form.submit();
+            }
+        }
+    </script>
+
+    <form action="http://www.example.com/search">
+        <input type="search" id="q" name="q" size=60>
+        <input type="button" value="Click to Speak" onclick="recognition.start()">
+    </form>
+
+    <!-- <script type="text/javascript">
+        speechSynthesis.speak(SpeechSynthesisUtterance('Hello World'));
+    </script>
+
+    <script type="text/javascript">
+        var recognition = new SpeechRecognition();
+        recognition.onresult = function(event) {
+            if (event.results.length > 0) {
+                q.value = event.results[0][0].transcript;
+                q.form.submit();
+            }
+        }
+    </script>
+
+    <form action="http://www.example.com/search">
+        <input type="search" id="q" name="q" size=60>
+        <input type="button" value="Click to Speak" onclick="recognition.start()">
+    </form> -->
+
+</body>
+
+</html>

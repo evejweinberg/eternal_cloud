@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="splash full-screen">
+    <canvas class="splash full-screen" id="it">
         <div class="splash full-screen" id="splash-bg"></div>
         <!-- <div class="splash full-screen" id="hex-video"><video src="assets/bg.mp4" autoplay loop>    </video></div> -->
         <div class="align-vert-center">
@@ -54,7 +54,8 @@
             </div>
         </div>
 
-    </div>
+    </canvas>
+
 
     <script src="js/third-party/threejs/three.js"></script>
     <script src="js/third-party/threejs/WebVR.js"></script>
@@ -67,11 +68,12 @@
 
     <script src="js/third-party/TweenMax.min.js"></script>
 
+    <!-- <script data-main="js/variables.js" src="js/require.js"></script> -->
     <script src="js/utils/helpers.js"></script>
     <script src="js/variables.js"></script>
-    <script src="js/scene1.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/splash.js"></script>
+    <script src="js/lib/scene1.js"></script>
+    <script src="js/lib/main.js"></script>
+    <script src="js/lib/splash.js"></script>
 </body>
 
 </html>
