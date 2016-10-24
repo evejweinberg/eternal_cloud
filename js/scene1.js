@@ -43,6 +43,10 @@ function changeScene(num){
   if (num <=0){
     num = 0
   }
+  if (num >= images.length-1){
+    num = images.length-1
+  }
+  console.log('scene NUm '+ num)
   currentScene = num;
   frames = document.getElementById('frames');
   frames.src= images[num];
