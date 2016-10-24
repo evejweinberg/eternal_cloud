@@ -20,6 +20,14 @@ body {
 
 }
 
+#frames{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+  display: none;
+}
+
 #hex-video{
   background-blend-mode: color-dodge;
 
@@ -36,7 +44,11 @@ body {
 }
 
 #splash-tagline{
+<<<<<<< HEAD
     margin-top: -40px;
+=======
+    margin-top: -34px;
+>>>>>>> 195b8f129a73d045373a2eef8b689d35c587c90f
 
 }
 

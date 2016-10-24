@@ -47,6 +47,7 @@ function init() {
     controls = new THREE.OrbitControls(camera);
     controls.autoRotate = true;
     controls.autoRotateSpeed = -.5
+    controls.enabled = false;
     // controls.maxPolarAngle = Math.PI / 2
     // controls.maxDistance = 30
 
