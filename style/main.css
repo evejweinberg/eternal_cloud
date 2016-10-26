@@ -12,7 +12,6 @@ body {
   height: 100%;
   width: 100%;
   position: absolute;
-  object-fit: cover;
   display: none; }
 
 #hex-video {
