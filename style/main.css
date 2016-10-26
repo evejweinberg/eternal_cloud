@@ -26,12 +26,16 @@ body {
   margin-top: -24px; }
 
 #splash-tagline {
+<<<<<<< HEAD
+  margin-top: -40px; }
+=======
   margin-top: -34px; }
+>>>>>>> 195b8f129a73d045373a2eef8b689d35c587c90f
 
 button {
   background-color: black;
   color: white;
-  font-size: 34px; }
+  font-size: 40px; }
 
 button:hover {
   background-color: #14cec2; }
@@ -40,7 +44,7 @@ button:hover {
   font-size: 80px; }
 
 .text-med {
-  font-size: 34px; }
+  font-size: 40px; }
 
 .text-sm {
   font-size: 24px; }

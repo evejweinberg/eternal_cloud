@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <style media="screen">
+        #container {
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="js/third-party/threejs/three.js"></script>
+    <!-- <script src="js/third-party/threejs/WebVR.js"></script> -->
+    <!-- <script src="js/third-party/threejs/effects/VREffect.js"></script> -->
+    <!-- <script src="js/third-party/threejs/effects/StereoEffect.js"></script> -->
+
+    <!-- <script src="js/third-party/threejs/controls/VRControls.js"></script> -->
+    <!-- <script src="js/third-party/threejs/controls/DeviceOrientationControls.js"></script> -->
+    <script src="js/third-party/threejs/controls/OrbitControls.js"></script>
+    <div id="container"></div>
+    <script type="text/javascript">
+        var renderer, camera, scene;
+        init();
+
+        function init() {
+            container = document.getElementById('container');
+
+
+            camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.set(0.0, 40, 40);
+            scene = new THREE.Scene();
+            renderer = new THREE.WebGLRenderer();
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            container.appendChild(renderer.domElement);
+
+
+            var light = new THREE.DirectionalLight(0xffffff);
+            light.position.set(0.5, 1, 1).normalize();
+            scene.add(light); //
+            controls = new THREE.OrbitControls(camera);
+
+            var bitmap = document.createElement('canvas');
+            var g = bitmap.getContext('2d');
+            bitmap.width = 900;
+            bitmap.height = 900;
+            g.font = 'Bold 90px Arial';
+            g.fillStyle = 'blue';
+            g.fillText("text", 0,
+                20);
+            g.strokeStyle = 'red';
+            g.strokeText("text", 0, 20);
+            var parameters = {
+                color: 0xf74545,
+                map: bitmap
+            };
+            var Geo = new THREE.BoxGeometry(20, 20, 2);
+            var Mtl = new THREE.MeshPhongMaterial(parameters);
+            // Mtl.opacity = .4
+            var MMesh = new THREE.Mesh(Geo, Mtl);
+            scene.add(MMesh);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+
+        }
+
+        function render() {
+            renderer.render(scene, camera);
+
+        }
+    </script>
+
+</body>
+
+</html>
