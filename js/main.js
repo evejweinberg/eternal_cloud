@@ -124,7 +124,6 @@ function setup() {
         //color: 0,
         //map: texture,
         roughness: .2,
-        metalness: 1,
         lightMap: texture,
         side: THREE.DoubleSide,
         envMap: cubeMap,

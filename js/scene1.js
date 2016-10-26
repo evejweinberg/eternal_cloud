@@ -17,6 +17,15 @@ changeScene(currentScene)
 
 document.onkeydown = function(e) {
     switch (e.keyCode) {
+        case 80:
+            console.log('p');
+            popUp()
+            break;
+        case 79:
+            removepopUP()
+            console.log('o');
+            break;
+
         case 37:
             console.log('left');
             changeScene(currentScene -1)
@@ -46,11 +55,12 @@ function changeScene(num){
   if (num >= images.length-1){
     num = images.length-1
   }
-  console.log('scene NUm '+ num)
   currentScene = num;
+  console.log('new scene NUm '+ currentScene)
   frames = document.getElementById('frames');
-  frames.src= images[num];
+  // frames.src= '';
   $("#frames").show()
+  frames.src= images[num];
   if (typeof audio[num] === 'string'){
 
     $("#frames-audio").attr('src', audio[num])

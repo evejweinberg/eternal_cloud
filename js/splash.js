@@ -9,11 +9,11 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-document.write("The current month is " + monthNames[mm]);
+// document.write("The current month is " + monthNames[mm]);
 
-if(dd<10) {
-    dd='0'+dd
-}
+// if(dd<10) {
+//     dd='0'+dd
+// }
 
 
 today = '<mark>' +monthNames[mm]+' '+dd+', '+yyyy + + '</mark>';
