@@ -352,7 +352,11 @@ function animate(timestamp) {
   var cameraWorldMatrix = new THREE.Vector3();
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
-    console.log(dist);
+    console.log(dist)
+    if (dist < 10){
+
+      console.log('change video');
+    }
 
   if ( controlsEnabled ) {
     raycaster.ray.origin.copy( controls.getObject().position );

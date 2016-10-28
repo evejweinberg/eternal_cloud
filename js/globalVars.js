@@ -51,3 +51,4 @@ var pink = 0xfebdb7;
 var teal =  0x009fc6;
 var pinkDrk = 0xf68f83;
 var mint = 0xa8e1d1;
+var purple = 0xb9a0b1;
