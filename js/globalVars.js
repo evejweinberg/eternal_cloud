@@ -4,7 +4,7 @@ var controls;
 
 var raycaster;
 var objects = [];
-var canvas, hemiLight, dirLight, directionalLight2, directionalLightR, directionalLight, lightA, light;
+var canvas, hemiLight, spotlight, dirLight, directionalLight2, directionalLightR, directionalLight, lightA, light;
 var container, renderer;
 var serverObject;
 var allBrains = []

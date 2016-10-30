@@ -103,7 +103,7 @@ function init() {
 
     // Create a three.js camera.
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-    camera.position.set(0, -7.4, 0)
+    camera.position.set(0, 2.4, 0)
     renderer = new THREE.WebGLRenderer({
         alpha: false
             // antialias: true
@@ -205,8 +205,8 @@ function init() {
         var material = new THREE.MeshStandardMaterial({
             roughness: .64,
             metalness: .81,
-            transparent: true,
-            opacity: .4,
+            transparent: false,
+            opacity: 1,
             color: 0xdebe8f,
             emissive: 0xdebe8f,
             side: THREE.DoubleSide
@@ -243,7 +243,7 @@ function init() {
             side: THREE.BackSide
         });
 
-        var geometry = new THREE.SphereGeometry(380, 32, 32);
+        var geometry = new THREE.SphereGeometry(340, 32, 32);
 
         var skysphere = new THREE.Mesh(geometry, material);
         scene.add(skysphere);
@@ -261,9 +261,10 @@ function init() {
         opacity: .2,
         reflectivity: 0.9
     })
-    var reflectionMatBrain = new THREE.MeshBasicMaterial({
-            color: 0xffc0cb,
+    var reflectionMatBrain = new THREE.MeshStandardMaterial({
+            color: pink,
             envMap: textureCube,
+            roughness: 0.1,
             refractionRatio: 0.92,
             reflectivity: 0.7
         })
@@ -285,13 +286,41 @@ function init() {
             }
         })
 
-        for (var i = 0; i <= numberOfservers; i++) {
+        drawServers(7,26)
+        drawServers(10,40)
+        drawServers(13,50)
+        drawServers(16,63)
+        drawServers(19,80)
+        // drawServers(23,90)
+        drawServers(26,80)
+        drawServers(30,90)
+        // drawServers(33,130)
+        drawServers(36,160)
+        console.log(allBrains.length)
 
+
+function drawServers(rad,num){
+  var dummy = num+3
+  var spacing = 360/dummy
+  for (var i =0; i<num;i++){
+    var tempNew = serverObject.clone();
+    tempNew.scale.set(.27, .27, .27);
+    tempNew.position.set(rad*Math.cos(toRadians(spacing*i)), 0, rad*Math.sin(toRadians(spacing*i)));
+    allBrains.push(tempNew);
+    scene.add(tempNew)
+  }
+
+}
+  //number of FULL server circles, and the radius of those circles
+  for (var j = 3; j <= 14; j+=2) {
+    //nmber of servers in each circle
+        for (var i = 0; i <= numberOfservers; i++) {
+          //make a new object
             var tempNew = serverObject.clone();
 
-            xCenter = Math.cos(toRadians(i * spacing)) * 7;
+            xCenter = Math.cos(toRadians(i * spacing)) * j;
 
-            zCenter = Math.sin(toRadians(i * spacing)) * 7;
+            zCenter = Math.sin(toRadians(i * spacing)) * j;
 
             tempNew.scale.set(.27, .27, .27);
 
@@ -299,9 +328,15 @@ function init() {
 
             allBrains.push(tempNew);
 
-            scene.add(allBrains[i]);
+            // scene.add(allBrains[i*j]);
+
 
         }
+        //make more servers in the next circle
+        numberOfservers++
+        //decrease spacing in next circle
+        spacing = 360 / numberOfservers-3*j;
+      }
 
         // console.log(allBrains.length)
 
@@ -352,11 +387,13 @@ function animate(timestamp) {
   var cameraWorldMatrix = new THREE.Vector3();
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
-    console.log(dist)
-    if (dist < 10){
 
-      console.log('change video');
+    // console.log(cameraWorldMatrix);
+    if (dist < 10){
+  video.src = "../asset_src/welcome.mp4";
     }
+
+    mainVidLady.lookAt(cameraWorldMatrix)
 
   if ( controlsEnabled ) {
     raycaster.ray.origin.copy( controls.getObject().position );
@@ -437,10 +474,10 @@ if(video.readyState == video.HAVE_ENOUGH_DATA){
       mainVidLady.position.y+=videoBounce
       // mainVidLady.lookAt(camera)
 
-    if (mainVidLady.position.y>2.1){
+    if (mainVidLady.position.y>5.1){
       videoBounce = -.01
       }
-    if (mainVidLady.position.y<1.5){
+    if (mainVidLady.position.y<2.9){
       videoBounce = .01
       }
 
@@ -483,61 +520,7 @@ function addHelpers(grid_width, dims, light_name) {
     scene.add(gridXY);
 }
 
-function addLights() {
-    hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
-    hemiLight.color.setHSL(0.6, 1, 0.6);
-    hemiLight.groundColor.setHSL(0.095, 1, 0.75);
-    hemiLight.position.set(0, 100, 0);
-    scene.add(hemiLight);
 
-    dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.color.setHSL(0.1, 1, 0.95);
-    dirLight.position.set(-1, 1.75, 1);
-    dirLight.position.multiplyScalar(50);
-    scene.add(dirLight);
-    dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width = 2048;
-    dirLight.shadow.mapSize.height = 2048;
-    var d = 50;
-    dirLight.shadow.camera.left = -d;
-    dirLight.shadow.camera.right = d;
-    dirLight.shadow.camera.top = d;
-    dirLight.shadow.camera.bottom = -d;
-    dirLight.shadow.camera.far = 3500;
-    dirLight.shadow.bias = -0.0001;
-
-    directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(0, 11, 0);
-    directionalLight.castShadow = true;
-    directionalLight.shadow = new THREE.LightShadow(new THREE.PerspectiveCamera(50, 1, 1200, 2500));
-    directionalLight.castShadow = true
-        // scene.add(directionalLight);
-
-    directionalLight2 = new THREE.DirectionalLight(0x02f402, .2);
-    directionalLight2.position.set(0, 12, 0);
-    // directionalLight2.target = allBrains[0]
-    directionalLight2.castShadow = true
-        // scene.add(directionalLight2);
-
-    directionalLightR = new THREE.DirectionalLight(0xffc1e5, 1);
-    directionalLightR.position.set(0, 10, 0);
-    // directionalLight2.target.set(0, 0, 0)
-    directionalLightR.castShadow = true
-
-    lightA = new THREE.PointLight(0xff0000, 1, 100);
-    lightA.name = "lightA"
-    lightA.position.set(5, 0, 0);
-    scene.add(lightA);
-    lightA.castShadow = true
-
-    light = new THREE.PointLight(0xffffff, 1, 100);
-    light.name = "light"
-    light.position.set(-5, 5, 5);
-    light.castShadow = true;
-    scene.add(light);
-
-    // scene.add(directionalLightR);
-}
 
 
 function callMainVideo(){
@@ -566,24 +549,22 @@ function callMainVideo(){
 
   videoImageContext = videoImage.getContext( '2d' );
   // background color if no video present
-  videoImageContext.fillStyle = '#000000';
+  videoImageContext.fillStyle = '#ffffff';
   videoImageContext.fillRect( 0, 0, video.width, video.height );
 
   videoTexture = new THREE.Texture( videoImage );
   videoTexture.minFilter = THREE.LinearFilter;
   videoTexture.magFilter = THREE.LinearFilter;
   videoTexture.format = THREE.RGBFormat;
-  // videoTexture.repeat.x=2
-  // videoTexture.repeat.y=2
   videoTexture.needsUpdate = true;
 
 
 
 
-  var xCenter = Math.cos(toRadians(340)) * 42;
+  var xCenter = Math.cos(toRadians(350)) * 72;
 
-  var zCenter = Math.sin(toRadians(340)) * 42;
-  var geo = new THREE.BoxGeometry(20.6,10.4,.01)
+  var zCenter = Math.sin(toRadians(350)) * 72;
+  var geo = new THREE.BoxGeometry(20.6,12,.01)
   var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: mint, map: videoTexture,roughness: 1})
   mainVidLady = new THREE.Mesh(geo,mat)
   mainVidLady.position.set(xCenter,2,zCenter)
