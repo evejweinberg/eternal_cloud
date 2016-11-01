@@ -15,18 +15,38 @@
 
 <body>
     <div class="esc-instructions">
-        <img id="logo" src="img/logo.svg" alt="" />
-        <p class="top-nav-text">
-            Your Value
-        </p>
-        <p class="top-nav-text">
-            Log in
-        </p>
+        <div class="bg-animation">
+            <video class='video-bg' src="asset_src/bg.mp4" autoplay loop>
+
+        </video>
+            <video class='video-bg' id="vide-2" src="asset_src/bg.mp4" autoplay loop>
+
+    </video>
+
+        </div>
+        <div class="top-nav-top">
+
+
+            <!-- <img src="img/one_hex.svg" id="one-hex" /> -->
+            <img id="logo" src="img/logo.svg" alt="" />
+            <p class="top-nav-text buttons">
+                Your Value
+            </p>
+            <p class="top-nav-text buttons">
+                Log in
+            </p>
+        </div>
 
     </div>
 
     <div class="splash">
-        <h1 id="tagline">Your new neural neighborhood <sup>®</sup></h1>
+        <div class="tagline-holder">
+
+            <h1 id="tagline">Your new neural neighborhood <sup>®</sup></h1>
+            <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="button-first buttons">
+                EXPLORE</div>
+        </div>
+        <!-- <button type="button" id="button-first" name="button">EXPLORE</button> -->
 
     </div>
 
@@ -48,14 +68,24 @@
 
 
     <script src="node_modules/es6-promise/dist/es6-promise.js"></script>
+    <!-- //scroll magic -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
 
+    <!-- //threejs stuff -->
     <script src="node_modules/three/build/three.min.js"></script>
     <script src="js/PointerLockControls.js"></script>
-
     <script src="loaders/JSONLoader.js"></script>
 
+    <!-- //green sock and jquery -->
+    <script src="lib/TweenMax.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+
+
+    <!-- //my stuff -->
     <script src="js/globalVars.js"></script>
     <script src="js/globalFunctions.js"></script>
+    <script src="js/eventHandlers.js"></script>
     <script src="js/scene1.js"></script>
 
 

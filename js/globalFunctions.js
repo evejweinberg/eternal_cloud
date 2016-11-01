@@ -1,22 +1,23 @@
-function MakeHex(x,y,z, name){
+function MakeHex(x,y,z, name,width, col){
 
-  var geo = new THREE.CylinderGeometry(3, 3, .6, 6)
+  var geo = new THREE.CylinderGeometry(width,width, .6, 6)
   var material = new THREE.MeshStandardMaterial({
     roughness: .64,
     metalness: .81,
     transparent: true,
     opacity: .4,
-    color: 0xdebe8f,
-    emmissive: 0xdebe8f,
+    color: col,
+    emissive: col,
     side: THREE.DoubleSide
   });
   var hexy = new THREE.Mesh(geo, material)
   hexy.position.set(x,y,z)
+  hexy.rotation.x = 1.57
   if (name){
 
     hexy.name = name
   }
-  scene.add(hexyCenter)
+  scene.add(hexy)
 }
 
 
@@ -93,3 +94,20 @@ function addLights() {
 
     // scene.add(directionalLightR);
 }
+
+
+function startExperience(){
+  first_descend = true;
+  //add pointer-controls back  to the splash dom element
+}
+
+
+// var controller = new ScrollMagic.Controller();
+//
+// // create a scene
+// new ScrollMagic.Scene({
+//         duration: 100,    // the scene should last for a scroll distance of 100px
+//         offset: 50        // start this scene after scrolling for 50px
+//     })
+//     .setPin("#three-scene") // pins the element for the the scene's duration
+//     .addTo(controller); // assign the scene to the controller

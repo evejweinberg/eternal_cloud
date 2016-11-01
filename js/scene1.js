@@ -110,11 +110,8 @@ function init() {
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.body.appendChild(renderer.domElement);
     renderer.setPixelRatio(window.devicePixelRatio);
-    // scene.background = new THREE.Color(0xff0000)
-    // renderer.setClearColor(0xff0000, 1);
-    // renderer.shadowMapEnabled = true;
+
     renderer.shadowMap.enabled = true;
     renderer.shadowMapSoft = true;
     //
@@ -131,7 +128,8 @@ function init() {
 				// renderer.setPixelRatio( window.devicePixelRatio );
 				// renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( renderer.domElement );
-
+    renderer.domElement.id = "three-scene"
+// console.log(renderer.domElement)
     // Append the canvas element created by the renderer to document body element.
     // container.appendChild(renderer.domElement);
 
@@ -266,7 +264,7 @@ function init() {
             envMap: textureCube,
             roughness: 0.1,
             refractionRatio: 0.92,
-            reflectivity: 0.7
+            // reflectivity: 0.7
         })
         // for (var j = 2; j <= 10; j += 10) {
     var objectLoader2 = new THREE.ObjectLoader();
@@ -296,7 +294,7 @@ function init() {
         drawServers(30,90)
         // drawServers(33,130)
         drawServers(36,160)
-        console.log(allBrains.length)
+        // console.log(allBrains.length)
 
 
 function drawServers(rad,num){
@@ -345,24 +343,15 @@ function drawServers(rad,num){
 
     // }
 
+    MakeHex(0,14,0, "newHex",2, pink)
+    MakeHex(0,20,0, "newHex2",2, mint)
+    MakeHex(0,26,0, "newHex3",2, pinkDrk)
 
-    var geo = new THREE.CylinderGeometry(3, 3, .6, 6)
-    var material = new THREE.MeshStandardMaterial({
-        roughness: .64,
-        metalness: .81,
-        transparent: true,
-        opacity: .4,
-        color: 0xdebe8f,
-        emmissive: 0xdebe8f,
-        side: THREE.DoubleSide
-    });
-    hexyCenter = new THREE.Mesh(geo, material)
-    hexyCenter.position.set(0, 10, 0)
-    scene.add(hexyCenter)
+
 
     addLights()
 
-    addHelpers(1000, 100, [light,lightA,directionalLight,directionalLightR,directionalLight2])
+    // addHelpers(1000, 100, [light,lightA,directionalLight,directionalLightR,directionalLight2])
 
 
 
@@ -382,6 +371,18 @@ function toRadians(angle) {
 
 function animate(timestamp) {
 
+  if (first_descend){
+    camera.position.y -= .09
+    console.log(camera.position.y)
+    if (camera.position.y < -5){
+      first_descend = false;
+    }
+  }
+
+  scene.getObjectByName( "newHex" ).rotation.z += .1;
+  scene.getObjectByName( "newHex2" ).rotation.x += .1;
+  scene.getObjectByName( "newHex3" ).rotation.z += .1;
+
   // console.log(controls.getObject)
 
   var cameraWorldMatrix = new THREE.Vector3();
@@ -390,7 +391,7 @@ function animate(timestamp) {
 
     // console.log(cameraWorldMatrix);
     if (dist < 10){
-  video.src = "../asset_src/welcome.mp4";
+        video.src = "../asset_src/welcome.mp4";
     }
 
     mainVidLady.lookAt(cameraWorldMatrix)
@@ -439,7 +440,7 @@ function animate(timestamp) {
 
   }
 
-    hexyCenter.rotation.z += .01
+
 
     if (playFirstvideo == true){
       video.loop = true
@@ -499,7 +500,7 @@ function addHelpers(grid_width, dims, light_name) {
   // console.log(light_name[0].position)
     if (light_name) {
         for (var i in light_name) {
-          console.log(light_name[i].position)
+          // console.log(light_name[i].position)
           var geo = new THREE.SphereGeometry(.25,.25,.25)
           var mat = new THREE.MeshBasicMaterial({color:0x0000FF})
           var mesh = new THREE.Mesh(geo,mat)
@@ -540,6 +541,7 @@ function callMainVideo(){
 
 
   videoImage = document.createElement( 'canvas' );
+
   // videoImage.width = 200;
   // videoImage.height = 140;
 
@@ -573,5 +575,5 @@ function callMainVideo(){
   mainVidLady.rotation.y = 1.5708
   // mainVidLady.lookAt(camera)
   scene.add(mainVidLady)
-  console.log(mainVidLady)
+  // console.log(mainVidLady)
 }
