@@ -97,9 +97,17 @@ function addLights() {
 
 
 function startExperience(){
+  playFirstvideo = true
   first_descend = true;
+  document.getElementById('blocker').style.pointerEvents = "all";
+  var tagline = document.getElementById('tagline-holder')
+  TweenMax.to(tagline, 7, {opacity: 0,y: -100,ease: Expo.easeOut})
   //add pointer-controls back  to the splash dom element
 }
+
+
+
+
 
 
 // var controller = new ScrollMagic.Controller();

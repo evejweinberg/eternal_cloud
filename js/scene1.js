@@ -103,7 +103,7 @@ function init() {
 
     // Create a three.js camera.
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-    camera.position.set(0, 2.4, 0)
+    camera.position.set(0, camStartY, camStartZ)
     renderer = new THREE.WebGLRenderer({
         alpha: false
             // antialias: true
@@ -371,8 +371,10 @@ function toRadians(angle) {
 
 function animate(timestamp) {
 
+  // console.log(controls.getObject().position)
+
   if (first_descend){
-    camera.position.y -= .09
+    camera.position.y -= camDownSpeed
     console.log(camera.position.y)
     if (camera.position.y < -5){
       first_descend = false;
@@ -383,15 +385,21 @@ function animate(timestamp) {
   scene.getObjectByName( "newHex2" ).rotation.x += .1;
   scene.getObjectByName( "newHex3" ).rotation.z += .1;
 
-  // console.log(controls.getObject)
 
   var cameraWorldMatrix = new THREE.Vector3();
+  // console.log(cameraWorldMatrix)
+
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
 
     // console.log(cameraWorldMatrix);
     if (dist < 10){
+      scene.remove(mainVidLady)
+      setTimeout(function(){
+        MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
+      },3000)
         video.src = "../asset_src/welcome.mp4";
+        scene.add(mainVidLady)
     }
 
     mainVidLady.lookAt(cameraWorldMatrix)
@@ -476,10 +484,10 @@ if(video.readyState == video.HAVE_ENOUGH_DATA){
       // mainVidLady.lookAt(camera)
 
     if (mainVidLady.position.y>5.1){
-      videoBounce = -.01
+      videoBounce = -.02
       }
     if (mainVidLady.position.y<2.9){
-      videoBounce = .01
+      videoBounce = .02
       }
 
 
@@ -536,19 +544,7 @@ function callMainVideo(){
   video.src = "../asset_src/closer.mp4";
   video.load(); // must call after setting/changing source
   video.play();
-
-  //document.body.appendChild(video);
-
-
   videoImage = document.createElement( 'canvas' );
-
-  // videoImage.width = 200;
-  // videoImage.height = 140;
-
-  // document.getElementById("canvasBox").innerHTML = "";
-
-  // document.getElementById("canvasBox").appendChild(videoImage);
-
   videoImageContext = videoImage.getContext( '2d' );
   // background color if no video present
   videoImageContext.fillStyle = '#ffffff';
@@ -573,7 +569,9 @@ function callMainVideo(){
   //radians
   mainVidLady.name = "target";
   mainVidLady.rotation.y = 1.5708
-  // mainVidLady.lookAt(camera)
+  mainVidLady.castShadow = true;
+  mainVidLady.receiveShadow = true;
+
   scene.add(mainVidLady)
   // console.log(mainVidLady)
 }

@@ -34,7 +34,7 @@ var velocity = new THREE.Vector3();
 var mainVidLady;
 var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
-var playFirstvideo = true
+var playFirstvideo = false
 
 var r = "img/";
 
@@ -58,3 +58,11 @@ var purple = 0xb9a0b1;
 // BOOLEANS
 
 var first_descend = false;
+
+
+
+////3D WORLD
+
+var camStartY = 10;
+var camStartZ = 10;
+var camDownSpeed = .19
