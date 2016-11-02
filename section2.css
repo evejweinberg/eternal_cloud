@@ -1,0 +1,11 @@
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+.img-responsive {
+    width: 250px;
+}
+
+#all-projects {
+    position: relative;
+}

@@ -30,19 +30,14 @@ var canJump = false;
 var d = 200;
 var prevTime = performance.now();
 var velocity = new THREE.Vector3();
+var type22;
+var ThreeSceneHghtRation = .9
 
 var mainVidLady;
 var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
-var playFirstvideo = false
 
-var r = "img/";
 
-var urls = [
-    r + "px.jpg", r + "nx.jpg",
-    r + "py.jpg", r + "ny.jpg",
-    r + "pz.jpg", r + "nz.jpg"
-];
 
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
@@ -58,6 +53,7 @@ var purple = 0xb9a0b1;
 // BOOLEANS
 
 var first_descend = false;
+var playFirstvideo = false
 
 
 
@@ -66,3 +62,13 @@ var first_descend = false;
 var camStartY = 10;
 var camStartZ = 10;
 var camDownSpeed = .19
+//Loading manager - decides when to render the scene in onProgress under the loaders
+var loadingManager = new THREE.LoadingManager();
+
+var r = "img/";
+
+var urls = [
+    r + "px.jpg", r + "nx.jpg",
+    r + "py.jpg", r + "ny.jpg",
+    r + "pz.jpg", r + "nz.jpg"
+];

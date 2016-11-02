@@ -31,12 +31,14 @@ $font-size-medlrg: 40px;
 }
 
 .button-first{
-  margin:auto;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 400;
-  width: 100px;
-  height: 20px;
-  top: 35%;
-  // background-color: $blue;
+  width: 90px;
+  position: relative;
+  // height: 35px;
+  border-radius: 40px;
+  top: 33%;
 }
 
 .button-first:hover{
@@ -97,6 +99,8 @@ p{
     font-size: $font-size-medlrg;
     text-align: center;
     top: 22%;
+    font-size: 34px;
+    overflow: visible;
 
 }
 
@@ -171,6 +175,13 @@ p{
   padding-bottom: 4px;
 }
 
+#walking-instructions{
+  color: $blue;
+  margin: auto;
+  text-align: center;
+  margin: 5px;
+}
+
 html,
 body {
     width: 100%;
@@ -178,7 +189,7 @@ body {
 }
 
 body {
-    background-color: #ffffff;
+    background-color: white;
     margin: 0;
     overflow: hidden;
     font-family: $font-main;

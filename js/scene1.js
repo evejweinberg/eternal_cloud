@@ -1,3 +1,9 @@
+//Init the scene so we can push shit to it?
+window.onload = function(){
+  init();
+};
+
+
 if ( havePointerLock ) {
 
   var element = document.body;
@@ -82,18 +88,13 @@ if ( havePointerLock ) {
 
 }
 
-init()
 
-
-
-
-animate()
 
 function init() {
 
 
 
-    // container = document.getElementById('container');
+    container = document.getElementById('canvasBox');
 
 
     // Create a three.js scene.
@@ -109,7 +110,7 @@ function init() {
             // antialias: true
     });
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
     renderer.setPixelRatio(window.devicePixelRatio);
 
     renderer.shadowMap.enabled = true;
@@ -124,11 +125,13 @@ function init() {
     renderer.shadowMapWidth = 512;
     renderer.shadowMapHeight = 512;
 
-    renderer.setClearColor( 0xffffff );
+    renderer.setClearColor( pink );
 				// renderer.setPixelRatio( window.devicePixelRatio );
 				// renderer.setSize( window.innerWidth, window.innerHeight );
-		document.body.appendChild( renderer.domElement );
+		// document.body.appendChild( renderer.domElement );
+    container.appendChild(renderer.domElement )
     renderer.domElement.id = "three-scene"
+    // document.getElementById("three-scene").style.height = getWindowHeight()*.75;
 // console.log(renderer.domElement)
     // Append the canvas element created by the renderer to document body element.
     // container.appendChild(renderer.domElement);
@@ -189,7 +192,7 @@ function init() {
 
 
     //////LOAD FLOOR ////////
-    var loader2 = new THREE.TextureLoader();
+    var loader2 = new THREE.TextureLoader(loadingManager);
     loader2.load('img/Floor.jpg', onTextureLoaded2);
 
     function onTextureLoaded2(texture) {
@@ -227,7 +230,7 @@ function init() {
 
     // Add a repeating grid as a skybox.
     var boxSize = 5;
-    var loader = new THREE.TextureLoader();
+    var loader = new THREE.TextureLoader(loadingManager);
     loader.load('img/bg2.png', onTextureLoaded);
 
     function onTextureLoaded(texture) {
@@ -267,7 +270,7 @@ function init() {
             // reflectivity: 0.7
         })
         // for (var j = 2; j <= 10; j += 10) {
-    var objectLoader2 = new THREE.ObjectLoader();
+    var objectLoader2 = new THREE.ObjectLoader(loadingManager);
     objectLoader2.load("asset_src/model.json", function(obj) {
 
         //give it a global name, so I can access it later
@@ -315,6 +318,7 @@ function drawServers(rad,num){
         for (var i = 0; i <= numberOfservers; i++) {
           //make a new object
             var tempNew = serverObject.clone();
+            tempNew.lookAt(new THREE.Vector3(0,0,0))
 
             xCenter = Math.cos(toRadians(i * spacing)) * j;
 
@@ -375,9 +379,13 @@ function animate(timestamp) {
 
   if (first_descend){
     camera.position.y -= camDownSpeed
+    camera.position.z -= .1
     console.log(camera.position.y)
     if (camera.position.y < -5){
       first_descend = false;
+    }
+    if (camera.position.z==0 || camera.position.z < 0){
+      camera.position.z = 0;
     }
   }
 
@@ -400,6 +408,7 @@ function animate(timestamp) {
       },3000)
         video.src = "../asset_src/welcome.mp4";
         scene.add(mainVidLady)
+        video.play()
     }
 
     mainVidLady.lookAt(cameraWorldMatrix)
@@ -501,7 +510,7 @@ if(video.readyState == video.HAVE_ENOUGH_DATA){
 function onResize(e) {
   camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize( window.innerWidth, window.innerHeight );
+      renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
 }
 
 function addHelpers(grid_width, dims, light_name) {
@@ -539,11 +548,9 @@ function callMainVideo(){
   video.height = 172;
   video.width = 308;
 
-
-
   video.src = "../asset_src/closer.mp4";
   video.load(); // must call after setting/changing source
-  video.play();
+  // video.play();
   videoImage = document.createElement( 'canvas' );
   videoImageContext = videoImage.getContext( '2d' );
   // background color if no video present
@@ -551,12 +558,10 @@ function callMainVideo(){
   videoImageContext.fillRect( 0, 0, video.width, video.height );
 
   videoTexture = new THREE.Texture( videoImage );
-  videoTexture.minFilter = THREE.LinearFilter;
-  videoTexture.magFilter = THREE.LinearFilter;
+  // videoTexture.minFilter = THREE.LinearFilter;
+  // videoTexture.magFilter = THREE.LinearFilter;
   videoTexture.format = THREE.RGBFormat;
   videoTexture.needsUpdate = true;
-
-
 
 
   var xCenter = Math.cos(toRadians(350)) * 72;

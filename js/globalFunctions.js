@@ -1,3 +1,25 @@
+//Track global loading
+loadingManager.onProgress = function(item, loaded, total){
+
+  //Loading precentage pattern
+  console.log(loaded / total * 100 + '%');
+
+}
+
+//Signify loading done
+loadingManager.onLoad = function(){
+
+  //get rid of the loading screen
+
+  //Start redrawing when the models are done loading
+  animate();
+
+}
+
+
+
+
+///HEXAGONS
 function MakeHex(x,y,z, name,width, col){
 
   var geo = new THREE.CylinderGeometry(width,width, .6, 6)
@@ -28,11 +50,11 @@ function addLights() {
     hemiLight.position.set(0, 100, 0);
     // scene.add(hemiLight);
 
-    var lightD = new THREE.AmbientLight( mint, .3 ); // soft white light
+    var lightD = new THREE.AmbientLight( 0xffffff, .3 ); // soft white light
     scene.add( lightD );
 
 ///SpotLight( color, intensity, distance, angle, penumbra, decay )
-    spotLight = new THREE.SpotLight( purple,2.5,30,50,.2,0 );
+    spotLight = new THREE.SpotLight( 0xffffff,2.5,30,50,.2,0 );
     spotLight.position.set( 0, 4, 0 );
     spotLight.castShadow = true;
     scene.add(spotLight)
@@ -97,15 +119,75 @@ function addLights() {
 
 
 function startExperience(){
-  playFirstvideo = true
+  playFirstvideo = true;
+  video.play()
   first_descend = true;
   document.getElementById('blocker').style.pointerEvents = "all";
   var tagline = document.getElementById('tagline-holder')
-  TweenMax.to(tagline, 7, {opacity: 0,y: -100,ease: Expo.easeOut})
+  TweenMax.to(tagline, 9, {opacity: 0,y: -500,ease: Expo.easeOut})
+  document.getElementById('walking-instructions').style.display = "block";
   //add pointer-controls back  to the splash dom element
 }
 
 
+
+
+function loadfont() {
+  var loader = new THREE.FontLoader(loadingManager);
+  loader.load('hel.typeface.json', function(font) {
+
+    var textGeo = new THREE.TextGeometry("22 TB", {
+
+      font: font,
+      size: textSize,
+      height: .3,
+      curveSegments: 12,
+      bevelThickness: 0,
+      bevelSize: 0,
+      bevelEnabled: true
+
+    });
+
+    textGeo.computeBoundingBox();
+    centerOffset = -.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+    var centerOffsetY = -.5 * ( textGeo.boundingBox.max.y - textGeo.boundingBox.min.y );
+    var textMaterial = new THREE.MeshPhongMaterial({
+      color: mint,
+      metalness: 0.5,
+      roughness: 0.5,
+    });
+
+    type22 = new THREE.Mesh(textGeo, textMaterial);
+    type22.position.x = 0
+    type22.position.y = 10.5
+    type22.position.z = 4
+    type22.geometry.translate(centerOffset, centerOffsetY, 0 );
+
+    scene.add(type22);
+
+
+  });
+}
+
+
+
+
+// var elem = document.getElementById('all-projects');
+// var iDiv = document.createElement('div');
+// var thumb = document.createElement('img');
+// var title = document.createElement('h3')
+// var makingOf = document.createElement('p').innerHTML = 'yoyo'
+// var descr = document.createElement('p').innerHTML = 'hihihi'
+// var tag = document.createElement('p')
+// tag.className = 'tag'
+// thumb.className = "img-responsive"
+// iDiv.className = 'col-md-4 portfolio-item';
+// elem.appendChild(iDiv)
+// iDiv.appendChild(thumb)
+// iDiv.appendChild(title)
+// iDiv.appendChild(makingOf)
+// iDiv.appendChild(descr)
+// iDiv.appendChild(tag)
 
 
 
