@@ -4,6 +4,9 @@ var controls;
 
 var raycaster;
 var objects = [];
+var popUpsInterval;
+var myWindow;
+var windowName = 0;
 var canvas, hemiLight, spotlight, dirLight, directionalLight2, directionalLightR, directionalLight, lightA, light;
 var container, renderer;
 var serverObject;
