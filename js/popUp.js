@@ -23,8 +23,8 @@ function popUp(name,widthmove,heightmove) {
     var heightThing = (Math.random() * 30) + 100;
     var bgURLS = ["url(http://evejweinberg.github.io/samples/ArrowDownwardPurpleGreen.gif)", "url(http://evejweinberg.github.io/samples/txt_blgrid.jpg)", "url(http://evejweinberg.github.io/samples/txt_pnkscrb.jpg)", "url(http://evejweinberg.github.io/samples/ArrowDownwardPink.gif)","url(http://evejweinberg.github.io/img/fb1.jpg)","url(http://evejweinberg.github.io/img/fb2.jpg)","url(http://evejweinberg.github.io/img/fb3.jpg)"]
     var bgRandom = Math.floor(Math.random() * bgURLS.length);
-    myWindow.document.body.style.backgroundImage = bgURLS[bgRandom];
     myWindow = window.open("", name, "width=" + widthThing + ", " + "height=" + heightThing + "," + "left=" + widthmove+ "," +  "top=" + heightmove);
+    myWindow.document.body.style.backgroundImage = bgURLS[bgRandom];
     console.log(bgURLS[bgRandom])
     setTimeout(function(){myWindow.close();oscillator.stop();},1000)
     oscillator.start();

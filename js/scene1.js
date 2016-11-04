@@ -199,19 +199,19 @@ function init() {
 
     function onTextureLoaded2(texture) {
         // console.log('floor txt loaded')
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(400, 400);
+        // texture.wrapS = THREE.RepeatWrapping;
+        // texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(512, 512);
 
-        var geometry = new THREE.PlaneGeometry(390, 390);
+        var geometry = new THREE.PlaneGeometry(512, 512);
 
         var material = new THREE.MeshStandardMaterial({
             roughness: .64,
             metalness: .81,
             transparent: false,
             opacity: 1,
-            color: 0xdebe8f,
-            emissive: 0xdebe8f,
+            color: 0xfffff,
+            emissive: 0xffffff,
             side: THREE.DoubleSide
         });
         plane = new THREE.Mesh(geometry, material);
@@ -352,7 +352,7 @@ function drawServers(rad,num){
 for (var i=0; i<30; i++){
 var rnd = [pink, pinkDrk, mint, purple]
 
-  Hexes.push(MakeHex(Math.random()*10-10,10+(i*6),Math.random()*10-10, "newHex"+ i,2, rnd[i%rnd.length]))
+  Hexes.push(MakeHex(Math.random()*30-30,10+(i*3),Math.random()*10-10, "newHex"+ i,2, rnd[i%rnd.length]))
 scene.add(Hexes[i])
 }
 
@@ -457,22 +457,22 @@ for (var i in Hexes){
 
 
 
-    if (playFirstvideo == true){
-      video.loop = true
-    } else {
-      video.loop = false
-    }
+    // if (playFirstvideo == true){
+    //   video.loop = true
+    // } else {
+    //   video.loop = false
+    // }
 
     // if (camera os close to screen, then switch video)
 
-if(video.readyState == video.HAVE_ENOUGH_DATA){
-
-  videoImageContext.drawImage(video,0,0,video.width, video.height);
-  if (videoTexture){
-
-    videoTexture.needsUpdate = true
-  }
-}
+// if(video.readyState == video.HAVE_ENOUGH_DATA){
+//
+//   videoImageContext.drawImage(video,0,0,video.width, video.height);
+//   if (videoTexture){
+//
+//     videoTexture.needsUpdate = true
+//   }
+// }
 
     for (var i in allBrains) {
         if (allBrains[i].children[0].position.z > 7.6) {
@@ -541,40 +541,36 @@ function addHelpers(grid_width, dims, light_name) {
 
 
 function callMainVideo(){
-  // create the video element
-  video = document.createElement( 'video' );
 
-  video.height = 172;
-  video.width = 308;
+  video1 = document.getElementById( 'video1' );
+	var texture1 = new THREE.VideoTexture( video1 );
+	texture1.minFilter = THREE.LinearFilter;
+	texture1.magFilter = THREE.LinearFilter;
+	texture1.format = THREE.RGBFormat;
 
-  video.src = "../asset_src/closer.mp4";
-  video.load(); // must call after setting/changing source
-  // video.play();
-  videoImage = document.createElement( 'canvas' );
-  videoImageContext = videoImage.getContext( '2d' );
-  // background color if no video present
-  videoImageContext.fillStyle = '#ffffff';
-  videoImageContext.fillRect( 0, 0, video.width, video.height );
+  video2 = document.getElementById( 'video2' );
+	var texture2 = new THREE.VideoTexture( video2 );
+	texture2.minFilter = THREE.LinearFilter;
+	texture2.magFilter = THREE.LinearFilter;
+	texture2.format = THREE.RGBFormat;
 
-  videoTexture = new THREE.Texture( videoImage );
-  // videoTexture.minFilter = THREE.LinearFilter;
-  // videoTexture.magFilter = THREE.LinearFilter;
-  videoTexture.format = THREE.RGBFormat;
-  videoTexture.needsUpdate = true;
+  matVid = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture1});
+
+
 
 
   var xCenter = Math.cos(toRadians(350)) * 72;
 
   var zCenter = Math.sin(toRadians(350)) * 72;
-  var geo = new THREE.BoxGeometry(20.6,12,.01)
-  var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: mint, map: videoTexture,roughness: 1})
-  mainVidLady = new THREE.Mesh(geo,mat)
-  mainVidLady.position.set(xCenter,2,zCenter)
+  var geo = new THREE.BoxGeometry(20,20,.01)
+  var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: videoTexture,roughness: 1})
+  mainVidLady = new THREE.Mesh(geo,matVid)
+  mainVidLady.position.set(xCenter,5,zCenter)
   //radians
   mainVidLady.name = "target";
   mainVidLady.rotation.y = 1.5708
   mainVidLady.castShadow = true;
-  mainVidLady.receiveShadow = true;
+  mainVidLady.receiveShadow = false;
 
   scene.add(mainVidLady)
 }

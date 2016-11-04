@@ -10,6 +10,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 
     <link rel="stylesheet" href="section2.css">
@@ -17,27 +19,29 @@
 
 <body>
     <div class="esc-instructions">
-        <div class="bg-animation">
-            <video class='video-bg' src="asset_src/bg.mp4" autoplay loop>
-
-        </video>
-            <video class='video-bg' id="vide-2" src="asset_src/bg.mp4" autoplay loop>
-
-    </video>
-
-        </div>
-        <div class="top-nav-top">
 
 
-            <!-- <img src="img/one_hex.svg" id="one-hex" /> -->
-            <img id="logo" src="img/logo.svg" alt="" />
-            <p class="top-nav-text buttons" id='your-value'>
-                Your Value
-            </p>
-            <p class="top-nav-text buttons" id="login" style="display:none">
-                Log in
-            </p>
-        </div>
+        <nav class="navbar navbar-default navbar-fixed-top" id="override-nav">
+          <div class="container">
+            <div class="bg-animation">
+                <!-- <video class='video-bg' src="asset_src/bg.mp4" autoplay loop> -->
+
+            <!-- </video> -->
+                <!-- <video class='video-bg' id="vide-2" src="asset_src/bg.mp4" autoplay loop> -->
+
+        <!-- </video> -->
+
+            </div>
+              <img id="logo" src="img/logo.svg" alt="" />
+              <p class="top-nav-text buttons" id='your-value'>
+                  Your Value
+              </p>
+              <p class="top-nav-text buttons" id="login" style="display:none">
+                  Log in
+              </p>
+          </div>
+        </nav>
+
 
     </div>
 
@@ -48,7 +52,6 @@
             <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first">
                 EXPLORE </div>
         </div>
-        <!-- <button type="button" id="button-first" name="button">EXPLORE</button> -->
 
     </div>
 
@@ -62,35 +65,45 @@
     </div>
 
 
-    <!-- <div id="container"></div> -->
 
     <div id="canvasBox">
 
     </div>
-
     <div class="row" id="all-projects">
         <p id="walking-instructions" style="display:none">
             Click to Look Around | " ← ↑ ↓ →" to walk around
         </p>
-        <p>
-            Hi
-        </p>
-        <p>
-            Hi
-        </p>
-        <p>
-            Hi
-        </p>
-        <p>
-            Hi
-        </p>
-        <p>
-            Hi
-        </p>
-        <p>
-            Hi
-        </p>
+
+
     </div>
+
+<div class="col-md-4">
+  <h1>Community Members</h1>
+
+    <button type="button" class="buttons" name="button">Who you will be connected to? </button>
+    <p>  Please remember that your humanitarian score will determine the strength of the links
+  </p>
+</div>
+<div class="col-md-4">
+  <h1>What</h1>
+  <p>
+    I dont know yet
+  </p>
+</div>
+<div class="col-md-4">
+  <h1>What</h1>
+  <p>
+    I dont know yet
+  </p>
+</div>
+
+<video id="video1" autoplay loop webkit-playsinline style="display:none">
+			<source src="asset_src/closer.mp4">
+		</video>
+    <video id="video2" autoplay loop webkit-playsinline style="display:none">
+    			<source src="asset_src/closer.mp4">
+    		</video>
+
 
 
     <script src="node_modules/es6-promise/dist/es6-promise.js"></script>

@@ -5,8 +5,11 @@
   left: 0px;
   width: 100%;
   height: 80px;
-  background-color: white;
   height: 7vh; }
+
+#override-nav {
+  background-color: rgba(3, 3, 3, 0);
+  border: 0px; }
 
 .top-nav-top {
   position: absolute;
@@ -38,6 +41,7 @@
 
 .bg-animation {
   position: absolute;
+  z-index: -20;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -47,7 +51,7 @@
   float: right; }
 
 .video-bg {
-  height: 7vh;
+  height: 100%;
   position: relative;
   opacity: 0.6;
   display: inline-block; }
@@ -122,11 +126,9 @@ p {
   cursor: pointer; }
 
 #logo {
-  width: 30%;
-  height: 30%;
-  padding: 10px;
-  float: left;
-  padding-bottom: 4px; }
+  width: 43%;
+  padding: 3px;
+  margin-left: -19px; }
 
 #walking-instructions {
   color: #009fc6;
