@@ -110,7 +110,9 @@ function init() {
             // antialias: true
     });
 
-    renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
+    renderer.setSize(window.innerWidth, 600);
+    // renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
+
     renderer.setPixelRatio(window.devicePixelRatio);
 
     renderer.shadowMap.enabled = true;
@@ -201,7 +203,7 @@ function init() {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(400, 400);
 
-        var geometry = new THREE.BoxGeometry(300, .2, 300);
+        var geometry = new THREE.PlaneGeometry(390, 390);
 
         var material = new THREE.MeshStandardMaterial({
             roughness: .64,
@@ -212,10 +214,11 @@ function init() {
             emissive: 0xdebe8f,
             side: THREE.DoubleSide
         });
-        var plane = new THREE.Mesh(geometry, material);
+        plane = new THREE.Mesh(geometry, material);
         scene.add(plane);
         plane.receiveShadow = true;
-        plane.position.y = 0;
+        // plane.position.y = 1.57;
+        plane.rotation.x = 1.57;
 
 
     } //////////DONE LOADING FLOOR //////////
@@ -346,14 +349,18 @@ function drawServers(rad,num){
 
 
     // }
+for (var i=0; i<30; i++){
+var rnd = [pink, pinkDrk, mint, purple]
 
-    MakeHex(0,14,0, "newHex",2, pink)
-    MakeHex(0,20,0, "newHex2",2, mint)
-    MakeHex(0,26,0, "newHex3",2, pinkDrk)
+  Hexes.push(MakeHex(Math.random()*10-10,10+(i*6),Math.random()*10-10, "newHex"+ i,2, rnd[i%rnd.length]))
+scene.add(Hexes[i])
+}
+
 
 
 
     addLights()
+    camera.parent.rotation.x = .2
 
     // addHelpers(1000, 100, [light,lightA,directionalLight,directionalLightR,directionalLight2])
 
@@ -376,12 +383,13 @@ function toRadians(angle) {
 function animate(timestamp) {
 
   if (first_descend){
-    TweenMax.to(camera.position, 2,{z: 0, y: -5},function(){first_descend=false})
+    TweenMax.to(camera.position, 2,{z: 0, y: -5.5},function(){first_descend=false})
   }
 
-  scene.getObjectByName( "newHex" ).rotation.z += .1;
-  scene.getObjectByName( "newHex2" ).rotation.x += .1;
-  scene.getObjectByName( "newHex3" ).rotation.z += .1;
+for (var i in Hexes){
+  Hexes[i].rotation.z += .1
+}
+
 
 
   var cameraWorldMatrix = new THREE.Vector3();
@@ -500,7 +508,8 @@ if(video.readyState == video.HAVE_ENOUGH_DATA){
 function onResize(e) {
     camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
+      // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
+        renderer.setSize( window.innerWidth, 600);
 }
 
 function addHelpers(grid_width, dims, light_name) {
@@ -568,5 +577,4 @@ function callMainVideo(){
   mainVidLady.receiveShadow = true;
 
   scene.add(mainVidLady)
-  // console.log(mainVidLady)
 }

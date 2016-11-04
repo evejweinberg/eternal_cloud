@@ -10,6 +10,7 @@ $font-size-lrg: 80px;
 $font-size-medlrg: 40px;
 
 
+
 .esc-instructions{
   display: inline-block;
   position: absolute;
@@ -191,7 +192,6 @@ body {
 body {
     background-color: white;
     margin: 0;
-    overflow: hidden;
     font-family: $font-main;
     color: $pink;
 }

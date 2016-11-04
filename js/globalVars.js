@@ -62,10 +62,11 @@ var playFirstvideo = false
 
 
 ////3D WORLD
-
-var camStartY = 10;
+var plane;
+var camStartY = 22;
 var camStartZ = 10;
-var camDownSpeed = .19
+var camDownSpeed = .19;
+var Hexes = [];
 //Loading manager - decides when to render the scene in onProgress under the loaders
 var loadingManager = new THREE.LoadingManager();
 

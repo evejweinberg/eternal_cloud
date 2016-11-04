@@ -39,7 +39,7 @@ function MakeHex(x,y,z, name,width, col){
 
     hexy.name = name
   }
-  scene.add(hexy)
+  return hexy
 }
 
 
@@ -127,6 +127,7 @@ function startExperience(){
   document.getElementById('blocker').style.pointerEvents = "all";
   var tagline = document.getElementById('tagline-holder')
   TweenMax.to(tagline, 9, {opacity: 0,y: -500,ease: Expo.easeOut})
+  TweenMax.to(camera.parent.rotation,2,{x:0})
   document.getElementById('walking-instructions').style.display = "block";
   //add pointer-controls back  to the splash dom element
 }
