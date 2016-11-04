@@ -1,6 +1,7 @@
 // Request animation frame loop function
 var lastRender = 0;
 var controls;
+var yourValue = 0;
 
 var raycaster;
 var objects = [];

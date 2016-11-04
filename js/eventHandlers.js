@@ -24,3 +24,10 @@ function mOut(obj) {
     obj.innerHTML="EXPLORE";
     obj.style.fontSize = "18px";
 }
+
+
+document.getElementById('your-value').addEventListener('click', function(){
+  window.alert('your value to Eternal Cloud is '+ yourValue)
+})
+
+window.addEventListener('resize', onResize, true);

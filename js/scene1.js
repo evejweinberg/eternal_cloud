@@ -364,7 +364,7 @@ function drawServers(rad,num){
 }
 //init over
 
-window.addEventListener('resize', onResize, true);
+
 
 function toRadians(angle) {
     return angle * (Math.PI / 180);
@@ -375,18 +375,8 @@ function toRadians(angle) {
 
 function animate(timestamp) {
 
-  // console.log(controls.getObject().position)
-
   if (first_descend){
-    camera.position.y -= camDownSpeed
-    camera.position.z -= .1
-    console.log(camera.position.y)
-    if (camera.position.y < -5){
-      first_descend = false;
-    }
-    if (camera.position.z==0 || camera.position.z < 0){
-      camera.position.z = 0;
-    }
+    TweenMax.to(camera.position, 2,{z: 0, y: -5},function(){first_descend=false})
   }
 
   scene.getObjectByName( "newHex" ).rotation.z += .1;
@@ -508,7 +498,7 @@ if(video.readyState == video.HAVE_ENOUGH_DATA){
 
 
 function onResize(e) {
-  camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
 }

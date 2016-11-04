@@ -119,6 +119,8 @@ function addLights() {
 
 
 function startExperience(){
+  pointerlockchange();
+  document.getElementById('login').style.display = "block"
   playFirstvideo = true;
   video.play()
   first_descend = true;
