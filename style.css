@@ -1,3 +1,6 @@
+#canvasBox {
+  overflow: hidden; }
+
 .esc-instructions {
   display: inline-block;
   position: absolute;
@@ -37,7 +40,8 @@
   text-align: center;
   height: 100px;
   position: relative;
-  background: white; }
+  background: white;
+  z-index: 1; }
 
 .bg-animation {
   position: absolute;

@@ -9,29 +9,28 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- my style sheets -->
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="section2.css">
 </head>
 
 <body>
+
+  <!-- //add jquery first -->
+  <script
+  src="http://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+
     <div class="esc-instructions">
-
-
         <nav class="navbar navbar-default navbar-fixed-top" id="override-nav">
           <div class="container">
-            <div class="bg-animation">
-                <!-- <video class='video-bg' src="asset_src/bg.mp4" autoplay loop> -->
-
-            <!-- </video> -->
-                <!-- <video class='video-bg' id="vide-2" src="asset_src/bg.mp4" autoplay loop> -->
-
-        <!-- </video> -->
-
-            </div>
+            <div class="bg-animation">  </div>
               <img id="logo" src="img/logo.svg" alt="" />
               <p class="top-nav-text buttons" id='your-value'>
                   Your Value
@@ -65,20 +64,19 @@
     </div>
 
 
+    <!-- //three js to be added here -->
+    <div id="canvasBox"></div>
 
-    <div id="canvasBox">
-
-    </div>
+    <!-- //more bootstrap stuff here -->
     <div class="row" id="all-projects">
         <p id="walking-instructions" style="display:none">
             Click to Look Around | " ← ↑ ↓ →" to walk around
         </p>
-
-
     </div>
 
-<div class="col-md-4">
-  <h1>Community Members</h1>
+  <!-- //more bootstrap stuff here -->
+  <div class="col-md-4">
+    <h1>Community Members</h1>
 
     <button type="button" class="buttons" name="button">Who you will be connected to? </button>
     <p>  Please remember that your humanitarian score will determine the strength of the links
@@ -97,19 +95,23 @@
   </p>
 </div>
 
-<video id="video1" autoplay loop webkit-playsinline style="display:none">
+<!-- these videos get triggered in the threejs scene -->
+<video id="video1"  loop webkit-playsinline style="display:none">
 			<source src="asset_src/closer.mp4">
 		</video>
-    <video id="video2" autoplay loop webkit-playsinline style="display:none">
-    			<source src="asset_src/closer.mp4">
+    <video id="video2"  loop webkit-playsinline style="display:none">
+    			<source src="asset_src/welcome.mp4">
     		</video>
 
+<!-- //audio for the whole scene -->
+  <audio loop audio autoplay id="myTune" volume=".1"> <source src="asset_src/PurpleVortex.mp3"></audio>
+    <!-- //button to turn audio on and off -->
+  <button type="button" id='audio-toggle' onclick="toggleAudio()" name="button">AUDIO</button>
 
 
+
+<!-- //a boiler plate i used had this, not sure if i still need it -->
     <script src="node_modules/es6-promise/dist/es6-promise.js"></script>
-    <!-- //scroll magic -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
 
     <!-- //threejs stuff -->
     <script src="node_modules/three/build/three.min.js"></script>
@@ -118,22 +120,18 @@
 
     <!-- //green sock and jquery -->
     <script src="lib/TweenMax.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
 
 
-    <!-- //my stuff -->
+    <!-- //my JS stuff -->
     <script src="js/globalVars.js"></script>
     <script src="js/globalFunctions.js"></script>
     <script src="js/scene1.js"></script>
     <script src="js/popUp.js"></script>
     <script src="js/eventHandlers.js"></script>
-    <!-- //add bootstrap -->
+    <!-- //add bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
 
 
 
-
-
 </body>
-
 </html>

@@ -1,4 +1,12 @@
 //Track global loading
+// if (typeof jQuery == 'undefined') {
+//     var script = document.createElement('script');
+//     script.type = "text/javascript";
+//     script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
+//     document.getElementsByTagName('head')[0].appendChild(script);
+// }
+// $(document).ready(function () {
+
 loadingManager.onProgress = function(item, loaded, total){
 
   //Loading precentage pattern
@@ -122,7 +130,9 @@ function startExperience(){
   pointerlockchange();
   document.getElementById('login').style.display = "block"
   playFirstvideo = true;
-  video.play()
+  // elementStyle.top = "40px";
+  TweenMax.to('#three-scene',2,{top: 60, ease: Strong.easeInOut})
+  video1.play()
   first_descend = true;
   document.getElementById('blocker').style.pointerEvents = "all";
   var tagline = document.getElementById('tagline-holder')
@@ -175,32 +185,12 @@ function loadfont() {
 
 
 
-// var elem = document.getElementById('all-projects');
-// var iDiv = document.createElement('div');
-// var thumb = document.createElement('img');
-// var title = document.createElement('h3')
-// var makingOf = document.createElement('p').innerHTML = 'yoyo'
-// var descr = document.createElement('p').innerHTML = 'hihihi'
-// var tag = document.createElement('p')
-// tag.className = 'tag'
-// thumb.className = "img-responsive"
-// iDiv.className = 'col-md-4 portfolio-item';
-// elem.appendChild(iDiv)
-// iDiv.appendChild(thumb)
-// iDiv.appendChild(title)
-// iDiv.appendChild(makingOf)
-// iDiv.appendChild(descr)
-// iDiv.appendChild(tag)
+function toggleAudio(){
+   var audio = document.getElementById("myTune");
+   if (audio.paused) audio.play();
+   else audio.pause();
+}
 
 
 
-
-// var controller = new ScrollMagic.Controller();
-//
-// // create a scene
-// new ScrollMagic.Scene({
-//         duration: 100,    // the scene should last for a scroll distance of 100px
-//         offset: 50        // start this scene after scrolling for 50px
-//     })
-//     .setPin("#three-scene") // pins the element for the the scene's duration
-//     .addTo(controller); // assign the scene to the controller
+// })

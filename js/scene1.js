@@ -92,6 +92,9 @@ if ( havePointerLock ) {
 
 function init() {
 
+  var vid = document.getElementById("myTune");
+vid.volume = 0.2;
+
 
 
     container = document.getElementById('canvasBox');
@@ -133,6 +136,12 @@ function init() {
 		// document.body.appendChild( renderer.domElement );
     container.appendChild(renderer.domElement )
     renderer.domElement.id = "three-scene"
+    elementStyle = document.getElementById("three-scene").style;
+
+elementStyle.position = "relative";
+
+elementStyle.top = "0px";
+elementStyle.overflow = "hidden"
     // document.getElementById("three-scene").style.height = getWindowHeight()*.75;
 // console.log(renderer.domElement)
     // Append the canvas element created by the renderer to document body element.
@@ -194,29 +203,43 @@ function init() {
 
 
     //////LOAD FLOOR ////////
+
+    // var mapHeight = new THREE.TextureLoader().load( "obj/leeperrysmith/Infinite-Level_02_Disp_NoSmoothUV-4096.jpg" );
+		// 		mapHeight.anisotropy = 4;
+		// 		mapHeight.repeat.set( 0.998, 0.998 );
+		// 		mapHeight.offset.set( 0.001, 0.001 );
+		// 		mapHeight.wrapS = mapHeight.wrapT = THREE.RepeatWrapping;
+		// 		mapHeight.format = THREE.RGBFormat;
+
+
     var loader2 = new THREE.TextureLoader(loadingManager);
     loader2.load('img/Floor.jpg', onTextureLoaded2);
 
+    loader2.anisotropy = 4;
+    // loader2.repeat.set( 0.998, 0.998 );
+    // loader2.offset.set( 0.001, 0.001 );
+    loader2.wrapS = loader2.wrapT = THREE.RepeatWrapping;
+    loader2.format = THREE.RGBFormat;
+    // loader2.repeat.set(512, 512);
     function onTextureLoaded2(texture) {
-        // console.log('floor txt loaded')
-        // texture.wrapS = THREE.RepeatWrapping;
-        // texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(512, 512);
 
         var geometry = new THREE.PlaneGeometry(512, 512);
 
-        var material = new THREE.MeshStandardMaterial({
+        var material = new THREE.MeshPhongMaterial({
             roughness: .64,
             metalness: .81,
             transparent: false,
             opacity: 1,
-            color: 0xfffff,
-            emissive: 0xffffff,
+            color: pink,
+            // emissive: pink,
+            // bumpMap: loader2,
+					bumpScale: 12,
             side: THREE.DoubleSide
         });
         plane = new THREE.Mesh(geometry, material);
         scene.add(plane);
         plane.receiveShadow = true;
+        plane.castShadow = true;
         // plane.position.y = 1.57;
         plane.rotation.x = 1.57;
 
@@ -383,7 +406,7 @@ function toRadians(angle) {
 function animate(timestamp) {
 
   if (first_descend){
-    TweenMax.to(camera.position, 2,{z: 0, y: -5.5},function(){first_descend=false})
+    TweenMax.to(camera.position, 2,{z: 0, y: -7},function(){first_descend=false})
   }
 
 for (var i in Hexes){
@@ -393,23 +416,29 @@ for (var i in Hexes){
 
 
   var cameraWorldMatrix = new THREE.Vector3();
-  // console.log(cameraWorldMatrix)
 
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
+    if (mainVidLady){
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
 
     // console.log(cameraWorldMatrix);
-    if (dist < 10){
-      scene.remove(mainVidLady)
+    if (dist < 15){
+      mainVidLady.material.map = video2
+      // scene.remove(mainVidLady)
       setTimeout(function(){
         MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
       },3000)
-        video.src = "../asset_src/welcome.mp4";
-        scene.add(mainVidLady)
-        video.play()
+        // video.src = "../asset_src/welcome.mp4";
+        // scene.add(mainVidLady)
+        // video.play()
     }
 
     mainVidLady.lookAt(cameraWorldMatrix)
+
+
+// TweenMax.fromTo(mainVidLady.position, 2, {y:2}, {y:12, repeat:-1, yoyo:true});
+
+    }
 
   if ( controlsEnabled ) {
     raycaster.ray.origin.copy( controls.getObject().position );
@@ -457,22 +486,9 @@ for (var i in Hexes){
 
 
 
-    // if (playFirstvideo == true){
-    //   video.loop = true
-    // } else {
-    //   video.loop = false
-    // }
 
-    // if (camera os close to screen, then switch video)
 
-// if(video.readyState == video.HAVE_ENOUGH_DATA){
-//
-//   videoImageContext.drawImage(video,0,0,video.width, video.height);
-//   if (videoTexture){
-//
-//     videoTexture.needsUpdate = true
-//   }
-// }
+
 
     for (var i in allBrains) {
         if (allBrains[i].children[0].position.z > 7.6) {
@@ -487,15 +503,7 @@ for (var i in Hexes){
     var delta = Math.min(timestamp - lastRender, 500);
     lastRender = timestamp;
 
-      mainVidLady.position.y+=videoBounce
-      // mainVidLady.lookAt(camera)
 
-    if (mainVidLady.position.y>5.1){
-      videoBounce = -.02
-      }
-    if (mainVidLady.position.y<2.9){
-      videoBounce = .02
-      }
 
 
     requestAnimationFrame(animate);

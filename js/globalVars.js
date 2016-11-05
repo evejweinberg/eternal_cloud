@@ -2,6 +2,8 @@
 var lastRender = 0;
 var controls;
 var yourValue = 0;
+  var elementStyle;
+  // var oscillator;
 
 var raycaster;
 var objects = [];

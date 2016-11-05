@@ -27,7 +27,9 @@ function mOut(obj) {
 
 
 document.getElementById('your-value').addEventListener('click', function(){
-  window.alert('your value to Eternal Cloud is '+ yourValue)
+  window.alert('your value to Eternal Cloud is '+ yourValue+ ' Login to earn value')
 })
+
+
 
 window.addEventListener('resize', onResize, true);
