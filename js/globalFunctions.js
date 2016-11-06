@@ -1,12 +1,3 @@
-//Track global loading
-// if (typeof jQuery == 'undefined') {
-//     var script = document.createElement('script');
-//     script.type = "text/javascript";
-//     script.src = "http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
-//     document.getElementsByTagName('head')[0].appendChild(script);
-// }
-// $(document).ready(function () {
-
 loadingManager.onProgress = function(item, loaded, total){
 
   //Loading precentage pattern
@@ -17,15 +8,41 @@ loadingManager.onProgress = function(item, loaded, total){
 //Signify loading done
 loadingManager.onLoad = function(){
 
-  //get rid of the loading screen
-
   //Start redrawing when the models are done loading
   animate();
 
 }
 
 
+var loader = new THREE.TextureLoader(loadingManager)
+loader.load('../img/leo.jpg',function ( texture ) {
+		// do something with the texture
+		leoTxt = new THREE.MeshStandardMaterial( {
+			map: texture,
+      roughness: .64,
+      metalness: .81,
+      transparent: true,
+      side: THREE.DoubleSide
+		 } );
 
+     var geo = new THREE.CylinderGeometry(6,6, .6, 6)
+
+     LeoGeo = new THREE.Mesh(geo, leoTxt)
+     LeoGeo.position.set(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)))
+     LeoGeo.rotation.x = 1.57
+
+     console.log(LeoGeo)
+
+
+   })
+
+
+function FourHexes(x,y,z, width, col){
+  scene.add(MakeHex(x-10,y-10,z, "tl",width, col))
+  scene.add(MakeHex(x-10,y+10,z, "tr",width, col))
+  scene.add(MakeHex(x+10,y-10,z, "bl",width, col))
+  scene.add(MakeHex(x+10,y+10,z, "br",width, col))
+}
 
 ///HEXAGONS
 function MakeHex(x,y,z, name,width, col){
@@ -41,13 +58,16 @@ function MakeHex(x,y,z, name,width, col){
     side: THREE.DoubleSide
   });
   var hexy = new THREE.Mesh(geo, material)
+
   hexy.position.set(x,y,z)
   hexy.rotation.x = 1.57
-  if (name){
 
+  if (name){
     hexy.name = name
   }
-  return hexy
+
+  return hexy;
+
 }
 
 
@@ -127,19 +147,34 @@ function addLights() {
 
 
 function startExperience(){
-  pointerlockchange();
+  //show login button
   document.getElementById('login').style.display = "block"
   playFirstvideo = true;
-  // elementStyle.top = "40px";
+  // tween top of 3js scene down
   TweenMax.to('#three-scene',2,{top: 60, ease: Strong.easeInOut})
   video1.play()
   first_descend = true;
-  document.getElementById('blocker').style.pointerEvents = "all";
+  //move tagline out of the way -- up, and fade out
   var tagline = document.getElementById('tagline-holder')
   TweenMax.to(tagline, 9, {opacity: 0,y: -500,ease: Expo.easeOut})
   TweenMax.to(camera.parent.rotation,2,{x:0})
+  //turn on instructions below 3jd scene
   document.getElementById('walking-instructions').style.display = "block";
-  //add pointer-controls back  to the splash dom element
+}
+
+
+
+function drawServers(rad,num){
+  var dummy = num+3
+  var spacing = 360/dummy
+  for (var i =0; i<num;i++){
+    var tempNew = serverObject.clone();
+    tempNew.scale.set(.27, .27, .27);
+    tempNew.position.set(rad*Math.cos(toRadians(spacing*i)), 0, rad*Math.sin(toRadians(spacing*i)));
+    allBrains.push(tempNew);
+    scene.add(tempNew)
+  }
+
 }
 
 
@@ -192,5 +227,24 @@ function toggleAudio(){
 }
 
 
+function MakeLeo(x,y,z, name,width, col){
 
-// })
+  var geo = new THREE.CylinderGeometry(width,width, .6, 6)
+  var material = new THREE.MeshStandardMaterial({
+    roughness: .64,
+    metalness: .81,
+    transparent: true,
+    opacity: .4,
+    color: col,
+    emissive: col,
+    side: THREE.DoubleSide
+  });
+  var hexy = new THREE.Mesh(geo, material)
+  hexy.position.set(x,y,z)
+  hexy.rotation.x = 1.57
+  if (name){
+
+    hexy.name = name
+  }
+  return hexy
+}

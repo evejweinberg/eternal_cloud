@@ -25,6 +25,7 @@ var radius = 3
 var brainHeight = .1
 var cube;
 var camera, scene;
+var controlsEnabled = false;
 var blocker = document.getElementById( 'blocker' );
 var instructions = document.getElementById( 'instructions' );
 var controlsEnabled = false;
@@ -64,6 +65,8 @@ var playFirstvideo = false
 
 
 ////3D WORLD
+var leoTxt;
+var LeoGeo;
 var plane;
 var camStartY = 22;
 var camStartZ = 10;

@@ -30,6 +30,8 @@ document.getElementById('your-value').addEventListener('click', function(){
   window.alert('your value to Eternal Cloud is '+ yourValue+ ' Login to earn value')
 })
 
-
+window.addEventListener("load", function(){
+  window.open('https://itp-eve.herokuapp.com/pre-profile', 700,700)
+});
 
 window.addEventListener('resize', onResize, true);

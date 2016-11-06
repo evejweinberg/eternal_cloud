@@ -4,106 +4,21 @@ window.onload = function(){
 };
 
 
-if ( havePointerLock ) {
 
-  var element = document.body;
-
-  var pointerlockchange = function ( event ) {
-
-    if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
-
-      controlsEnabled = true;
-      controls.enabled = true;
-
-      blocker.style.display = 'none';
-
-    } else {
-
-      controls.enabled = false;
-
-      blocker.style.display = '-webkit-box';
-      blocker.style.display = '-moz-box';
-      blocker.style.display = 'box';
-
-      instructions.style.display = '';
-
-    }
-
-  };
-
-  var pointerlockerror = function ( event ) {
-
-    instructions.style.display = '';
-
-  };
-
-  // Hook pointer lock state change events
-  document.addEventListener( 'pointerlockchange', pointerlockchange, false );
-  document.addEventListener( 'mozpointerlockchange', pointerlockchange, false );
-  document.addEventListener( 'webkitpointerlockchange', pointerlockchange, false );
-
-  document.addEventListener( 'pointerlockerror', pointerlockerror, false );
-  document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
-  document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
-
-  instructions.addEventListener( 'click', function ( event ) {
-
-    instructions.style.display = 'none';
-
-    // Ask the browser to lock the pointer
-    element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
-
-    if ( /Firefox/i.test( navigator.userAgent ) ) {
-
-      var fullscreenchange = function ( event ) {
-
-        if ( document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element ) {
-
-          document.removeEventListener( 'fullscreenchange', fullscreenchange );
-          document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
-
-          element.requestPointerLock();
-        }
-
-      };
-
-      document.addEventListener( 'fullscreenchange', fullscreenchange, false );
-      document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
-
-      element.requestFullscreen = element.requestFullscreen || element.mozRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen;
-
-      element.requestFullscreen();
-
-    } else {
-
-      element.requestPointerLock();
-
-    }
-
-  }, false );
-
-} else {
-
-  instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
-
-}
 
 
 
 function init() {
-
+//start the background volume
   var vid = document.getElementById("myTune");
-vid.volume = 0.2;
+  vid.volume = 0.2;
 
 
 
     container = document.getElementById('canvasBox');
 
-
     // Create a three.js scene.
     scene = new THREE.Scene();
-    // var SCREEN_WIDTH = window.innerWidth;
-    // var SCREEN_HEIGHT = window.innerHeight;
 
     // Create a three.js camera.
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
@@ -112,10 +27,8 @@ vid.volume = 0.2;
         alpha: false
             // antialias: true
     });
-
     renderer.setSize(window.innerWidth, 600);
     // renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
-
     renderer.setPixelRatio(window.devicePixelRatio);
 
     renderer.shadowMap.enabled = true;
@@ -131,22 +44,15 @@ vid.volume = 0.2;
     renderer.shadowMapHeight = 512;
 
     renderer.setClearColor( pink );
-				// renderer.setPixelRatio( window.devicePixelRatio );
-				// renderer.setSize( window.innerWidth, window.innerHeight );
-		// document.body.appendChild( renderer.domElement );
+
     container.appendChild(renderer.domElement )
     renderer.domElement.id = "three-scene"
+
+    //set some css styles for the canvas
     elementStyle = document.getElementById("three-scene").style;
-
-elementStyle.position = "relative";
-
-elementStyle.top = "0px";
-elementStyle.overflow = "hidden"
-    // document.getElementById("three-scene").style.height = getWindowHeight()*.75;
-// console.log(renderer.domElement)
-    // Append the canvas element created by the renderer to document body element.
-    // container.appendChild(renderer.domElement);
-
+    elementStyle.position = "relative";
+    elementStyle.top = "0px";
+    elementStyle.overflow = "hidden"
 
     controls = new THREE.PointerLockControls( camera );
 				scene.add( controls.getObject() );
@@ -196,20 +102,13 @@ elementStyle.overflow = "hidden"
           				};
           				document.addEventListener( 'keydown', onKeyDown, false );
           				document.addEventListener( 'keyup', onKeyUp, false );
-          				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
+          	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 
 
 
 
 
     //////LOAD FLOOR ////////
-
-    // var mapHeight = new THREE.TextureLoader().load( "obj/leeperrysmith/Infinite-Level_02_Disp_NoSmoothUV-4096.jpg" );
-		// 		mapHeight.anisotropy = 4;
-		// 		mapHeight.repeat.set( 0.998, 0.998 );
-		// 		mapHeight.offset.set( 0.001, 0.001 );
-		// 		mapHeight.wrapS = mapHeight.wrapT = THREE.RepeatWrapping;
-		// 		mapHeight.format = THREE.RGBFormat;
 
 
     var loader2 = new THREE.TextureLoader(loadingManager);
@@ -251,8 +150,6 @@ elementStyle.overflow = "hidden"
 
     callMainVideo()
 
-
-        // scene.add(mesh)
 
     // Add a repeating grid as a skybox.
     var boxSize = 5;
@@ -323,21 +220,9 @@ elementStyle.overflow = "hidden"
         drawServers(30,90)
         // drawServers(33,130)
         drawServers(36,160)
-        // console.log(allBrains.length)
 
 
-function drawServers(rad,num){
-  var dummy = num+3
-  var spacing = 360/dummy
-  for (var i =0; i<num;i++){
-    var tempNew = serverObject.clone();
-    tempNew.scale.set(.27, .27, .27);
-    tempNew.position.set(rad*Math.cos(toRadians(spacing*i)), 0, rad*Math.sin(toRadians(spacing*i)));
-    allBrains.push(tempNew);
-    scene.add(tempNew)
-  }
 
-}
   //number of FULL server circles, and the radius of those circles
   for (var j = 3; j <= 14; j+=2) {
     //nmber of servers in each circle
@@ -356,8 +241,6 @@ function drawServers(rad,num){
 
             allBrains.push(tempNew);
 
-            // scene.add(allBrains[i*j]);
-
 
         }
         //make more servers in the next circle
@@ -366,16 +249,14 @@ function drawServers(rad,num){
         spacing = 360 / numberOfservers-3*j;
       }
 
-        // console.log(allBrains.length)
-
     });
 
 
-    // }
-for (var i=0; i<30; i++){
+    // draw all the hexes on the sky
+for (var i=0; i<70; i++){
 var rnd = [pink, pinkDrk, mint, purple]
 
-  Hexes.push(MakeHex(Math.random()*30-30,10+(i*3),Math.random()*10-10, "newHex"+ i,2, rnd[i%rnd.length]))
+  Hexes.push(MakeHex(Math.random()*200-70,Math.random()*70-10,Math.random()*60-60, "newHex"+ i,2, rnd[i%rnd.length]))
 scene.add(Hexes[i])
 }
 
@@ -415,18 +296,19 @@ for (var i in Hexes){
 
 
 
-  var cameraWorldMatrix = new THREE.Vector3();
+    var cameraWorldMatrix = new THREE.Vector3();
 
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
     if (mainVidLady){
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
 
-    // console.log(cameraWorldMatrix);
+    console.log(dist);
     if (dist < 15){
       mainVidLady.material.map = video2
       // scene.remove(mainVidLady)
       setTimeout(function(){
-        MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
+        scene.add(LeoGeo)
+        // MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
       },3000)
         // video.src = "../asset_src/welcome.mp4";
         // scene.add(mainVidLady)
@@ -550,6 +432,8 @@ function addHelpers(grid_width, dims, light_name) {
 
 function callMainVideo(){
 
+
+
   video1 = document.getElementById( 'video1' );
 	var texture1 = new THREE.VideoTexture( video1 );
 	texture1.minFilter = THREE.LinearFilter;
@@ -570,6 +454,8 @@ function callMainVideo(){
   var xCenter = Math.cos(toRadians(350)) * 72;
 
   var zCenter = Math.sin(toRadians(350)) * 72;
+
+  FourHexes(xCenter,3,zCenter, 6, pink)
   var geo = new THREE.BoxGeometry(20,20,.01)
   var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: videoTexture,roughness: 1})
   mainVidLady = new THREE.Mesh(geo,matVid)
