@@ -56,14 +56,15 @@ border: 0px;
 }
 
 .tagline-holder{
-  width: 60%;
-  margin:auto;
-  top:30%;
-  text-align: center;
-  height: 100px;
-  position: relative;
-  background: white;
-  z-index: 1;
+  // color: white;
+  // width: 60%;
+  // margin:auto;
+  // top:30%;
+  // text-align: center;
+  // height: 100px;
+  // position: relative;
+  // // background: white;
+  // z-index: 1;
   // background-image: url('asset_src/bg.gif');
   // background-repeat: repeat;
 }
@@ -143,13 +144,7 @@ p{
 
 }
 
-#blocker {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    pointer-events: none;
-}
+
 
 .splash {
     position: absolute;
@@ -158,26 +153,35 @@ p{
     // background-color: rgba(0, 0, 0, 0);
 }
 
-#instructions {
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    box-orient: horizontal;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    box-pack: center;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    box-align: center;
-    // color: #ffffff;
-    text-align: center;
-    cursor: pointer;
-}
+#blocker {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        // background-color: rgba(0,0,0,0.5);
+        z-index: 900;
+      }
+      #instructions {
+        border: 20px blue;
+        width: 100%;
+        height: 100%;
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+        // background-color: yellow;
 
+        -webkit-box-orient: horizontal;
+        -moz-box-orient: horizontal;
+        box-orient: horizontal;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        box-pack: center;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        box-align: center;
+        color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+      }
 
 #logo{
   width: 43%;

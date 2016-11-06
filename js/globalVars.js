@@ -26,8 +26,10 @@ var brainHeight = .1
 var cube;
 var camera, scene;
 var controlsEnabled = false;
-var blocker = document.getElementById( 'blocker' );
+var blocker = document.getElementById( 'explore' );
 var instructions = document.getElementById( 'instructions' );
+var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+
 var controlsEnabled = false;
 var moveForward = false;
 var moveBackward = false;
@@ -60,11 +62,13 @@ var purple = 0xb9a0b1;
 // BOOLEANS
 
 var first_descend = false;
-var playFirstvideo = false
-
+var playFirstvideo = false;
+var havenotHitLady = true;
 
 
 ////3D WORLD
+var textureLady2;
+var textureLady1;
 var leoTxt;
 var LeoGeo;
 var plane;

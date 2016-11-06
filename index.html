@@ -45,24 +45,32 @@
 
     </div>
 
-    <div class="splash">
-        <div class="tagline-holder" id="tagline-holder">
+    <!-- <div class="splash"> -->
+        <!-- <div class="tagline-holder" id="tagline-holder">
 
             <h1 id="tagline">Your new neural neighborhood <sup>®</sup></h1>
-            <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first">
+            <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first" id="explore">
                 EXPLORE </div>
-        </div>
+        </div> -->
 
-    </div>
+    <!-- </div> -->
 
     <div id="blocker">
 
-        <div id="instructions">
-            <!-- <span style="font-size:40px">Click to play</span> -->
-            <!-- <br /> (W, A, S, D = Move, SPACE = Jump, MOUSE = Look around) -->
-        </div>
+  			<div id="instructions">
+          <div class="tagline-holder" id="tagline-holder">
 
-    </div>
+              <h1 id="tagline">Your new neural neighborhood <sup>®</sup></h1>
+              <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first" id="explore">
+                  EXPLORE </div>
+          </div>
+  				<!-- <span style="font-size:40px; color:red">Click to play</span>
+  				<br />
+  				(W, A, S, D = Move, SPACE = Jump, MOUSE = Look around) -->
+  			</div>
+
+  	  	</div>
+
 
 
     <!-- //three js to be added here -->
@@ -100,8 +108,8 @@
 <video id="video1"  loop webkit-playsinline style="display:none">
 			<source src="asset_src/intro.mp4">
 		</video>
-    <video id="video2"  loop webkit-playsinline style="display:none">
-    			<source src="asset_src/welcome.mp4">
+    <video id="video2" webkit-playsinline style="display:none">
+    			<source src="asset_src/welcome2.mp4">
     		</video>
 
 <!-- //audio for the whole scene -->
@@ -129,7 +137,7 @@
     <script src="js/scene1.js"></script>
     <script src="js/popUp.js"></script>
     <script src="js/eventHandlers.js"></script>
-    
+
     <!-- //add bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
 

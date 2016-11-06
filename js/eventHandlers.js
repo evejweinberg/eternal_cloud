@@ -31,7 +31,7 @@ document.getElementById('your-value').addEventListener('click', function(){
 })
 
 window.addEventListener("load", function(){
-  window.open('https://itp-eve.herokuapp.com/pre-profile', 700,700)
+  window.open('https://itp-eve.herokuapp.com/pre-profile', 300,400)
 });
 
 window.addEventListener('resize', onResize, true);

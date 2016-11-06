@@ -7,6 +7,62 @@ window.onload = function(){
 
 
 
+if ( havePointerLock ) {
+				var element = document.body;
+				var pointerlockchange = function ( event ) {
+					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
+						controlsEnabled = true;
+						controls.enabled = true;
+						blocker.style.display = 'none';
+					} else {
+						controls.enabled = false;
+						blocker.style.display = '-webkit-box';
+						blocker.style.display = '-moz-box';
+						blocker.style.display = 'box';
+						// instructions.style.display = '';
+					}
+				};
+				var pointerlockerror = function ( event ) {
+					// instructions.style.display = '';
+				};
+				// Hook pointer lock state change events
+				document.addEventListener( 'pointerlockchange', pointerlockchange, false );
+				document.addEventListener( 'mozpointerlockchange', pointerlockchange, false );
+				document.addEventListener( 'webkitpointerlockchange', pointerlockchange, false );
+				document.addEventListener( 'pointerlockerror', pointerlockerror, false );
+				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
+				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
+				instructions.addEventListener( 'click', function ( event ) {
+					instructions.style.display = 'none';
+					// Ask the browser to lock the pointer
+					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+					if ( /Firefox/i.test( navigator.userAgent ) ) {
+						var fullscreenchange = function ( event ) {
+							if ( document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element ) {
+								document.removeEventListener( 'fullscreenchange', fullscreenchange );
+								document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
+								element.requestPointerLock();
+							}
+						};
+						document.addEventListener( 'fullscreenchange', fullscreenchange, false );
+						document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
+						element.requestFullscreen = element.requestFullscreen || element.mozRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen;
+						element.requestFullscreen();
+					} else {
+						element.requestPointerLock();
+					}
+				}, false );
+			} else {
+				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
+			}
+
+
+
+
+
+
+
+
 
 function init() {
 //start the background volume
@@ -44,7 +100,7 @@ function init() {
     renderer.shadowMapHeight = 512;
 
     renderer.setClearColor( pink );
-
+    // document.body.appendChild( renderer.domElement );
     container.appendChild(renderer.domElement )
     renderer.domElement.id = "three-scene"
 
@@ -100,6 +156,8 @@ function init() {
           							break;
           					}
           				};
+
+                  //maybe change this to container
           				document.addEventListener( 'keydown', onKeyDown, false );
           				document.addEventListener( 'keyup', onKeyUp, false );
           	raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
@@ -286,33 +344,42 @@ function toRadians(angle) {
 
 function animate(timestamp) {
 
+    requestAnimationFrame(animate);
+
   if (first_descend){
     TweenMax.to(camera.position, 2,{z: 0, y: -7},function(){first_descend=false})
   }
 
-for (var i in Hexes){
-  Hexes[i].rotation.z += .1
-}
+  for (var i in Hexes){
+    Hexes[i].rotation.z += .1
+  }
 
 
 
     var cameraWorldMatrix = new THREE.Vector3();
-
+if (camera.matrixWorld)
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
+
     if (mainVidLady){
+      // var dist = 10
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
 
     console.log(dist);
-    if (dist < 15){
-      mainVidLady.material.map = video2
-      // scene.remove(mainVidLady)
+    if (dist < 25){
+      if (havenotHitLady){
+        video1.pause()
+        scene.remove(mainVidLady)
+        mainVidLady.material.map = textureLady2
+        scene.add(mainVidLady)
+        video2.play()
+        // textureLady2.needsUpdate = true;
+        havenotHitLady = false;
+      }
       setTimeout(function(){
         scene.add(LeoGeo)
         // MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
       },3000)
-        // video.src = "../asset_src/welcome.mp4";
-        // scene.add(mainVidLady)
-        // video.play()
+
     }
 
     mainVidLady.lookAt(cameraWorldMatrix)
@@ -322,49 +389,34 @@ for (var i in Hexes){
 
     }
 
-  if ( controlsEnabled ) {
-    raycaster.ray.origin.copy( controls.getObject().position );
-    raycaster.ray.origin.y -= 10;
-
-    var intersections = raycaster.intersectObjects( objects );
-
-    var isOnObject = intersections.length > 0;
-
-    var time = performance.now();
-    var delta = ( time - prevTime ) / 1000;
-
-    velocity.x -= velocity.x * 10.0 * delta;
-    velocity.z -= velocity.z * 10.0 * delta;
-
-    velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
-
-    if ( moveForward ) velocity.z -= 400.0 * delta;
-    if ( moveBackward ) velocity.z += 400.0 * delta;
-
-    if ( moveLeft ) velocity.x -= 400.0 * delta;
-    if ( moveRight ) velocity.x += 400.0 * delta;
-
-    if ( isOnObject === true ) {
-      velocity.y = Math.max( 0, velocity.y );
-
-      canJump = true;
-    }
-
-    controls.getObject().translateX( velocity.x * delta );
-    controls.getObject().translateY( velocity.y * delta );
-    controls.getObject().translateZ( velocity.z * delta );
-
-    if ( controls.getObject().position.y < 10 ) {
-
-      velocity.y = 0;
-      controls.getObject().position.y = 10;
-
-      canJump = true;
-
-    }
-    prevTime = time;
-
-  }
+    if ( controlsEnabled ) {
+    					raycaster.ray.origin.copy( controls.getObject().position );
+    					raycaster.ray.origin.y -= 10;
+    					var intersections = raycaster.intersectObjects( objects );
+    					var isOnObject = intersections.length > 0;
+    					var time = performance.now();
+    					var delta = ( time - prevTime ) / 1000;
+    					velocity.x -= velocity.x * 10.0 * delta;
+    					velocity.z -= velocity.z * 10.0 * delta;
+    					velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
+    					if ( moveForward ) velocity.z -= 400.0 * delta;
+    					if ( moveBackward ) velocity.z += 400.0 * delta;
+    					if ( moveLeft ) velocity.x -= 400.0 * delta;
+    					if ( moveRight ) velocity.x += 400.0 * delta;
+    					if ( isOnObject === true ) {
+    						velocity.y = Math.max( 0, velocity.y );
+    						canJump = true;
+    					}
+    					controls.getObject().translateX( velocity.x * delta );
+    					controls.getObject().translateY( velocity.y * delta );
+    					controls.getObject().translateZ( velocity.z * delta );
+    					if ( controls.getObject().position.y < 10 ) {
+    						velocity.y = 0;
+    						controls.getObject().position.y = 10;
+    						canJump = true;
+    					}
+    					prevTime = time;
+    				}
 
 
 
@@ -388,7 +440,7 @@ for (var i in Hexes){
 
 
 
-    requestAnimationFrame(animate);
+
     renderer.render(scene, camera);
 
 }
@@ -435,18 +487,18 @@ function callMainVideo(){
 
 
   video1 = document.getElementById( 'video1' );
-	var texture1 = new THREE.VideoTexture( video1 );
-	texture1.minFilter = THREE.LinearFilter;
-	texture1.magFilter = THREE.LinearFilter;
-	texture1.format = THREE.RGBFormat;
+	textureLady1 = new THREE.VideoTexture( video1 );
+	textureLady1.minFilter = THREE.LinearFilter;
+	textureLady1.magFilter = THREE.LinearFilter;
+	textureLady1.format = THREE.RGBFormat;
 
   video2 = document.getElementById( 'video2' );
-	var texture2 = new THREE.VideoTexture( video2 );
-	texture2.minFilter = THREE.LinearFilter;
-	texture2.magFilter = THREE.LinearFilter;
-	texture2.format = THREE.RGBFormat;
+	textureLady2 = new THREE.VideoTexture( video2 );
+	textureLady2.minFilter = THREE.LinearFilter;
+	textureLady2.magFilter = THREE.LinearFilter;
+	textureLady2.format = THREE.RGBFormat;
 
-  matVid = new THREE.MeshLambertMaterial({color: 0xffffff, map: texture1});
+  matVid = new THREE.MeshLambertMaterial({color: 0xffffff, map: textureLady1});
 
 
 
@@ -456,8 +508,8 @@ function callMainVideo(){
   var zCenter = Math.sin(toRadians(350)) * 72;
 
   FourHexes(xCenter,3,zCenter, 6, pink)
-  var geo = new THREE.BoxGeometry(20,20,.01)
-  var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: videoTexture,roughness: 1})
+  var geo = new THREE.BoxGeometry(20,20,1)
+  var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: textureLady1,roughness: 1})
   mainVidLady = new THREE.Mesh(geo,matVid)
   mainVidLady.position.set(xCenter,5,zCenter)
   //radians
