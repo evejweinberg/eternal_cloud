@@ -29,9 +29,11 @@ loader.load('../img/leo.jpg',function ( texture ) {
 
      LeoGeo = new THREE.Mesh(geo, leoTxt)
      LeoGeo.position.set(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)))
-     LeoGeo.rotation.x = 1.57
+    //  LeoGeo.rotation.x = 1.57
 
-     console.log(LeoGeo)
+    //  LeoGroup.add(LeoGeo)
+
+    //  console.log(LeoGeo)
 
 
    })

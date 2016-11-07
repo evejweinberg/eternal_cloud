@@ -55,18 +55,28 @@ border: 0px;
   cursor: pointer;
 }
 
+#access-score{
+  display: none;
+  width: 70%;
+  height: 70%;
+  margin: auto;
+  text-align: center;
+  background-color: $purple;
+}
+
 .tagline-holder{
-  // color: white;
-  // width: 60%;
-  // margin:auto;
-  // top:30%;
-  // text-align: center;
-  // height: 100px;
-  // position: relative;
-  // // background: white;
-  // z-index: 1;
-  // background-image: url('asset_src/bg.gif');
-  // background-repeat: repeat;
+  position: relative;
+top: -10%;
+
+}
+
+#audio-toggle{
+  width:5%;
+  float:right;
+  display: inline-block;
+margin-top: 9px;
+margin-right: 14px;
+vertical-align: middle;
 }
 
 .bg-animation{

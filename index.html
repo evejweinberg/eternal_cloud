@@ -39,6 +39,8 @@
               <p class="top-nav-text buttons" id="login" style="display:none">
                   Log in
               </p>
+              <!-- //button to turn audio on and off -->
+            <img src="img/audio.png" id='audio-toggle' onclick="toggleAudio()" name="button"></img>
           </div>
         </nav>
 
@@ -57,6 +59,13 @@
 
     <div id="blocker">
 
+      <div id="access-score">
+        <h1>Current Score: </h1>
+        <p>
+          Question 1:
+        </p>
+      </div>
+
   			<div id="instructions">
           <div class="tagline-holder" id="tagline-holder">
 
@@ -70,6 +79,8 @@
   			</div>
 
   	  	</div>
+
+
 
 
 
@@ -114,8 +125,7 @@
 
 <!-- //audio for the whole scene -->
   <audio loop audio autoplay id="myTune" volume=".1"> <source src="asset_src/PurpleVortex.mp3"></audio>
-    <!-- //button to turn audio on and off -->
-  <button type="button" id='audio-toggle' onclick="toggleAudio()" name="button">AUDIO</button>
+
 
 
 

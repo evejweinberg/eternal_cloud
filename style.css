@@ -33,6 +33,26 @@
 .button-first:hover {
   cursor: pointer; }
 
+#access-score {
+  display: none;
+  width: 70%;
+  height: 70%;
+  margin: auto;
+  text-align: center;
+  background-color: #b9a0b1; }
+
+.tagline-holder {
+  position: relative;
+  top: -10%; }
+
+#audio-toggle {
+  width: 5%;
+  float: right;
+  display: inline-block;
+  margin-top: 9px;
+  margin-right: 14px;
+  vertical-align: middle; }
+
 .bg-animation {
   position: absolute;
   z-index: -20;

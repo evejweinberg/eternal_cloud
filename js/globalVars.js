@@ -4,7 +4,7 @@ var controls;
 var yourValue = 0;
   var elementStyle;
   // var oscillator;
-
+var LeoGroup = new THREE.Group();
 var raycaster;
 var objects = [];
 var popUpsInterval;

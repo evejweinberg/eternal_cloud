@@ -346,6 +346,12 @@ function animate(timestamp) {
 
     requestAnimationFrame(animate);
 
+    // if(LeoGeo){
+      LeoGeo.rotation.x += .1
+      LeoGeo.rotation.y += .2
+      LeoGeo.rotation.z += .2
+    // }
+
   if (first_descend){
     TweenMax.to(camera.position, 2,{z: 0, y: -7},function(){first_descend=false})
   }
@@ -364,7 +370,7 @@ if (camera.matrixWorld)
       // var dist = 10
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
 
-    console.log(dist);
+    // console.log(dist);
     if (dist < 25){
       if (havenotHitLady){
         video1.pause()
@@ -376,12 +382,12 @@ if (camera.matrixWorld)
         havenotHitLady = false;
       }
       setTimeout(function(){
-        scene.add(LeoGeo)
+        scene.add(LeoGroup)
         // MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
       },3000)
 
     }
-
+    LeoGeo.lookAt(cameraWorldMatrix)
     mainVidLady.lookAt(cameraWorldMatrix)
 
 
