@@ -1,22 +1,6 @@
 
 
-//add form to fill out HemisphereLight
-document.getElementById('login').addEventListener('click', LoginPressed)
 
-
-function LoginPressed(){
-  document.getElementById('access-score').style.display = 'block';
-  //switdch to ascii shaders
-
-  // console.log('was login pressed already??')
-  for (var i=0;i<16;i++){
-
-    setInterval(popUp('window' + windowName,window.innerWidth-(i*50),i*50),200)
-    setInterval(popUp('window' + windowName+ 'B',i*50,i*50),200)
-    // console.log()
-    windowName++;
-  }
-}
 
 
 

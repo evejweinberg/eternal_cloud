@@ -29,21 +29,17 @@ loader.load('../img/leo.jpg',function ( texture ) {
 
      LeoGeo = new THREE.Mesh(geo, leoTxt)
      LeoGeo.position.set(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)))
-    //  LeoGeo.rotation.x = 1.57
 
-    //  LeoGroup.add(LeoGeo)
-
-    //  console.log(LeoGeo)
 
 
    })
 
 
 function FourHexes(x,y,z, width, col){
-  scene.add(MakeHex(x-10,y-10,z, "tl",width, col))
-  scene.add(MakeHex(x-10,y+10,z, "tr",width, col))
-  scene.add(MakeHex(x+10,y-10,z, "bl",width, col))
-  scene.add(MakeHex(x+10,y+10,z, "br",width, col))
+  for (var i =0; i< 20; i++){
+    scene.add(MakeHex(x-i,y-i,z, "tl"+i,width, col))
+      scene.add(MakeHex(x+i,y+i,z, "tl2"+i,width, col))
+  }
 }
 
 ///HEXAGONS
@@ -150,7 +146,7 @@ function addLights() {
 
 function startExperience(){
   //show login button
-  document.getElementById('login').style.display = "block"
+  document.getElementById('login').style.display = "block";
   playFirstvideo = true;
   // tween top of 3js scene down
   TweenMax.to('#three-scene',2,{top: 60, ease: Strong.easeInOut})

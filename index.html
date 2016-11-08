@@ -47,23 +47,19 @@
 
     </div>
 
-    <!-- <div class="splash"> -->
-        <!-- <div class="tagline-holder" id="tagline-holder">
 
-            <h1 id="tagline">Your new neural neighborhood <sup>®</sup></h1>
-            <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first" id="explore">
-                EXPLORE </div>
-        </div> -->
-
-    <!-- </div> -->
 
     <div id="blocker">
 
       <div id="access-score">
-        <h1>Current Score: </h1>
-        <p>
+        <h1 class = 'access-score-type'>Current Score: </h1>
+        <!-- <p>
           Question 1:
-        </p>
+        </p> -->
+        <h1 class = 'access-score-type' id="access-1">Philanthropy: <span id="access-1-score">nAn</span></h1>
+        <h1 class = 'access-score-type' id="access-2">Career Choices: <span id="access-2-score">nAn</span></h1>
+        <h1 class = 'access-score-type' id="access-3">Intelligence: <span id="access-3-score">nAn</span></h1>
+        <h1 class = 'access-score-type' id="access-4">Activism Level: <span id="access-4-score">nAn</span></h1>
       </div>
 
   			<div id="instructions">
@@ -109,9 +105,12 @@
   </p>
 </div>
 <div class="col-md-4">
-  <h1>What</h1>
+  <h1>FAQ</h1>
   <p>
-    I dont know yet
+    <ul>
+      <li>Can I buy my way in?</li>
+      <li>Can I do anything to reverse my past actions?</li>
+    </ul>
   </p>
 </div>
 
@@ -134,6 +133,7 @@
 
     <!-- //threejs stuff -->
     <script src="node_modules/three/build/three.min.js"></script>
+        <script src="js/AsciiEffect.js"></script>
     <script src="js/PointerLockControls.js"></script>
     <script src="loaders/JSONLoader.js"></script>
 

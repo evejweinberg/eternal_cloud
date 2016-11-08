@@ -102,7 +102,16 @@ function init() {
     renderer.setClearColor( pink );
     // document.body.appendChild( renderer.domElement );
     container.appendChild(renderer.domElement )
-    renderer.domElement.id = "three-scene"
+
+    renderer.domElement.id = "three-scene";
+
+    effect = new THREE.AsciiEffect( renderer );
+    effect.setSize(window.innerWidth, 600);
+    // container.appendChild( effect.domElement );
+
+
+
+
 
     //set some css styles for the canvas
     elementStyle = document.getElementById("three-scene").style;
@@ -340,20 +349,20 @@ function toRadians(angle) {
 }
 
 
-
+ // var counter = 0
 
 function animate(timestamp) {
 
     requestAnimationFrame(animate);
 
-    // if(LeoGeo){
-      LeoGeo.rotation.x += .1
-      LeoGeo.rotation.y += .2
-      LeoGeo.rotation.z += .2
-    // }
+  //  counter ++;
+
+    // mainVidLady.position.y = counter;
+
+
 
   if (first_descend){
-    TweenMax.to(camera.position, 2,{z: 0, y: -7},function(){first_descend=false})
+    TweenMax.to(camera.position, 3,{z: 0, y: -7},function(){first_descend=false})
   }
 
   for (var i in Hexes){
@@ -362,11 +371,29 @@ function animate(timestamp) {
 
 
 
-    var cameraWorldMatrix = new THREE.Vector3();
+
 if (camera.matrixWorld)
     cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
 
     if (mainVidLady){
+      // TweenMax.fromTo( mainVidLady.position, 4, 	{y:0}, {y:20, repeat: -1, yoyo:true});
+
+      if(mainVidLady.position.y == 22){
+        console.log('its 12')
+        TweenMax.to( mainVidLady.position, 4, 	{y:12});
+
+      }
+      if(mainVidLady.position.y == 12){
+        TweenMax.to( mainVidLady.position, 4, 	{y:22})}
+
+for (var i=0;i<6;i++){
+
+  scene.getObjectByName( "tl"+i ).lookAt(cameraWorldMatrix)
+  scene.getObjectByName( "tl2"+i ).lookAt(cameraWorldMatrix)
+  scene.getObjectByName( "tl2"+i ).rotation.x += .2
+  scene.getObjectByName( "tl"+i ).rotation.z += .2
+
+}
       // var dist = 10
     var dist = parseInt( cameraWorldMatrix.distanceTo(mainVidLady.position) );
 
@@ -378,20 +405,19 @@ if (camera.matrixWorld)
         mainVidLady.material.map = textureLady2
         scene.add(mainVidLady)
         video2.play()
-        // textureLady2.needsUpdate = true;
         havenotHitLady = false;
       }
       setTimeout(function(){
         scene.add(LeoGroup)
-        // MakeHex(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)), "newHex4",6, mint)
+
       },3000)
 
     }
     LeoGeo.lookAt(cameraWorldMatrix)
+    LeoGroup.rotation.x += .1
+    LeoGroup.rotation.y += .2
+    LeoGroup.rotation.z += .2
     mainVidLady.lookAt(cameraWorldMatrix)
-
-
-// TweenMax.fromTo(mainVidLady.position, 2, {y:2}, {y:12, repeat:-1, yoyo:true});
 
     }
 
@@ -445,9 +471,22 @@ if (camera.matrixWorld)
 
 
 
+if (asciiOn){
+  console.log('ascii is on')
+
+  if (switchedYet == false){
+
+    container.appendChild( effect.domElement )
+    container.removeChild( renderer.domElement )
+    switchedYet = true
+  }
 
 
-    renderer.render(scene, camera);
+  effect.render( scene, camera );
+} else {
+
+  renderer.render(scene, camera);
+}
 
 }
 
@@ -458,6 +497,7 @@ function onResize(e) {
       camera.updateProjectionMatrix();
       // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
         renderer.setSize( window.innerWidth, 600);
+        	effect.setSize( window.innerWidth, 600);
 }
 
 function addHelpers(grid_width, dims, light_name) {
@@ -517,7 +557,7 @@ function callMainVideo(){
   var geo = new THREE.BoxGeometry(20,20,1)
   var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: textureLady1,roughness: 1})
   mainVidLady = new THREE.Mesh(geo,matVid)
-  mainVidLady.position.set(xCenter,5,zCenter)
+  mainVidLady.position.set(xCenter,22,zCenter)
   //radians
   mainVidLady.name = "target";
   mainVidLady.rotation.y = 1.5708

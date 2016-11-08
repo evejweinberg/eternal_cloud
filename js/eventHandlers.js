@@ -31,7 +31,34 @@ document.getElementById('your-value').addEventListener('click', function(){
 })
 
 window.addEventListener("load", function(){
-  window.open('https://itp-eve.herokuapp.com/pre-profile', 300,400)
+  secondScreen = window.open('https://itp-eve.herokuapp.com/pre-profile', "loginScreen", "width=300,height=700")
+  console.log(secondScreen)
 });
 
 window.addEventListener('resize', onResize, true);
+
+
+//add form to fill out HemisphereLight
+document.getElementById('login').addEventListener('click', LoginPressed)
+
+
+function LoginPressed(){
+  asciiOn = true;
+  document.getElementById('access-score').style.display = 'block';
+  document.body.style.backgroundColor = "black";
+
+  secondScreen.location.href="https://itp-eve.herokuapp.com/login"
+  //switdch to ascii shaders
+//change this URL to be
+  // https://itp-eve.herokuapp.com/pre-profile
+  //https://itp-eve.herokuapp.com/login
+
+  // console.log('was login pressed already??')
+  for (var i=0;i<16;i++){
+
+    setInterval(popUp('window' + windowName,window.innerWidth-(i*50),i*50),200)
+    setInterval(popUp('window' + windowName+ 'B',i*50,i*50),200)
+    // console.log()
+    windowName++;
+  }
+}

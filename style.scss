@@ -56,12 +56,18 @@ border: 0px;
 }
 
 #access-score{
-  display: none;
   width: 70%;
-  height: 70%;
-  margin: auto;
-  text-align: center;
-  background-color: $purple;
+height: 70%;
+margin: 15%;
+padding: 30px;
+z-index: 1100;
+position: absolute;
+  display: none;
+  z-index: 800;
+  color: white;
+  background-color: rgba(5,5,5,.4);
+  // background-color: $purple;
+  box-shadow: 10px 10px 0px 0px black;
 }
 
 .tagline-holder{

@@ -41,6 +41,7 @@ var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 var type22;
 var ThreeSceneHghtRation = .9
+var secondScreen;
 
 var mainVidLady;
 var videoBounce = .01
@@ -76,8 +77,12 @@ var camStartY = 22;
 var camStartZ = 10;
 var camDownSpeed = .19;
 var Hexes = [];
+var effect;
+var asciiOn = false;
+var switchedYet = false;
 //Loading manager - decides when to render the scene in onProgress under the loaders
 var loadingManager = new THREE.LoadingManager();
+var cameraWorldMatrix = new THREE.Vector3();
 
 var r = "img/";
 
