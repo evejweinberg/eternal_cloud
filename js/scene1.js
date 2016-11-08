@@ -379,7 +379,6 @@ if (camera.matrixWorld)
       // TweenMax.fromTo( mainVidLady.position, 4, 	{y:0}, {y:20, repeat: -1, yoyo:true});
 
       if(mainVidLady.position.y == 22){
-        console.log('its 12')
         TweenMax.to( mainVidLady.position, 4, 	{y:12});
 
       }
@@ -472,7 +471,7 @@ for (var i=0;i<6;i++){
 
 
 if (asciiOn){
-  console.log('ascii is on')
+  // console.log('ascii is on')
 
   if (switchedYet == false){
 

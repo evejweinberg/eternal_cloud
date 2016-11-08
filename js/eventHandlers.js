@@ -31,7 +31,7 @@ document.getElementById('your-value').addEventListener('click', function(){
 })
 
 window.addEventListener("load", function(){
-  secondScreen = window.open('https://itp-eve.herokuapp.com/pre-profile', "loginScreen", "width=300,height=700")
+  secondScreen = window.open('https://itp-eve.herokuapp.com/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
   console.log(secondScreen)
 });
 
