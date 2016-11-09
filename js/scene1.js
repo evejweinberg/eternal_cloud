@@ -52,7 +52,8 @@ if ( havePointerLock ) {
 						element.requestPointerLock();
 					}
 				}, false );
-			} else {
+
+      } else {
 				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 			}
 
@@ -344,9 +345,7 @@ scene.add(Hexes[i])
 
 
 
-function toRadians(angle) {
-    return angle * (Math.PI / 180);
-}
+
 
 
  // var counter = 0
@@ -404,6 +403,16 @@ for (var i=0;i<6;i++){
         mainVidLady.material.map = textureLady2
         scene.add(mainVidLady)
         video2.play()
+        video2.addEventListener('ended',function(){
+            scene.remove(mainVidLady)
+            mainVidLady.material.map = textureLady3
+            scene.add(mainVidLady)
+            TweenMax.to(mainVidLady.rotation,4,{y:360})
+            video3.play()
+            loginPrompt = setInterval(newVidLady, 3000)
+        
+
+        },false);
         havenotHitLady = false;
       }
       setTimeout(function(){
@@ -412,10 +421,12 @@ for (var i=0;i<6;i++){
       },3000)
 
     }
+
+
     LeoGeo.lookAt(cameraWorldMatrix)
-    LeoGroup.rotation.x += .1
-    LeoGroup.rotation.y += .2
-    LeoGroup.rotation.z += .2
+    // LeoGroup.rotation.x += .1
+    // LeoGroup.rotation.y += .2
+    // LeoGroup.rotation.z += .2
     mainVidLady.lookAt(cameraWorldMatrix)
 
     }
@@ -522,46 +533,4 @@ function addHelpers(grid_width, dims, light_name) {
     gridXY.position.set(0, 0, 0);
     // gridXY.setColors(new THREE.Color(0xff0000), new THREE.Color(0xffffff));
     scene.add(gridXY);
-}
-
-
-
-
-function callMainVideo(){
-
-
-
-  video1 = document.getElementById( 'video1' );
-	textureLady1 = new THREE.VideoTexture( video1 );
-	textureLady1.minFilter = THREE.LinearFilter;
-	textureLady1.magFilter = THREE.LinearFilter;
-	textureLady1.format = THREE.RGBFormat;
-
-  video2 = document.getElementById( 'video2' );
-	textureLady2 = new THREE.VideoTexture( video2 );
-	textureLady2.minFilter = THREE.LinearFilter;
-	textureLady2.magFilter = THREE.LinearFilter;
-	textureLady2.format = THREE.RGBFormat;
-
-  matVid = new THREE.MeshLambertMaterial({color: 0xffffff, map: textureLady1});
-
-
-
-
-  var xCenter = Math.cos(toRadians(350)) * 72;
-
-  var zCenter = Math.sin(toRadians(350)) * 72;
-
-  FourHexes(xCenter,3,zCenter, 6, pink)
-  var geo = new THREE.BoxGeometry(20,20,1)
-  var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: textureLady1,roughness: 1})
-  mainVidLady = new THREE.Mesh(geo,matVid)
-  mainVidLady.position.set(xCenter,22,zCenter)
-  //radians
-  mainVidLady.name = "target";
-  mainVidLady.rotation.y = 1.5708
-  mainVidLady.castShadow = true;
-  mainVidLady.receiveShadow = false;
-
-  scene.add(mainVidLady)
 }

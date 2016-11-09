@@ -41,9 +41,10 @@ var prevTime = performance.now();
 var velocity = new THREE.Vector3();
 var type22;
 var ThreeSceneHghtRation = .9
-var secondScreen;
+var secondScreen, thirdScreen, loginPrompt;
 
 var mainVidLady;
+var allLadies = [];
 var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
 

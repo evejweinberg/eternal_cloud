@@ -32,7 +32,8 @@ document.getElementById('your-value').addEventListener('click', function(){
 
 window.addEventListener("load", function(){
   secondScreen = window.open('https://itp-eve.herokuapp.com/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
-  console.log(secondScreen)
+  thirdScreen = window.open('https://itp-eve.herokuapp.com/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
+
 });
 
 window.addEventListener('resize', onResize, true);
@@ -43,22 +44,52 @@ document.getElementById('login').addEventListener('click', LoginPressed)
 
 
 function LoginPressed(){
+  //remove ladies
+  for (i in allLadies){
+    scene.remove(allLadies[i])
+  }
+  clearInterval(loginPrompt)
   asciiOn = true;
+  TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut})
+
   document.getElementById('access-score').style.display = 'block';
   document.body.style.backgroundColor = "black";
 
   secondScreen.location.href="https://itp-eve.herokuapp.com/login"
-  //switdch to ascii shaders
+
 //change this URL to be
   // https://itp-eve.herokuapp.com/pre-profile
   //https://itp-eve.herokuapp.com/login
 
   // console.log('was login pressed already??')
-  for (var i=0;i<16;i++){
+  for (var i=0;i<10;i++){
 
-    setInterval(popUp('window' + windowName,window.innerWidth-(i*50),i*50),200)
-    setInterval(popUp('window' + windowName+ 'B',i*50,i*50),200)
+    setInterval(popUp('window' + windowName,window.innerWidth-(i*80),i*80),150)
+    setInterval(popUp('window' + windowName+ 'B',i*80,i*80),150)
     // console.log()
     windowName++;
   }
+}
+
+
+
+
+
+function startExperience(){
+  //show login button
+  document.getElementById('login').style.display = "block";
+  //turn first video on
+  playFirstvideo = true;
+  // tween top of 3js scene down
+  TweenMax.to('#three-scene',2,{top: 80, ease: Strong.easeInOut})
+  video1.play()
+  TweenMax.to("#logo",2,{width:"11%", ease: Strong.easeInOut})
+    //allow animation loop to tween camera
+  first_descend = true;
+  //move tagline out of the way -- up, and fade out
+  var tagline = document.getElementById('tagline-holder')
+  TweenMax.to(tagline, 9, {opacity: 0,y: -500,ease: Expo.easeOut})
+  TweenMax.to(camera.parent.rotation,2,{x:0})
+  //turn on instructions below 3jd scene
+  document.getElementById('walking-instructions').style.display = "block";
 }

@@ -13,6 +13,10 @@ loadingManager.onLoad = function(){
 
 }
 
+function toRadians(angle) {
+    return angle * (Math.PI / 180);
+}
+
 
 var loader = new THREE.TextureLoader(loadingManager)
 loader.load('../img/leo.jpg',function ( texture ) {
@@ -28,9 +32,9 @@ loader.load('../img/leo.jpg',function ( texture ) {
      var geo = new THREE.CylinderGeometry(6,6, .6, 6)
 
      LeoGeo = new THREE.Mesh(geo, leoTxt)
+     LeoGeo.name = 'leogeo'
      LeoGeo.position.set(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)))
-
-
+     LeoGroup.add(LeoGeo)
 
    })
 
@@ -41,6 +45,10 @@ function FourHexes(x,y,z, width, col){
       scene.add(MakeHex(x+i,y+i,z, "tl2"+i,width, col))
   }
 }
+
+var xCenter = Math.cos(toRadians(350)) * 72;
+
+var zCenter = Math.sin(toRadians(350)) * 72;
 
 ///HEXAGONS
 function MakeHex(x,y,z, name,width, col){
@@ -144,21 +152,6 @@ function addLights() {
 }
 
 
-function startExperience(){
-  //show login button
-  document.getElementById('login').style.display = "block";
-  playFirstvideo = true;
-  // tween top of 3js scene down
-  TweenMax.to('#three-scene',2,{top: 60, ease: Strong.easeInOut})
-  video1.play()
-  first_descend = true;
-  //move tagline out of the way -- up, and fade out
-  var tagline = document.getElementById('tagline-holder')
-  TweenMax.to(tagline, 9, {opacity: 0,y: -500,ease: Expo.easeOut})
-  TweenMax.to(camera.parent.rotation,2,{x:0})
-  //turn on instructions below 3jd scene
-  document.getElementById('walking-instructions').style.display = "block";
-}
 
 
 
@@ -245,4 +238,58 @@ function MakeLeo(x,y,z, name,width, col){
     hexy.name = name
   }
   return hexy
+}
+
+
+
+function newVidLady(){
+  var newLady =  mainVidLady.clone()
+  newLady.position.set(mainVidLady.position.x+ Math.random()*5,Math.random()*20,mainVidLady.position.z+ (Math.random()*1)); // or any other coordinates
+  newLady.material.map.image.play()
+  allLadies.push(newLady)
+  scene.add(newLady)
+  console.log('add a new lady')
+  // mainVidLady.clone()
+}
+
+
+
+
+function callMainVideo(){
+
+
+
+  video1 = document.getElementById( 'video1' );
+	textureLady1 = new THREE.VideoTexture( video1 );
+	textureLady1.minFilter = THREE.LinearFilter;
+	textureLady1.magFilter = THREE.LinearFilter;
+	textureLady1.format = THREE.RGBFormat;
+
+  video2 = document.getElementById( 'video2' );
+	textureLady2 = new THREE.VideoTexture( video2 );
+	textureLady2.minFilter = THREE.LinearFilter;
+	textureLady2.magFilter = THREE.LinearFilter;
+	textureLady2.format = THREE.RGBFormat;
+
+  video3 = document.getElementById( 'video3' );
+  textureLady3 = new THREE.VideoTexture( video3 );
+  textureLady3.minFilter = THREE.LinearFilter;
+  textureLady3.magFilter = THREE.LinearFilter;
+  textureLady3.format = THREE.RGBFormat;
+
+  matVid = new THREE.MeshLambertMaterial({color: 0xffffff, map: textureLady1});
+
+
+  FourHexes(xCenter,3,zCenter, 6, pink)
+  var geo = new THREE.BoxGeometry(20,20,1)
+  var mat = new THREE.MeshStandardMaterial({overdraw: 0.5, color: 0xffffff, map: textureLady1,roughness: 1})
+  mainVidLady = new THREE.Mesh(geo,matVid)
+  mainVidLady.position.set(xCenter,22,zCenter)
+  //radians
+  mainVidLady.name = "target";
+  mainVidLady.rotation.y = 1.5708
+  mainVidLady.castShadow = true;
+  mainVidLady.receiveShadow = false;
+
+  scene.add(mainVidLady)
 }
