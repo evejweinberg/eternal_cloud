@@ -1,3 +1,180 @@
-/**************/
-/* Custom CSS */
-/**************/
+#canvasBox {
+  overflow: hidden; }
+
+.esc-instructions {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 80px;
+  height: 7vh; }
+
+#override-nav {
+  background-color: rgba(3, 3, 3, 0);
+  border: 0px; }
+
+.top-nav-top {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 300; }
+
+.button-first {
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 400;
+  width: 90px;
+  position: relative;
+  border-radius: 40px;
+  top: 33%; }
+
+.button-first:hover {
+  cursor: pointer; }
+
+mark {
+  background-color: black; }
+
+#access-score {
+  width: 70%;
+  height: 70%;
+  margin: 15%;
+  padding: 30px;
+  z-index: 1100;
+  font-weight: bold;
+  position: absolute;
+  display: none;
+  z-index: 800;
+  color: white;
+  background-color: rgba(5, 5, 5, 0);
+  box-shadow: 10px 10px 0px 0px black; }
+
+.tagline-holder {
+  position: relative;
+  top: -10%; }
+
+#audio-toggle {
+  width: 5%;
+  float: right;
+  display: inline-block;
+  margin-right: 14px;
+  vertical-align: middle; }
+
+#vide-2 {
+  float: right; }
+
+.video-bg {
+  height: 100%;
+  position: relative;
+  opacity: 0.6;
+  display: inline-block; }
+
+#one-hex {
+  position: absolute;
+  z-index: -300;
+  top: 0px;
+  left: 0px;
+  width: 10%;
+  height: 10%; }
+
+p {
+  color: #f68f83; }
+
+#tagline {
+  position: relative;
+  vertical-align: middle;
+  font-size: 40px;
+  text-align: center;
+  top: 22%;
+  font-size: 34px;
+  overflow: visible; }
+
+.buttons {
+  color: #009fc6;
+  padding: 8px;
+  border: 2px solid #009fc6;
+  border-radius: 20px;
+  text-align: center; }
+
+.buttons:hover {
+  color: white;
+  background-color: #009fc6;
+  cursor: pointer; }
+
+.top-nav-text {
+  float: right;
+  display: inline-block;
+  margin-right: 14px;
+  vertical-align: middle; }
+
+.splash {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+#blocker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 900; }
+
+#instructions {
+  border: 20px blue;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  box-orient: horizontal;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  box-pack: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer; }
+
+#header {
+  margin-top: 10px; }
+
+#logo {
+  width: 16%;
+  padding: 3px;
+  margin-left: -19px;
+  float: left;
+  margin-top: -12px; }
+
+#company-name {
+  float: left;
+  font-size: 30px; }
+
+#walking-instructions {
+  color: #009fc6;
+  margin: auto;
+  text-align: center;
+  margin: 5px; }
+
+html,
+body {
+  width: 100%;
+  height: 100%; }
+
+body {
+  background-color: white;
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+  color: #f68f83; }
+
+#container {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: absolute; }
+
+/*# sourceMappingURL=style.css.map */
