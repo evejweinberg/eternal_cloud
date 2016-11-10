@@ -33,6 +33,9 @@
 .button-first:hover {
   cursor: pointer; }
 
+mark {
+  background-color: black; }
+
 #access-score {
   width: 70%;
   height: 70%;
