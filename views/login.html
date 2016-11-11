@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Eternal Cloud Login Screen</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<script
+		  src="https://code.jquery.com/jquery-3.1.1.min.js"
+		  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		  crossorigin="anonymous"></script>
+		<script src="js/three.js/Three.js"></script>
+		<script src="js/three.js/Detector.js"></script>
+		<script src="js/three.js/Stats.js"></script>
+
+		<script src="js/threex/THREEx.screenshot.js"></script>
+		<!-- <script src="js/threex/THREEx.FullScreen.js"></script> -->
+		<script src="js/threex/THREEx.WindowResize.js"></script>
+		<script src="js/three.js/TrackballControls.js"></script>
+		<script src="js/webcam.js"></script>
+
+		<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link  href="css/make-profile.css" rel="stylesheet"/>
+	</head>
+<body>
+	<!-- <h1>LOGIN</h1> -->
+
+	<!-- <img src="" alt="" /> -->
+	<!-- <button type="button" class="btn btn-lg btn-pill btn-primary">Primary</button> -->
+
+
+	<div id="my_camera"></div>
+	<div id="container"></div>
+
+
+	<script type="text/javascript">
+	var stage = 0;
+	var image_tex, video, buffer, pre_video_tex, video_tex, video_mat, video_mesh, video_geo, buffer_mat, buffer_geo, buffer_mesh;
+	var newImage;
+	var ortho_width = 1920, ortho_height = 1080, ortho_near = -1, ortho_far = 1;
+
+	var get_webcam = function(){
+	video = document.createElement('video');
+	video.width = ortho_width;
+	video.height = ortho_width;
+	video.autoplay = true;
+	video.muted = true; //- to prevent create feedback from mic input ***
+	video_tex = new THREE.Texture( video );
+	    video_tex.minFilter = THREE.LinearFilter //- to use non powers of two image
+
+	    video_mat = new THREE.MeshPhongMaterial(
+				{map: video_tex}
+
+	    );
+	if(navigator.getUserMedia){
+		navigator.getUserMedia({ audio: true, video:{ width: ortho_width, height: ortho_height, facingMode: { exact: "environment" } } }, function(stream){
+			video.src = window.URL.createObjectURL(stream);
+			video.play();
+		}, function(err){
+			console.log('failed to get a steram : ', err );
+		});
+	} else {
+		console.log('user media is not supported');
+	}
+};
+
+
+
+		var stats, scene, renderer, composer;
+		var camera, cameraControls;
+		var globalBlob = null;
+
+		if( !init() )	animate();
+
+		// init the scene
+		function init(){
+			get_webcam();
+
+			if( Detector.webgl ){
+				renderer = new THREE.WebGLRenderer({
+					antialias		: true,	// to get smoother output
+					alpha: true,
+					transparent: true,
+
+					preserveDrawingBuffer	: true	// to allow screenshot
+				});
+				renderer.setClearColor( 0xbbbbbb,0 );
+			}else{
+				Detector.addGetWebGLMessage();
+				return true;
+			}
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setClearColorHex( 0x000000, 0 );
+			document.getElementById('container').appendChild(renderer.domElement);
+
+			// add Stats.js - https://github.com/mrdoob/stats.js
+			stats = new Stats();
+			stats.domElement.style.position	= 'absolute';
+			stats.domElement.style.bottom	= '0px';
+			document.body.appendChild( stats.domElement );
+
+			// create a scene
+			scene = new THREE.Scene();
+
+			// put a camera in the scene
+			camera	= new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000 );
+			camera.position.set(0, 0, 150);
+			scene.add(camera);
+
+			// create a camera contol
+			// cameraControls	= new THREE.TrackballControls( camera )
+
+			// transparently support window resize
+			THREEx.WindowResize.bind(renderer, camera);
+			// allow 'p' to make screenshot
+			// THREEx.Screenshot.bindKey(renderer);
+			// allow 'f' to go fullscreen where this feature is supported
+			// if( THREEx.FullScreen.available() ){
+			// 	THREEx.FullScreen.bindKey();
+			// 	// document.getElementById('inlineDoc').innerHTML	+= "- <i>f</i> for fullscreen";
+			// }
+
+			// here you add your objects
+			// - you will most likely replace this part by your own
+			var light	= new THREE.AmbientLight( Math.random() * 0xffffff );
+			scene.add( light );
+			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+			// scene.add( light );
+			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+			// scene.add( light );
+			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
+			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
+			scene.add( light );
+			var light	= new THREE.PointLight( Math.random() * 0xffffff );
+			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
+						.normalize().multiplyScalar(1.2);
+			scene.add( light );
+			var light	= new THREE.PointLight( Math.random() * 0xffffff );
+			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
+						.normalize().multiplyScalar(1.2);
+			scene.add( light );
+
+
+
+			video_geo = new THREE.BoxGeometry( 30,30,30 );
+			video_mesh = new THREE.Mesh( video_geo, video_mat );
+			scene.add(video_mesh);
+
+		}
+
+		// animation loop
+		function animate() {
+			if(video.readyState === video.HAVE_ENOUGH_DATA) { video_tex.needsUpdate = true; }
+
+			requestAnimationFrame( animate );
+			render();
+			stats.update();
+		} //animate over
+
+		// render the scene
+		function render() {
+			// variable which is increase by Math.PI every seconds - usefull for animation
+			var PIseconds	= Date.now() * Math.PI;
+
+			// update camera controls
+			// cameraControls.update();
+
+			// animation of all objects
+			scene.traverse(function(object3d, i){
+				if( object3d instanceof THREE.Mesh === false )	return
+				object3d.rotation.y = PIseconds*0.0001 * (i % 2 ? 1 : -1);
+				object3d.rotation.x = PIseconds*0.0001 * (i % 2 ? 1 : -1);
+			})
+
+			// render the scene
+			renderer.render( scene, camera );
+		}//render over
+
+
+		////2D webcam stuff
+
+		Webcam.set({
+			width: 240,
+			height: 240,
+			image_format: 'jpeg',
+			jpeg_quality: 90
+		});
+		//attach to any DOM element
+		Webcam.attach( '#my_camera' );
+
+
+
+		function take_snapshot() {
+			// take snapshot and get image data
+			Webcam.snap( function(data_uri) {
+
+				// setting the global blob
+				globalBlob = data_uri;
+				newImage = data_uri;
+				var newImageB = new Image()
+				newImageB.src = data_uri;
+				// we need to send this to AWS
+
+				//push image to 3D cube
+				video_mesh.material.map.image =newImageB
+
+				uploadBlob();
+
+			} );
+		}
+
+
+
+
+
+
+		////////////////////////////////
+		////////UPLOAD BLOB //////////
+		////////////////////////////////
+		////////////////////////////////
+
+		function uploadBlob()
+		{
+			// console.log('uploading Blob with ajax request');
+
+			//make a new javascript native blob
+		 var blob = new Blob();
+		 //make a file reader
+		 var reader = new FileReader();
+
+		 // this function is triggered once a call to readAsDataURL returns ???
+		 reader.onload = function(event){
+
+		     // create the formData object and add our data to it
+		     var fd = new FormData();
+		     fd.append('name', $('#name').val());
+		     fd.append('data', globalBlob.split(',')[1]); // splitting the URL removes the 'base64' prefix and sends just the necessary data
+
+				//  console.log('fd is: ' , fd)
+		     $.ajax({
+		         type: 'POST',
+						 //hit this route
+		         url: './submitProfile',
+		         data: fd,
+		         processData: false,
+		         contentType: false
+		     }).done(function(data) {
+
+					 console.log(data)
+
+					 //hit another route here
+					ChangeThird()
+						//if the status from the backend is 'OK' then do this
+						//change it on both sides if you change the string 'ok'
+		         if (data.status == 'OK') {
+							 //replace this with a new route
+							  window.location = '/candidate';
+						 } else {
+							 console.log('data was not OK')
+						 }
+
+
+		     });
+
+		 };
+
+		   // trigger the read from the reader...
+		   reader.readAsDataURL(blob); // this creates a base64 encoded URL
+		}
+
+
+
+		function ChangeThird(){
+			// $.ajax({
+			// 		type: 'POST',
+			// 		//hit this route
+			// 		url: './third',
+			// 		data: fd,
+			// 		processData: false,
+			// 		contentType: false
+			// }).done(function(data) {
+			// 	}
+
+		}
+
+
+	</script>
+
+
+
+
+
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3">
+				<h1>Become a Member</h1>
+				<!-- validate this form!, look at bottom of this html -->
+				<form method="post" action="/api/create" id="myForm" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" id="name" placeholder="Name" name="name">
+						<!-- <p class="help-block">Your name is an identifying string given to you at birth</p> -->
+					</div>
+						<!-- A button for taking snaps of the webcam // pushing resuly to the console log -->
+						<input type=button class="btn" value="Take Snapshot" onClick="take_snapshot()">
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<br>
+
+
+
+
+</body>
+</html>

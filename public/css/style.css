@@ -34,6 +34,7 @@
   cursor: pointer; }
 
 mark {
+  color: white;
   background-color: black; }
 
 #access-score {
