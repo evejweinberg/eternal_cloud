@@ -50,6 +50,7 @@ function LoginPressed(){
   }
   clearInterval(loginPrompt)
   asciiOn = true;
+  scene3triggered = true;
   TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut})
 
   document.getElementById('access-score').style.display = 'block';

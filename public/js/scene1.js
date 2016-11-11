@@ -1,9 +1,8 @@
 //Init the scene so we can push shit to it?
 window.onload = function(){
   init();
+  //turn html on now
 };
-
-
 
 
 
@@ -278,16 +277,16 @@ function init() {
             }
         })
 
-        drawServers(7,26)
+        drawServers(6,26)
         drawServers(10,40)
         drawServers(13,50)
         drawServers(16,63)
-        drawServers(19,80)
+        drawServers(19,90)
         // drawServers(23,90)
         drawServers(26,80)
-        drawServers(30,90)
+        drawServers(30,160)
         // drawServers(33,130)
-        drawServers(36,160)
+        drawServers(36,220)
 
 
 
@@ -371,8 +370,7 @@ function animate(timestamp) {
 
 
 
-if (camera.matrixWorld)
-    cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
+if (camera.matrixWorld)cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
 
     if (mainVidLady){
       // TweenMax.fromTo( mainVidLady.position, 4, 	{y:0}, {y:20, repeat: -1, yoyo:true});
@@ -410,7 +408,7 @@ for (var i=0;i<6;i++){
             TweenMax.to(mainVidLady.rotation,4,{y:360})
             video3.play()
             loginPrompt = setInterval(newVidLady, 3000)
-        
+
 
         },false);
         havenotHitLady = false;
@@ -420,6 +418,10 @@ for (var i=0;i<6;i++){
 
       },3000)
 
+    }
+
+    if (scene3triggered){
+      TweenMax.to( mainVidLady.position, 24, 	{y:cameraWorldMatrix.y,x:cameraWorldMatrix.x,z:cameraWorldMatrix.z });
     }
 
 
