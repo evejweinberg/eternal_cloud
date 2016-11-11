@@ -283,7 +283,7 @@ jQuery("#candidateForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
-	  		console.log(response);
+	  		// console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
   	},

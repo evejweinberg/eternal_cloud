@@ -130,7 +130,8 @@
   <audio loop audio autoplay id="myTune" volume=".1"> <source src="img/PurpleVortex.mp3"></audio>
 
 
-
+    <!-- //do I need these here at all? -->
+    <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 
 <!-- //a boiler plate i used had this, not sure if i still need it -->
     <!-- <script src="node_modules/es6-promise/dist/es6-promise.js"></script> -->
@@ -154,6 +155,43 @@
 
     <!-- //add bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script>
+
+    //need to keep this key scret before commiting
+    var pusher = new Pusher("ec1b7d29a3ba5e666350");
+    console.log(pusher.connection.state);
+    //If a channel has been subscribed to already it is possible to access channels by name,
+    //through the pusher.channel function:
+    //The name of the channel to retrieve
+    var channel = pusher.channel('channelName');
+
+
+    //subscribe and unsubscribe from channels at any time.
+    var channel = pusher.subscribe("channelName");
+    // pusher.unsubscribe(channelName);
+
+
+    pusher.connection.bind('connected', function() {
+        //alert('hi')
+    });
+
+    channel.bind('addedInfo',
+      function(data) {
+        // add new price into the APPL widget
+        console.log(data);
+        document.getElementById("access-1-score").innerHTML = data.philanthropy;
+
+        if(data.career != undefined){
+          document.getElementById("access-2-score").innerHTML = data.career;
+        }
+
+      }
+    );
+
+
+
+    </script>
 
 
 

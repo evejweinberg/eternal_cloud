@@ -2,11 +2,30 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var Pusher = require('pusher');
 
+var pusher = new Pusher({
+  appId: "269340",
+  key: "ec1b7d29a3ba5e666350",
+  secret: "cf2d6a2e8143d68fd2c6"
+});
+
+//console.log(pusher);
+
+//subscribe to a channel
+//var channel = pusher.subscribe('my-channel');
+//pusher.trigger( channels, event, data, socketId, callback );
+
+
+//define callbacks that bind to events on a channel, coming in via the connection to Pusher:
+// channel.bind('my-event', function(data) {
+//   alert('An event was triggered with message: ' + data.message);
+// });
+
+// pusher.trigger('my-channel','my-event', {'message': 'hello world'})
 
 // our db models
 var Person = require("../models/person.js");
-var Course = require("../models/course.js");
 
 // S3 File dependencies
 var AWS = require('aws-sdk');
@@ -64,17 +83,11 @@ var upload = multer({
 
 router.get('/', function(req, res) {
   res.redirect('/first')
-
  });
-
-
 
 
 router.get('/second', function(req, res) {
   res.redirect('/pre-profile')
-
-
-
 });
 
 
@@ -199,6 +212,8 @@ router.post('/submitProfile', upload.single('file'), function(req,res){
 
 
     })
+
+
 
 
 });
@@ -552,16 +567,16 @@ router.get('/third', function(req,res){
 router.post('/api/update/:id', function(req,res){
   //pull out fields that were posted
   console.log('REQUEST')
-  console.log(req.params)
+  //console.log(req.params);
 
   var idToUpdate = req.params.id;
 
-  // console.log(idToUpdate);
+  console.log(idToUpdate);
   //create an object
   var dataToUpdate = {};
 
   if(req.body.philanthropy) dataToUpdate.philanthropy = req.body.philanthropy;
-  if(req.body.career) console.log(req.body.career); dataToUpdate.career = req.body.career;
+  if(req.body.career) dataToUpdate.career = req.body.career;//console.log(req.body.career);
   if(req.body.intelligence) dataToUpdate.intelligence = req.body.intelligence;
   if(req.body.activism) dataToUpdate.activism = req.body.activism;
 
@@ -572,8 +587,19 @@ router.post('/api/update/:id', function(req,res){
     if (err){
       alert("There was an error updating your profile. Eternal Cloud might be at maximum capacity.")
     } else{
-        console.log(data)
+        //console.log(data,data.philanthropy);
+
+        //make up event here
+        var myMsg = {
+          philanthropy: data.philanthropy,
+          career : data.career,
+        }
+
+        pusher.trigger( 'channelName', 'addedInfo', myMsg );
+        console.log("triggered");
         res.json(data);
+        //we are responding with it but now we have
+        //to put it in the html
     }
   });
 

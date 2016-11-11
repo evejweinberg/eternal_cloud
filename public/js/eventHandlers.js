@@ -57,6 +57,7 @@ function LoginPressed(){
     document.body.style.backgroundColor = "black";
 
     secondScreen.location.href="/login"
+    thirdScreen.location.href="/candidate-solo"
   }
   })
 
