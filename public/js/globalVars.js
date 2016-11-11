@@ -2,7 +2,9 @@
 var lastRender = 0;
 var controls;
 var yourValue = 0;
+
 var elementStyle;
+
   // var oscillator;
 var LeoGroup = new THREE.Group();
 var raycaster;
@@ -47,7 +49,9 @@ var mainVidLady;
 var allLadies = [];
 var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
+
 var scene3triggered = false;
+
 
 
 

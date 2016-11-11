@@ -31,6 +31,7 @@ document.getElementById('your-value').addEventListener('click', function(){
 })
 
 window.addEventListener("load", function(){
+
   secondScreen = window.open('/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
   thirdScreen = window.open('/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
 
@@ -44,6 +45,7 @@ document.getElementById('login').addEventListener('click', LoginPressed)
 
 
 function LoginPressed(){
+
   TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut,onComplete: function(){
     //remove ladies
     for (i in allLadies){
@@ -60,6 +62,16 @@ function LoginPressed(){
   }
   })
 
+  //remove ladies
+  for (i in allLadies){
+    scene.remove(allLadies[i])
+  }
+  clearInterval(loginPrompt)
+  asciiOn = true;
+  TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut})
+  document.getElementById('access-score').style.display = 'block';
+  document.body.style.backgroundColor = "black";
+  secondScreen.location.href="/login"
 
 
 //change this URL to be
@@ -74,7 +86,7 @@ function LoginPressed(){
     // console.log()
     windowName++;
   }
-}
+} //login pressed over
 
 
 
