@@ -53,7 +53,12 @@ var upload = multer({
 
 
 
-
+/**
+ * GET '/'
+ * Default home route. Just relays a success message back.
+ * @param  {Object} req
+ * @return {Object} json
+ */
 
 
 
@@ -199,6 +204,8 @@ router.post('/submitProfile', upload.single('file'), function(req,res){
 
     })
 
+
+});
 
 
 
@@ -575,6 +582,7 @@ router.post('/api/update/:id', function(req,res){
 
 
 
+////////////////////////
 
 
 

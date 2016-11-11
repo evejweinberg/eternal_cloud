@@ -1,7 +1,7 @@
 //Init the scene so we can push shit to it?
 window.onload = function(){
   init();
-
+  //turn html on now
 };
 
 
@@ -277,7 +277,6 @@ function init() {
             }
         })
 
-
         drawServers(6,26)
         drawServers(10,40)
         drawServers(13,50)
@@ -288,7 +287,6 @@ function init() {
         drawServers(30,160)
         // drawServers(33,130)
         drawServers(36,220)
-
 
 
 
@@ -372,9 +370,7 @@ function animate(timestamp) {
 
 
 
-
 if (camera.matrixWorld)cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
-
 
     if (mainVidLady){
       // TweenMax.fromTo( mainVidLady.position, 4, 	{y:0}, {y:20, repeat: -1, yoyo:true});
@@ -412,8 +408,10 @@ for (var i=0;i<6;i++){
             TweenMax.to(mainVidLady.rotation,4,{y:360})
             video3.play()
             loginPrompt = setInterval(newVidLady, 3000)
-              },false);
-          havenotHitLady = false;
+
+
+        },false);
+        havenotHitLady = false;
       }
       setTimeout(function(){
         scene.add(LeoGroup)
@@ -422,11 +420,9 @@ for (var i=0;i<6;i++){
 
     }
 
-
     if (scene3triggered){
       TweenMax.to( mainVidLady.position, 24, 	{y:cameraWorldMatrix.y,x:cameraWorldMatrix.x,z:cameraWorldMatrix.z });
     }
-
 
 
     LeoGeo.lookAt(cameraWorldMatrix)

@@ -348,9 +348,7 @@ jQuery("#ActivismForm").submit(function(e){
   	type : 'POST',
   	// we send the data in a data object (with key/value pairs)
   	data : {
-
       //YOU CAN HAVE ERRORS HERE
-
   		activism: activism,
   	},
   	success : function(response){
@@ -398,9 +396,7 @@ jQuery("#IntelligenceForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
-
 	  		console.log(response);
-
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
   	},
