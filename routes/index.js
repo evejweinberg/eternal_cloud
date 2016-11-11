@@ -62,24 +62,20 @@ var upload = multer({
 
 
 
- router.get('/', function(req, res) {
-
-
-     res.render('start.html')
+router.get('/', function(req, res) {
+  res.redirect('/first')
 
  });
 
 
+
+
 router.get('/second', function(req, res) {
-
-
   res.redirect('/pre-profile')
 
 
 
 });
-
-
 
 
 router.get('/edit/:id', function(req,res){
@@ -529,6 +525,10 @@ router.get('/login', function(req,res){
 
 router.get('/candidate', function(req,res){
   res.render('candidate.html')
+})
+
+router.get('/first', function(req,res){
+  res.render('start.html')
 })
 
 
