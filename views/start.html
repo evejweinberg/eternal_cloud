@@ -19,9 +19,7 @@
 </head>
 
 <body>
-  <!-- //or juse google -->
-<!-- https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js -->
-  <!-- //add jquery first -->
+  <!-- //jquery -->
   <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -36,6 +34,7 @@
               <p id= "company-name">
                 Eternal Cloud
               </p>
+              <!-- //button to turn audio on and off -->
               <img src="img/audio.png" id='audio-toggle' onclick="toggleAudio()" name="button"></img>
 
               <p class="top-nav-text buttons" id='your-value'>
@@ -44,7 +43,6 @@
               <p class="top-nav-text buttons" id="login" style="display:none">
                   Log in
               </p>
-              <!-- //button to turn audio on and off -->
           </div>
         </nav>
 
@@ -60,10 +58,10 @@
         <!-- <p>
           Question 1:
         </p> -->
-        <mark><h1 class = 'access-score-type' id="access-1">Philanthropy: <span id="access-1-score">nAn</span></h1></mark>
-        <mark><h1 class = 'access-score-type' id="access-2">Career Choices: <span id="access-2-score">nAn</span></h1></mark>
-        <mark><h1 class = 'access-score-type' id="access-3">Intelligence: <span id="access-3-score">nAn</span></h1></mark>
-        <mark><h1 class = 'access-score-type' id="access-4">Activism Level: <span id="access-4-score">nAn</span></h1></mark>
+        <h1 class = 'access-score-type' id="access-1"><mark>Philanthropy: <span id="access-1-score">😭 </span></mark></h1>
+        <h1 class = 'access-score-type' id="access-2"><mark>Career Choices: <span id="access-2-score">😭 </span></mark></h1>
+        <h1 class = 'access-score-type' id="access-3"><mark>Intelligence: <span id="access-3-score">😭 </span></mark></h1>
+        <h1 class = 'access-score-type' id="access-4"><mark>Activism Level: <span id="access-4-score">😭 </span></mark></h1>
       </div>
 
   			<div id="instructions">
@@ -95,20 +93,20 @@
     </div>
 
   <!-- //more bootstrap stuff here -->
-  <div class="col-md-4">
+  <!-- <div class="col-md-4">
     <h1>Community Members</h1>
 
     <button type="button" class="buttons" name="button">Who you will be connected to? </button>
     <p>  Please remember that your humanitarian score will determine the strength of the links
   </p>
-</div>
-<div class="col-md-4">
+</div> -->
+<!-- <div class="col-md-4">
   <h1>What</h1>
   <p>
     I dont know yet
   </p>
-</div>
-<div class="col-md-4">
+</div> -->
+<!-- <div class="col-md-4">
   <h1>FAQ</h1>
   <p>
     <ul>
@@ -116,15 +114,15 @@
       <li>Can I do anything to reverse my past actions?</li>
     </ul>
   </p>
-</div>
+</div> -->
 
 <!-- these videos get triggered in the threejs scene -->
-<video id="video1"  loop webkit-playsinline style="display:none">
-			<source src="img/intro.mp4"></video>
+    <video id="video1"  loop webkit-playsinline style="display:none">
+		<source src="img/intro.mp4"></video>
     <video id="video2" webkit-playsinline style="display:none">
-    			<source src="img/welcome2.mp4"></video>
-            <video id="video3" webkit-playsinline style="display:none">
-                  <source src="img/login.mp4"></video>
+    <source src="img/welcome2.mp4"></video>
+    <video id="video3" webkit-playsinline style="display:none">
+    <source src="img/login.mp4"></video>
 
 <!-- //audio for the whole scene -->
   <audio loop audio autoplay id="myTune" volume=".1"> <source src="img/PurpleVortex.mp3"></audio>
@@ -159,24 +157,42 @@
     <script>
 
     //need to keep this key scret before commiting
-    var pusher = new Pusher("ec1b7d29a3ba5e666350");
-    console.log(pusher.connection.state);
+    // console.log(process.env.pusher_key)
+    $.ajax({
+      url: '/getKey',
+      method: 'get',
+    })
+    .done(function(data){
+
+      makePusher(data)
+    })
+    .fail(function(err){
+      console.log(err)
+    })
+    // ec1b7d29a3ba5e666350
+    // console.log(pusher.connection.state);
+
     //If a channel has been subscribed to already it is possible to access channels by name,
     //through the pusher.channel function:
     //The name of the channel to retrieve
-    var channel = pusher.channel('channelName');
+    function makePusher(key){
+    var pusherFront = new Pusher(key);
+
+    var channel1 = pusherFront.channel('channelName');
+    var channel2 = pusherFront.channel('photoTakenCh');
 
 
     //subscribe and unsubscribe from channels at any time.
-    var channel = pusher.subscribe("channelName");
+    var channel1 = pusherFront.subscribe("channelName");
+    var channel2 = pusherFront.subscribe("photoTakenCh");
     // pusher.unsubscribe(channelName);
 
 
-    pusher.connection.bind('connected', function() {
-        //alert('hi')
-    });
+    // pusherFront.connection.bind('connected', function() {
+    //     //alert('hi')
+    // });
 
-    channel.bind('addedInfo',
+    channel1.bind('addedInfo',
       function(data) {
         // add new price into the APPL widget
         console.log(data);
@@ -186,8 +202,31 @@
           document.getElementById("access-2-score").innerHTML = data.career;
         }
 
-      }
-    );
+        if(data.intelligence != undefined){
+          document.getElementById("access-3-score").innerHTML = data.intelligence;
+        }
+
+        if(data.activism != undefined){
+          document.getElementById("access-4-score").innerHTML = data.activism;
+        } else {
+          document.getElementById("access-4-score").innerHTML = '🙈 🙉 🙊';
+
+        }
+
+      })
+
+
+
+
+      channel2.bind('photoTaken',function(data){
+        console.log('photo was taken')
+        thirdScreen.location.href="/candidate-solo"
+
+      })
+
+    }
+//bind an event to this channel
+
 
 
 

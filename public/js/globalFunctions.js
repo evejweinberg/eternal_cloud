@@ -258,7 +258,6 @@ function newVidLady(){
 function callMainVideo(){
 
 
-
   video1 = document.getElementById( 'video1' );
 	textureLady1 = new THREE.VideoTexture( video1 );
 	textureLady1.minFilter = THREE.LinearFilter;

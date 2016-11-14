@@ -1,4 +1,6 @@
 
+var audioCtx = new AudioContext();
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 
 
@@ -11,10 +13,16 @@ function AssessingValue(){
 
 function popUp(name,widthmove,heightmove) {
 
+
+  var volume = audioCtx.createGain();
   var oscillator = audioCtx.createOscillator();
+  volume.connect(audioCtx.destination);
   oscillator.connect(audioCtx.destination);
+
   oscillator.type = 'sine'; // sine wave — other values are 'square', 'sawtooth', 'triangle' and 'custom'
   oscillator.frequency.value = Math.random()* 3500; // value in hertz
+  oscillator.connect(volume);
+  volume.gain.value=0.1;
   var myWindow;
     var index = Math.floor(2* Math.random());
     // var widthThing = (Math.random() * 350) + 30;
@@ -28,9 +36,11 @@ function popUp(name,widthmove,heightmove) {
     myWindow = window.open("", name, "width=" + widthThing + ", " + "height=" + heightThing + "," + "left=" + widthmove+ "," +  "top=" + heightmove);
     myWindow.document.body.style["background-image"] = bgURLS[bgRandom];
     // console.log(bgURLS[bgRandom])
-    setTimeout(function(){oscillator.stop();myWindow.close()},1000)
-    oscillator.start();
-    oscillator.volume = .12;
+    setTimeout(function(){
+      // oscillator.stop();
+      myWindow.close()},1000)
+    // oscillator.start();
+    // oscillator.volume = .12;
     myWindow.document.writeln("<body><p>Login in the other screen</p>");
     myWindow.document.writeln("<\/body>");
 
@@ -40,6 +50,3 @@ function popUp(name,widthmove,heightmove) {
 function removepopUP() {
     myWindow.close();
 }
-
-var audioCtx = new AudioContext();
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();

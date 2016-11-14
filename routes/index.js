@@ -4,13 +4,16 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Pusher = require('pusher');
 
+// console.log(process.env.PUSHER_APP_ID)
+// console.log(process.env.pusher_key)
+
+
 var pusher = new Pusher({
-  appId: "269340",
-  key: "ec1b7d29a3ba5e666350",
-  secret: "cf2d6a2e8143d68fd2c6"
+  appId: process.env.PUSHER_APP_ID,
+  key: process.env.pusher_key,
+  secret: process.env.pusher_secret
 });
 
-//console.log(pusher);
 
 //subscribe to a channel
 //var channel = pusher.subscribe('my-channel');
@@ -85,10 +88,24 @@ router.get('/', function(req, res) {
   res.redirect('/first')
  });
 
+router.get('/first', function(req,res){
+   res.render('start.html')
+ })
+
 
 router.get('/second', function(req, res) {
   res.redirect('/pre-profile')
 });
+
+//staging front end website
+router.get('/pre-profile', function(req,res){
+  res.render('pre-profile.html')
+})
+
+router.get('/getKey', function(req,res){
+  var theKey = process.env.pusher_key
+  res.send(theKey)
+})
 
 
 router.get('/edit/:id', function(req,res){
@@ -206,131 +223,15 @@ router.post('/submitProfile', upload.single('file'), function(req,res){
         status: "OK",
         person: data
       }
+      //'hi' is the message
+      pusher.trigger( 'photoTakenCh', 'photoTaken', 'hi' );
+
       //respond back to the frint end. Here's the data
       return res.json(jsonData)
 
-
-
     })
 
-
-
-
 });
-
-
-
-/*
-
-router.post('/api/create/image', multipartMiddleware, function(req,res){
-
-  console.log('the incoming data >> ' + JSON.stringify(req.body));
-  console.log('the incoming image file >> ' + JSON.stringify(req.files.image));
-
-  var personObj = {
-    name: req.body.name,
-    imageUrl: req.body.imageUrl,
-    slug : req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-')
-  }
-
-  if (req.body.hasGlasses == 'yes') personObj['hasGlasses'] = true;
-  else personObj['hasGlasses'] = false;
-
-
-  // NOW, we need to deal with the image
-  // the contents of the image will come in req.files (not req.body)
-  var filename = req.files.image.name; // actual filename of file
-  var path = req.files.image.path; // will be put into a temp directory
-  var mimeType = req.files.image.type; // image/jpeg or actual mime type
-
-  // create a cleaned file name to store in S3
-  // see cleanFileName function below
-  var cleanedFileName = cleanFileName(filename);
-
-  // We first need to open and read the uploaded image into a buffer
-  fs.readFile(path, function(err, file_buffer){
-
-    // reference to the Amazon S3 Bucket
-    var s3bucket = new AWS.S3({params: {Bucket: awsBucketName}});
-
-    // Set the bucket object properties
-    // Key == filename
-    // Body == contents of file
-    // ACL == Should it be public? Private?
-    // ContentType == MimeType of file ie. image/jpeg.
-    var params = {
-      Key: cleanedFileName,
-      Body: file_buffer,
-      ACL: 'public-read',
-      ContentType: mimeType
-    };
-
-    // Put the above Object in the Bucket
-    s3bucket.putObject(params, function(err, data) {
-      if (err) {
-        console.log(err)
-        return;
-      } else {
-        console.log("Successfully uploaded data to s3 bucket");
-
-        // now that we have the image
-        // we can add the s3 url our person object from above
-        personObj['imageUrl'] = s3Path + cleanedFileName;
-
-        // now, we can create our person instance
-        var person = new Person(personObj);
-
-        person.save(function(err,data){
-          if(err){
-            var error = {
-              status: "ERROR",
-              message: err
-            }
-            return res.json(err)
-          }
-
-          var jsonData = {
-            status: "OK",
-            person: data
-          }
-
-          return res.json(jsonData);
-        })
-
-      }
-
-    }); // end of putObject function
-
-  });// end of read file
-})
-
-*/
-
-
-
-
-
-// function cleanFileName (filename) {
-//
-//     // cleans and generates new filename for example userID=abc123 and filename="My Pet Dog.jpg"
-//     // will return "abc123_my_pet_dog.jpg"
-//     var fileParts = filename.split(".");
-//
-//     //get the file extension
-//     var fileExtension = fileParts[fileParts.length-1]; //get last part of file
-//
-//     //add time string to make filename a little more random
-//     d = new Date();
-//     timeStr = d.getTime();
-//
-//     //name without extension
-//     newFileName = fileParts[0];
-//
-//     return newFilename = timeStr + "_" + fileParts[0].toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'_') + "." + fileExtension;
-//
-// }
-
-
 
 
 
@@ -525,10 +426,7 @@ router.get('/api/get/query',function(req,res){
 
 
 
-//staging front end website
-router.get('/pre-profile', function(req,res){
-  res.render('pre-profile.html')
-})
+
 
 router.get('/add-person', function(req,res){
   res.render('add.html')
@@ -542,9 +440,7 @@ router.get('/candidate', function(req,res){
   res.render('candidate.html')
 })
 
-router.get('/first', function(req,res){
-  res.render('start.html')
-})
+
 
 
 
@@ -553,6 +449,9 @@ router.get('/directory', function(req,res){
 })
 
 
+router.get('/candidate-solo', function(req,res){
+    res.render('candidate-solo.html')
+})
 router.get('/third', function(req,res){
 
   // isStart = req.query.isStart
@@ -567,10 +466,8 @@ router.get('/third', function(req,res){
 router.post('/api/update/:id', function(req,res){
   //pull out fields that were posted
   console.log('REQUEST')
-  //console.log(req.params);
-
   var idToUpdate = req.params.id;
-
+ //where is this console logging to? server?
   console.log(idToUpdate);
   //create an object
   var dataToUpdate = {};
@@ -580,32 +477,33 @@ router.post('/api/update/:id', function(req,res){
   if(req.body.intelligence) dataToUpdate.intelligence = req.body.intelligence;
   if(req.body.activism) dataToUpdate.activism = req.body.activism;
 
-
-
-
+  //find them in the database, by their ID
   Person.findByIdAndUpdate(idToUpdate, dataToUpdate, function(err,data){
     if (err){
       alert("There was an error updating your profile. Eternal Cloud might be at maximum capacity.")
     } else{
-        //console.log(data,data.philanthropy);
+        console.log(data);
 
         //make up event here
         var myMsg = {
           philanthropy: data.philanthropy,
           career : data.career,
+          intelligence : data.intelligence,
+          activism : data.activism,
         }
-
+        //'channel Name', 'event Name', message
         pusher.trigger( 'channelName', 'addedInfo', myMsg );
-        console.log("triggered");
+        console.log("triggered/pushed");
         res.json(data);
         //we are responding with it but now we have
         //to put it in the html
     }
   });
 
+
+
+
 })
-
-
 
 
 ////////////////////////

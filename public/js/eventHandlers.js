@@ -56,8 +56,8 @@ function LoginPressed(){
     document.getElementById('access-score').style.display = 'block';
     document.body.style.backgroundColor = "black";
 
+    // thirdScreen.location.href="/candidate-solo"
     secondScreen.location.href="/login"
-    thirdScreen.location.href="/candidate-solo"
   }
   })
 

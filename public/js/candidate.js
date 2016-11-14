@@ -103,7 +103,7 @@ var group = new THREE.Group();
     var geo = new THREE.BoxGeometry(130,30,30)
     var mat = new THREE.MeshBasicMaterial({color: 0xb2b7b7})
     mesh = new THREE.Mesh(geo, material1)
-    scene.add(mesh)
+    // scene.add(mesh)
     mesh.position.z = -80
 
     composer = new THREE.EffectComposer( renderer );
@@ -170,7 +170,6 @@ var group = new THREE.Group();
   		url : '/api/get',
   		dataType : 'json',
   		success : function(response) {
-  			// console.log(response.people);
   			var person = response.people[response.people.length-1];
         personId = person._id;
         console.log('we are updating person with ID ' + personId);
@@ -283,7 +282,7 @@ jQuery("#candidateForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
-	  		// console.log(response);
+	  		console.log('success in posting');
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
   	},
@@ -318,6 +317,7 @@ jQuery("#CareerForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
+        console.log('success in posting');
 	  		console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
@@ -353,6 +353,7 @@ jQuery("#ActivismForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
+        console.log('success in posting activism');
 	  		console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
@@ -396,6 +397,7 @@ jQuery("#IntelligenceForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
+        console.log('asuccess in posting intelligence')
 	  		console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
