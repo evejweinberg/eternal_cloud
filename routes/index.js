@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Pusher = require('pusher');
+var env = require('node-env-file');
 
 // console.log(process.env.PUSHER_APP_ID)
 // console.log(process.env.pusher_key)
