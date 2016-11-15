@@ -1,6 +1,16 @@
 #canvasBox {
   overflow: hidden; }
 
+#image-cursor {
+  position: absolute;
+  display: none;
+  z-index: 2000;
+  width: 50%; }
+
+.ra {
+  text-align: right;
+  background-color: black; }
+
 .esc-instructions {
   display: inline-block;
   position: absolute;

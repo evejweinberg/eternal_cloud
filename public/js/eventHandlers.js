@@ -34,14 +34,14 @@ window.addEventListener("load", function(){
   secondScreen = window.open('/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
   thirdScreen = window.open('/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
 
-  setTimeout( function() {
-   if(!secondScreen || secondScreen.outerHeight === 0) {
-       //First Checking Condition Works For IE & Firefox
-       //Second Checking Condition Works For Chrome
-       alert("Popup Blocker is enabled! Please add this site to your exception list and REFRESH THE SITE");
-        // window.location.href = 'warning.html';
-   }
-}, 25);
+//   setTimeout( function() {
+//    if(!secondScreen || secondScreen.outerHeight === 0) {
+//        //First Checking Condition Works For IE & Firefox
+//        //Second Checking Condition Works For Chrome
+//        alert("Popup Blocker is enabled! Please add this site to your exception list and REFRESH THE SITE");
+//         // window.location.href = 'warning.html';
+//    }
+// }, 225);
 
 });
 
@@ -108,3 +108,12 @@ function startExperience(){
   //turn on instructions below 3jd scene
   document.getElementById('walking-instructions').style.display = "block";
 }
+
+
+$(document).mousemove(function(e){
+  if (followcursor){
+
+    $("#image-cursor").css({left:e.pageX, top:e.pageY});
+    $("#image-cursor").show()
+  }
+});

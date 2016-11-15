@@ -299,13 +299,13 @@ jQuery("#candidateForm").submit(function(e){
 
 })
 
-
-
+//
+// $("#CareerForm").submit(function(e){
+//     return false;
+// });
 
 jQuery("#CareerForm").submit(function(e){
   var career = $(".career:checked").val();
-  // console.log(career + '  is value of career')
-  // console.log('updating career of person: '+ personId)
 
   jQuery.ajax({
   	url : '/api/update/'+personId,
@@ -317,7 +317,7 @@ jQuery("#CareerForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
-        console.log('success in posting');
+        console.log('success in posting career response:');
 	  		console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');

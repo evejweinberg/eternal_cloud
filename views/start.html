@@ -25,6 +25,8 @@
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 
+  <img id="image-cursor" src="img/low_cursor.png"/>
+
 
     <div class="esc-instructions">
         <nav class="navbar navbar-default navbar-fixed-top" id="override-nav">
@@ -55,14 +57,42 @@
 
       <div id="access-score">
         <h1 class = 'access-score-type'><mark>YOUR HUMANITARIAN SCORE</mark></h1>
-        <!-- <p>
-          Question 1:
-        </p> -->
-        <h1 class = 'access-score-type' id="access-1"><mark>Philanthropy: <span id="access-1-score">😭 </span></mark></h1>
-        <h1 class = 'access-score-type' id="access-2"><mark>Career Choices: <span id="access-2-score">😭 </span></mark></h1>
-        <h1 class = 'access-score-type' id="access-3"><mark>Intelligence: <span id="access-3-score">😭 </span></mark></h1>
-        <h1 class = 'access-score-type' id="access-4"><mark>Activism Level: <span id="access-4-score">😭 </span></mark></h1>
-      </div>
+      <br>
+      <table>
+        <tr>
+<td class="ra"><span id= "access-1-gb">0</span> GB</span></td>
+<td>
+  <h1 class = 'access-score-type' id="access-1"><mark>Philanthropy: <span id="access-1-score">😭 </span></mark></h1>
+
+</td>
+  </tr>
+  <tr>
+  <td class="ra"><span id= "access-2-gb">0 GB</span></td>
+  <td> <h1 class = 'access-score-type' id="access-2"><mark>Career Choice: <span id="access-2-score">😭 </span></mark></h1>
+  </td>
+  </tr>
+
+</tr>
+<tr>
+<td class="ra"><span id= "access-3-gb">0 GB</span></td>
+<td>
+  <h1 class = 'access-score-type' id="access-3"><mark>Intelligence: <span id="access-3-score">😭 </span></mark></h1>
+</td>
+</tr>
+
+</tr>
+<tr>
+<td class="ra"><span id= "access-4-gb">0 GB</span></td>
+<td>
+  <h1 class = 'access-score-type' id="access-4"><mark>Activism Level: <span id="access-4-score">😭 </span></mark></h1>
+</td>
+</tr>
+      </table>
+<br>
+<h1 class = 'access-score-type'><mark>TOTAL: </mark><span id="hc-total"></span></h1>
+
+    </div>
+
 
   			<div id="instructions">
           <div class="tagline-holder" id="tagline-holder">
@@ -156,8 +186,6 @@
 
     <script>
 
-    //need to keep this key scret before commiting
-    // console.log(process.env.pusher_key)
     $.ajax({
       url: '/getKey',
       method: 'get',
@@ -169,8 +197,6 @@
     .fail(function(err){
       console.log(err)
     })
-    // ec1b7d29a3ba5e666350
-    // console.log(pusher.connection.state);
 
     //If a channel has been subscribed to already it is possible to access channels by name,
     //through the pusher.channel function:
@@ -178,28 +204,46 @@
     function makePusher(key){
     var pusherFront = new Pusher(key);
 
-    var channel1 = pusherFront.channel('channelName');
-    var channel2 = pusherFront.channel('photoTakenCh');
-
-
-    //subscribe and unsubscribe from channels at any time.
+    // //subscribe and unsubscribe from channels at any time.
+    //create a channel from nothing like this.
+    //events are past tense "thing was created"
     var channel1 = pusherFront.subscribe("channelName");
     var channel2 = pusherFront.subscribe("photoTakenCh");
     // pusher.unsubscribe(channelName);
 
 
+    //you can bind events to when the state is connected
     // pusherFront.connection.bind('connected', function() {
     //     //alert('hi')
     // });
 
+//events are published to channels.
+//all events on a channel are pushed to all subscribers of that channel
+//use channels to filter
+//bind with a callback;
     channel1.bind('addedInfo',
       function(data) {
         // add new price into the APPL widget
+        console.log('binding "addedInfo" to channel1. data:');
         console.log(data);
-        document.getElementById("access-1-score").innerHTML = data.philanthropy;
+
+        if(data.philanthropy != undefined){
+          //make an algorithm for score
+          var philGB = data.philanthropy*1.3;
+        document.getElementById("access-1-score").innerHTML = data.philanthropy+ '%';
+        document.getElementById("access-1-gb").innerHTML = philGB;
+
+        }
 
         if(data.career != undefined){
           document.getElementById("access-2-score").innerHTML = data.career;
+          if (data.career == true){
+            document.getElementById("access-2-gb").innerHTML = -66;
+
+          } else {
+            document.getElementById("access-2-gb").innerHTML = 66;
+
+          }
         }
 
         if(data.intelligence != undefined){
@@ -207,11 +251,16 @@
         }
 
         if(data.activism != undefined){
+          document.getElementById("access-4-gb").innerHTML = 43;
+
           document.getElementById("access-4-score").innerHTML = data.activism;
         } else {
           document.getElementById("access-4-score").innerHTML = '🙈 🙉 🙊';
 
         }
+
+        document.getElementById("hc-total").innerHTML = parseInt(document.getElementById("access-1-gb").val()+document.getElementById("access-2-gb").val()+document.getElementById("access-3-gb").val()+document.getElementById("access-4-gb").val());
+
 
       })
 
@@ -224,7 +273,7 @@
 
       })
 
-    }
+  }
 //bind an event to this channel
 
 

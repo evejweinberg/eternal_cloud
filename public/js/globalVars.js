@@ -42,6 +42,7 @@ var velocity = new THREE.Vector3();
 var type22;
 var ThreeSceneHghtRation = .9
 var secondScreen, thirdScreen, loginPrompt;
+var followcursor = false;
 
 var mainVidLady;
 var allLadies = [];

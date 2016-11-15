@@ -5,9 +5,6 @@ var mongoose = require('mongoose');
 var Pusher = require('pusher');
 var env = require('node-env-file');
 
-// console.log(process.env.PUSHER_APP_ID)
-// console.log(process.env.pusher_key)
-
 
 var pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
@@ -225,7 +222,8 @@ router.post('/submitProfile', upload.single('file'), function(req,res){
         person: data
       }
       //'hi' is the message
-      pusher.trigger( 'photoTakenCh', 'photoTaken', 'hi' );
+      //channel, event,
+      pusher.trigger( 'photoTakenCh', 'photoTaken', data );
 
       //respond back to the frint end. Here's the data
       return res.json(jsonData)
@@ -467,8 +465,9 @@ router.get('/third', function(req,res){
 router.post('/api/update/:id', function(req,res){
   //pull out fields that were posted
   console.log('REQUEST')
+  console.log(req.body);
   var idToUpdate = req.params.id;
- //where is this console logging to? server?
+ // where is this console logging to? server?
   console.log(idToUpdate);
   //create an object
   var dataToUpdate = {};
@@ -487,15 +486,16 @@ router.post('/api/update/:id', function(req,res){
 
         //make up event here
         var myMsg = {
-          philanthropy: data.philanthropy,
-          career : data.career,
-          intelligence : data.intelligence,
-          activism : data.activism,
+          philanthropy: dataToUpdate.philanthropy,
+          career : dataToUpdate.career,
+          intelligence : dataToUpdate.intelligence,
+          activism : dataToUpdate.activism,
         }
+        res.json(data);
         //'channel Name', 'event Name', message
         pusher.trigger( 'channelName', 'addedInfo', myMsg );
-        console.log("triggered/pushed");
-        res.json(data);
+        console.log("triggered/pushed ", myMsg );
+
         //we are responding with it but now we have
         //to put it in the html
     }
