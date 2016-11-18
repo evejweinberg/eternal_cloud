@@ -67,14 +67,14 @@
 </td>
   </tr>
   <tr>
-  <td class="ra"><span id= "access-2-gb">0 GB</span></td>
+  <td class="ra"><span id= "access-2-gb">0</span>GB</td>
   <td> <h1 class = 'access-score-type' id="access-2"><mark>Career Choice: <span id="access-2-score">😭 </span></mark></h1>
   </td>
   </tr>
 
 </tr>
 <tr>
-<td class="ra"><span id= "access-3-gb">0 GB</span></td>
+<td class="ra"><span id= "access-3-gb">0 </span>GB</td>
 <td>
   <h1 class = 'access-score-type' id="access-3"><mark>Intelligence: <span id="access-3-score">😭 </span></mark></h1>
 </td>
@@ -82,14 +82,14 @@
 
 </tr>
 <tr>
-<td class="ra"><span id= "access-4-gb">0 GB</span></td>
+<td class="ra"><span id= "access-4-gb">0 </span>GB</td>
 <td>
   <h1 class = 'access-score-type' id="access-4"><mark>Activism Level: <span id="access-4-score">😭 </span></mark></h1>
 </td>
 </tr>
       </table>
 <br>
-<h1 class = 'access-score-type'><mark>TOTAL: </mark><span id="hc-total"></span></h1>
+<h1 class = 'access-score-type'><mark>TOTAL VALUE TO ETERNAL CLOUD: </mark><span id="hc-total"></span></h1>
 
     </div>
 
@@ -236,9 +236,10 @@
         }
 
         if(data.career != undefined){
+          console.log(data.career)
           document.getElementById("access-2-score").innerHTML = data.career;
-          if (data.career == true){
-            document.getElementById("access-2-gb").innerHTML = -66;
+          if (data.career == 'yes'){
+            document.getElementById("access-2-gb").innerHTML = -88;
 
           } else {
             document.getElementById("access-2-gb").innerHTML = 66;
@@ -247,10 +248,13 @@
         }
 
         if(data.intelligence != undefined){
+          console.log(data.intelligence)
           document.getElementById("access-3-score").innerHTML = data.intelligence;
+          document.getElementById("access-2-gb").innerHTML = Math.floor(Math.random()*300);
         }
 
         if(data.activism != undefined){
+          console.log(data.activism)
           document.getElementById("access-4-gb").innerHTML = 43;
 
           document.getElementById("access-4-score").innerHTML = data.activism;
@@ -259,10 +263,21 @@
 
         }
 
-        document.getElementById("hc-total").innerHTML = parseInt(document.getElementById("access-1-gb").val()+document.getElementById("access-2-gb").val()+document.getElementById("access-3-gb").val()+document.getElementById("access-4-gb").val());
+        document.getElementById("hc-total").innerHTML = parseInt(document.getElementById("access-2-gb").innerHTML) + parseInt(document.getElementById("access-1-gb").innerHTML)+parseInt(document.getElementById("access-3-gb").innerHTML)+parseInt(document.getElementById("access-4-gb").innerHTML)
+
+
 
 
       })
+
+      channel1.bind("finishedForm"),
+        function(data) {
+
+          console.log(data)
+          //secondscreen.close()
+          //third screen add score to
+
+        }
 
 
 

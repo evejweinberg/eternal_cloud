@@ -494,11 +494,11 @@ if (asciiOn){
   }
 
 
-  effect.render( scene, camera );
-} else {
+      effect.render( scene, camera );
+    } else {
 
-  renderer.render(scene, camera);
-}
+      renderer.render(scene, camera);
+    }
 
 }
 

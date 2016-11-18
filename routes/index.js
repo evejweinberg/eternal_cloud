@@ -5,25 +5,13 @@ var mongoose = require('mongoose');
 var Pusher = require('pusher');
 var env = require('node-env-file');
 
-
+//keep this shit secret
 var pusher = new Pusher({
   appId: process.env.PUSHER_APP_ID,
   key: process.env.pusher_key,
   secret: process.env.pusher_secret
 });
 
-
-//subscribe to a channel
-//var channel = pusher.subscribe('my-channel');
-//pusher.trigger( channels, event, data, socketId, callback );
-
-
-//define callbacks that bind to events on a channel, coming in via the connection to Pusher:
-// channel.bind('my-event', function(data) {
-//   alert('An event was triggered with message: ' + data.message);
-// });
-
-// pusher.trigger('my-channel','my-event', {'message': 'hello world'})
 
 // our db models
 var Person = require("../models/person.js");
@@ -234,35 +222,6 @@ router.post('/submitProfile', upload.single('file'), function(req,res){
 
 
 
-// router.get('/edit/:id', function(req,res){
-//
-//   //get the id
-//
-//   var requestedId = req.params.id;
-//
-//
-// //ask database for information
-//   Person.findById(requestedId,function(err,data){
-//     if(err){
-//       var error = {
-//         status: "ERROR",
-//         message: err
-//       }
-//       return res.json(err)
-//     }
-//
-//     var viewData = {
-//       status: "OK",
-//       person: data
-//     }
-// //views > edit.html
-//     return res.render('edit.html',viewData);
-//   })
-//
-// })
-
-
-
 
 
 //was hitting this route when the form was simply going to mongoose
@@ -346,49 +305,32 @@ router.get('/api/get', function(req,res){
 
 })
 
-// router.get('/api/get/year/:itpYear',function(req,res){
-//
-//   var requestedITPYear = req.params.itpYear;
-//
-//   console.log(requestedITPYear);
-//
-//   Person.find({itpYear:requestedITPYear},function(err,data){
-//       if(err){
-//         var error = {
-//           status: "ERROR",
-//           message: err
-//         }
-//         return res.json(err)
-//       }
-//
-//       var jsonData = {
-//         status: "OK",
-//         people: data
-//       }
-//
-//       return res.json(jsonData);
-//   })
-//
-// })
 
-// router.get('/api/person/:slug'), function(req,res){
-//   var reqestedSlug = req.params.slug;
-//   console.log(reqestedSlug)
-//   Person.findOne({slug:reqestedSlug}, function(err,data){
-//     if (err){
-//       return res.json({status: error})
-//     }
-//
-//     if (!data || data ==null || data==''){
-//
-//     }
-//
-//     console.log('found that person')
-//     console.log(data)
-//     res.json(data)
-//
-//   })
-// }
+router.get('/api/delete/:id',function(req,res){
+
+  var requestedId = req.param('id');
+
+  // Mongoose method to remove, http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
+  Person.findByIdAndRemove(requestedId,function(err, data){
+    if(err || data == null){
+      var error = {status:'ERROR', message: 'Could not find that animal to delete'};
+      return res.json(error);
+    }
+
+    // otherwise, respond back with success
+    var jsonData = {
+      status: 'OK',
+      message: 'Successfully deleted id ' + requestedId
+    }
+
+    res.json(jsonData);
+
+  })
+
+
+
+})
+
 
 
 router.get('/api/get/query',function(req,res){
@@ -464,11 +406,9 @@ router.get('/third', function(req,res){
 
 router.post('/api/update/:id', function(req,res){
   //pull out fields that were posted
-  console.log('REQUEST')
-  console.log(req.body);
+  console.log('REQUEST BODY: ', req.body)
   var idToUpdate = req.params.id;
  // where is this console logging to? server?
-  console.log(idToUpdate);
   //create an object
   var dataToUpdate = {};
 
@@ -476,6 +416,14 @@ router.post('/api/update/:id', function(req,res){
   if(req.body.career) dataToUpdate.career = req.body.career;//console.log(req.body.career);
   if(req.body.intelligence) dataToUpdate.intelligence = req.body.intelligence;
   if(req.body.activism) dataToUpdate.activism = req.body.activism;
+
+  if (req.body.done == "yes"){
+    var myMsg = {
+      done: "yes"
+    }
+    pusher.trigger( 'channelName', 'finishedForm', myMsg );
+
+  }
 
   //find them in the database, by their ID
   Person.findByIdAndUpdate(idToUpdate, dataToUpdate, function(err,data){

@@ -10,6 +10,9 @@ $font-size-lrg: 80px;
 $font-size-medlrg: 40px;
 
 
+h2{
+  color: $purple;
+}
 #canvasBox{
   overflow:hidden;
 }
@@ -157,6 +160,8 @@ p{
   border: 2px solid $blue;
   border-radius: $border-rad;
   text-align: center;
+  background-color: rgba(1,1,1,0);
+
 }
 
 .buttons:hover{

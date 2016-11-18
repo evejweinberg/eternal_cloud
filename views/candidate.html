@@ -32,20 +32,48 @@
 
     <!-- Custom CSS inside CSS folder -->
     <link  href="css/make-profile.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css">
 
     <style media="screen">
+
+    h2 {
+      color: #b9a0b1;
+    }
+
+    p {
+      color: #009fc6;
+    }
 
     .container{
       position: relative;
     }
       canvas{
         z-index: -10;
-position: absolute;
-top: 0px;
-left: 0px;
-width: 769px;
-height: 699px;
+        position: absolute;
+        top: 95px;
+        left: 0px;
+        width: 769px;
+        height: 699px;
       }
+
+      .header{
+        background-color: #009fc6;
+        color: white;
+        padding-top: 1px;
+        padding-bottom: 36px;
+
+      }
+
+      .progress{
+        position: absolute;
+        left:10%;
+        width:80%;
+      }
+
+      #done{
+        font-size: 40px;
+      }
+
     </style>
 
 
@@ -54,29 +82,63 @@ height: 699px;
   <body>
 
 
+<div class="header">
+    <h1 class="centered-type">Current Candidate</h1>
+    <div class="progress">
+    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+      PROGRESS - YOU MUST FINISH
+    </div>
+  </div>
+
+</div>
+<img src="../img/candidate.gif" id="candidate-gif" alt="" />
 
   <div class="container" id="full-form">
-    	<div class="row">
-        <img src="../img/candidate.gif" id="candidate-gif" alt="" />
-        <h1 class="centered-type">Current Candidate</h1>
+    	<!-- <div class="row"> -->
 
-      </div>
+
+      <!-- </div> -->
 		<div class="row">
-			<div class="col-md-1">
+			<div class="col-xs-6 col-sm-2 col-md-3">
 
         <!-- //make a new form ID -->
-        <form id="candidateForm">
-          <div class="form-group">
-            	<h2>PHILANTHROPY</h2>
-              <p>Perentage of annual income you donate:</p>
-            <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control" id="philanthropy" placeholder="10" name="philanthropy">
-          </div>
-
-          <button type="submit" class="btn btn-default">Submit</button>
 
 
-        </form>
-      <form id="CareerForm">
+        <!-- <input type="submit" class="buttons" id="done" name="newsubmit" value="DONE"> -->
+          <button type="submit" onclick="Done()" id="done" class="buttons" style="display:none">DONE</button>
+
+          <form id="ActivismForm" style="display:none">
+                    <div class="form-group">
+                      <!-- <label for="name">Name</label> -->
+                          <h2>ACTIVISM</h2>
+                          <p>Name one organization or cause that you have donated time or money to, in the last year?
+                          </p>
+                      <input type="text" class="form-control" id="activism" placeholder="" name="activism">
+                      <button type="submit" class="btn btn-default">Submit</button>
+
+                    </div>
+
+                </form>
+
+            <form id="IntelligenceForm" style="display:none">
+                      <div class="form-group">
+                            <h2>INTELLIGENCE</h2>
+                            <p>
+                              enter github handle
+                            </p>
+                            <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                            <!-- //how can I make something else do the submit -->
+                            <button type="submit" class="btn btn-default">I Don't have a github</button>
+                      </div>
+
+                    </form>
+
+
+
+      </form>
+      <form id="CareerForm" style="display:none">
           <div class="form-group">
                 <h2>CAREER CHOICE</h2>
               <p>Are you a banker?</p>
@@ -88,41 +150,20 @@ height: 699px;
 
         </form>
 
-  <form id="IntelligenceForm">
-            <div class="form-group">
-                  <h2>INTELLIGENCE</h2>
-                  <p>
-                    enter github handle
-                  </p>
-                  <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
-                  <button type="submit" class="btn btn-default">Submit</button>
-                  <!-- //how can I make something else do the submit -->
-                  <button type="submit" class="btn btn-default">I Don't have a github</button>
-            </div>
+        <form id="candidateForm">
+          <div class="form-group">
+              <h2>PHILANTHROPY</h2>
+              <p>Perentage of annual income you donate:</p>
+            <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control" id="philanthropy" placeholder="10" name="philanthropy">
+          </div>
 
-          </form>
-
-  <form id="ActivismForm">
-            <div class="form-group">
-              <!-- <label for="name">Name</label> -->
-                  <h2>ACTIVISM</h2>
-                  <p>Name one organization or cause that you have donated time or money to, in the last year?
-                  </p>
-              <input type="text" class="form-control" id="activism" placeholder="" name="activism">
-              <button type="submit" class="btn btn-default">Submit</button>
-
-            </div>
-
+          <button type="submit" class="btn btn-default">Submit</button>
         </form>
 
-          <button type="submit" id="done" class="btn btn-default">DONE</button>
 
-          <div class="progress" style="width:40%">
-          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
-          aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-            1/6 completed
-          </div>
-        </div>
+
+
+
 
      </div>   <!--col -->
    </div>  <!--row -->
@@ -136,4 +177,37 @@ height: 699px;
 
     <!-- CUSTOM JS look in public>JS -->
     <script src="js/candidate.js"></script>
+
+    <script type="text/javascript">
+    $('.progress-bar').attr("style","width:20%");
+
+    $("#candidateForm").submit(function() {
+    //   console.log('done forst one')
+    //   $('.progress-bar').attr("style","width:40%");
+    // // $("#candidateForm").fadeOut()
+    // $('#CareerForm').fadeIn();
+   });
+
+   $("#CareerForm").submit(function() {
+  //    console.log('done forst one')
+  //    $('.progress-bar').attr("style","width:60%");
+  //  // $("#candidateForm").fadeOut()
+  //  $('#IntelligenceForm').fadeIn();
+  });
+
+  $("#IntelligenceForm").submit(function() {
+    console.log('done forst one')
+    $('.progress-bar').attr("style","width:80%");
+  // $("#candidateForm").fadeOut()
+  $('#ActivismForm').fadeIn();
+ });
+
+ $("#ActivismForm").submit(function() {
+   console.log('done forst one')
+   $('.progress-bar').attr("style","width:100%");
+ // $("#candidateForm").fadeOut()
+ $('#done').fadeIn();
+});
+
+    </script>
 </html>

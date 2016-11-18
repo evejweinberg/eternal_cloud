@@ -11,7 +11,7 @@ THREE.AsciiEffect = function ( renderer, charSet, options ) {
 
 	// its fun to create one your own!
 
-	charSet = ( charSet === undefined ) ? ' .✌☂☮-=♡☆#♥█' : charSet;
+	charSet = ( charSet === undefined ) ? '😀😬😁😂.✌☂☮-=♡☆#♥█' : charSet;
 
 	// ' .,:;=|iI+hHOE#`$';
 	// darker bolder character set from https://github.com/saw/Canvas-ASCII-Art/

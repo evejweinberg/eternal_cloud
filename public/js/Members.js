@@ -200,7 +200,7 @@ function textureLoaded(texture) {
           var video_geo = new THREE.BoxGeometry( boxSize,boxSize,boxSize );
 
 
-          if (people[i].imageUrl.includes('eternaltest')){
+          if (people[i].imageUrl.includes('eternalcloudbucket')){
 
 
             //load the texture, and whwen it's done, push it into a Phong material
@@ -310,5 +310,28 @@ function onResize(e) {
     camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
-        renderer.setSize( window.innerWidth, window.innerHeight);
+      renderer.setSize( window.innerWidth, window.innerHeight);
+}
+
+
+
+
+function deletePerson(event){
+	var targetedId = event.target.id;
+	console.log('the person to delete is ' + targetedId);
+
+	// now, let's call the delete route with AJAX
+	jQuery.ajax({
+		url : '/api/delete/'+targetedId,
+		dataType : 'json',
+		success : function(response) {
+			// now, let's re-render the animals
+
+      //what do I want to do here
+			// renderPlaces();
+
+		}
+	})
+
+	event.preventDefault();
 }

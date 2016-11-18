@@ -1,3 +1,6 @@
+h2 {
+  color: #b9a0b1; }
+
 #canvasBox {
   overflow: hidden; }
 
@@ -106,7 +109,8 @@ p {
   padding: 8px;
   border: 2px solid #009fc6;
   border-radius: 20px;
-  text-align: center; }
+  text-align: center;
+  background-color: rgba(1, 1, 1, 0); }
 
 .buttons:hover {
   color: white;
