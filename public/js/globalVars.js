@@ -51,6 +51,7 @@ var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
 var scene3triggered = false;
 var currentVideo;
+var video4, scene4= false;
 
 
 

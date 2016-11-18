@@ -153,6 +153,8 @@
     <source src="img/welcome2.mp4"></video>
     <video id="video3" webkit-playsinline style="display:none">
     <source src="img/login.mp4"></video>
+    <video id="video4" webkit-playsinline style="display:none">
+    <source src="img/toolow.mp4"></video>
 
 <!-- //audio for the whole scene -->
   <audio loop audio autoplay id="myTune" volume=".1"> <source src="img/PurpleVortex.mp3"></audio>
@@ -265,16 +267,8 @@
 
       })
 
-      channel2.bind("finishedForm",function(data) {
+      channel2.bind("finishedForm",Scene4)
 
-          console.log('finished form as triggered')
-          console.log(data)
-          secondScreen.location.href="/directory"
-          asciiOn = false;
-          switchBackfromAscii = true;
-          //third screen add score to
-
-        })
 
 
       channel2.bind('photoTaken',function(data){

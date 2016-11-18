@@ -51,6 +51,20 @@ window.addEventListener('resize', onResize, true);
 //add form to fill out HemisphereLight
 document.getElementById('login').addEventListener('click', LoginPressed)
 
+function Scene4(data){
+  scene4 = true;
+  video4 = document.getElementById( 'video4' );
+  console.log('finished form as triggered')
+  console.log(data)
+  secondScreen.location.href="/directory"
+  asciiOn = false;
+  switchBackfromAscii = true;
+  currentVideo = video4;
+  video4.play();
+  //third screen add score to
+
+}
+
 
 function LoginPressed(){
   TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut,onComplete: function(){

@@ -404,16 +404,7 @@ for (var i=0;i<6;i++){
 
         video2.play()
         video2.addEventListener('ended',ThirdScene)
-        // function(){
-        //     scene.remove(mainVidLady)
-        //     mainVidLady.material.map = textureLady3
-        //     scene.add(mainVidLady)
-        //     TweenMax.to(mainVidLady.rotation,4,{y:360})
-        //     video3.play()
-        //     loginPrompt = setInterval(newVidLady, 3000)
-        //
-        //
-        // },false);
+
         havenotHitLady = false;
       }
       setTimeout(function(){
