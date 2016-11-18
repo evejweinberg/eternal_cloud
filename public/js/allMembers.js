@@ -164,7 +164,7 @@ var group = new THREE.Group();
 
 
 var imageIndex = 0;
-var movedown = -100;
+var movedown = 50;
 var carriage = 0;
 //get the person from the database
 
@@ -201,18 +201,18 @@ var carriage = 0;
             allMeshes.push(video_mesh)
             group.add(video_mesh)
             if (imageIndex%10 == 0){
-              console.log('ten more')
-              movedown -= boxSize
-              carriage -=10*boxSize
+              movedown -= boxSize*2
+              carriage += boxSize*10*1.3
 
             }
-
-            video_mesh.position.x = -100+ imageIndex*boxSize-carriage
+            video_mesh.position.x = -100+ (imageIndex*boxSize*1.3)-carriage
             video_mesh.position.y = movedown
 
-            loadfont(response.people[imageIndex].name, 11, -100+imageIndex*boxSize-carriage,boxSize+movedown,0)
+            group.add(loadfont(response.people[imageIndex].name, 8, -100+imageIndex*boxSize*1.3-carriage,boxSize+movedown,0))
             scene.add(group);
-            group.position.y = 30;
+            group.position.y = 300;
+            group.position.x = 450;
+            group.position.z=-700;
 
         //
         imageIndex ++

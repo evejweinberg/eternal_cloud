@@ -396,21 +396,24 @@ for (var i=0;i<6;i++){
     // console.log(dist);
     if (dist < 25){
       if (havenotHitLady){
+        Login()
         video1.pause()
         scene.remove(mainVidLady)
         mainVidLady.material.map = textureLady2
         scene.add(mainVidLady)
+
         video2.play()
-        video2.addEventListener('ended',function(){
-            scene.remove(mainVidLady)
-            mainVidLady.material.map = textureLady3
-            scene.add(mainVidLady)
-            TweenMax.to(mainVidLady.rotation,4,{y:360})
-            video3.play()
-            loginPrompt = setInterval(newVidLady, 3000)
-
-
-        },false);
+        video2.addEventListener('ended',ThirdScene)
+        // function(){
+        //     scene.remove(mainVidLady)
+        //     mainVidLady.material.map = textureLady3
+        //     scene.add(mainVidLady)
+        //     TweenMax.to(mainVidLady.rotation,4,{y:360})
+        //     video3.play()
+        //     loginPrompt = setInterval(newVidLady, 3000)
+        //
+        //
+        // },false);
         havenotHitLady = false;
       }
       setTimeout(function(){
@@ -486,6 +489,7 @@ for (var i=0;i<6;i++){
 if (asciiOn){
   // console.log('ascii is on')
 
+//gets hit onnce
   if (switchedYet == false){
 
     container.appendChild( effect.domElement )
@@ -493,11 +497,16 @@ if (asciiOn){
     switchedYet = true
   }
 
+  if (switchBackfromAscii){
+    container.removeChild( effect.domElement )
+    container.appendChild( renderer.domElement )
+  }
 
-      effect.render( scene, camera );
+
+    effect.render( scene, camera );
     } else {
 
-      renderer.render(scene, camera);
+    renderer.render(scene, camera);
     }
 
 }

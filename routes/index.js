@@ -237,6 +237,7 @@ router.post('/api/create', function(req,res){
   if (!req.body.philanthropy)req.body.philanthropy = 0
   if (!req.body.intelligence)req.body.intelligence = 0
   if (!req.body.activism)req.body.activism = 0
+  if (!req.body.score)req.body.score = 0
 
 
 //save a data object
@@ -248,6 +249,7 @@ router.post('/api/create', function(req,res){
     career: req.body.career,
     intelligence: req.body.intelligence,
     activism: req.body.activism,
+    score: req.body.score,
     //create a uniqur slug
     slug : req.body.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-')
   }
@@ -281,7 +283,7 @@ router.post('/api/create', function(req,res){
 
 
 
-
+//when do i hit this route?
 router.get('/api/get', function(req,res){
 //find all items
   Person.find(function(err,data){
@@ -382,9 +384,7 @@ router.get('/candidate', function(req,res){
 })
 
 
-
-
-
+//add search here
 router.get('/directory', function(req,res){
   res.render('directory.html')
 })
@@ -403,6 +403,20 @@ router.get('/third', function(req,res){
     // }
   })
 
+  router.post('/api/done', function(req,res){
+    console.log(req.body)
+
+    if (req.body.done == "yes"){
+      console.log('server DONE route hit and done was YES')
+
+      pusher.trigger( 'photoTakenCh', 'finishedForm', req.body );
+      // return;
+
+    }
+
+
+  })
+
 
 router.post('/api/update/:id', function(req,res){
   //pull out fields that were posted
@@ -416,14 +430,9 @@ router.post('/api/update/:id', function(req,res){
   if(req.body.career) dataToUpdate.career = req.body.career;//console.log(req.body.career);
   if(req.body.intelligence) dataToUpdate.intelligence = req.body.intelligence;
   if(req.body.activism) dataToUpdate.activism = req.body.activism;
+  if(req.body.score) dataToUpdate.score = req.body.score;
 
-  if (req.body.done == "yes"){
-    var myMsg = {
-      done: "yes"
-    }
-    pusher.trigger( 'channelName', 'finishedForm', myMsg );
 
-  }
 
   //find them in the database, by their ID
   Person.findByIdAndUpdate(idToUpdate, dataToUpdate, function(err,data){

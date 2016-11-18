@@ -43,12 +43,14 @@ var type22;
 var ThreeSceneHghtRation = .9
 var secondScreen, thirdScreen, loginPrompt;
 var followcursor = false;
+var switchBackfromAscii = false;
 
 var mainVidLady;
 var allLadies = [];
 var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
 var scene3triggered = false;
+var currentVideo;
 
 
 

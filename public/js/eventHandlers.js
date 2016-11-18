@@ -58,6 +58,7 @@ function LoginPressed(){
     for (i in allLadies){
       scene.remove(allLadies[i])
     }
+    console.log('clearing interval')
     clearInterval(loginPrompt)
     asciiOn = true;
     scene3triggered = true;
@@ -88,11 +89,26 @@ function LoginPressed(){
 
 
 
+function Login(){
+  document.getElementById('login').style.display = "block";
+  currentVideo = video2;
 
+}
+
+function ThirdScene(){
+  currentVideo = video3;
+  scene.remove(mainVidLady)
+  mainVidLady.material.map = textureLady3
+  scene.add(mainVidLady)
+  TweenMax.to(mainVidLady.rotation,4,{y:360})
+  video3.play()
+  loginPrompt = setInterval(newVidLady, 3000)
+}
 
 function startExperience(){
+    currentVideo = video1;
   //show login button
-  document.getElementById('login').style.display = "block";
+  // document.getElementById('login').style.display = "block";
   //turn first video on
   playFirstvideo = true;
   // tween top of 3js scene down

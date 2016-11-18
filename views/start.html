@@ -201,7 +201,7 @@
     //If a channel has been subscribed to already it is possible to access channels by name,
     //through the pusher.channel function:
     //The name of the channel to retrieve
-    function makePusher(key){
+  function makePusher(key){
     var pusherFront = new Pusher(key);
 
     // //subscribe and unsubscribe from channels at any time.
@@ -209,13 +209,9 @@
     //events are past tense "thing was created"
     var channel1 = pusherFront.subscribe("channelName");
     var channel2 = pusherFront.subscribe("photoTakenCh");
-    // pusher.unsubscribe(channelName);
+    var channel3 = pusherFront.subscribe("doneChannel");
 
 
-    //you can bind events to when the state is connected
-    // pusherFront.connection.bind('connected', function() {
-    //     //alert('hi')
-    // });
 
 //events are published to channels.
 //all events on a channel are pushed to all subscribers of that channel
@@ -262,24 +258,23 @@
           document.getElementById("access-4-score").innerHTML = '🙈 🙉 🙊';
 
         }
-
+        //tally up score
+        //post score to the server
         document.getElementById("hc-total").innerHTML = parseInt(document.getElementById("access-2-gb").innerHTML) + parseInt(document.getElementById("access-1-gb").innerHTML)+parseInt(document.getElementById("access-3-gb").innerHTML)+parseInt(document.getElementById("access-4-gb").innerHTML)
-
-
 
 
       })
 
-      channel1.bind("finishedForm"),
-        function(data) {
+      channel2.bind("finishedForm",function(data) {
 
+          console.log('finished form as triggered')
           console.log(data)
-          //secondscreen.close()
+          secondScreen.location.href="/directory"
+          asciiOn = false;
+          switchBackfromAscii = true;
           //third screen add score to
 
-        }
-
-
+        })
 
 
       channel2.bind('photoTaken',function(data){
@@ -290,9 +285,6 @@
 
   }
 //bind an event to this channel
-
-
-
 
     </script>
 

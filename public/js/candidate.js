@@ -430,9 +430,8 @@ function Done(){
 
   console.log('done fucntion was called')
 
-
   jQuery.ajax({
-  	url : '/api/update/'+personId,
+  	url : '/api/done',
   	dataType : 'json',
   	type : 'POST',
   	// we send the data in a data object (with key/value pairs)
@@ -448,7 +447,7 @@ function Done(){
   	},
   	error : function(err){
   		// do error checking
-  		alert("something went wrong");
+  		alert("something went wrong when hitting DONE button");
   		console.error(err);
   	}
   });
@@ -457,4 +456,3 @@ function Done(){
   // e.preventDefault();
   // return false;
 }
-// })

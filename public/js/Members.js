@@ -239,12 +239,13 @@ function textureLoaded(texture) {
 
           //place them in a grid
           video_mesh.position.x = -60 + ((i%3)*60)
+          video_mesh.position.y = movePeopleDown
+
           if (i%3 == 0){
             movePeopleDown -=60
-            video_mesh.position.y = movePeopleDown
             loadfont(people[i].name, 5, -60 + ((i%3)*60),movePeopleDown+boxSize,0)
           } else {
-            video_mesh.position.y = movePeopleDown
+            // video_mesh.position.y = movePeopleDown
               loadfont(people[i].name, 5, -60 + ((i%3)*60),movePeopleDown+boxSize,0)
           }
           allMembers.push(video_mesh)

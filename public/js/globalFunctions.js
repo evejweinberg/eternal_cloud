@@ -213,8 +213,17 @@ function loadfont() {
 
 function toggleAudio(){
    var audio = document.getElementById("myTune");
-   if (audio.paused) audio.play();
-   else audio.pause();
+   if (audio.paused) {
+
+     audio.play();
+     currentVideo.play();
+   }
+   else {
+     audio.pause();
+     currentVideo.pause();
+   }
+
+
 }
 
 
