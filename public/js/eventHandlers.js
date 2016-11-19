@@ -33,6 +33,7 @@ document.getElementById('your-value').addEventListener('click', function(){
 window.addEventListener("load", function(){
   secondScreen = window.open('/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
   thirdScreen = window.open('/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
+  document.getElementById('date').innerHTML = today
 
 //   setTimeout( function() {
 //    if(!secondScreen || secondScreen.outerHeight === 0) {

@@ -97,3 +97,15 @@ var urls = [
     r + "py.jpg", r + "ny.jpg",
     r + "pz.jpg", r + "nz.jpg"
 ];
+
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth(); //January is 0!
+var yyyy = today.getFullYear();
+var goUp = today.getFullYear()
+var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+today = 'TODAY: ' +monthNames[mm]+' '+dd+', '+2045 ;

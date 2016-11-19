@@ -1,3 +1,9 @@
+#date {
+  position: absolute;
+  color: #009fc6;
+  text-align: center;
+  transform: translateX(-85px); }
+
 h2 {
   color: #b9a0b1; }
 

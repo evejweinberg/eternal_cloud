@@ -9,7 +9,12 @@ $font-main: 'Rubik', sans-serif;
 $font-size-lrg: 80px;
 $font-size-medlrg: 40px;
 
-
+#date{
+  position: absolute;
+  color: $blue;
+  text-align: center;
+  transform: translateX(-85px);
+}
 h2{
   color: $purple;
 }
