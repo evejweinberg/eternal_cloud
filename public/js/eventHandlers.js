@@ -31,9 +31,17 @@ document.getElementById('your-value').addEventListener('click', function(){
 })
 
 window.addEventListener("load", function(){
-  secondScreen = window.open('/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
-  thirdScreen = window.open('/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
+  // secondScreen = window.open('/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
+  // thirdScreen = window.open('/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
   document.getElementById('date').innerHTML = today
+    // pull out the desiredSection that we've printed to the page
+    // this will be {{desiredSection}} above
+    var desiredSection = document.getElementById('hiddenDiv').innerHTML;
+
+    // send the user to that div, look at the URL in the window
+    location.hash = "#" + desiredSection;
+
+
 
 //   setTimeout( function() {
 //    if(!secondScreen || secondScreen.outerHeight === 0) {
@@ -50,14 +58,14 @@ window.addEventListener('resize', onResize, true);
 
 
 //add form to fill out HemisphereLight
-document.getElementById('login').addEventListener('click', LoginPressed)
+document.getElementById('login').addEventListener('click', SceneThree)
 
 function Scene4(data){
   scene4 = true;
   video4 = document.getElementById( 'video4' );
   console.log('finished form as triggered')
   console.log(data)
-  secondScreen.location.href="/directory"
+  // secondScreen.location.href="/directory"
   asciiOn = false;
   switchBackfromAscii = true;
   currentVideo = video4;
@@ -67,7 +75,8 @@ function Scene4(data){
 }
 
 
-function LoginPressed(){
+function SceneThree(){
+  showSideBar()
   TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut,onComplete: function(){
     //remove ladies
     for (i in allLadies){
@@ -75,24 +84,17 @@ function LoginPressed(){
     }
     console.log('clearing interval')
     clearInterval(loginPrompt)
-    asciiOn = true;
+    // asciiOn = true;
     scene3triggered = true;
 
     document.getElementById('access-score').style.display = 'block';
-    document.body.style.backgroundColor = "black";
+    // document.body.style.backgroundColor = "black";
 
     // thirdScreen.location.href="/candidate-solo"
-    secondScreen.location.href="/login"
+    // secondScreen.location.href="/login"
   }
   })
 
-
-
-//change this URL to be
-  // https://itp-eve.herokuapp.com/pre-profile
-  //https://itp-eve.herokuapp.com/login
-
-  // console.log('was login pressed already??')
   for (var i=0;i<10;i++){
 
     setInterval(popUp('window' + windowName,window.innerWidth-(i*80),i*80),150)
@@ -121,12 +123,14 @@ function ThirdScene(){
 }
 
 function startExperience(){
+  var footer = document.getElementById('footer')
     currentVideo = video1;
   //show login button
   // document.getElementById('login').style.display = "block";
   //turn first video on
   playFirstvideo = true;
   // tween top of 3js scene down
+  TweenMax.to(footer,1,{bottom:0, ease:Strong.easeIn})
   TweenMax.to('#three-scene',2,{top: 80, ease: Strong.easeInOut})
   video1.play()
   TweenMax.to("#logo",2,{width:"11%", ease: Strong.easeInOut})

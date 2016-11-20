@@ -8,12 +8,16 @@ window.onload = function(){
 
 if ( havePointerLock ) {
 				var element = document.body;
+
+
 				var pointerlockchange = function ( event ) {
 					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
 						controlsEnabled = true;
 						controls.enabled = true;
+            //hide blocker
 						blocker.style.display = 'none';
 					} else {
+            console.log('hiding blocker')
 						controls.enabled = false;
 						blocker.style.display = '-webkit-box';
 						blocker.style.display = '-moz-box';
@@ -21,7 +25,10 @@ if ( havePointerLock ) {
 						// instructions.style.display = '';
 					}
 				};
+
+
 				var pointerlockerror = function ( event ) {
+          alert("Error with pointer lock navigation. You're screwed. ERRRRRRR-ROAR")
 					// instructions.style.display = '';
 				};
 				// Hook pointer lock state change events
@@ -31,7 +38,9 @@ if ( havePointerLock ) {
 				document.addEventListener( 'pointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
-				instructions.addEventListener( 'click', function ( event ) {
+
+
+        instructions.addEventListener( 'click', function ( event ) {
 					instructions.style.display = 'none';
 					// Ask the browser to lock the pointer
 					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
@@ -51,6 +60,30 @@ if ( havePointerLock ) {
 						element.requestPointerLock();
 					}
 				}, false );
+
+        restartPointer.addEventListener( 'click', function ( event ) {
+          instructions.style.display = 'none';
+          // Ask the browser to lock the pointer
+          element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+          if ( /Firefox/i.test( navigator.userAgent ) ) {
+            var fullscreenchange = function ( event ) {
+              if ( document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element ) {
+                document.removeEventListener( 'fullscreenchange', fullscreenchange );
+                document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
+                element.requestPointerLock();
+              }
+            };
+            document.addEventListener( 'fullscreenchange', fullscreenchange, false );
+            document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
+            element.requestFullscreen = element.requestFullscreen || element.mozRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen;
+            element.requestFullscreen();
+          } else {
+            element.requestPointerLock();
+          }
+        }, false );
+
+
+
 
       } else {
 				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
@@ -83,7 +116,7 @@ function init() {
         alpha: false
             // antialias: true
     });
-    renderer.setSize(window.innerWidth, 600);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     // renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
     renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -106,7 +139,7 @@ function init() {
     renderer.domElement.id = "three-scene";
 
     effect = new THREE.AsciiEffect( renderer );
-    effect.setSize(window.innerWidth, 600);
+    effect.setSize(window.innerWidth, window.innerHeight);
     // container.appendChild( effect.domElement );
 
 
@@ -508,8 +541,8 @@ function onResize(e) {
     camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
-        renderer.setSize( window.innerWidth, 600);
-        	effect.setSize( window.innerWidth, 600);
+        renderer.setSize( window.innerWidth, window.innerHeight);
+        	effect.setSize( window.innerWidth, window.innerHeight);
 }
 
 function addHelpers(grid_width, dims, light_name) {

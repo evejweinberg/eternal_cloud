@@ -19,6 +19,10 @@ h2{
 	color: pink;
 }
 
+.blue{
+	color: #009fc6;
+}
+
 p{
 	font-size: 20px;
 }
@@ -63,7 +67,7 @@ p{
 	padding		: 5px;
 }
 
-#container{
+#container-for-camera{
 	z-index: -20;
 	position: absolute;
 }

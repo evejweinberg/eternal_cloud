@@ -13,9 +13,9 @@
 		<script src="js/three.js/Detector.js"></script>
 		<script src="js/three.js/Stats.js"></script>
 
-		<script src="js/threex/THREEx.screenshot.js"></script>
+		<!-- <script src="js/threex/THREEx.screenshot.js"></script> -->
 		<!-- <script src="js/threex/THREEx.FullScreen.js"></script> -->
-		<script src="js/threex/THREEx.WindowResize.js"></script>
+		<!-- <script src="js/threex/THREEx.WindowResize.js"></script> -->
 		<script src="js/three.js/TrackballControls.js"></script>
 		<script src="js/webcam.js"></script>
 
@@ -31,8 +31,8 @@
 	<!-- <button type="button" class="btn btn-lg btn-pill btn-primary">Primary</button> -->
 
 
-	<div id="my_camera"></div>
-	<div id="container"></div>
+	<div id="my_camera" style='display:none'></div>
+	<div id="container-for-camera"></div>
 
 
 	<script type="text/javascript">
@@ -93,7 +93,7 @@
 			}
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			renderer.setClearColorHex( 0x000000, 0 );
-			document.getElementById('container').appendChild(renderer.domElement);
+			document.getElementById('container-for-camera').appendChild(renderer.domElement);
 
 			// add Stats.js - https://github.com/mrdoob/stats.js
 			stats = new Stats();
@@ -113,7 +113,7 @@
 			// cameraControls	= new THREE.TrackballControls( camera )
 
 			// transparently support window resize
-			THREEx.WindowResize.bind(renderer, camera);
+			// THREEx.WindowResize.bind(renderer, camera);
 			// allow 'p' to make screenshot
 			// THREEx.Screenshot.bindKey(renderer);
 			// allow 'f' to go fullscreen where this feature is supported
@@ -147,6 +147,9 @@
 
 
 			video_geo = new THREE.BoxGeometry( 30,30,30 );
+			//top rad,  bottom rad, depth, something
+			// video_geo = new THREE.CylinderGeometry(36,36,36,6)
+			// THREE.CylinderGeometry(6,6, .6, 6)
 			video_mesh = new THREE.Mesh( video_geo, video_mat );
 			scene.add(video_mesh);
 
@@ -282,10 +285,11 @@
 
 
 
-	<div class="container">
+	<div class="container-webcamStage">
 		<div class="row">
+			<h1 class="blue">MEMBERSHIP: STEP 1</h1>
+			<h2 class="blue">We need your <strike>data</strike>  photo</h2>
 			<div class="col-md-3">
-				<h1>Become a Member</h1>
 				<!-- validate this form!, look at bottom of this html -->
 				<form method="post" action="/api/create" id="myForm" enctype="multipart/form-data">
 

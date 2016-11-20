@@ -1,0 +1,95 @@
+.header{
+  background-color: #009fc6;
+  color: white;
+  padding-top: 1px;
+  padding-bottom: 36px;
+
+}
+
+#my_camera{
+	position: absolute;
+	top:0px;
+	right:0px;
+	/*margin: auto;*/
+}
+
+.progress{
+  position: absolute;
+  left:10%;
+  width:80%;
+}
+
+#done{
+  font-size: 40px;
+}
+
+#about-side-info {
+    width: 300px;
+    height: 100%;
+    line-height: 27px;
+    top: 0px;
+    position: absolute;
+    right: -500px;
+    background-color: black;
+    color: white;
+    padding: 8px;
+    z-index: 1900;
+    background-image: url('../img/bg.gif');
+
+}
+
+#nav-toggleB {
+    position: fixed;
+    right: 0px;
+    z-index: 2000;
+    top: 7px;
+    width: 7px;
+    height: 39px;
+    /*position: absolute;
+    left: 50%;
+    top: 50%;*/
+}
+
+#nav-toggleB {
+    cursor: pointer;
+    padding: 10px 35px 16px 0px;
+}
+
+#nav-toggleB span, #nav-toggleB span:before, #nav-toggleB span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 3px;
+    width: 35px;
+    background: white;
+    position: absolute;
+    display: block;
+    content: '';
+}
+
+#nav-toggleB span:before {
+    top: -10px;
+}
+
+#nav-toggleB span:after {
+    bottom: -10px;
+}
+
+#nav-toggleB span, #nav-toggleB span:before, #nav-toggleB span:after {
+    transition: all 500ms ease-in-out;
+}
+
+#nav-toggleB.active span {
+    background-color: transparent;
+}
+
+#nav-toggleB.active span:before, #nav-toggleB.active span:after {
+    top: 0;
+}
+
+#nav-toggleB.active span:before {
+    transform: rotate(45deg);
+}
+
+#nav-toggleB.active span:after {
+    transform: rotate(-45deg);
+}

@@ -71,12 +71,25 @@ var upload = multer({
 
 
 router.get('/', function(req, res) {
-  res.redirect('/first')
+   res.render('start.html')
  });
 
-router.get('/first', function(req,res){
-   res.render('start.html')
+ router.get('/login', function(req,res){
+   // by passing in pageData as the 2nd argument below
+   // we are able to print values on the page
+   // we will use this to tell our page which section to go to
+   // see the HTML file; it will read section1 and direct accordingly
+   var pageData = {
+     desiredSection: "about-side-info",
+   }
+
+   res.render('login.html', pageData)
  })
+
+
+ // router.get('/login', function(req,res){
+ //   res.render('login.html')
+ // })
 
 
 router.get('/second', function(req, res) {
@@ -375,9 +388,7 @@ router.get('/add-person', function(req,res){
   res.render('add.html')
 })
 
-router.get('/login', function(req,res){
-  res.render('login.html')
-})
+
 
 router.get('/candidate', function(req,res){
   res.render('candidate.html')

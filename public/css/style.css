@@ -1,3 +1,10 @@
+#pink {
+  color: #f68f83; }
+
+#rect {
+  z-index: 1000;
+  text-align: center; }
+
 #date {
   position: absolute;
   color: #009fc6;
@@ -78,7 +85,7 @@ mark {
   width: 5%;
   float: right;
   display: inline-block;
-  margin-right: 14px;
+  margin-right: 0px;
   vertical-align: middle; }
 
 #vide-2 {
@@ -178,7 +185,8 @@ p {
   color: #009fc6;
   margin: auto;
   text-align: center;
-  margin: 5px; }
+  margin: 5px;
+  white-space: pre; }
 
 html,
 body {
