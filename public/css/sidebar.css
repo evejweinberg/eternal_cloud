@@ -30,7 +30,7 @@
     top: 0px;
     position: absolute;
     right: -500px;
-    background-color: black;
+    /*background-color: black;*/
     color: white;
     padding: 8px;
     z-index: 1900;

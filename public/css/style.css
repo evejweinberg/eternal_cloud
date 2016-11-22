@@ -15,7 +15,19 @@ h2 {
   color: #b9a0b1; }
 
 #canvasBox {
-  overflow: hidden; }
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; }
+
+canvas {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%; }
 
 #image-cursor {
   position: absolute;
@@ -79,7 +91,8 @@ mark {
 
 .tagline-holder {
   position: relative;
-  top: -10%; }
+  top: -10%;
+  z-index: 500; }
 
 #audio-toggle {
   width: 5%;
@@ -197,7 +210,9 @@ body {
   background-color: white;
   margin: 0;
   font-family: "Rubik", sans-serif;
-  color: #f68f83; }
+  color: #f68f83;
+  overflow: hidden;
+  padding: 0; }
 
 #container {
   width: 100%;

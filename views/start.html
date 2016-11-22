@@ -18,6 +18,15 @@
     <link rel="stylesheet" href="css/section2.css">
 
     <link rel="stylesheet" href="css/sidebar.css">
+
+    <style media="screen">
+#rect{
+  z-index: 3000;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+    </style>
 </head>
 
 <body>
@@ -94,10 +103,6 @@
 
 
 
-    <div id="blocker">
-      <div class="rect">
-        <!-- CLICK HERE TO NAVIGATE SCENE -->
-      </div>
 
 
 
@@ -111,20 +116,19 @@
               <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first" id="explore">
                   EXPLORE </div>
           </div>
-  				<!-- <span style="font-size:40px; color:red">Click to play</span>
-  				<br />
-  				(W, A, S, D = Move, SPACE = Jump, MOUSE = Look around) -->
   			</div>
 
-  	  	</div>
+  	  	<!-- </div> -->
 
  <div id="hiddenDiv" style="display:none">{{desiredSection}}</div>
         <!-- <a id="nav-toggleB" href="#"><span></span></a> -->
         <div id="about-side-info">
 
-          <iframe id="login-embed" src="/login" frameBorder="0"></iframe>
-        </div>
-          <!-- <div class="header">
+          <!-- <iframe id="login-embed" src="/login" frameBorder="0">
+
+          </iframe> -->
+
+          <div class="header">
               <h1 class="centered-type">Current Candidate</h1>
               <div class="progress">
               <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
@@ -133,7 +137,7 @@
               </div>
             </div>
 
-          </div> -->
+          </div>
 
          <!-- <div id="my_camera"></div>
           <div id="container-for-camera"></div>
@@ -141,7 +145,7 @@
             <div class="row">
               <h1 class="blue">MEMBERSHIP: STEP 1</h1>
               <h2 class="blue">We need your <strike>data</strike>  photo</h2>
-              <div class="col-md-3">
+              <div class="col-md-3"> -->
 
                 <form method="post" action="/api/create" id="myForm" enctype="multipart/form-data">
 
@@ -153,22 +157,16 @@
 
 
                  </form>
-              </div>
-            </div>
-          </div>  -->
-
-          <!-- </div> -->
 
 
 
-          <div class="container" id="full-form" style="display:none">
+          <div class="container" id="full-form">
 
         			<div class="col-xs-6 col-sm-2 col-md-3">
                   <button type="submit" onclick="Done()" id="done" class="buttons" style="display:none">DONE</button>
 
                 <form id="ActivismForm" style="display:none">
                             <div class="form-group">
-
                                   <h2>ACTIVISM</h2>
                                   <p>Name one organization or cause that you have donated time or money to, in the last year?
                                   </p>
@@ -218,7 +216,7 @@
          </div>
         </div>
 
-
+  </div>
 
     <!-- //three js to be added here -->
     <div id="canvasBox"></div>
@@ -264,16 +262,16 @@
     <!-- //green sock and jquery -->
     <script src="js/lib/TweenMax.min.js"></script>
 
+    <script src="js/webcam.js"></script>
 
     <!-- //my JS stuff -->
     <script src="js/globalVars.js"></script>
     <script src="js/globalFunctions.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/scene1.js"></script>
     <script src="js/pusherStuff.js"></script>
     <script src="js/popUp.js"></script>
     <script src="js/eventHandlers.js"></script>
-    <script src="js/webcam.js"></script>
-    <!-- <script src="js/sidebar.js"></script> -->
 
     <!-- //add bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>

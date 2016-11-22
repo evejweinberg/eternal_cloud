@@ -87,9 +87,9 @@ router.get('/', function(req, res) {
  })
 
 
- // router.get('/login', function(req,res){
- //   res.render('login.html')
- // })
+ router.get('/allScenes', function(req,res){
+   res.render('allScenes.html')
+ })
 
 
 router.get('/second', function(req, res) {

@@ -28,7 +28,8 @@ var camera, scene;
 var controlsEnabled = false;
 var blocker = document.getElementById( 'explore' );
 var instructions = document.getElementById( 'instructions' );
-var restartPointer = document.getElementById('blocker')
+var canvasElement = document.getElementById('canvasBox');
+var tooglePointerLock = [instructions, canvasElement];
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
 var controlsEnabled = false;
@@ -111,6 +112,13 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
 
 today = 'TODAY: ' +monthNames[mm]+' '+dd+', '+2045 ;
 
+var sideBarScene1 = false;
 
-//webcam and loginPrompt
-var ortho_width = 1920, ortho_height = 1080, ortho_near = -1, ortho_far = 1;
+
+
+
+
+
+
+
+// document.getElementById("login-embed").contentWindow.document.createElement('form');

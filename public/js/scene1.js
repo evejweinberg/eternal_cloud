@@ -11,17 +11,19 @@ if ( havePointerLock ) {
 
 
 				var pointerlockchange = function ( event ) {
+          //This part checks wheter we have pointer lock or not
 					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
 						controlsEnabled = true;
 						controls.enabled = true;
             //hide blocker
-						blocker.style.display = 'none';
+
+            instructions.style.display = 'none';
 					} else {
             console.log('hiding blocker')
 						controls.enabled = false;
-						blocker.style.display = '-webkit-box';
-						blocker.style.display = '-moz-box';
-						blocker.style.display = 'box';
+
+
+
 						// instructions.style.display = '';
 					}
 				};
@@ -39,9 +41,10 @@ if ( havePointerLock ) {
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
+for(var i = 0; i < tooglePointerLock.length; i++){
 
-        instructions.addEventListener( 'click', function ( event ) {
-					instructions.style.display = 'none';
+        tooglePointerLock[i].addEventListener( 'click', function ( event ) {
+
 					// Ask the browser to lock the pointer
 					element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
 					if ( /Firefox/i.test( navigator.userAgent ) ) {
@@ -60,31 +63,8 @@ if ( havePointerLock ) {
 						element.requestPointerLock();
 					}
 				}, false );
-
-        restartPointer.addEventListener( 'click', function ( event ) {
-          instructions.style.display = 'none';
-          // Ask the browser to lock the pointer
-          element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
-          if ( /Firefox/i.test( navigator.userAgent ) ) {
-            var fullscreenchange = function ( event ) {
-              if ( document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element ) {
-                document.removeEventListener( 'fullscreenchange', fullscreenchange );
-                document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
-                element.requestPointerLock();
-              }
-            };
-            document.addEventListener( 'fullscreenchange', fullscreenchange, false );
-            document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
-            element.requestFullscreen = element.requestFullscreen || element.mozRequestFullscreen || element.mozRequestFullScreen || element.webkitRequestFullscreen;
-            element.requestFullscreen();
-          } else {
-            element.requestPointerLock();
-          }
-        }, false );
-
-
-
-
+}
+//if /else pointer lock is not ready yet
       } else {
 				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 			}
@@ -312,14 +292,14 @@ function init() {
 
         drawServers(6,26)
         drawServers(10,40)
-        drawServers(13,50)
+        // drawServers(13,50)
         drawServers(16,63)
-        drawServers(19,90)
+        drawServers(19,70)
         // drawServers(23,90)
-        drawServers(26,80)
-        drawServers(30,160)
+        // drawServers(26,80)
+        // drawServers(30,100)
         // drawServers(33,130)
-        drawServers(36,220)
+        drawServers(36,160)
 
 
 
@@ -366,11 +346,10 @@ scene.add(Hexes[i])
     addLights()
     camera.parent.rotation.x = .2
 
-    // addHelpers(1000, 100, [light,lightA,directionalLight,directionalLightR,directionalLight2])
 
 
 
-
+initSideBar();
 
 }
 //init over
@@ -386,9 +365,14 @@ function animate(timestamp) {
 
     requestAnimationFrame(animate);
 
-  //  counter ++;
+if (sideBarScene1){
+    if(videoWC.readyState === videoWC.HAVE_ENOUGH_DATA) { video_tex.needsUpdate = true; }
+    // rendererWC.render( sceneWC, cameraWC );
+    renderer.render( sceneWC, cameraWC );
 
-    // mainVidLady.position.y = counter;
+  }
+
+
 
 
 

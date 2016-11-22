@@ -1,10 +1,10 @@
-// document.getElementById("button-first").
+TweenMax.to(document.getElementById('about-side-info'),3,{right:0,ease:Expo.easeOut})
 
 
 function mDown(obj) {
     obj.style.backgroundColor = pink;
     obj.innerHTML = "Release Me";
-    startExperience()
+    scene1()
 }
 
 function mUp(obj) {
@@ -76,6 +76,7 @@ function Scene4(data){
 
 
 function SceneThree(){
+  
   showSideBar()
   TweenMax.to('#three-scene',2,{height: 900, ease: Strong.easeInOut,onComplete: function(){
     //remove ladies
@@ -122,12 +123,11 @@ function ThirdScene(){
   loginPrompt = setInterval(newVidLady, 3000)
 }
 
-function startExperience(){
+function scene1(){
+  canvasElement.style.pointerEvents = 'all'
   var footer = document.getElementById('footer')
     currentVideo = video1;
-  //show login button
-  // document.getElementById('login').style.display = "block";
-  //turn first video on
+
   playFirstvideo = true;
   // tween top of 3js scene down
   TweenMax.to(footer,1,{bottom:0, ease:Strong.easeIn})

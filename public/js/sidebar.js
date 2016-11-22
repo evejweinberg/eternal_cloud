@@ -1,7 +1,8 @@
-var stats, sceneWC, rendererWC, composer;
+var videoWC, sceneWC, rendererWC, composer;
 var cameraWC, cameraControls;
 var globalBlob = null;
-  console.log('ready with sidebar.js')
+var image_tex, buffer, pre_video_tex, video_tex, video_mat, video_mesh, video_geo, buffer_mat, buffer_geo, buffer_mesh;
+
 
 
 //if we wanted to toggle the side to slide out on click, but that DOM element is currently hidden
@@ -22,35 +23,11 @@ var globalBlob = null;
 
 //instead we slide it out here
 function showSideBar(){
-  get_webcam();
+  sideBarScene1 = true;
   TweenMax.to(document.getElementById('about-side-info'),3,{right:0,ease:Expo.easeOut})
 }
 
 
-function get_webcam(){
-video = document.createElement('video');
-video.width = ortho_width;
-video.height = ortho_width;
-video.autoplay = true;
-video.muted = true; //- to prevent create feedback from mic input ***
-video_tex = new THREE.Texture( video );
-    video_tex.minFilter = THREE.LinearFilter //- to use non powers of two image
-
-    video_mat = new THREE.MeshPhongMaterial(
-      {map: video_tex}
-
-    );
-if(navigator.getUserMedia){
-  navigator.getUserMedia({ audio: true, video:{ width: ortho_width, height: ortho_height, facingMode: { exact: "environment" } } }, function(stream){
-    video.src = window.URL.createObjectURL(stream);
-    video.play();
-  }, function(err){
-    console.log('failed to get a steram : ', err );
-  });
-} else {
-  console.log('user media is not supported');
-}
-};
 
 
 function take_snapshot() {
@@ -83,12 +60,12 @@ function take_snapshot() {
 
 
 var stage = 0;
-var image_tex, videoWC, buffer, pre_video_tex, video_tex, video_mat, video_mesh, video_geo, buffer_mat, buffer_geo, buffer_mesh;
 var newImage;
 var ortho_width = 1920, ortho_height = 1080, ortho_near = -1, ortho_far = 1;
 
-var get_webcam = function(){
+function get_webcam(){
 videoWC = document.createElement('video');
+console.log(videoWC)
 videoWC.width = ortho_width;
 videoWC.height = ortho_width;
 videoWC.autoplay = true;
@@ -101,7 +78,7 @@ video_tex = new THREE.Texture( videoWC );
 
     );
 if(navigator.getUserMedia){
-  navigator.getUserMedia({ audio: true, video:{ width: ortho_width, height: ortho_height, facingMode: { exact: "environment" } } }, function(stream){
+  navigator.getUserMedia({ audio: true, videoWC:{ width: ortho_width, height: ortho_height, facingMode: { exact: "environment" } } }, function(stream){
     videoWC.src = window.URL.createObjectURL(stream);
     videoWC.play();
   }, function(err){
@@ -110,43 +87,44 @@ if(navigator.getUserMedia){
 } else {
   console.log('user media is not supported');
 }
+console.log('videoWC' , videoWC)
 };
 
 
 
 
 
-  if( !init() )	animate();
+  // if( !init() )	animate();
 
   // init the sceneWC
-  function init(){
-    get_webcam();
+  function initSideBar(){
 
-    if( Detector.webgl ){
-      rendererWC = new THREE.WebGLRenderer({
-        antialias		: true,	// to get smoother output
-        alpha: true,
-        transparent: true,
-        // canvas:document.getElementById("container-for-camera"),
+    get_webcam()
 
-        preserveDrawingBuffer	: true	// to allow screenshot
-      });
-      rendererWC.setClearColor( 0xbbbbbb,0 );
-    }else{
-      Detector.addGetWebGLMessage();
-      return true;
-    }
-    // rendererWC.setSize( window.innerWidth, window.innerHeight );
-    rendererWC.setSize(document.getElementById("container-for-camera").offsetWidth, document.getElementById("container-for-camera").offsetHeight);
+      console.log('ready with sidebar.js')
 
-    // rendererWC.setClearColorHex( 0x000000, 0 );
-    document.getElementById('container-for-camera').appendChild(rendererWC.domElement);
 
-    // add Stats.js - https://github.com/mrdoob/stats.js
-    stats = new Stats();
-    stats.domElement.style.position	= 'absolute';
-    stats.domElement.style.bottom	= '0px';
-    document.body.appendChild( stats.domElement );
+    // if( Detector.webgl ){
+    //   rendererWC = new THREE.WebGLRenderer({
+    //     // antialias		: true,	// to get smoother output
+    //     alpha: true,
+    //     transparent: true,
+    //     // canvas:document.getElementById("container-for-camera"),
+    //
+    //     preserveDrawingBuffer	: true	// to allow screenshot
+    //   });
+    //   rendererWC.setClearColor( 0xbbbbbb,0 );
+    // }else{
+    //   Detector.addGetWebGLMessage();
+    //   return true;
+    // }
+    // // rendererWC.setSize( window.innerWidth, window.innerHeight );
+    // rendererWC.setSize(document.getElementById("container-for-camera").offsetWidth, document.getElementById("container-for-camera").offsetHeight);
+    //
+    // // rendererWC.setClearColorHex( 0x000000, 0 );
+    // document.getElementById('container-for-camera').appendChild(rendererWC.domElement);
+
+
 
     // create a sceneWC
     sceneWC = new THREE.Scene();
@@ -176,32 +154,6 @@ if(navigator.getUserMedia){
     var video_mesh = new THREE.Mesh( video_geo, video_mat );
     sceneWC.add(video_mesh);
 
+
+
   }
-
-  // animation loop
-  function animate() {
-    if(videoWC.readyState === videoWC.HAVE_ENOUGH_DATA) { video_tex.needsUpdate = true; }
-
-    requestAnimationFrame( animate );
-    render();
-    stats.update();
-  } //animate over
-
-  // render the sceneWC
-  function render() {
-    // variable which is increase by Math.PI every seconds - usefull for animation
-    var PIseconds	= Date.now() * Math.PI;
-
-    // update camera controls
-    // cameraControls.update();
-
-    // animation of all objects
-    // sceneWC.traverse(function(object3d, i){
-    //   if( object3d instanceof THREE.Mesh === false )	return
-    //   object3d.rotation.y = PIseconds*0.0001 * (i % 2 ? 1 : -1);
-    //   object3d.rotation.x = PIseconds*0.0001 * (i % 2 ? 1 : -1);
-    // })
-
-    // render the sceneWC
-    rendererWC.render( sceneWC, camera );
-  }//render over
