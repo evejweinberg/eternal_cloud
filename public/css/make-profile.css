@@ -24,12 +24,30 @@ p{
 }
 
 #candidate-gif{
-	width: 220px;
+	width: 160px;
 	margin: auto;
+	right: 0px;
+	bottom:5px;
 	position: absolute;
-	left: 50%;
-	top: 53%;
-	transform: translateX(-50%);
+
+}
+#candidate-gif-2{
+	width: 160px;
+	margin: auto;
+	left: 0px;
+	bottom:5px;
+	position: absolute;
+
+}
+
+#botton-button{
+	position: absolute;
+	bottom: 10%;
+	left: 40%;
+}
+
+.blue{
+	/*color: #009fc6;*/
 }
 
 .centered-type{
@@ -61,6 +79,12 @@ p{
 	bottom		: 0px;
 	right		: 5px;
 	padding		: 5px;
+}
+
+.header{
+	background-color: #009fc6;
+	color: white;
+	text-align: center;
 }
 
 #container{

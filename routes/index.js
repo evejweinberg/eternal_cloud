@@ -88,6 +88,11 @@ router.get('/pre-profile', function(req,res){
   res.render('pre-profile.html')
 })
 
+//staging front end website
+router.get('/form-score', function(req,res){
+  res.render('form-score.html')
+})
+
 router.get('/getKey', function(req,res){
   var theKey = process.env.pusher_key
   res.send(theKey)
@@ -267,7 +272,7 @@ router.post('/api/create', function(req,res){
         message: err
       }
       // return res.json(err)
-      res.redirect('/candidate')
+      res.redirect('/form-score')
       //redirect /third to /candidate-solo
     }
 

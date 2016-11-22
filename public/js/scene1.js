@@ -235,7 +235,6 @@ function init() {
         });
 
         var geometry = new THREE.SphereGeometry(340, 32, 32);
-
         var skysphere = new THREE.Mesh(geometry, material);
         scene.add(skysphere);
 
@@ -277,16 +276,16 @@ function init() {
             }
         })
 
-        drawServers(6,26)
-        drawServers(10,40)
-        drawServers(13,50)
-        drawServers(16,63)
-        drawServers(19,90)
+        drawServers(6,24)
+        drawServers(10,30)
+        drawServers(13,47)
+        // drawServers(16,63)
+        drawServers(19,80)
         // drawServers(23,90)
-        drawServers(26,80)
-        drawServers(30,160)
+        drawServers(26,50)
+        // drawServers(30,160)
         // drawServers(33,130)
-        drawServers(36,220)
+        drawServers(36,170)
 
 
 
@@ -477,28 +476,28 @@ for (var i=0;i<6;i++){
 
 
 
-if (asciiOn){
-  // console.log('ascii is on')
-
-//gets hit onnce
-  if (switchedYet == false){
-
-    container.appendChild( effect.domElement )
-    container.removeChild( renderer.domElement )
-    switchedYet = true
-  }
-
-  if (switchBackfromAscii){
-    container.removeChild( effect.domElement )
-    container.appendChild( renderer.domElement )
-  }
-
-
-    effect.render( scene, camera );
-    } else {
+// if (asciiOn){
+//   // console.log('ascii is on')
+//
+// //gets hit onnce
+//   if (switchedYet == false){
+//
+//     container.appendChild( effect.domElement )
+//     container.removeChild( renderer.domElement )
+//     switchedYet = true
+//   }
+//
+//   if (switchBackfromAscii){
+//     container.removeChild( effect.domElement )
+//     container.appendChild( renderer.domElement )
+//   }
+//
+//
+//     effect.render( scene, camera );
+//     } else {
 
     renderer.render(scene, camera);
-    }
+    // }
 
 }
 
