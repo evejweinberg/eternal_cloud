@@ -2,12 +2,38 @@ $border-rad: 20px;
 $blue: #009fc6;
 $pink: #f68f83;
 $pink-lgt: #ffbdb8;
-$yel-lgt: #ffe771;
+$yel-lgt: #fff2bd;
 $mint: #a8e1d1;
 $purple: #b9a0b1;
+$baby-blue: #c0f8fd;
 $font-main: 'Rubik', sans-serif;
 $font-size-lrg: 80px;
 $font-size-medlrg: 40px;
+
+
+.activism-bg{
+  background-color: white;
+  color: $blue !important;
+}
+
+.intelligence-bg{
+  background-color: $purple;
+  color: white !important;
+}
+
+.green-bg{
+  background-color: $baby-blue;
+  color: $blue !important;
+}
+
+.philanthropy-bg{
+  background-color: $yel-lgt;
+  color: $purple !important;
+}
+
+
+
+
 
 #pink{
   color: $pink-lgt;
@@ -19,9 +45,7 @@ $font-size-medlrg: 40px;
   text-align: center;
   transform: translateX(-85px);
 }
-h2{
-  color: $purple;
-}
+
 #canvasBox{
   overflow:hidden;
 }
@@ -147,9 +171,6 @@ vertical-align: middle;
     height: 10%;
 }
 
-p{
-  color: $pink;
-}
 
 #tagline{
   position: relative;

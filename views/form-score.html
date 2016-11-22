@@ -40,21 +40,9 @@
   <link href="css/make-profile.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style media="screen">
-  .grid-item {
-    background: white;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 5px;
-    max-width: 200px;
-  }
 
-  h2 {
-    color: #b9a0b1;
-  }
 
-  p {
-    color: #009fc6;
-  }
+
 
   .container {
     position: relative;
@@ -90,12 +78,14 @@
     -webkit-column-break-inside: avoid;
     padding: 5px;
     min-width: 100px;
+    border-radius: 10px;
+    margin: 10px;
   }
 
   .masonry-layout__panel-content {
     padding: 10px;
     border-radius: 10px;
-    background-color: white;
+
   }
 
   .FB-findout {
@@ -106,6 +96,8 @@
     right: 0px;
     text-align: right;
   }
+
+
   </style>
 </head>
 
@@ -125,7 +117,7 @@
 
   <div class="header">
     <h1 class="centered-type">GET HUMANITARIAN SCORE</h1>
-    <h2>You have answered <span id="num-answered">0</span> / 26
+    <h2>MINIMUM: <span id="num-answered">0</span> / 12
 questions</h2>
     <img src="../img/candidate.gif" id="candidate-gif" alt="" style="fill:white">
   <div class="FB-findout">
@@ -143,23 +135,27 @@ questions</h2>
 
 
   <div class="masonry-layout">
-    <div class="masonry-layout__panel">
+
+
+    <div class="masonry-layout__panel philanthropy-bg">
       <div class="masonry-layout__panel-content">
-        <form id="candidateForm" name="candidateForm">
-          <div class="form-group">
+        <form id="percentageForm" name="percentageForm">
+          <!-- <div class="form-group"> -->
             <h2>PHILANTHROPY</h2>
             <p>Perentage of annual income you donate:</p>
             <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control"
-              id="philanthropy" placeholder="10" name="philanthropy">
-          </div>
+              id="percentIncome" placeholder="10" name="percentIncome">
+          <!-- </div> -->
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
       </div>
     </div>
-    <div class="masonry-layout__panel">
+
+
+    <div class="masonry-layout__panel intelligence-bg">
       <div class="masonry-layout__panel-content">
         <form id="IntelligenceForm" name="IntelligenceForm">
-          <div class="form-group">
+          <!-- <div class="form-group"> -->
             <h2>INTELLIGENCE</h2>
             <p>enter github handle</p>
             <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
@@ -167,12 +163,12 @@ questions</h2>
             <!-- //how can I make something else do the submit -->
             <button type="submit" class="btn btn-default">I Don't have a github
             </button>
-          </div>
+          <!-- </div> -->
         </form>
 
       </div>
     </div>
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel philanthropy-bg">
       <div class="masonry-layout__panel-content">
         <form id="candidateForm" name="candidateForm">
           <div class="form-group">
@@ -185,7 +181,7 @@ questions</h2>
         </form>
       </div>
     </div>
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel green-bg">
       <div class="masonry-layout__panel-content">
         <form id="candidateForm" name="candidateForm">
           <div class="form-group">
@@ -198,7 +194,7 @@ questions</h2>
       </div>
     </div>
 
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel green-bg">
       <div class="masonry-layout__panel-content">
         <form id="CareerForm" name="CareerForm">
           <div class="form-group">
@@ -216,13 +212,13 @@ questions</h2>
 
 
 
-    <div class="masonry-layout__panel">
+    <div class="intelligence-bg masonry-layout__panel">
       <div class="masonry-layout__panel-content">
         <form id="IntelligenceForm" name="IntelligenceForm">
           <div class="form-group">
             <h2>INTELLIGENCE</h2>
             <p>Highest education recieved</p>
-            <input type="text" class="form-control" id="education" placeholder="" name="education">
+            <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel">
             <button type="submit" class="btn btn-default">Submit</button>
             <!-- //how can I make something else do the submit -->
           </div>
@@ -232,7 +228,7 @@ questions</h2>
 
 
 
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel philanthropy-bg">
       <div class="masonry-layout__panel-content">
         <form id="" name="">
 
@@ -245,7 +241,7 @@ questions</h2>
       </div>
     </div>
 
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel philanthropy-bg">
       <div class="masonry-layout__panel-content">
         <form id="" name="">
 
@@ -259,7 +255,7 @@ questions</h2>
 
 
 
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel activism-bg">
       <div class="masonry-layout__panel-content">
         <form id="" name="">
 
@@ -276,7 +272,7 @@ questions</h2>
 
 
 
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel green-bg">
       <div class="masonry-layout__panel-content">
         <form id="" name="">
 
@@ -323,6 +319,39 @@ questions</h2>
 
 
   </div>
+
+
+  <script type="text/javascript">
+  jQuery("#percentageForm").submit(function(e){
+
+    jQuery.ajax({
+    	url : '/api/update/'+personId,
+    	dataType : 'json',
+    	type : 'POST',
+    	// we send the data in a data object (with key/value pairs)
+    	data : {
+    		percentIncome: percentIncome,
+    	},
+    	success : function(response){
+  	  		// success
+          console.log('success in posting percentage')
+  	  		console.log(response);
+  	  
+    	},
+    	error : function(err){
+    		// do error checking
+    		alert("something went wrong");
+    		console.error(err);
+    	}
+    });
+
+    // prevents the form from submitting normally
+    e.preventDefault();
+    return false;
+
+  })
+
+  </script>
 
 
 
