@@ -273,7 +273,6 @@ router.post('/api/create', function(req,res){
       }
       // return res.json(err)
       res.redirect('/form-score')
-      //redirect /third to /candidate-solo
     }
 
     var jsonData = {

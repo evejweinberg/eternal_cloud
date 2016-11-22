@@ -27,7 +27,9 @@ var cube;
 var camera, scene;
 var controlsEnabled = false;
 var blocker = document.getElementById( 'explore' );
+var canvasElement = document.getElementById('canvasBox');
 var instructions = document.getElementById( 'instructions' );
+var tooglePointerLock = [instructions, canvasElement];
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
 var controlsEnabled = false;

@@ -31,8 +31,8 @@ document.getElementById('your-value').addEventListener('click', function(){
 })
 
 window.addEventListener("load", function(){
-  secondScreen = window.open('/pre-profile', "loginScreen", "width=300,height=700,scrollbars=1,status=1")
-  thirdScreen = window.open('/third', "thirdScreen", "width=500,height=300,scrollbars=1,status=1")
+  secondScreen = window.open('/pre-profile', "loginScreen", "width=500,height=700,scrollbars=1,status=1")
+  thirdScreen = window.open('/third', "thirdScreen", "width=500,height=700,scrollbars=1,status=1")
   document.getElementById('date').innerHTML = today
 
 //   setTimeout( function() {
@@ -73,26 +73,18 @@ function LoginPressed(){
     for (i in allLadies){
       scene.remove(allLadies[i])
     }
-    console.log('clearing interval')
+    // console.log('clearing interval')
     clearInterval(loginPrompt)
-    asciiOn = true;
+    // asciiOn = true;
     scene3triggered = true;
-
     document.getElementById('access-score').style.display = 'block';
-    document.body.style.backgroundColor = "black";
-
-    // thirdScreen.location.href="/candidate-solo"
     secondScreen.location.href="/login"
   }
   })
 
 
 
-//change this URL to be
-  // https://itp-eve.herokuapp.com/pre-profile
-  //https://itp-eve.herokuapp.com/login
 
-  // console.log('was login pressed already??')
   for (var i=0;i<10;i++){
 
     setInterval(popUp('window' + windowName,window.innerWidth-(i*80),i*80),150)

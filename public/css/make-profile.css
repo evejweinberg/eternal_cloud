@@ -31,6 +31,12 @@ p{
 	position: absolute;
 
 }
+
+#score-update{
+	position: absolute;
+	left:45%;
+	bottom: 0px;
+}
 #candidate-gif-2{
 	width: 160px;
 	margin: auto;

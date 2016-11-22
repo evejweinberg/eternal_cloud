@@ -96,10 +96,10 @@
 			document.getElementById('container').appendChild(renderer.domElement);
 
 			// add Stats.js - https://github.com/mrdoob/stats.js
-			stats = new Stats();
-			stats.domElement.style.position	= 'absolute';
-			stats.domElement.style.bottom	= '0px';
-			document.body.appendChild( stats.domElement );
+			// stats = new Stats();
+			// stats.domElement.style.position	= 'absolute';
+			// stats.domElement.style.bottom	= '0px';
+			// document.body.appendChild( stats.domElement );
 
 			// create a scene
 			scene = new THREE.Scene();
@@ -158,7 +158,7 @@
 
 			requestAnimationFrame( animate );
 			render();
-			stats.update();
+			// stats.update();
 		} //animate over
 
 		// render the scene
@@ -256,7 +256,7 @@
 						//change it on both sides if you change the string 'ok'
 		         if (data.status == 'OK') {
 							 //replace this with a new route
-							  window.location = '/candidate';
+							  window.location = '/form-score';
 						 } else {
 							 console.log('data was not OK')
 						 }
