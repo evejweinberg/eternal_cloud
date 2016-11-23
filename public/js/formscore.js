@@ -2,15 +2,17 @@ var answeredQuestions = 0;
 var answeredQuestionsNum = document.getElementById('num-answered');
 
 function anyFormSubmitted(){
+  //change the front end html to show that they answered a question
   answeredQuestions ++
   answeredQuestionsNum.innerHTML = answeredQuestions
+  //show me that we have a person ID
   var personId = document.getElementById('personId').innerHTML;
   console.log('personID: '+ personId);
 }
 
 
-
-     function processForm( e ){
+//was testing aq form out this way, bc stack overflow suggested it
+function processForm( e ){
 
        var compost = $(".compost:checked").val();
        console.log('compost: ' + compost);
@@ -30,19 +32,18 @@ function anyFormSubmitted(){
          });
 
          e.preventDefault();
-     }
+}
 
 
 
 jQuery("#CompostForm").submit(function(e){
 
-  // prevents the form from submitting normally
-  // e.preventDefault();
   anyFormSubmitted();
-
+  //was testing a form out this way bc Stack overflow suggested it
   processForm( e );
 
 
+  // e.preventDefault();
   // var compost = $(".compost:checked").val();
   // console.log('compost: ' + compost);
 
@@ -75,10 +76,9 @@ jQuery("#CompostForm").submit(function(e){
 
 
 
-
+//this is the way that Sam and I did it in office hours
 jQuery("#percentageForm").submit(function(e){
 
-  // prevents the form from submitting normally
   e.preventDefault();
   anyFormSubmitted();
 
@@ -96,13 +96,11 @@ jQuery("#percentageForm").submit(function(e){
       percentIncome: percentIncome,
     },
     success : function(response){
-        // success
         console.log('success in posting percentage')
         console.log(response);
 
     },
     error : function(err){
-      // do error checking
       alert("something went wrong");
       console.error(err);
     }
@@ -117,12 +115,14 @@ jQuery("#percentageForm").submit(function(e){
 
 
 jQuery("#CareerForm").submit(function(e){
-  console.log('submitted career')
+
+
   e.preventDefault();
   anyFormSubmitted();
 
 
   var career = $(".career:checked").val();
+  console.log('submitted career: '+ career)
 
   jQuery.ajax({
   	url : '/api/update/'+personId,
@@ -136,8 +136,7 @@ jQuery("#CareerForm").submit(function(e){
 	  		// success
         console.log('success in posting career response:');
 	  		console.log(response);
-	  		// now, clear the input fields
-	  		// jQuery("#candidateForm input").val('');
+
   	},
   	error : function(err){
   		// do error checking
@@ -155,14 +154,12 @@ jQuery("#CareerForm").submit(function(e){
 
 jQuery("#ActivismForm").submit(function(e){
 
-  // prevents the form from submitting normally
   e.preventDefault();
-
   anyFormSubmitted();
 
 
-      var activism = $("#activism").val();
-      console.log(activism)
+  var activism = $("#activism").val();
+  console.log(activism)
 
 
   jQuery.ajax({
@@ -171,15 +168,12 @@ jQuery("#ActivismForm").submit(function(e){
   	type : 'POST',
   	// we send the data in a data object (with key/value pairs)
   	data : {
-      //YOU CAN HAVE ERRORS HERE
+      //YOU CAN HAVE ERRORS HERE, its ok to pass something that it's there
   		activism: activism,
   	},
   	success : function(response){
-	  		// success
         console.log('success in posting activism');
 	  		console.log(response);
-	  		// now, clear the input fields
-	  		// jQuery("#candidateForm input").val('');
   	},
   	error : function(err){
   		// do error checking
@@ -228,31 +222,29 @@ jQuery("#IntelligenceForm").submit(function(e){
 })
 
 
-function Done(){
-
-  console.log('done fucntion was called')
-
-  jQuery.ajax({
-  	url : '/api/done',
-  	dataType : 'json',
-  	type : 'POST',
-  	// we send the data in a data object (with key/value pairs)
-  	data : {
-  		done: "yes",
-  	},
-  	success : function(response){
-	  		// success
-        console.log('done with form');
-	  		console.log(response);
-	  		// now, clear the input fields
-	  		// jQuery("#candidateForm input").val('');
-  	},
-  	error : function(err){
-  		// do error checking
-  		alert("something went wrong when hitting DONE button");
-  		console.error(err);
-  	}
-  });
-
-
-}
+// function Done(){
+//   console.log('done fucntion was called')
+//
+//   jQuery.ajax({
+//   	url : '/api/done',
+//   	dataType : 'json',
+//   	type : 'POST',
+//   	// we send the data in a data object (with key/value pairs)
+//   	data : {
+//   		done: "yes",
+//   	},
+//   	success : function(response){
+// 	  		// success
+//         console.log('done with form');
+// 	  		console.log(response);
+// 	  		// now, clear the input fields
+// 	  		// jQuery("#candidateForm input").val('');
+//   	},
+//   	error : function(err){
+//   		// do error checking
+//   		alert("something went wrong when hitting DONE button");
+//   		console.error(err);
+//   	}
+//   });
+//
+// }
