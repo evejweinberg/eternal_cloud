@@ -22,6 +22,12 @@
   border: 10px solid #fcef8a;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
 
+.career-bg {
+  background-color: white;
+  color: #ffc760;
+  border: 10px solid #ffc760;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
+
 #pink {
   color: #ffbdb8; }
 

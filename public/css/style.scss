@@ -1,6 +1,7 @@
 $border-rad: 20px;
 $blue: #009fc6;
 $pink: #f68f83;
+$orange: #ffc760;
 $pink-lgt: #ffbdb8;
 $yel-lgt: #fff2bd;
 $yel: #fcef8a;
@@ -37,6 +38,13 @@ $font-size-medlrg: 40px;
   background-color: white;
   color: $purple ;
     border: 10px solid $yel;
+    box-shadow: 1px 1px 6px rgba(0,0,0,.2);
+}
+
+.career-bg{
+  background-color: white;
+  color: $orange ;
+    border: 10px solid $orange;
     box-shadow: 1px 1px 6px rgba(0,0,0,.2);
 }
 

@@ -8,25 +8,25 @@
   <title>Eternal Cloud Members</title>
 
 
-  <script src="js/three.min.js"></script>
-  <script src="js/three.js/Detector.js"></script>
-  <script src="js/three.js/Stats.js">
+  <script src="/js/three.min.js"></script>
+  <script src="/js/three.js/Detector.js"></script>
+  <script src="/js/three.js/Stats.js">
   </script>
-  <script src="js/three.js/TrackballControls.js">
+  <script src="/js/three.js/TrackballControls.js">
   </script>
-  <script src="js/glitch/CopyShader.js">
+  <script src="/js/glitch/CopyShader.js">
   </script>
-  <script src="js/glitch/DigitalGlitch.js">
+  <script src="/js/glitch/DigitalGlitch.js">
   </script>
-  <script src="js/glitch/EffectComposer.js">
+  <script src="/js/glitch/EffectComposer.js">
   </script>
-  <script src="js/glitch/RenderPass.js">
+  <script src="/js/glitch/RenderPass.js">
   </script>
-  <script src="js/glitch/MaskPass.js">
+  <script src="/js/glitch/MaskPass.js">
   </script>
-  <script src="js/glitch/ShaderPass.js">
+  <script src="/js/glitch/ShaderPass.js">
   </script>
-  <script src="js/glitch/GlitchPass.js">
+  <script src="/js/glitch/GlitchPass.js">
   </script>
   <!-- front end pusher -->
 
@@ -37,8 +37,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <!-- Custom CSS inside CSS folder -->
-  <link href="css/make-profile.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="/css/make-profile.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
   <style media="screen">
 
 
@@ -110,7 +110,7 @@
   <!-- CUSTOM JS look in public>JS -->
 
   <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
-  <script src="js/formscore.js">
+  <script src="/js/formscore.js">
   </script>
 
 
@@ -152,24 +152,33 @@ questions</h2>
     </div>
 
 
-    <div class="masonry-layout__panel intelligence-bg">
-      <div class="masonry-layout__panel-content">
-        <form id="IntelligenceForm" name="IntelligenceForm">
-          <!-- <div class="form-group"> -->
-            <h2>INTELLIGENCE</h2>
-            <p>enter github handle</p>
-            <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
-            <button type="submit" class="btn btn-default">Submit</button>
-            <!-- //how can I make something else do the submit -->
-            <button type="submit" class="btn btn-default">I Don't have a github
-            </button>
-          <!-- </div> -->
-        </form>
 
+
+    <div class="masonry-layout__panel ad-bg">
+      <div class="masonry-layout__panel-content">
+        <form id="CompostForm">
+            <h2>SALVATION OPPORTUNITY</h2>
+            <p>Earn 25 GB by donating to the ACLU right now</p>
+
+          <button type="submit" class="btn btn-default">Donate</button>
+        </form>
       </div>
     </div>
 
 
+    <div class="masonry-layout__panel green-bg">
+      <div class="masonry-layout__panel-content">
+        <form id="CompostForm">
+            <h2>GREEN</h2>
+            <p>Do you compost?</p>
+            <input type="radio" name="compost" class="compost" value="yes"> Yes
+            <br>
+            <input type="radio" name="compost" class="compost" value="no"> No
+            <br>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
 
 
     <div class="masonry-layout__panel philanthropy-bg">
@@ -185,23 +194,12 @@ questions</h2>
         </form>
       </div>
     </div>
-    <div class="masonry-layout__panel green-bg">
-      <div class="masonry-layout__panel-content">
-        <form id="candidateForm" name="candidateForm">
-          <div class="form-group">
-            <h2>GREEN</h2>
-            <p>Do you compost?</p>
-            <input type="text">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-      </div>
-    </div>
 
-    <div class="masonry-layout__panel green-bg">
+    
+
+    <div class="masonry-layout__panel career-bg">
       <div class="masonry-layout__panel-content">
-        <form id="CareerForm" name="CareerForm">
-          <div class="form-group">
+        <form id="CareerForm">
             <h2>CAREER CHOICE</h2>
             <p>Are you a banker?</p>
             <input type="radio" name="career" class="career" value="yes"> Yes
@@ -209,7 +207,6 @@ questions</h2>
             <input type="radio" name="career" class="career" value="no"> No
             <br>
             <button type="submit" class="btn btn-default">Submit</button>
-          </div>
         </form>
       </div>
     </div>
@@ -219,13 +216,10 @@ questions</h2>
     <div class="intelligence-bg masonry-layout__panel">
       <div class="masonry-layout__panel-content">
         <form id="IntelligenceForm" name="IntelligenceForm">
-          <div class="form-group">
             <h2>INTELLIGENCE</h2>
             <p>Highest education recieved</p>
             <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel">
             <button type="submit" class="btn btn-default">Submit</button>
-            <!-- //how can I make something else do the submit -->
-          </div>
         </form>
       </div>
     </div>
@@ -240,6 +234,8 @@ questions</h2>
             Name something you do every day that makes you a good person.
           </p>
 
+          <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel">
+          <button type="submit" class="btn btn-default">Submit</button>
 
         </form>
       </div>
@@ -252,6 +248,9 @@ questions</h2>
           <p>
             What humanitarian score would you give yourself?
           </p>
+          <input type="number" class="form-control" id="educationlevel" placeholder="" name="educationlevel">
+
+          <button type="submit" class="btn btn-default">Submit</button>
 
         </form>
       </div>
@@ -293,20 +292,9 @@ questions</h2>
 
 
 
-    <!-- <div class="masonry-layout__panel">
-      <div class="masonry-layout__panel-content">
-        <form id="" name="">
-
-          <h2>ACTIVISM</h2>
-
-          <button type="submit" class="btn btn-default">Submit</button>
-
-        </form>
-      </div>
-    </div> -->
 
 
-    <div class="masonry-layout__panel">
+    <div class="masonry-layout__panel activism-bg">
       <div class="masonry-layout__panel-content">
         <form id="" name="">
 
@@ -319,46 +307,24 @@ questions</h2>
       </div>
     </div>
 
+    <div class="masonry-layout__panel intelligence-bg">
+      <div class="masonry-layout__panel-content">
+        <form id="IntelligenceForm" name="IntelligenceForm">
+            <h2>INTELLIGENCE</h2>
+            <p>enter github handle</p>
+            <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
+            <button type="submit" class="btn btn-default">Submit</button>
+            <!-- //how can I make something else do the submit -->
+            </button>
+        </form>
+
+      </div>
+    </div>
 
 
-
+    <!-- //hide this but we use in all the ajax -->
+  <div style="display:none" id="personId">{{personId}}</div>
   </div>
-
-
-  <script type="text/javascript">
-  jQuery("#percentageForm").submit(function(e){
-
-    jQuery.ajax({
-    	url : '/api/update/'+personId,
-    	dataType : 'json',
-    	type : 'POST',
-    	// we send the data in a data object (with key/value pairs)
-    	data : {
-    		percentIncome: percentIncome,
-    	},
-    	success : function(response){
-  	  		// success
-          console.log('success in posting percentage')
-  	  		console.log(response);
-
-    	},
-    	error : function(err){
-    		// do error checking
-    		alert("something went wrong");
-    		console.error(err);
-    	}
-    });
-
-    // prevents the form from submitting normally
-    e.preventDefault();
-    return false;
-
-  })
-
-  </script>
-
-
-
 
 
 </body>

@@ -1,49 +1,126 @@
+var answeredQuestions = 0;
+var answeredQuestionsNum = document.getElementById('num-answered');
+
+function anyFormSubmitted(){
+  answeredQuestions ++
+  answeredQuestionsNum.innerHTML = answeredQuestions
+  var personId = document.getElementById('personId').innerHTML;
+  console.log('personID: '+ personId);
+}
 
 
-jQuery("#candidateForm").submit(function(e){
-  console.log('done forst one')
-  $('.progress-bar').attr("style","width:40%");
-// $("#candidateForm").fadeOut()
-$('#CareerForm').fadeIn();
-  var philanthropy = parseInt($('#philanthropy').val());
 
-  jQuery.ajax({
-  	url : '/api/update/'+personId,
-  	dataType : 'json',
-  	type : 'POST',
-  	// we send the data in a data object (with key/value pairs)
-  	data : {
-  		philanthropy: philanthropy,
-  	},
-  	success : function(response){
-	  		// success
-	  		console.log('success in posting');
-	  		// now, clear the input fields
-	  		// jQuery("#candidateForm input").val('');
-  	},
-  	error : function(err){
-  		// do error checking
-  		alert("something went wrong");
-  		console.error(err);
-  	}
-  });
+     function processForm( e ){
+
+       var compost = $(".compost:checked").val();
+       console.log('compost: ' + compost);
+         $.ajax({
+             url: '/api/update/'+personId,
+             dataType: 'json',
+             type: 'post',
+             data: {
+               compost: compost,
+             },
+             success: function( data, textStatus, jQxhr ){
+                 console.log( data );
+             },
+             error: function( jqXhr, textStatus, errorThrown ){
+                 console.log( errorThrown );
+             }
+         });
+
+         e.preventDefault();
+     }
+
+
+
+jQuery("#CompostForm").submit(function(e){
 
   // prevents the form from submitting normally
-  e.preventDefault();
+  // e.preventDefault();
+  anyFormSubmitted();
+
+  processForm( e );
+
+
+  // var compost = $(".compost:checked").val();
+  // console.log('compost: ' + compost);
+
+  // jQuery.ajax({
+  //   url : '/api/update/'+personId,
+  //   dataType : 'json',
+  //   type : 'POST',
+  //   // we send the data in a data object (with key/value pairs)
+  //   data : {
+  //     compost: compost,
+  //   },
+  //   success : function(response){
+  //       // success
+  //       console.log('success in posting percentage')
+  //       console.log(response);
+  //
+  //   },
+  //   error : function(err){
+  //     // do error checking
+  //     alert("something went wrong adding compost");
+  //     console.error(err);
+  //   }
+  // });
+
   return false;
 
 })
 
-//
-// $("#CareerForm").submit(function(e){
-//     return false;
-// });
+
+
+
+
+
+jQuery("#percentageForm").submit(function(e){
+
+  // prevents the form from submitting normally
+  e.preventDefault();
+  anyFormSubmitted();
+
+  var personId = document.getElementById('personId').innerHTML;
+  console.log(personId);
+  var percentIncome = document.getElementById('percentIncome').value;
+  console.log(percentIncome);
+
+  jQuery.ajax({
+    url : '/api/update/'+personId,
+    dataType : 'json',
+    type : 'POST',
+    // we send the data in a data object (with key/value pairs)
+    data : {
+      percentIncome: percentIncome,
+    },
+    success : function(response){
+        // success
+        console.log('success in posting percentage')
+        console.log(response);
+
+    },
+    error : function(err){
+      // do error checking
+      alert("something went wrong");
+      console.error(err);
+    }
+  });
+
+  return false;
+
+})
+
+
+
+
 
 jQuery("#CareerForm").submit(function(e){
-  console.log('done forst one')
-  $('.progress-bar').attr("style","width:60%");
-// $("#candidateForm").fadeOut()
-$('#IntelligenceForm').fadeIn();
+  console.log('submitted career')
+  e.preventDefault();
+  anyFormSubmitted();
+
 
   var career = $(".career:checked").val();
 
@@ -69,8 +146,7 @@ $('#IntelligenceForm').fadeIn();
   	}
   });
 
-  // prevents the form from submitting normally
-  e.preventDefault();
+
   return false;
 
 })
@@ -79,12 +155,14 @@ $('#IntelligenceForm').fadeIn();
 
 jQuery("#ActivismForm").submit(function(e){
 
-  console.log('done forst one')
-  $('.progress-bar').attr("style","width:100%");
-// $("#candidateForm").fadeOut()
-$('#done').fadeIn();
-//split this
+  // prevents the form from submitting normally
+  e.preventDefault();
+
+  anyFormSubmitted();
+
+
       var activism = $("#activism").val();
+      console.log(activism)
 
 
   jQuery.ajax({
@@ -110,44 +188,16 @@ $('#done').fadeIn();
   	}
   });
 
-  // prevents the form from submitting normally
-  e.preventDefault();
+
   return false;
 
 })
 
-// jQuery("#percentageForm").submit(function(e){
-//
-//   jQuery.ajax({
-//   	url : '/api/update/'+personId,
-//   	dataType : 'json',
-//   	type : 'POST',
-//   	// we send the data in a data object (with key/value pairs)
-//   	data : {
-//   		percentIncome: percentIncome,
-//   	},
-//   	success : function(response){
-// 	  		// success
-//         console.log('success in posting intelligence')
-// 	  		console.log(response);
-// 	  		// now, clear the input fields
-// 	  		// jQuery("#candidateForm input").val('');
-//   	},
-//   	error : function(err){
-//   		// do error checking
-//   		alert("something went wrong");
-//   		console.error(err);
-//   	}
-//   });
-//
-//   // prevents the form from submitting normally
-//   e.preventDefault();
-//   return false;
-//
-// })
 
 
 jQuery("#IntelligenceForm").submit(function(e){
+   e.preventDefault();
+    anyFormSubmitted();
 
   jQuery.ajax({
   	url : '/api/update/'+personId,
@@ -172,14 +222,12 @@ jQuery("#IntelligenceForm").submit(function(e){
   	}
   });
 
-  // prevents the form from submitting normally
-  e.preventDefault();
+
   return false;
 
 })
 
-// jQuery("#done").submit(function(e){
-//   console.log('done hit')
+
 function Done(){
 
   console.log('done fucntion was called')
@@ -206,7 +254,5 @@ function Done(){
   	}
   });
 
-  // prevents the form from submitting normally
-  // e.preventDefault();
-  // return false;
+
 }

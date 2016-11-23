@@ -89,8 +89,15 @@ router.get('/pre-profile', function(req,res){
 })
 
 //staging front end website
-router.get('/form-score', function(req,res){
-  res.render('form-score.html')
+router.get('/form-score/:id', function(req,res){
+
+  var personId = req.params.id;
+
+  var pageData = {
+    personId: personId
+  }
+
+  res.render('form-score.html', pageData)
 })
 
 router.get('/getKey', function(req,res){
