@@ -1,18 +1,26 @@
 .activism-bg {
   background-color: white;
-  color: #009fc6 !important; }
+  color: #009fc6;
+  border: 10px solid #009fc6;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
 
 .intelligence-bg {
-  background-color: #b9a0b1;
-  color: white !important; }
+  background-color: white;
+  color: #b9a0b1;
+  border: 10px solid #b9a0b1;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
 
 .green-bg {
-  background-color: #c0f8fd;
-  color: #009fc6 !important; }
+  background-color: white;
+  color: #f68f83;
+  border: 10px solid #ffbdb8;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
 
 .philanthropy-bg {
-  background-color: #fff2bd;
-  color: #b9a0b1 !important; }
+  background-color: white;
+  color: #b9a0b1;
+  border: 10px solid #fcef8a;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
 
 #pink {
   color: #ffbdb8; }

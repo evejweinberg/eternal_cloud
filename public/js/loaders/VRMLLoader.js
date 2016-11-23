@@ -586,7 +586,7 @@ THREE.VRMLLoader.prototype = {
 
 						if ( undefined == defines[ defineKey ] ) {
 
-							console.warn( defineKey + ' is not defined.' );
+							console.warn( defineKey + ' is notTT defined.' );
 
 						} else {
 

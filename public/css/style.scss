@@ -3,6 +3,7 @@ $blue: #009fc6;
 $pink: #f68f83;
 $pink-lgt: #ffbdb8;
 $yel-lgt: #fff2bd;
+$yel: #fcef8a;
 $mint: #a8e1d1;
 $purple: #b9a0b1;
 $baby-blue: #c0f8fd;
@@ -13,22 +14,30 @@ $font-size-medlrg: 40px;
 
 .activism-bg{
   background-color: white;
-  color: $blue !important;
+  color: $blue;
+  border: 10px solid $blue;
+  box-shadow: 1px 1px 6px rgba(0,0,0,.2);
 }
 
 .intelligence-bg{
-  background-color: $purple;
-  color: white !important;
+  background-color: white;
+  color: $purple ;
+  border: 10px solid $purple;
+  box-shadow: 1px 1px 6px rgba(0,0,0,.2);
 }
 
 .green-bg{
-  background-color: $baby-blue;
-  color: $blue !important;
+  background-color: white;
+  color: $pink ;
+  border: 10px solid $pink-lgt;
+  box-shadow: 1px 1px 6px rgba(0,0,0,.2);
 }
 
 .philanthropy-bg{
-  background-color: $yel-lgt;
-  color: $purple !important;
+  background-color: white;
+  color: $purple ;
+    border: 10px solid $yel;
+    box-shadow: 1px 1px 6px rgba(0,0,0,.2);
 }
 
 
