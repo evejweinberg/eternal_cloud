@@ -431,24 +431,28 @@ router.get('/third', function(req,res){
 
 router.post('/api/update/:id', function(req,res){
   //pull out fields that were posted
-  console.log('REQUEST BODY: ', req.body)
-  var idToUpdate = req.params.id;
+  // console.log('REQUEST BODY: ', req.body)
+  // var idToUpdate = req.params.id;
+  var idToUpdate = req.body.personId;
  // where is this console logging to? server?
   //create an object
   var dataToUpdate = {};
 
   if(req.body.philanthropy) dataToUpdate.philanthropy = req.body.philanthropy;
-  if(req.body.career) dataToUpdate.career = req.body.career;//console.log(req.body.career);
+  if(req.body.career) dataToUpdate.career = req.body.career;
   if(req.body.intelligence) dataToUpdate.intelligence = req.body.intelligence;
   if(req.body.activism) dataToUpdate.activism = req.body.activism;
   if(req.body.score) dataToUpdate.score = req.body.score;
+  if(req.body.percentIncome) dataToUpdate.percentIncome = req.body.percentIncome;
+
 
 
 
   //find them in the database, by their ID
   Person.findByIdAndUpdate(idToUpdate, dataToUpdate, function(err,data){
+    console.log(dataToUpdate)
     if (err){
-      alert("There was an error updating your profile. Eternal Cloud might be at maximum capacity.")
+      console.log(idToUpdate, dataToUpdate,'err hit')
     } else{
         console.log(data);
 
@@ -458,6 +462,8 @@ router.post('/api/update/:id', function(req,res){
           career : dataToUpdate.career,
           intelligence : dataToUpdate.intelligence,
           activism : dataToUpdate.activism,
+          score: dataToUpdate.score,
+          percentIncome: dataToUpdate.percentIncome,
         }
         res.json(data);
         //'channel Name', 'event Name', message

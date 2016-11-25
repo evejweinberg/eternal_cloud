@@ -12,6 +12,7 @@ var personSchema = new Schema({
 	career: Boolean,
 	intelligence: String,
 	activism: String,
+	percentIncome: Number,
 	score: Number,
 	dateAdded : { type: Date, default: Date.now }
 })

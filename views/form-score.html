@@ -8,7 +8,7 @@
   <title>Eternal Cloud Scoring</title>
 
 
-  <script src="/js/three.min.js"></script>
+  <!-- <script src="/js/three.min.js"></script>
   <script src="/js/three.js/Detector.js"></script>
   <script src="/js/three.js/Stats.js">
   </script>
@@ -27,83 +27,23 @@
   <script src="/js/glitch/ShaderPass.js">
   </script>
   <script src="/js/glitch/GlitchPass.js">
-  </script>
-  <!-- front end pusher -->
+  </script> -->
 
-  <script src="https://js.pusher.com/3.2/pusher.min.js">
-  </script>
+  <!-- front end pusher -->
+  <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
   <!-- Custom Font - Change 'Muli' to the font you want -->
   <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
   <!-- Custom CSS inside CSS folder -->
   <link href="/css/make-profile.css" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
-  <style media="screen">
-
-
-
-
-  .container {
-    position: relative;
-  }
-
-  .header {
-    background-color: #009fc6;
-    color: white;
-    padding-top: 1px;
-    padding-bottom: 36px;
-  }
-
-  #done {
-    font-size: 40px;
-  }
-
-  body {
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-  }
-
-  .masonry-layout {
-    column-count: 3;
-    -webkit-column-count: 3;
-    column-gap: 4;
-    margin: 15px;
-    -webkit-column-gap: 4;
-  }
-
-  .masonry-layout__panel {
-    break-inside: avoid;
-    -webkit-column-break-inside: avoid;
-    padding: 5px;
-    min-width: 100px;
-    border-radius: 10px;
-    margin: 10px;
-  }
-
-  .masonry-layout__panel-content {
-    padding: 10px;
-    border-radius: 10px;
-
-  }
-
-  .FB-findout {
-    margin-top: -100px;
-    font-size: 8px !important;
-    color: white;
-    position: absolute;
-    right: 0px;
-    text-align: right;
-  }
-
-
-  </style>
+  <link rel="stylesheet" href="/css/form-score.css">
 </head>
 
 <body>
 
-  <!--container -->
   <!-- JQuery script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
   </script>
@@ -117,20 +57,20 @@
 
   <div class="header">
     <h1 class="centered-type">GET HUMANITARIAN SCORE</h1>
-    <h2>MINIMUM: <span id="num-answered">0</span> / 12
-questions</h2>
+    <p>MINIMUM:
+      <span id="num-answered">0</span> / 12 questions</p>
     <img src="../img/candidate.gif" id="candidate-gif" alt="" style="fill:white">
-  <div class="FB-findout">
-    <p style="color:white">
-      Oh just find out for yourself.
-    </p>
-    <br>
-    <p>
-      <button type="button" name="button">Facebook Login</button>
+    <div class="FB-findout">
+      <p style="color:white">
+        Oh just find out for yourself.
+      </p>
+      <br>
+      <p>
+        <button type="button" name="button">Facebook Login</button>
 
-    </p>
+      </p>
 
-  </div>
+    </div>
   </div>
 
 
@@ -139,15 +79,13 @@ questions</h2>
 
     <div class="masonry-layout__panel philanthropy-bg">
       <div class="masonry-layout__panel-content">
-        <form id="percentageForm" name="percentageForm">
-          <!-- <div class="form-group"> -->
-            <h2>PHILANTHROPY</h2>
-            <p>Perentage of annual income you donate:</p>
-            <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control"
-              id="percentIncome" placeholder="10" name="percentIncome">
-          <!-- </div> -->
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        <div id="percentageForm" name="percentageForm">
+          <h2>PHILANTHROPY</h2>
+          <p>Perentage of annual income you donate:</p>
+          <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control"
+            id="percentIncome" placeholder="10" name="percentIncome">
+          <button type="submit" onclick="philanthropyOne()" id="temp" class="btn btn-default">Submit</button>
+        </div>
       </div>
     </div>
 
@@ -157,8 +95,8 @@ questions</h2>
     <div class="masonry-layout__panel ad-bg">
       <div class="masonry-layout__panel-content">
         <form id="CompostForm">
-            <h2>SALVATION OPPORTUNITY</h2>
-            <p>Earn 25 GB by donating to the ACLU right now</p>
+          <h2>SALVATION OPPORTUNITY</h2>
+          <p>Earn 25 GB by donating to the ACLU right now</p>
 
           <button type="submit" class="btn btn-default">Donate</button>
         </form>
@@ -169,45 +107,33 @@ questions</h2>
     <div class="masonry-layout__panel green-bg">
       <div class="masonry-layout__panel-content">
         <form id="CompostForm">
-            <h2>GREEN</h2>
-            <p>Do you compost?</p>
-            <input type="radio" name="compost" class="compost" value="yes"> Yes
-            <br>
-            <input type="radio" name="compost" class="compost" value="no"> No
-            <br>
+          <h2>GREEN</h2>
+          <p>Do you compost?</p>
+          <input type="radio" name="compost" class="compost" value="yes"> Yes
+          <br>
+          <input type="radio" name="compost" class="compost" value="no"> No
+          <br>
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
       </div>
     </div>
 
 
-    <div class="masonry-layout__panel philanthropy-bg">
-      <div class="masonry-layout__panel-content">
-        <form id="candidateForm" name="candidateForm">
-          <div class="form-group">
-            <h2>PHILANTHROPY</h2>
-            <p>Perentage of annual income you donate:</p>
-            <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control"
-              id="philanthropy" placeholder="10" name="philanthropy">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-      </div>
-    </div>
+
 
 
 
     <div class="masonry-layout__panel career-bg">
       <div class="masonry-layout__panel-content">
-        <form id="CareerForm">
-            <h2>CAREER CHOICE</h2>
-            <p>Are you a banker?</p>
-            <input type="radio" name="career" class="career" value="yes"> Yes
-            <br>
-            <input type="radio" name="career" class="career" value="no"> No
-            <br>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        <div id="CareerForm">
+          <h2>CAREER CHOICE</h2>
+          <p>Are you a banker?</p>
+          <input type="radio" name="career" class="career" value="yes"> Yes
+          <br>
+          <input type="radio" name="career" class="career" value="no"> No
+          <br>
+          <button id="career_id" onclick="careerChoice()" type="submit" class="btn btn-default">Submit</button>
+        </div>
       </div>
     </div>
 
@@ -216,10 +142,16 @@ questions</h2>
     <div class="intelligence-bg masonry-layout__panel">
       <div class="masonry-layout__panel-content">
         <form id="IntelligenceForm" name="IntelligenceForm">
-            <h2>INTELLIGENCE</h2>
-            <p>Highest education recieved</p>
-            <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel">
-            <button type="submit" class="btn btn-default">Submit</button>
+          <h2>INTELLIGENCE</h2>
+          <p>Highest education recieved</p>
+          <select>
+  <option value="hs">Highschool or less</option>
+  <option value="col">College</option>
+  <option value="grad">Grad school</option>
+  <option value="phd">PhD or higher</option>
+</select>
+          <!-- <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel"> -->
+          <button type="submit" class="btn btn-default">Submit</button>
         </form>
       </div>
     </div>
@@ -248,7 +180,16 @@ questions</h2>
           <p>
             What humanitarian score would you give yourself?
           </p>
-          <input type="number" class="form-control" id="selfscore" placeholder="" name="selfscore">
+          <!-- <form oninput="x.value=parseInt(a.value)+parseInt(b.value)"> -->
+            0
+            <input type="range" id="a" name="a" value="50"> 100 +
+            <input type="number" id="b" name="b" value="50"> =
+            <output name="x" for="a b"></output>
+            <br>
+            <br>
+            <!-- <input type="submit"> -->
+          <!-- </form> -->
+          <!-- <input type="number" class="form-control" id="selfscore" placeholder="" name="selfscore"> -->
 
           <button type="submit" class="btn btn-default">Submit</button>
 
@@ -310,12 +251,12 @@ questions</h2>
     <div class="masonry-layout__panel intelligence-bg">
       <div class="masonry-layout__panel-content">
         <form id="IntelligenceForm" name="IntelligenceForm">
-            <h2>INTELLIGENCE</h2>
-            <p>enter github handle</p>
-            <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
-            <button type="submit" class="btn btn-default">Submit</button>
-            <!-- //how can I make something else do the submit -->
-            </button>
+          <h2>INTELLIGENCE</h2>
+          <p>enter github handle</p>
+          <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
+          <button type="submit" class="btn btn-default">Submit</button>
+          <!-- //how can I make something else do the submit -->
+          </button>
         </form>
 
       </div>
@@ -323,7 +264,7 @@ questions</h2>
 
 
     <!-- //hide this but we use in all the ajax -->
-  <div style="display:none" id="personId">{{personId}}</div>
+    <div style="display:none" id="personId">{{personId}}</div>
   </div>
 
 

@@ -1,89 +1,20 @@
 var answeredQuestions = 0;
 var answeredQuestionsNum = document.getElementById('num-answered');
+var personId;
+
 
 function anyFormSubmitted(){
   //change the front end html to show that they answered a question
-  answeredQuestions ++
-  answeredQuestionsNum.innerHTML = answeredQuestions
-  //show me that we have a person ID
-  var personId = document.getElementById('personId').innerHTML;
-  console.log('personID: '+ personId);
+  answeredQuestions ++;
+  document.getElementById('num-answered').innerHTML = answeredQuestions
+  personId = document.getElementById('personId').innerHTML;
 }
 
 
-//was testing aq form out this way, bc stack overflow suggested it
-function processForm( e ){
-
-       var compost = $(".compost:checked").val();
-       console.log('compost: ' + compost);
-         $.ajax({
-             url: '/api/update/'+personId,
-             dataType: 'json',
-             type: 'post',
-             data: {
-               compost: compost,
-             },
-             success: function( data, textStatus, jQxhr ){
-                 console.log( data );
-             },
-             error: function( jqXhr, textStatus, errorThrown ){
-                 console.log( errorThrown );
-             }
-         });
-
-         e.preventDefault();
-}
-
-
-
-jQuery("#CompostForm").submit(function(e){
-
-  anyFormSubmitted();
-  //was testing a form out this way bc Stack overflow suggested it
-  processForm( e );
-
-
-  // e.preventDefault();
-  // var compost = $(".compost:checked").val();
-  // console.log('compost: ' + compost);
-
-  // jQuery.ajax({
-  //   url : '/api/update/'+personId,
-  //   dataType : 'json',
-  //   type : 'POST',
-  //   // we send the data in a data object (with key/value pairs)
-  //   data : {
-  //     compost: compost,
-  //   },
-  //   success : function(response){
-  //       // success
-  //       console.log('success in posting percentage')
-  //       console.log(response);
-  //
-  //   },
-  //   error : function(err){
-  //     // do error checking
-  //     alert("something went wrong adding compost");
-  //     console.error(err);
-  //   }
-  // });
-
-  return false;
-
-})
-
-
-
-
-
-//this is the way that Sam and I did it in office hours
-jQuery("#percentageForm").submit(function(e){
-
-  e.preventDefault();
+function philanthropyOne(){
   anyFormSubmitted();
 
-  var personId = document.getElementById('personId').innerHTML;
-  console.log(personId);
+  //create, parse, do whatever you need to do to get the value
   var percentIncome = document.getElementById('percentIncome').value;
   console.log(percentIncome);
 
@@ -94,11 +25,11 @@ jQuery("#percentageForm").submit(function(e){
     // we send the data in a data object (with key/value pairs)
     data : {
       percentIncome: percentIncome,
-    },
+      personId:personId
+        },
     success : function(response){
         console.log('success in posting percentage')
         console.log(response);
-
     },
     error : function(err){
       alert("something went wrong");
@@ -106,20 +37,12 @@ jQuery("#percentageForm").submit(function(e){
     }
   });
 
-  return false;
-
-})
+}
 
 
+function careerChoice(){
 
-
-
-jQuery("#CareerForm").submit(function(e){
-
-
-  e.preventDefault();
   anyFormSubmitted();
-
 
   var career = $(".career:checked").val();
   console.log('submitted career: '+ career)
@@ -131,6 +54,7 @@ jQuery("#CareerForm").submit(function(e){
   	// we send the data in a data object (with key/value pairs)
   	data : {
   		career: career,
+      personId:personId
   	},
   	success : function(response){
 	  		// success
@@ -145,14 +69,11 @@ jQuery("#CareerForm").submit(function(e){
   	}
   });
 
-
-  return false;
-
-})
+};
 
 
 
-jQuery("#ActivismForm").submit(function(e){
+$("#ActivismForm").submit(function(e){
 
   e.preventDefault();
   anyFormSubmitted();
