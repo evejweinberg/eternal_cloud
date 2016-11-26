@@ -49,8 +49,11 @@
   </script>
   <!-- CUSTOM JS look in public>JS -->
 
+    <script src="/js/facebook.js">
+
   <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
   <script src="/js/formscore.js">
+
   </script>
 
 
@@ -66,7 +69,12 @@
       </p>
       <br>
       <p>
-        <button type="button" name="button">Facebook Login</button>
+        <fb:login-button 
+  scope="email,user_posts,user_photos,user_likes"
+  onlogin="checkLoginState();" id="facebookLogin">
+  Connect
+</fb:login-button>
+        <!--<button type="button" name="button">Facebook Login</button>-->
 
       </p>
 
@@ -265,6 +273,7 @@
 
     <!-- //hide this but we use in all the ajax -->
     <div style="display:none" id="personId">{{personId}}</div>
+    <div style="display:none" id="hasFacebook">{{hasFacebook}}</div>
   </div>
 
 

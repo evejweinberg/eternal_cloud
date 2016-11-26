@@ -14,8 +14,17 @@ var personSchema = new Schema({
 	activism: String,
 	percentIncome: Number,
 	score: Number,
-	dateAdded : { type: Date, default: Date.now }
+	dateAdded : { type: Date, default: Date.now },
+	facebook: {
+		default: null,
+		type: Object
+	}
 })
+
+personSchema.virtual('hasFacebook').get(function(){
+	console.log('asked Facebook')
+	return true ? this.facebook : false;
+});
 
 // export 'Person' model so we can interact with it in other files
 module.exports = mongoose.model('Person',personSchema);
