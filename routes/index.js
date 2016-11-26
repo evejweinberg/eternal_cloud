@@ -111,7 +111,7 @@ router.get('/form-score/:id/photos', function(req, res) {
     var personId = req.params.id;
     facebookUtil.getFacebookPhotos(personId, { limit: 10}, function(err, data) {
         var resp = {
-            err: err,
+            err: JSON.stringify(err || {}, undefined, 2),
             data: JSON.stringify(data || {}, undefined, 2)
         };
         res.render('data.html', resp);
@@ -122,7 +122,7 @@ router.get('/form-score/:id/likes', function(req, res) {
     var personId = req.params.id;
     facebookUtil.getFacebookLikes(personId, { limit: 100}, function(err, data) {
         var resp = {
-            err: err,
+            err: JSON.stringify(err || {}, undefined, 2),
             data: JSON.stringify(data || {}, undefined, 2)
         };
         res.render('data.html', resp);
@@ -141,7 +141,7 @@ router.get('/form-score/:id/posts', function(req, res) {
       until: dateTo,
     }, function(err, data) {
         var resp = {
-            err: err,
+            err: JSON.stringify(err || {}, undefined, 2),
             data: JSON.stringify(data || {}, undefined, 2)
         };
         res.render('data.html', resp);

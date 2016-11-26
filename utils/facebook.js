@@ -10,7 +10,7 @@ var Person = require("../models/person.js");
 function getAccessToken(userId){
     return function(callback){
         Person.findById(userId, function(err, user) {
-            if (!user || !user.facebook.access_token) {
+            if (!user || !user.facebook ||  !user.facebook.access_token) {
                 return callback({
                     message: 'User not found'
                 });
@@ -99,3 +99,4 @@ function extendAccessToken(options, callback){
 module.exports.getFacebookPhotos = getFacebookPhotos;
 module.exports.getFacebookPosts = getFacebookPosts;
 module.exports.getFacebookLikes = getFacebookLikes;
+module.exports.extendAccessToken = extendAccessToken;
