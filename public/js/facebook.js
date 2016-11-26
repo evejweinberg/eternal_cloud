@@ -25,11 +25,14 @@ function requestServer(options,cb){
     });;
 }
 
-let clientId = '184716311990555';
+function clientId(){
+    return $("#facebookClientId").text();
+}
+
 
 window.fbAsyncInit = function() {
     FB.init({
-      appId      : clientId,
+      appId      : clientId(),
       xfbml      : true,
       version    : 'v2.6'
     });
@@ -55,7 +58,7 @@ function checkLoginState() {
           contentType: "application/json",
           data : JSON.stringify({
             accessToken: response.authResponse.accessToken,
-            clientId: clientId,
+            clientId: clientId(),
             userID: response.authResponse.userID
           })
         }, function(err,d){

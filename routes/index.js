@@ -97,7 +97,8 @@ router.get('/form-score/:id', function(req, res) {
     var personId = req.params.id;
 
     var pageData = {
-        personId: personId
+        personId: personId,
+        facebookClientId: process.env.FACEBOOK_APP_ID,
     }
     Person.findById(personId, function(err, data) {
         var personInfo = data || {};
