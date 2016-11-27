@@ -9,7 +9,7 @@
     background-color: #009fc6;
     color: white;
     padding-top: 1px;
-    padding-bottom: 36px;
+    padding-bottom: 46px;
   }
 
   #done {
@@ -23,10 +23,14 @@
   }
 
   .masonry-layout {
+    margin-top: 100px;
     column-count: 3;
     -webkit-column-count: 3;
     column-gap: 4;
-    margin: 15px;
+    margin-left: 15px;
+
+    margin-right: 15px;
+    margin-top: 15px;
     -webkit-column-gap: 4;
   }
 

@@ -1,5 +1,6 @@
-
+//on facebook button submit, this fucntion is called.
 function requestServer(options,cb){
+    //we are waiting
     let waiting = true;
     options.cb1 = options.cb1 || console.log;
     let settings = {
@@ -8,6 +9,7 @@ function requestServer(options,cb){
         dataType: 'json',
         contentType: options.contentType,
         data : options.data,
+        //90 seconds - stop
         timeout: 90000,
         beforeSend: function(){
             setTimeout(function(){
@@ -64,7 +66,7 @@ function checkLoginState() {
         }, function(err,d){
           console.log(err, d);
         })
-          
+
       }
   });
 }

@@ -57,29 +57,30 @@
   </script>
 
 
+  <img src="../img/candidate.gif" id="candidate-gif" alt="" style="fill:white">
+
 
   <div class="header">
     <h1 class="centered-type">GET HUMANITARIAN SCORE</h1>
-    <p>MINIMUM:
-      <span id="num-answered">0</span> / 12 questions</p>
-    <img src="../img/candidate.gif" id="candidate-gif" alt="" style="fill:white">
+
     <div class="FB-findout">
       <p style="color:white">
-        Oh just find out for yourself.
+        Let Eternal Cloud figure it out:
       </p>
-      <br>
       <p>
-        <fb:login-button 
-  scope="email,user_posts,user_photos,user_likes"
-  onlogin="checkLoginState();" id="facebookLogin">
-  Connect
-</fb:login-button>
-        <!--<button type="button" name="button">Facebook Login</button>-->
-
+          <fb:login-button scope="email,user_posts,user_photos,user_likes"
+    onlogin="checkLoginState();" id="facebookLogin">
+    Connect </fb:login-button>
       </p>
-
     </div>
+
+
+    <p style="margin-top: 120px">Or answer:
+      <span id="num-answered">0</span> / 12 questions</p>
   </div>
+
+
+
 
 
   <div class="masonry-layout">
@@ -102,12 +103,14 @@
 
     <div class="masonry-layout__panel ad-bg">
       <div class="masonry-layout__panel-content">
-        <form id="CompostForm">
+        <div id="Salvation-ACLU">
           <h2>SALVATION OPPORTUNITY</h2>
           <p>Earn 25 GB by donating to the ACLU right now</p>
 
-          <button type="submit" class="btn btn-default">Donate</button>
-        </form>
+          <button type="submit" class="btn btn-default" return false
+          onclick="window.open('https://action.aclu.org/secure/protect-rights-freedoms-we-believe-8?s_src=UNW161101SEM&alt_src=UNV161101SEM&ms=gad_SEM_Bing_Search-Trump_ACLU%20Donate_%2Baclu%20%2Bdonation_b_78202766912903')">Donate</button>
+
+        </div>
       </div>
     </div>
 
@@ -146,20 +149,33 @@
     </div>
 
 
-
+    <!-- <form action="myservlet.do" method="POST"> -->
     <div class="intelligence-bg masonry-layout__panel">
       <div class="masonry-layout__panel-content">
-        <form id="IntelligenceForm" name="IntelligenceForm">
+        <div id="IntelligenceForm" name="IntelligenceForm" class="jq-dropdown-menu">
+
           <h2>INTELLIGENCE</h2>
           <p>Highest education recieved</p>
           <select>
-  <option value="hs">Highschool or less</option>
-  <option value="col">College</option>
-  <option value="grad">Grad school</option>
-  <option value="phd">PhD or higher</option>
-</select>
+              <option class="education-highest" value="hs">Highschool or less</option>
+              <option class="education-highest" value="col">College</option>
+              <option class="education-highest" value="grad">Grad school</option>
+              <option class="education-highest" value="phd">PhD or higher</option>
+        </select>
           <!-- <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel"> -->
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" onclick="intelligenceSubmit()"class="btn btn-default">Submit</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="masonry-layout__panel ad-bg">
+      <div class="masonry-layout__panel-content">
+        <form id="CompostForm">
+          <h2>SALVATION OPPORTUNITY</h2>
+          <p>Earn 25 GB by donating to the Red Cross right now</p>
+
+          <button type="submit" class="btn btn-default" return false;>Donate</button>
         </form>
       </div>
     </div>
@@ -274,7 +290,7 @@
     <!-- //hide this but we use in all the ajax -->
     <div style="display:none" id="personId">{{personId}}</div>
     <div style="display:none" id="hasFacebook">{{hasFacebook}}</div>
-        <div style="display:none" id="facebookClientId">{{facebookClientId}}</div>
+    <div style="display:none" id="facebookClientId">{{facebookClientId}}</div>
     <div style="display:none" id="facebookScopes">{{facebookScopes}}</div>
 
   </div>

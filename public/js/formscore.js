@@ -11,6 +11,24 @@ function anyFormSubmitted(){
 }
 
 
+function intelligenceSubmit(){
+  var intelligence = $(".education-highest:selected").val();
+  console.log(intelligence)
+  anyFormSubmitted()
+  $.ajax({
+    url: '/api/update/'+personId,
+    method: 'POST',
+    data: { intelligence: intelligence },
+    success: function (data) {
+        console.log(data);
+    },
+    error: function () {
+        // Uh oh, something went wrong
+    }
+});
+}
+
+
 function philanthropyOne(){
   anyFormSubmitted();
 

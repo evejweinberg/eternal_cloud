@@ -121,11 +121,19 @@ router.get('/form-score/:id/photos', function(req, res) {
 
 router.get('/form-score/:id/likes', function(req, res) {
     var personId = req.params.id;
+
     facebookUtil.getFacebookLikes(personId, { limit: 100}, function(err, data) {
+
         var resp = {
             err: JSON.stringify(err || {}, undefined, 2),
             data: JSON.stringify(data || {}, undefined, 2)
         };
+        // console.log(Object.keys(resp.data))
+        for (var key in resp.data){
+          console.log(resp.data[key])
+        // console.log( Object.keys(resp.data[i]))
+        }
+
         res.render('data.html', resp);
     });
 });
@@ -396,7 +404,6 @@ router.post('/api/create', function(req, res) {
 
 
 
-
 //when do i hit this route?
 router.get('/api/get', function(req, res) {
     //find all items
@@ -452,36 +459,36 @@ router.get('/api/delete/:id', function(req, res) {
 
 
 
-router.get('/api/get/query', function(req, res) {
-    //
-    // console.log(req.query);
-
-    var searchQuery = {};
-
-    if (req.query.itpYear) {
-        searchQuery['itpYear'] = req.query.itpYear
-    }
-
-    if (req.query.name) {
-        //add to the object
-        searchQuery['name'] = req.query.name
-    }
-
-    if (req.query.hasGlasses) {
-        searchQuery['hasGlasses'] = req.query.hasGlasses
-    }
-
-    //pass in the search query that was built
-    Person.find(searchQuery, function(err, data) {
-        res.json(data);
-    })
-
-    Person.find(searchQuery).sort('-name').exec(function(err, data) {
-        res.json(data);
-    })
-
-
-})
+// router.get('/api/get/query', function(req, res) {
+//     //
+//     // console.log(req.query);
+//
+//     var searchQuery = {};
+//
+//     if (req.query.itpYear) {
+//         searchQuery['itpYear'] = req.query.itpYear
+//     }
+//
+//     if (req.query.name) {
+//         //add to the object
+//         searchQuery['name'] = req.query.name
+//     }
+//
+//     if (req.query.hasGlasses) {
+//         searchQuery['hasGlasses'] = req.query.hasGlasses
+//     }
+//
+//     //pass in the search query that was built
+//     Person.find(searchQuery, function(err, data) {
+//         res.json(data);
+//     })
+//
+//     Person.find(searchQuery).sort('-name').exec(function(err, data) {
+//         res.json(data);
+//     })
+//
+//
+// })
 
 
 
