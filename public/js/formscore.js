@@ -28,6 +28,23 @@ function intelligenceSubmit(){
 });
 }
 
+function compostSubmit(){
+  var compost = $(".compost:checked").val();
+  anyFormSubmitted()
+  $.ajax({
+    url: '/api/update/'+personId,
+    method: 'POST',
+    data: { compost: compost },
+    success: function (data) {
+        console.log(data);
+    },
+    error: function () {
+        // Uh oh, something went wrong
+    }
+});
+
+}
+
 
 function philanthropyOne(){
   anyFormSubmitted();
@@ -50,7 +67,7 @@ function philanthropyOne(){
         console.log(response);
     },
     error : function(err){
-      alert("something went wrong");
+      alert("backend response: something went wrong from backend");
       console.error(err);
     }
   });

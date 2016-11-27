@@ -27,6 +27,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+    <!-- //do I need these here at all? -->
+    <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+
     <!-- Custom CSS inside CSS folder -->
     <link rel="stylesheet" href="css/style.css">
     <link  href="css/make-profile.css" rel="stylesheet"/>
@@ -42,12 +45,9 @@
 
     </div>
     <img src="../img/candidate.gif" id="candidate-gif" alt=""/>
-      <img src="../img/candidate.gif" id="candidate-gif-2" alt=""/>
+    <img src="../img/candidate.gif" id="candidate-gif-2" alt=""/>
 
-  <div class="container" id="candidate-container">
-
-
-    </div>
+    <div class="container" id="candidate-container"></div>
 
     <div id="score-update">
       <p>
@@ -74,4 +74,63 @@
 
     <!-- CUSTOM JS look in public>JS -->
     <script src="js/candidate.js"></script>
+
+
+    <script>
+
+    $.ajax({
+      url: '/getKey',
+      method: 'get',
+    })
+    .done(function(data){
+
+      makePusher(data)
+    })
+    .fail(function(err){
+      console.log(err)
+    })
+
+    //If a channel has been subscribed to already it is possible to access channels by name,
+    //through the pusher.channel function:
+    //The name of the channel to retrieve
+  function makePusher(key){
+    var pusherFront = new Pusher(key);
+
+    // //subscribe and unsubscribe from channels at any time.
+    //create a channel from nothing like this.
+    //events are past tense "thing was created"
+    var channel1 = pusherFront.subscribe("channelName");
+
+
+
+
+//events are published to channels.
+//all events on a channel are pushed to all subscribers of that channel
+//use channels to filter
+//bind with a callback;
+    channel1.bind('addedInfo',
+      function(data) {
+        // add new price into the APPL widget
+        console.log('binding "addedInfo" to channel1. data:');
+        console.log(data);
+
+
+        //tally up score
+        //post score to the server
+        document.getElementById("score").innerHTML = data.score;
+
+
+      })
+
+      // channel2.bind("finishedForm",Scene4)
+
+
+
+
+  }
+
+
+    </script>
+
+
 </html>
