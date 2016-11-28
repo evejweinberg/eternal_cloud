@@ -1,28 +1,27 @@
-#on login submit
+#when /login submit button is pressed
 
-- replace front end screen with /form-score/:id
-- post to route api/create
-- push image that was taken to amazon s3 bucket 'eternalcloud'
+- replace front end screen with /form-score/:id (working already)
+- post to route api/create (working already)
+- push image that was taken to amazon s3 bucket 'eternalcloud' (working already)
 - send the amazon link to mongoLab database
 - load third screen with /candidate-solo/:id
-- load image, name, and score into third screenshot
+- load image, name, and score into third screen - eve to make it work with three.js ionce data is coming in
 
 #upon any form being submitted on /form-score:id
 
-- post to route /api/update/:id
-- update score in the mongoLabdatabase
-- push new score to front end of /candidate-solo
+- post to route /api/update/:id (working already)
+- update score in the mongoLabdatabase (working already)
+- push new score to front end of /candidate-solo (might be working already)
 
-#if facebook login is succesful
+#if facebook login is successful
 
-- on /formscore, push masonry forms down and display user's photos and likes above it
-- push score of Math.floor(Math.random(577-307)-307)) to /candidate-solo
-- store this score in the mongoLab database
-- trigger /first to play video3.play() which says 'unfortunately your humanity score is too low'
+- on /form-score, push masonry forms down and display user's photos and likes above it
+- push score of Math.floor(Math.random(577 to 307) to /candidate-solo
+- store this score in the mongoLab database (working already)
+- trigger a function in /first (call it anything for now, eve will add to it)
 - make a <p> that says 'hi'+ person's name
-- eve to change graphics on middle sreen to say 'perish or secure space another way'
 
 
-#add to /formscore
+#add to /form-score
 - add a No CAPTCHA reCAPTCHA and push a score update of 10
 - reconnect entire project to heroku (it's broken)
