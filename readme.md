@@ -28,3 +28,4 @@
 
 #overall issues
 - reconnect entire project to heroku (it's broken)
+- on login.html, if the name they type in is already taken, let them use it anyway, currently there is not even error messaging to let them know.
