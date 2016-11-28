@@ -302,7 +302,7 @@ router.post('/submitProfile', upload.single('file'), function(req, res) {
   var personObj = {
     //grab your mongood schema and double it here
     name: req.body.name || 'Dildo',
-    imageUrl: req.body.imageUrl || 'https://s3.amazonaws.com/eternalcloudbucket/david22.jpg',
+    imageUrl: req.body.imageUrl,
     philanthropy: req.body.philanthropy || 0,
     career: req.body.career || '',
     intelligence: req.body.intelligence || 0,
@@ -499,6 +499,10 @@ router.post('/api/update/:id', function(req, res) {
       data.score += 13
     } else {
       data.score += 1
+    }
+
+    if(req.body.like){
+      data.score +=.01
     }
 
 

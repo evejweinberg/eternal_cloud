@@ -4,6 +4,15 @@
   border: 10px solid #009fc6;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
 
+.blue-bg {
+  background-color: #009fc6;
+  color: white;
+  border: 10px solid #009fc6;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2); }
+
+.centered {
+  text-align: center; }
+
 .intelligence-bg {
   background-color: white;
   color: #b9a0b1;

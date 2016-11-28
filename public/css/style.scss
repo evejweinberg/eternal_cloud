@@ -20,6 +20,17 @@ $font-size-medlrg: 40px;
   box-shadow: 1px 1px 6px rgba(0,0,0,.2);
 }
 
+.blue-bg{
+  background-color: $blue;
+  color: white;
+  border: 10px solid $blue;
+  box-shadow: 1px 1px 6px rgba(0,0,0,.2);
+}
+
+.centered{
+  text-align: center;
+}
+
 .intelligence-bg{
   background-color: white;
   color: $purple ;

@@ -164,6 +164,8 @@ var group = new THREE.Group();
 
 
 
+
+
 //get the person from the database
 
   	jQuery.ajax({
@@ -177,6 +179,7 @@ var group = new THREE.Group();
         // console.log(person)
           var video_geo = new THREE.BoxGeometry( boxSize,boxSize,boxSize );
 
+          console.log(person)
 
           if (person.imageUrl.includes('eternalcloudbucket')){
 
