@@ -1,7 +1,7 @@
 #when /login submit button is pressed
 
 - replace front end screen with /form-score/:id (working already)
-- post imageUrl and name to route api/create (working already)
+- post imageUrl and name to route /submitProfile (working already)
 - push image that was taken to amazon s3 bucket 'eternalcloud' (working already)
 - send the amazon link to mongoLab database (broken)
 - load third screen with /candidate-solo/:id
@@ -20,6 +20,7 @@
 - store this score in the mongoLab database (working already)
 - on start.html trigger a function (call it anything for now, eve will add to it)
 - on form-score.html front end make a paragraph element that says 'hi'+ person's name
+
 
 
 #add to form-score.html
