@@ -1,9 +1,9 @@
 #when /login submit button is pressed
 
 - replace front end screen with /form-score/:id (working already)
-- post to route api/create (working already)
+- post imageUrl and name to route api/create (working already)
 - push image that was taken to amazon s3 bucket 'eternalcloud' (working already)
-- send the amazon link to mongoLab database
+- send the amazon link to mongoLab database (broken)
 - load third screen with /candidate-solo/:id
 - load image, name, and score into third screen - eve to make it work with three.js ionce data is coming in
 
