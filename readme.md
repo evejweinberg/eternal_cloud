@@ -19,8 +19,10 @@
 - push score of Math.floor(Math.random(577-307)-307)) to /candidate-solo
 - store this score in the mongoLab database
 - trigger /first to play video3.play() which says 'unfortunately your humanity score is too low'
+- make a <p> that says 'hi'+ person's name
 - eve to change graphics on middle sreen to say 'perish or secure space another way'
 
 
 #add to /formscore
 - add a No CAPTCHA reCAPTCHA and push a score update of 10
+- reconnect entire project to heroku (it's broken)
