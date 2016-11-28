@@ -243,7 +243,7 @@ router.get('/edit/:id', function(req, res) {
 
 router.post('/submitProfile', upload.single('file'), function(req, res) {
 
-  console.log('attempting to submit a profile');
+  console.log('attempting to submit a profile image and name');
 
   var buf = new Buffer(req.body.data, 'base64');
 
@@ -278,31 +278,20 @@ router.post('/submitProfile', upload.single('file'), function(req, res) {
 
   s3bucket.putObject(params, function(err, data) {
     if (err) console.log(err);
-    else console.log('success@');
+    else console.log('success for: '+ tempName);
   });
 
-  // res.json({msg: "success!"});
 
   var publicUrl = process.env.AWS_S3_PATH + tempName;
   console.log('public url: ' + publicUrl);
 
-  console.log(req.body)
-
-
-  // if (req.body.banker == 'yes') personObj['banker'] = true;
-  // else personObj['banker'] = false;
-  //
-  // if (req.body.philanthropy === null )req.body.philanthropy = 0
-  // if (req.body.intelligence === null )req.body.intelligence = 0
-  // if (req.body.activism === null )req.body.activism = 0
-
-
+  console.log(req.body.imageUrl)
 
   //save a data object
   var personObj = {
     //grab your mongood schema and double it here
     name: req.body.name || 'Dildo',
-    imageUrl: req.body.imageUrl,
+    imageUrl: publicUrl,
     philanthropy: req.body.philanthropy || 0,
     career: req.body.career || '',
     intelligence: req.body.intelligence || 0,
@@ -375,39 +364,6 @@ router.get('/api/get', function(req, res) {
 })
 
 
-
-
-
-// router.get('/api/get/query', function(req, res) {
-//     //
-//     // console.log(req.query);
-//
-//     var searchQuery = {};
-//
-//     if (req.query.itpYear) {
-//         searchQuery['itpYear'] = req.query.itpYear
-//     }
-//
-//     if (req.query.name) {
-//         //add to the object
-//         searchQuery['name'] = req.query.name
-//     }
-//
-//     if (req.query.hasGlasses) {
-//         searchQuery['hasGlasses'] = req.query.hasGlasses
-//     }
-//
-//     //pass in the search query that was built
-//     Person.find(searchQuery, function(err, data) {
-//         res.json(data);
-//     })
-//
-//     Person.find(searchQuery).sort('-name').exec(function(err, data) {
-//         res.json(data);
-//     })
-//
-//
-// })
 
 
 
