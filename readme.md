@@ -1,9 +1,9 @@
 #when /login submit button is pressed
 
-- replace front end screen with /form-score/:id (working already)
-- post imageUrl and name to route /submitProfile (working already)
-- push image that was taken to amazon s3 bucket 'eternalcloud' (working already)
-- send the amazon link to mongoLab database (broken)
+- ~~replace front end screen with /form-score/:id (working already)~~
+- ~~post imageUrl and name to route /submitProfile (working already)~~
+- ~~push image that was taken to amazon s3 bucket 'eternalcloud' (working already)~~
+- ~~send the amazon link to mongoLab database (broken)~~
 - load third screen with /candidate-solo/:id
 - load image, name, and score into third screen - eve to make it work with three.js ionce data is coming in
 
@@ -28,5 +28,4 @@
 
 
 #overall issues
-- reconnect entire project to heroku (it's broken)
 - on login.html, if the name they type in is already taken, let them use it anyway, currently there is not even error messaging to let them know.
