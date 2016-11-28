@@ -16,7 +16,7 @@
 #if facebook login is successful
 
 - on form-score.html push masonry forms down and display user's photos and likes above it
-- pon candidate-solo.html push score of Math.floor(Math.random(577 to 307) to
+- on candidate-solo.html push score of Math.floor(Math.random(577 to 307)
 - store this score in the mongoLab database (working already)
 - on start.html trigger a function (call it anything for now, eve will add to it)
 - on form-score.html front end make a paragraph element that says 'hi'+ person's name
