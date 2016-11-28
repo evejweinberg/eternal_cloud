@@ -5,7 +5,7 @@
 - ~~push image that was taken to amazon s3 bucket 'eternalcloud' (working already)~~
 - ~~send the amazon link to mongoLab database (broken)~~
 - load third screen with /candidate-solo/:id
-- load image, name, and score into third screen - eve to make it work with three.js ionce data is coming in
+- ~~load image, name, and score into third screen - eve to make it work with three.js ionce data is coming in~~
 
 #upon any form being submitted on /form-score:id
 
