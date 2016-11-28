@@ -17,7 +17,7 @@ live heroku deployed URL: https://lit-castle-51205.herokuapp.com/
 
 #if facebook login is successful
 
--facebook login not showing up on heroku deployment
+
 - on form-score.html push masonry forms down and display user's photos and likes above it
 - on candidate-solo.html push score of Math.floor(Math.random(577 to 307)
 - store this score in the mongoLab database (working already)
@@ -31,4 +31,5 @@ live heroku deployed URL: https://lit-castle-51205.herokuapp.com/
 
 
 #overall issues
+-facebook login not showing up on heroku deployment
 - on login.html, if the name they type in is already taken, let them use it anyway, currently there is not even error messaging to let them know.
