@@ -22,6 +22,9 @@
 - on form-score.html front end make a paragraph element that says 'hi'+ person's name
 
 
-#add to /form-score
+#add to form-score.html
 - add a No CAPTCHA reCAPTCHA and push a score update of 10
+
+
+#overall issues
 - reconnect entire project to heroku (it's broken)
