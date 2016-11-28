@@ -1,3 +1,5 @@
+live heroku deployed URL: https://lit-castle-51205.herokuapp.com/
+
 #when /login submit button is pressed
 
 - ~~replace front end screen with /form-score/:id (working already)~~
@@ -5,7 +7,7 @@
 - ~~push image that was taken to amazon s3 bucket 'eternalcloud' (working already)~~
 - ~~send the amazon link to mongoLab database (broken)~~
 - load third screen with /candidate-solo/:id
-- ~~load image, name, and score into third screen - eve to make it work with three.js ionce data is coming in~~
+- ~~load image, name, and score into third screen - eve to make it work with three.js once data is coming in~~
 
 #upon any form being submitted on /form-score:id
 
@@ -15,6 +17,7 @@
 
 #if facebook login is successful
 
+-facebook login not showing up on heroku deployment
 - on form-score.html push masonry forms down and display user's photos and likes above it
 - on candidate-solo.html push score of Math.floor(Math.random(577 to 307)
 - store this score in the mongoLab database (working already)
