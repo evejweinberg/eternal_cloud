@@ -197,6 +197,7 @@ var group = new THREE.Group();
                   })
             var video_mesh = new THREE.Mesh( video_geo, video_mat );
             group.add(video_mesh)
+            console.log(video_mat)
             loadfont(person.name, 11, 0,boxSize,0)
             // console.log(loadfont(person.name, 11, 0,boxSize*1.3,0))
             scene.add(group);

@@ -386,6 +386,11 @@ router.get('/directory', function(req, res) {
   res.render('directory.html')
 })
 
+//add search here
+router.get('/members', function(req, res) {
+  res.render('members.html')
+})
+
 
 router.get('/candidate-solo', function(req, res) {
   res.render('candidate-solo.html')
