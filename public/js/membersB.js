@@ -80,7 +80,7 @@ function init() {
 
 
 
-          if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https')){
+          if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket')){
             // console.log('image is '+ response.people[i].imageUrl)
 
 
