@@ -23,30 +23,41 @@ function init() {
   var loader2 = new THREE.TextureLoader();
 
 
+
+
+
+
+
+
+
   //get data from mongoLab database!!
   jQuery.ajax({
     url : '/api/get',
     dataType : 'json',
     success : function(response) {
-      console.log(response)
+      // console.log(response)
 
 
       for (var i in response.people){
         // console.log(response.people[i])
 
         var person = response.people[i];
-        var personId = person._id;
 
-        var scene = new THREE.Scene();
 
+
+
+          var scene = new THREE.Scene();
+
+          //create a div with class name scene
           // make a list item
-        var element = document.createElement( "div" );
-        element.className = "list-item";
+          var element = document.createElement( "div" );
+          element.className = "list-item";
 
-        //check the names, add them or add a placeholder word
+
+          //check the names, add them or add a placeholder word
           if (response.people[i].name){
-          // console.log(response.people[i].name)
-          element.innerHTML = template.replace( '$', response.people[i].name);
+            // console.log(response.people[i].name)
+            element.innerHTML = template.replace( '$', response.people[i].name);
           } else {
             element.innerHTML = template.replace( '$', 'unindentified');
             // console.log('unindentified')
@@ -55,12 +66,11 @@ function init() {
 
           //check the scores
           if (response.people[i].score){
-          // console.log(response.people[i].score)
-          element.innerHTML += 'Score: ' + response.people[i].score;
-        } else {
-          element.innerHTML += 'Score: 0';
-        }
-
+            // console.log(response.people[i].score)
+            element.innerHTML += 'Score: ' + response.people[i].score;
+          } else {
+            element.innerHTML += 'Score: 0';
+          }
 
           scene.userData.element = element.querySelector( ".scene" );
           content.appendChild( element );
@@ -78,64 +88,73 @@ function init() {
           scene.userData.controls = controls;
 
 
+          scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
 
-
-          if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/')){
-            // console.log('image is '+ response.people[i].imageUrl)
-
-
-                loader2.load(response.people[i].imageUrl, textureLoaded);
-
-                function textureLoaded(texture){
-
-                  var geometry = geometries[ geometries.length * Math.random() | 0 ];
-
-                    var video_mat = new THREE.MeshPhongMaterial({
-                      color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
-                        // color: 0xb7b7b7,
-                        map: texture
-                          })
-
-                    // console.log(video_mat)
-
-                    var video_mesh = new THREE.Mesh( geometry, video_mat );
-                    // console.log("adding" , video_mesh)
-                    // video_mesh.position.y = 0;
-                    scene.add(video_mesh)
-
-                    //should i add this here? or outside of the else?
-                    scenes.push( scene );
-
-                  }//texture loader
+          var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+          light.position.set( 1, 1, 1 );
+          scene.add( light );
 
 
 
-              } else {
 
-                // console.log('image no good')
-                // add one random mesh to each scene
-                var geometry = geometries[ geometries.length * Math.random() | 0 ];
 
-                var material = new THREE.MeshStandardMaterial( {
 
-                  color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
-                  roughness: 0.5,
-                  metalness: 0,
-                  shading: THREE.FlatShading
 
-                } );
-                var t = new THREE.Mesh( geometry, material )
-                scene.add(t);
-                console.log(t)
-                  scenes.push( scene );
 
-              } //else over
 
-                scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
 
-                var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-                light.position.set( 1, 1, 1 );
-                scene.add( light );
+
+        if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/')){
+          // console.log('image is '+ response.people[i].imageUrl)
+
+          console.log(i);
+          loader2.load(response.people[i].imageUrl, function ( texture ) {
+            // do something with the texture
+            console.log(i);
+            createScene(texture, scene);
+          },
+          // Function called when download progresses
+          function ( xhr ) {
+            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+          },
+          // Function called when download errors
+          function ( xhr ) {
+            console.log( 'An error happened' );
+          });
+
+
+
+
+
+
+
+
+        }
+        else {
+
+          console.log('else');
+
+          //   var scene = new THREE.Scene();
+          //
+          // // console.log('image no good')
+          // // add one random mesh to each scene
+          // var geometry = geometries[ geometries.length * Math.random() | 0 ];
+          //
+          // var material = new THREE.MeshStandardMaterial( {
+          //
+          //   color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
+          //   roughness: 0.5,
+          //   metalness: 0,
+          //   shading: THREE.FlatShading
+          //
+          // } );
+          // var t = new THREE.Mesh( geometry, material )
+          // scene.add(t);
+          // scenes.push( scene );
+
+        } //else over
+
+
 
 
 
@@ -146,11 +165,51 @@ function init() {
       renderer.setPixelRatio( window.devicePixelRatio );
 
       animate();
-        },//success fucntion over
-      });//ajax request over
+    },//success fucntion over
+  });//ajax request over
 
 
-  }
+
+
+
+}
+
+
+
+function createScene(texture, scene){
+  console.log(i,scene);
+
+
+
+  var geometry = new THREE.BoxGeometry(1,1,1);
+
+  var video_mat = new THREE.MeshPhongMaterial({
+    color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
+    // color: 0xb7b7b7,
+    map: texture
+  })
+
+  // console.log(video_mat)
+
+  var video_mesh = new THREE.Mesh( geometry, video_mat );
+  // console.log("adding" , video_mesh)
+  // video_mesh.position.y = 0;
+  scene.add(video_mesh)
+
+  //should i add this here? or outside of the else?
+  scenes.push( scene );
+
+}
+
+
+
+
+function textureLoaded(texture){
+
+  createScene(texture)
+
+
+}//texture loader
 
 
 
@@ -189,19 +248,19 @@ function render() {
 
   scenes.forEach( function( scene ) {
 
-      // so something moves
-      scene.children[0].rotation.y = Date.now() * 0.001;
+    // so something moves
+    scene.children[0].rotation.y = Date.now() * 0.001;
 
-      // get the element that is a place holder for where we want to
-      // draw the scene
-      var element = scene.userData.element;
+    // get the element that is a place holder for where we want to
+    // draw the scene
+    var element = scene.userData.element;
 
-      // get its position relative to the page's viewport
-      var rect = element.getBoundingClientRect();
+    // get its position relative to the page's viewport
+    var rect = element.getBoundingClientRect();
 
-      // check if it's offscreen. If so skip it
-      if ( rect.bottom < 0 || rect.top  > renderer.domElement.clientHeight ||
-         rect.right  < 0 || rect.left > renderer.domElement.clientWidth ) {
+    // check if it's offscreen. If so skip it
+    if ( rect.bottom < 0 || rect.top  > renderer.domElement.clientHeight ||
+      rect.right  < 0 || rect.left > renderer.domElement.clientWidth ) {
 
         return;  // it's off screen
 
@@ -222,7 +281,7 @@ function render() {
 
     }); //for each over
 
-}
+  }
 
 
 
@@ -235,4 +294,4 @@ function render() {
 
 
 
-    // })
+  // })

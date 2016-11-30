@@ -1,5 +1,15 @@
 live heroku deployed URL: https://lit-castle-51205.herokuapp.com/
 
+
+#overall issues
+-facebook login button (/login.html) not showing up on heroku deployment (only shows on localhost)
+- webcam 
+- on login.html, if the name they type in is already taken, let them use it anyway, currently there is not even error messaging to let them know.
+
+
+
+
+
 #when /login submit button is pressed
 
 - ~~replace front end screen with /form-score/:id (working already)~~
@@ -28,8 +38,3 @@ live heroku deployed URL: https://lit-castle-51205.herokuapp.com/
 
 #add to form-score.html
 - add a No CAPTCHA reCAPTCHA and push a score update of 10
-
-
-#overall issues
--facebook login not showing up on heroku deployment
-- on login.html, if the name they type in is already taken, let them use it anyway, currently there is not even error messaging to let them know.
