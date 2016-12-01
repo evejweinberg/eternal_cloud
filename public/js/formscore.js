@@ -43,7 +43,10 @@ function intelligenceSubmit(){
   $.ajax({
     url: '/api/update/'+personId,
     method: 'POST',
-    data: { intelligence: intelligence },
+    data: {
+      intelligence: intelligence,
+    personId:personId
+   },
     success: function (data) {
         console.log(data);
     },
@@ -60,7 +63,10 @@ function compostSubmit(){
   $.ajax({
     url: '/api/update/'+personId,
     method: 'POST',
-    data: { compost: compost },
+    data: {
+      compost: compost,
+    personId:personId
+   },
     success: function (data) {
         console.log(data);
     },
@@ -78,7 +84,10 @@ function everydaySubmit(){
   $.ajax({
     url: '/api/update/'+personId,
     method: 'POST',
-    data: { everyday: everyday },
+    data: {
+      everyday: everyday,
+    personId:personId
+   },
     success: function (data) {
         console.log(data);
     },
@@ -150,3 +159,27 @@ function careerChoice(){
   });
 checkifFinished()
 };
+
+
+
+
+
+
+
+
+function yep() {
+	var loader = document.getElementById("checkBox");
+	loader.className = "yepAnim";
+	setTimeout(function(){
+		loader.className = "loadAnim"
+				   },0450);
+	setTimeout(function(){
+		loader.className = "checkAnim"
+	},1000);
+	setTimeout(function(){
+		documentgetElementById('cap-res').innerHTML = "Thank You for being human."
+		documentgetElementById('cap-res').className = "container";
+		documentgetElementById('cap-res').style.fontSize = "15px";
+	},3000);
+
+}

@@ -284,7 +284,7 @@ router.post('/submitProfile', upload.single('file'), function(req, res) {
   var publicUrl = process.env.AWS_S3_PATH + tempName;
   console.log('public url: ' + publicUrl);
 
-  console.log(req.body.imageUrl)
+  // console.log(req.body.imageUrl)
 
   //save a data object
   var personObj = {
@@ -433,11 +433,9 @@ router.get('/api/get', function(req, res) {
 
 //all scoring updates happen here
 router.post('/api/update/:id', function(req, res) {
-  //pull out fields that were posted
-  // console.log('REQUEST BODY: ', req.body)
 
-  // var idToUpdate = req.body.personId;
-  var requestedId = req.param('id');
+  var requestedId = req.body.personId;
+  // var requestedId = req.body._id;
   // where is this console logging to? server?
   //create an object
   var dataToUpdate = {};
@@ -445,16 +443,15 @@ router.post('/api/update/:id', function(req, res) {
   //change score of personId
   Person.findById(requestedId, function(err,data){
     console.log('////////////////')
-    console.log(data)
-    console.warn(req.body)
+    // console.log(data)
+    // console.warn(req.body)
 
 
 
     if (parseInt(req.body.percentIncome) > 10){
-      // dataToUpdate.score = data.score+20;
+      console.log('updating donation percentage score factor')
       data.score += 20
     } else {
-      // dataToUpdate.score = data.score-20;
       data.score -= 20
     }
 
@@ -477,7 +474,7 @@ router.post('/api/update/:id', function(req, res) {
 
 
     //save score
-    dataToUpdate.score = data.score.toFixed(3);
+    dataToUpdate.score = data.score.toFixed(2);
 
     Person.findByIdAndUpdate(requestedId, dataToUpdate, function(err,updatedData){
       if(err){
