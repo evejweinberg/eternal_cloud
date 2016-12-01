@@ -1,11 +1,10 @@
 // if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
-var canvas = document.getElementById( "c" );;
+var canvas;
 var scenes = [], renderer;
 var sceneNum = 0;
 var moveon = false;
 var i = 0;
-var alltextures = []
 var geometries = [
   new THREE.BoxGeometry( 1, 1, 1 ),
   new THREE.SphereGeometry( 0.5, 12, 8 ),
@@ -29,10 +28,10 @@ jQuery.ajax({
   success : function(response) {
 
     //when we have it, then init the scene
-    console.log(response) //<---- returns 23
+    // console.log(response.people.length) <---- returns 23
 
     init();
-    loopingfunction(response)
+  loopingfunction(response)
 
 
 
@@ -48,6 +47,19 @@ jQuery.ajax({
 
 
 function init() {
+
+  canvas = document.getElementById( "c" );
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -205,21 +217,18 @@ function render() {
   function loopingfunction(response){
 
     if(i < response.people.length-1) {
-      console.log('on loop: ' + i)
+      console.log(i)
       if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/')){
-        console.log('image is '+ response.people[i].imageUrl)
+        // console.log('image is '+ response.people[i].imageUrl)
 
         //this is asynchronous, go into here and pause forloop until it's done
         loader2.load(response.people[i].imageUrl, function ( texture ) {
-
-          alltextures.push(texture)
           // do something with the texture
-          // createScene(texture, i, response);
+          createScene(texture, i, response);
         },
         // Function called when download progresses
         function ( xhr ) {
           console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-          console.log(alltextures)
         },
         // Function called when download errors
         function ( xhr ) {
