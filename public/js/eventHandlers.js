@@ -75,9 +75,9 @@ function LoginPressed(){
     }
     // console.log('clearing interval')
     clearInterval(loginPrompt)
-    // asciiOn = true;
+    asciiOn = true;
     scene3triggered = true;
-    document.getElementById('access-score').style.display = 'block';
+    // document.getElementById('access-score').style.display = 'block';
     secondScreen.location.href="/login"
   }
   })

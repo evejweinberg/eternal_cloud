@@ -67,7 +67,7 @@ function philanthropyOne(){
         console.log(response);
     },
     error : function(err){
-      alert("backend response: something went wrong from backend");
+      alert("backend response: something went wrong from backend like");
       console.error(err);
     }
   });

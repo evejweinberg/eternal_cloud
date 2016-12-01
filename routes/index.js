@@ -432,8 +432,6 @@ router.post('/api/update/:id', function(req, res) {
   //create an object
   var dataToUpdate = {};
 
-
-
   //change score of personId
   Person.findById(requestedId, function(err,data){
     console.log('////////////////')
@@ -470,8 +468,17 @@ router.post('/api/update/:id', function(req, res) {
     //save score
     dataToUpdate.score = data.score;
 
-    pusher.trigger('channelName', 'addedInfo', dataToUpdate);
-    data.save()
+    Person.findByIdAndUpdate(requestedId, dataToUpdate, function(err,updatedData){
+      if(err){
+        return res.json({status:'error', message: 'something went wrong trying to save that user'})
+      }
+
+      //tell any browser window that is at route /third to switch to
+      //route /candidate-solo
+      pusher.trigger('channelName', 'addedInfo', dataToUpdate);
+      return res.json(updatedData);
+
+    })
 
 
   })

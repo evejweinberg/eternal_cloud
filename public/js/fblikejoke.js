@@ -81,12 +81,12 @@ jQuery.ajax({
       console.log(response);
   },
   error : function(err){
-    alert("backend response: something went wrong from backend");
+    alert("backend response: something went wrong from backend, update");
     console.error(err);
   }
 });
 
-
+//commentt this out
 jQuery.ajax({
   url : '/api/update/'+personId,
   dataType : 'json',

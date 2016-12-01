@@ -15,6 +15,9 @@
 		<script src="js/threex/THREEx.WindowResize.js"></script>
 		<script src="js/three.js/TrackballControls.js"></script>
 		<script src="js/webcam.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		  <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 
 		<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 
@@ -50,7 +53,49 @@
 
 	<script type="text/javascript">
 		// if
-		// window.location = '/candidate-solo';
+		$.ajax({
+			url: '/getKey',
+			method: 'get',
+		})
+		.done(function(data){
+
+			makePusher(data)
+		})
+		.fail(function(err){
+			console.log(err)
+		})
+
+		function makePusher(key){
+			var pusherFront = new Pusher(key);
+
+			// //subscribe and unsubscribe from channels at any time.
+			//create a channel from nothing like this.
+			//events are past tense "thing was created"
+			var channel1 = pusherFront.subscribe("photoTakenCh");
+
+
+
+
+	//events are published to channels.
+	//all events on a channel are pushed to all subscribers of that channel
+	//use channels to filter
+	//bind with a callback;
+			channel1.bind('photoTaken',
+				function(data) {
+					// add new price into the APPL widget
+					//console.log('binding "addedInfo" to channel1. data:');
+					console.log(data);
+
+
+					//tally up score
+					//post score to the server
+					location.href = '/candidate-solo';
+
+				})
+
+		}
+
+
 	</script>
 
 

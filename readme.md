@@ -6,6 +6,7 @@ live heroku deployed URL: https://lit-castle-51205.herokuapp.com/
 - webcam
 - on login.html, if the name they type in is already taken, let them use it anyway, currently there is not even error messaging to let them know.
 - can the pusher/websockets works in the windows are no longer popups, but instead separate browser windows on different machines?
+- what is causing the error: backend response: something went wrong from backend
 
 
 
