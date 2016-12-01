@@ -27,8 +27,8 @@ if ( parseInt($("#num-answered").text()) == 12){
         console.log(response);
     },
     error : function(err){
-      // do error checking
-      alert("something went wrong");
+      //why is this getting hit but its still working?
+      // alert("something went wrong");
       console.error(err);
     }
   });

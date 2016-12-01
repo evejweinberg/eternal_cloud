@@ -25,10 +25,7 @@
 		<link  href="css/make-profile.css" rel="stylesheet"/>
 	</head>
 <body>
-	<!-- <h1>LOGIN</h1> -->
 
-	<!-- <img src="" alt="" /> -->
-	<!-- <button type="button" class="btn btn-lg btn-pill btn-primary">Primary</button> -->
 
 
 	<div id="my_camera" style="display:none"></div>
@@ -281,7 +278,6 @@
 
 
 
-
 	<!-- <div class="container"> -->
 		<div class="header">
 
@@ -293,7 +289,7 @@
 
 				<form method="post" action="/api/create" id="myForm" enctype="multipart/form-data">
 
-					<div class="form-group" style="position:absolute">
+					<div class="form-group" id="login-button" style="position:absolute">
 						<label for="name"></label>
 						<input type="text" class="form-control" id="name" placeholder="Name" name="name">
 						<input id="botton-button" type=button class="btn" value="Submit Name & Photo" onClick="take_snapshot()">
