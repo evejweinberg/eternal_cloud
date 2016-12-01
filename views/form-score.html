@@ -482,6 +482,42 @@ left: 15%;
     </div>
 
 
+    <script type="text/javascript">
+      // if
+      $.ajax({
+        url: '/getKey',
+        method: 'get',
+      })
+      .done(function(data){
+
+        makePusher(data)
+      })
+      .fail(function(err){
+        console.log(err)
+      })
+
+      function makePusher(key){
+        var pusherFront = new Pusher(key);
+
+
+        var channel2 = pusherFront.subscribe("formFinishedCh");
+
+        channel2.bind('formFinished',
+          function(data) {
+            console.log(data);
+
+            //change the route
+            location.href = '/members';
+
+          })
+
+
+      }
+    </script>
+
+
+
+
   </body>
 
   </html>

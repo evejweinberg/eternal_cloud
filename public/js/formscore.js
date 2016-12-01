@@ -18,7 +18,8 @@ if ( parseInt($("#num-answered").text()) == 12){
     dataType : 'json',
     type : 'POST',
     data : {
-      done: 'yes'
+      done: 'yes',
+      personId: personId
     },
     success : function(response){
         // success
