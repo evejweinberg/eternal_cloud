@@ -37,13 +37,9 @@
 		</style>
 	</head>
 <body>
+
+
 <div class="center">
-
-
-<!-- <h1>you can't</h1>
-<h1 id='login'>LOGIN</h1>
-<h1>yet</h1>
-<br><br> -->
 <h1>DO NOT CLOSE THIS WINDOW</h1>
 </div>
 
@@ -68,27 +64,15 @@
 		function makePusher(key){
 			var pusherFront = new Pusher(key);
 
-			// //subscribe and unsubscribe from channels at any time.
-			//create a channel from nothing like this.
-			//events are past tense "thing was created"
 			var channel1 = pusherFront.subscribe("photoTakenCh");
 
 
 
-
-	//events are published to channels.
-	//all events on a channel are pushed to all subscribers of that channel
-	//use channels to filter
-	//bind with a callback;
 			channel1.bind('photoTaken',
 				function(data) {
-					// add new price into the APPL widget
-					//console.log('binding "addedInfo" to channel1. data:');
 					console.log(data);
 
-
-					//tally up score
-					//post score to the server
+					//change the route
 					location.href = '/candidate-solo';
 
 				})

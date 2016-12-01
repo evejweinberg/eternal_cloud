@@ -369,6 +369,11 @@ function animate(timestamp) {
     TweenMax.to(camera.position, 3,{z: 0, y: -7},function(){first_descend=false})
   }
 
+  if (listen_to_plan){
+    TweenMax.to(camera.position, 7,{z: 0, x: 0,y: 60},function(){listen_to_plan=false})
+
+  }
+
   for (var i in Hexes){
     Hexes[i].rotation.z += .1
   }

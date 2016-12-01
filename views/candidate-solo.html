@@ -102,6 +102,19 @@
     //create a channel from nothing like this.
     //events are past tense "thing was created"
     var channel1 = pusherFront.subscribe("channelName");
+    var channel2 = pusherFront.subscribe("formFinishedCh");
+
+
+
+
+    channel2.bind('formFinished',
+      function(data) {
+        console.log(data);
+
+        //change the route
+        location.href = '/members';
+
+      })
 
 
 

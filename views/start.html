@@ -56,7 +56,21 @@
 
     <div id="blocker">
 
-      <div id="access-score">
+      <div id="your-plan">
+        <h1>Your Plan for Salvation</h1>
+        <p>Do NOT panic. There is still time for you. We will send you back to 2016, and as long as you adhere to the following plan, you will surely make it into Eternal Cloud by 2045</p>
+        <br>
+
+
+        <div class="form-group">
+            <label for="email">Email me my plan:</label>
+            <input type="email" class="form-control" id="email">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+
+      </div>
+
+      <!-- <div id="access-score">
         <h1 class = 'access-score-type'><mark>YOUR HUMANITARIAN SCORE</mark></h1>
       <br>
       <table>
@@ -92,7 +106,7 @@
 <br>
 <h1 class = 'access-score-type'><mark>TOTAL VALUE TO ETERNAL CLOUD: </mark><span id="hc-total"></span></h1>
 
-    </div>
+    </div> -->
 
 
   			<div id="instructions">
@@ -216,6 +230,8 @@
     var channel1 = pusherFront.subscribe("channelName");
     var channel2 = pusherFront.subscribe("photoTakenCh");
     var channel3 = pusherFront.subscribe("doneChannel");
+    var channel4 = pusherFront.subscribe("formFinishedCh");
+
 
 
 
@@ -229,49 +245,10 @@
         console.log('binding "addedInfo" to channel1. data:');
         console.log(data);
 
-        if(data.philanthropy != undefined){
-          //make an algorithm for score
-          var philGB = data.philanthropy*1.3;
-        document.getElementById("access-1-score").innerHTML = data.philanthropy+ '%';
-        document.getElementById("access-1-gb").innerHTML = philGB;
-
-        }
-
-        if(data.career != undefined){
-          console.log(data.career)
-          document.getElementById("access-2-score").innerHTML = data.career;
-          if (data.career == 'yes'){
-            document.getElementById("access-2-gb").innerHTML = -88;
-
-          } else {
-            document.getElementById("access-2-gb").innerHTML = 66;
-
-          }
-        }
-
-        if(data.intelligence != undefined){
-          console.log(data.intelligence)
-          document.getElementById("access-3-score").innerHTML = data.intelligence;
-          document.getElementById("access-2-gb").innerHTML = Math.floor(Math.random()*300);
-        }
-
-        if(data.activism != undefined){
-          console.log(data.activism)
-          document.getElementById("access-4-gb").innerHTML = 43;
-
-          document.getElementById("access-4-score").innerHTML = data.activism;
-        } else {
-          document.getElementById("access-4-score").innerHTML = '🙈 🙉 🙊';
-
-        }
-        //tally up score
-        //post score to the server
-        document.getElementById("hc-total").innerHTML = parseInt(document.getElementById("access-2-gb").innerHTML) + parseInt(document.getElementById("access-1-gb").innerHTML)+parseInt(document.getElementById("access-3-gb").innerHTML)+parseInt(document.getElementById("access-4-gb").innerHTML)
-
 
       })
-
-      channel2.bind("finishedForm",Scene4)
+      //event name
+      channel4.bind("formFinished",Scene4)
 
 
 

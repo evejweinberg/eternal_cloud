@@ -95,7 +95,7 @@ mark {
   color: white;
   background-color: black; }
 
-#access-score {
+#access-score, #your-plan {
   width: 70%;
   height: 70%;
   margin: 15%;
@@ -105,9 +105,8 @@ mark {
   position: absolute;
   display: none;
   z-index: 800;
-  color: white;
-  background-color: rgba(5, 5, 5, 0);
-  box-shadow: 10px 10px 0px 0px black; }
+  color: #009fc6;
+  background-color: rgba(255, 255, 255, 0.3); }
 
 .tagline-holder {
   position: relative;

@@ -24,7 +24,11 @@ function mOut(obj) {
 var i = 0
 var colors= [ "#10e88a","#7f3995",
 "#0d78e7","#f88f18","#bb6774"]
+
+
+
 function   startExperience() {
+  console.log('fb joke was hit')
   // document.getElementById('make-diff').style.display = "block"
   i++
   var endingHeight = 5;
@@ -67,26 +71,20 @@ TweenMax.from(like,.6, {
   y: 10,ease: Strong.easeInOut, yoyo:true
 })
 
-jQuery.ajax({
-  url : '/api/update/'+personId,
-  dataType : 'json',
-  type : 'POST',
-  // we send the data in a data object (with key/value pairs)
-  data : {
-    percentIncome: percentIncome,
-    personId:personId
-      },
-  success : function(response){
-      console.log('success in posting percentage')
-      console.log(response);
-  },
-  error : function(err){
-    alert("backend response: something went wrong from backend, update");
-    console.error(err);
-  }
-});
 
-//commentt this out
+
+like.innerHTML = i + ' LIKES'
+document.getElementById('dot1').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+document.getElementById('dot2').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+document.getElementById('dot3').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+document.getElementById('dot4').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+document.getElementById('dot5').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+document.getElementById('dot6').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+document.getElementById('dot7').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
+
+
+
+//commentt this out??
 jQuery.ajax({
   url : '/api/update/'+personId,
   dataType : 'json',
@@ -101,18 +99,10 @@ jQuery.ajax({
       console.log(response);
   },
   error : function(err){
-    alert("backend response: something went wrong from backend");
+    alert("backend response: something went wrong from backend when hitting like");
     console.error(err);
   }
 });
 
-like.innerHTML = i + ' LIKES'
-document.getElementById('dot1').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-document.getElementById('dot2').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-document.getElementById('dot3').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-document.getElementById('dot4').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-document.getElementById('dot5').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-document.getElementById('dot6').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-document.getElementById('dot7').style.backgroundColor = dotCol[Math.floor(Math.random()*dotCol.length)]
-//  document.body.style.backgroundColor = colors[i%colors.length];
-}
+
+} //end of function

@@ -53,7 +53,8 @@ var videoBounce = .01
 var video, videoImage, videoImageContext, videoTexture;
 var scene3triggered = false;
 var currentVideo;
-var video4, scene4= false;
+var scene4= false;
+var video4 = document.getElementById( 'video4' );
 
 
 
@@ -71,6 +72,7 @@ var purple = 0xb9a0b1;
 // BOOLEANS
 
 var first_descend = false;
+var listen_to_plan = false;
 var playFirstvideo = false;
 var havenotHitLady = true;
 

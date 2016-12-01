@@ -16,6 +16,10 @@
 		<script src="js/three.js/TrackballControls.js"></script>
 		<script src="js/webcam.js"></script>
 
+		<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
 		<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -47,6 +51,46 @@
 
 	<div id="my_camera"></div>
 	<div id="container"></div>
+
+
+	<script type="text/javascript">
+		// if
+		$.ajax({
+			url: '/getKey',
+			method: 'get',
+		})
+		.done(function(data){
+			console.log('pre profile has pusher')
+
+			makePusher(data)
+		})
+		.fail(function(err){
+			console.log(err)
+		})
+
+		function makePusher(key){
+			var pusherFront = new Pusher(key);
+
+			var channel1 = pusherFront.subscribe("loginPressedCh");
+
+
+			channel1.bind('loginPressed',
+				function(data) {
+					console.log(data);
+
+					//change the route
+					location.href = '/login';
+
+				})
+
+		}
+
+
+	</script>
+
+
+
+
 
 
 

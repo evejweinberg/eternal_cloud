@@ -10,6 +10,31 @@ function anyFormSubmitted(){
   personId = document.getElementById('personId').innerHTML;
 }
 
+function checkifFinished(){
+if ( parseInt($("#num-answered").text()) == 12){
+  console.log('12 answers')
+  jQuery.ajax({
+    url : '/api/done',
+    dataType : 'json',
+    type : 'POST',
+    data : {
+      done: 'yes'
+    },
+    success : function(response){
+        // success
+        console.log('success in finishing 12 answers')
+        console.log(response);
+    },
+    error : function(err){
+      // do error checking
+      alert("something went wrong");
+      console.error(err);
+    }
+  });
+
+}
+}
+
 
 function intelligenceSubmit(){
   var intelligence = $(".education-highest:selected").val();
@@ -26,6 +51,7 @@ function intelligenceSubmit(){
         // Uh oh, something went wrong
     }
 });
+checkifFinished()
 }
 
 function compostSubmit(){
@@ -42,7 +68,26 @@ function compostSubmit(){
         // Uh oh, something went wrong
     }
 });
+checkifFinished()
+}
 
+
+function everydaySubmit(){
+  var everday = $("#everyday").val();
+  anyFormSubmitted()
+  $.ajax({
+    url: '/api/update/'+personId,
+    method: 'POST',
+    data: { everyday: everyday },
+    success: function (data) {
+        console.log(data);
+    },
+    error: function () {
+        // Uh oh, something went wrong
+    }
+});
+
+checkifFinished()
 }
 
 
@@ -71,7 +116,7 @@ function philanthropyOne(){
       console.error(err);
     }
   });
-
+checkifFinished()
 }
 
 
@@ -103,104 +148,5 @@ function careerChoice(){
   		console.error(err);
   	}
   });
-
+checkifFinished()
 };
-
-
-
-$("#ActivismForm").submit(function(e){
-
-  e.preventDefault();
-  anyFormSubmitted();
-
-
-  var activism = $("#activism").val();
-  console.log(activism)
-
-
-  jQuery.ajax({
-  	url : '/api/update/'+personId,
-  	dataType : 'json',
-  	type : 'POST',
-  	// we send the data in a data object (with key/value pairs)
-  	data : {
-      //YOU CAN HAVE ERRORS HERE, its ok to pass something that it's there
-  		activism: activism,
-  	},
-  	success : function(response){
-        console.log('success in posting activism');
-	  		console.log(response);
-  	},
-  	error : function(err){
-  		// do error checking
-  		alert("something went wrong");
-  		console.error(err);
-  	}
-  });
-
-
-  return false;
-
-})
-
-
-
-jQuery("#IntelligenceForm").submit(function(e){
-   e.preventDefault();
-    anyFormSubmitted();
-
-  jQuery.ajax({
-  	url : '/api/update/'+personId,
-  	dataType : 'json',
-  	type : 'POST',
-  	// we send the data in a data object (with key/value pairs)
-  	data : {
-  		intelligence: intelligence,
-      educationlevel: educationlevel
-  	},
-  	success : function(response){
-	  		// success
-        console.log('success in posting intelligence')
-	  		console.log(response);
-	  		// now, clear the input fields
-	  		// jQuery("#candidateForm input").val('');
-  	},
-  	error : function(err){
-  		// do error checking
-  		alert("something went wrong");
-  		console.error(err);
-  	}
-  });
-
-
-  return false;
-
-})
-
-
-// function Done(){
-//   console.log('done fucntion was called')
-//
-//   jQuery.ajax({
-//   	url : '/api/done',
-//   	dataType : 'json',
-//   	type : 'POST',
-//   	// we send the data in a data object (with key/value pairs)
-//   	data : {
-//   		done: "yes",
-//   	},
-//   	success : function(response){
-// 	  		// success
-//         console.log('done with form');
-// 	  		console.log(response);
-// 	  		// now, clear the input fields
-// 	  		// jQuery("#candidateForm input").val('');
-//   	},
-//   	error : function(err){
-//   		// do error checking
-//   		alert("something went wrong when hitting DONE button");
-//   		console.error(err);
-//   	}
-//   });
-//
-// }

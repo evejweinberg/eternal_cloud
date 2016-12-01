@@ -74,12 +74,12 @@ var upload = multer({
 
 
 router.get('/', function(req, res) {
-  res.redirect('/first')
+  res.render('start.html')
 });
 
-router.get('/first', function(req, res) {
-  res.render('start.html')
-})
+// router.get('/first', function(req, res) {
+//   res.render('start.html')
+// })
 
 
 router.get('/second', function(req, res) {
@@ -163,7 +163,6 @@ router.post('/form-score/:id/facebookAdd', function(req, res) {
   var accessToken = req.body.accessToken;
   var clientId = req.body.clientId;
   var clientSecret = process.env.FACEBOOK_SECRET;
-
 
   var pageData = {
     personId: personId
@@ -337,34 +336,13 @@ router.post('/submitProfile', upload.single('file'), function(req, res) {
 });
 
 
+router.post('/api/login',function(req,res){
+  console.log(res.body)
 
-
-//when do i hit this route?
-router.get('/api/get', function(req, res) {
-  //find all items
-  Person.find(function(err, data) {
-
-    if (err) {
-      var error = {
-        status: "ERROR",
-        message: err
-      }
-      return res.json(err)
-    }
-
-    var jsonData = {
-      status: "OK",
-      people: data
-    }
-
-    return res.json(jsonData);
-
-  })
+  pusher.trigger('loginPressedCh', 'loginPressed', {pressed:'yes'});
+  res.json({pressed:'yes'});
 
 })
-
-
-
 
 
 
@@ -395,15 +373,14 @@ router.get('/members', function(req, res) {
 router.get('/candidate-solo', function(req, res) {
   res.render('candidate-solo.html')
 })
-router.get('/third', function(req, res) {
 
-  // isStart = req.query.isStart
-  // if (isStart == 'true')
+router.get('/third', function(req, res) {
   res.render('blank.html')
-  // else {
-  // res.render('candidate-solo.html')
-  // }
 })
+
+
+
+
 
 router.post('/api/done', function(req, res) {
   console.log(req.body)
@@ -411,13 +388,46 @@ router.post('/api/done', function(req, res) {
   if (req.body.done == "yes") {
     console.log('server DONE route hit and done was YES')
 
-    pusher.trigger('photoTakenCh', 'finishedForm', req.body);
-    // return;
+    pusher.trigger('formFinishedCh', 'formFinished', req.body);
 
   }
 
+  return res.json();
 
 })
+
+
+
+
+
+
+//i hit this route when I need to render my people onto cubes
+router.get('/api/get', function(req, res) {
+  //find all items
+  Person.find(function(err, data) {
+
+    if (err) {
+      var error = {
+        status: "ERROR",
+        message: err
+      }
+      return res.json(err)
+    }
+
+    var jsonData = {
+      status: "OK",
+      people: data
+    }
+
+    return res.json(jsonData);
+
+  })
+
+})
+
+
+
+
 
 
 
@@ -461,12 +471,13 @@ router.post('/api/update/:id', function(req, res) {
     }
 
     if(req.body.like){
+      console.log('like was hit')
       data.score +=.01
     }
 
 
     //save score
-    dataToUpdate.score = data.score;
+    dataToUpdate.score = data.score.toFixed(3);
 
     Person.findByIdAndUpdate(requestedId, dataToUpdate, function(err,updatedData){
       if(err){
@@ -483,23 +494,7 @@ router.post('/api/update/:id', function(req, res) {
 
   })
 
-  //find them in the database, by their ID
-  // Person.findByIdAndUpdate(requestedId, dataToUpdate, function(err, data) {
-  //   console.log(dataToUpdate)
-  //   if (err) {
-  //     console.log(requestedId, dataToUpdate, 'err hit')
-  //   } else {
-  //     //whats currently in the database, previous value
-  //     // console.log(data);
-  //     res.json(data);
-  //     //push to the front end
-  //     //'channel Name', 'event Name', message
-  //     pusher.trigger('channelName', 'addedInfo', dataToUpdate);
-  //     // console.log("triggered/pushed ", dataToUpdate);
-  //     //we are responding with it but now we have
-  //     //to put it in the html
-  //   }
-  // });
+
 
 
 

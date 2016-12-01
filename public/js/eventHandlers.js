@@ -35,14 +35,7 @@ window.addEventListener("load", function(){
   thirdScreen = window.open('/third', "thirdScreen", "width=500,height=700,scrollbars=1,status=1")
   document.getElementById('date').innerHTML = today
 
-//   setTimeout( function() {
-//    if(!secondScreen || secondScreen.outerHeight === 0) {
-//        //First Checking Condition Works For IE & Firefox
-//        //Second Checking Condition Works For Chrome
-//        alert("Popup Blocker is enabled! Please add this site to your exception list and REFRESH THE SITE");
-//         // window.location.href = 'warning.html';
-//    }
-// }, 225);
+
 
 });
 
@@ -54,14 +47,18 @@ document.getElementById('login').addEventListener('click', LoginPressed)
 
 function Scene4(data){
   scene4 = true;
-  video4 = document.getElementById( 'video4' );
+  mainVidLady.material.map = textureLady4
   console.log('finished form as triggered')
   console.log(data)
-  secondScreen.location.href="/directory"
+  listen_to_plan = true;
+
+  secondScreen.location.href="/members"
   asciiOn = false;
   switchBackfromAscii = true;
+
   currentVideo = video4;
   video4.play();
+  $("#your-plan").fadeIn();
   //third screen add score to
 
 }
@@ -74,10 +71,28 @@ function LoginPressed(){
       scene.remove(allLadies[i])
     }
     // console.log('clearing interval')
-    clearInterval(loginPrompt)
+    // clearInterval(loginPrompt)
     asciiOn = true;
     scene3triggered = true;
-    // document.getElementById('access-score').style.display = 'block';
+    jQuery.ajax({
+      url : '/api/login',
+      dataType : 'json',
+      type : 'POST',
+      data : {
+        login: 'yes',
+      },
+      success : function(response){
+          console.log('success in telling server to login now');
+
+          console.log(response);
+      },
+      error : function(err){
+        // do error checking
+        alert("login to 2nd screen error");
+        console.error(err);
+      }
+    });
+
     secondScreen.location.href="/login"
   }
   })
@@ -89,7 +104,6 @@ function LoginPressed(){
 
     setInterval(popUp('window' + windowName,window.innerWidth-(i*80),i*80),150)
     setInterval(popUp('window' + windowName+ 'B',i*80,i*80),150)
-    // console.log()
     windowName++;
   }
 }
@@ -109,7 +123,7 @@ function ThirdScene(){
   scene.add(mainVidLady)
   TweenMax.to(mainVidLady.rotation,4,{y:360})
   video3.play()
-  loginPrompt = setInterval(newVidLady, 3000)
+  // loginPrompt = setInterval(newVidLady, 3000)
 }
 
 function startExperience(){

@@ -432,8 +432,6 @@ jQuery("#IntelligenceForm").submit(function(e){
 //   console.log('done hit')
 function Done(){
 
-  console.log('done fucntion was called')
-
   jQuery.ajax({
   	url : '/api/done',
   	dataType : 'json',
@@ -456,7 +454,4 @@ function Done(){
   	}
   });
 
-  // prevents the form from submitting normally
-  // e.preventDefault();
-  // return false;
 }

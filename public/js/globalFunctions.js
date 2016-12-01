@@ -285,6 +285,12 @@ function callMainVideo(){
   textureLady3.magFilter = THREE.LinearFilter;
   textureLady3.format = THREE.RGBFormat;
 
+  video4 = document.getElementById( 'video4' );
+  textureLady4 = new THREE.VideoTexture( video4 );
+  textureLady4.minFilter = THREE.LinearFilter;
+  textureLady4.magFilter = THREE.LinearFilter;
+  textureLady4.format = THREE.RGBFormat;
+
   matVid = new THREE.MeshLambertMaterial({color: 0xffffff, map: textureLady1});
 
 
