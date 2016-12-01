@@ -199,7 +199,7 @@ function init() {
         var geometry = new THREE.PlaneGeometry(512, 512);
 
         var material = new THREE.MeshPhongMaterial({
-            roughness: .64,
+      
             metalness: .81,
             transparent: false,
             opacity: 1,

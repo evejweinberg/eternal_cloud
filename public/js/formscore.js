@@ -122,7 +122,7 @@ function philanthropyOne(){
         console.log(response);
     },
     error : function(err){
-      alert("backend response: something went wrong from backend like");
+      alert("front end: something went wrong putting in percent income");
       console.error(err);
     }
   });

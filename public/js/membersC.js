@@ -5,6 +5,7 @@ var scenes = [], renderer;
 var sceneNum = 0;
 var moveon = false;
 var i = 0;
+var alltextures = [];
 
 var geometries = [
   new THREE.BoxGeometry( 1, 1, 1 ),
@@ -16,8 +17,8 @@ var video_geo = new THREE.BoxGeometry(1,1,1);
 
 var template = document.getElementById( "template" ).text;
 var content = document.getElementById( "content" );
-var loader2 = new THREE.TextureLoader();
 var manager = new THREE.LoadingManager();
+var loader2 = new THREE.TextureLoader(manager);
 
 
 
@@ -29,15 +30,6 @@ jQuery.ajax({
   dataType : 'json',
   success : function(response) {
 
-    // console.log(response.people.length) <---- returns 23
-
-
-
-
-    init();
-    animate();
-
-    function init() {
 
       canvas = document.getElementById( "c" );
 
@@ -51,61 +43,151 @@ jQuery.ajax({
       var template = document.getElementById( "template" ).text;
       var content = document.getElementById( "content" );
 
-      for ( var i =  0; i < 40; i ++ ) {
-
-        var scene = new THREE.Scene();
-
-        // make a list item
-        var element = document.createElement( "div" );
-        element.className = "list-item";
-        element.innerHTML = template.replace( '$', i + 1 );
-
-        // Look up the element that represents the area
-        // we want to render the scene
-        scene.userData.element = element.querySelector( ".scene" );
-        content.appendChild( element );
-
-        var camera = new THREE.PerspectiveCamera( 50, 1, 1, 10 );
-        camera.position.z = 2;
-        scene.userData.camera = camera;
-
-        var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
-        controls.minDistance = 2;
-        controls.maxDistance = 5;
-        controls.enablePan = false;
-        controls.enableZoom = false;
-        scene.userData.controls = controls;
-
-        // add one random mesh to each scene
-        var geometry = geometries[ geometries.length * Math.random() | 0 ];
-
-        var material = new THREE.MeshStandardMaterial( {
-
-          color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
-          roughness: 0.5,
-          metalness: 0,
-          shading: THREE.FlatShading
-
-        } );
-
-        scene.add( new THREE.Mesh( geometry, material ) );
-
-        scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
-
-        var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-        light.position.set( 1, 1, 1 );
-        scene.add( light );
-
-        scenes.push( scene );
-
-      }
 
 
-      renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true } );
-      renderer.setClearColor( 0xffffff, 1 );
-      renderer.setPixelRatio( window.devicePixelRatio );
+      for ( var i =  0; i < response.people.length; i ++ ) {
 
-    }
+
+
+        if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/') ){
+          // console.log(response.people[i].imageUrl)
+
+          var loader2 = new THREE.TextureLoader(manager);
+
+          loader2.load(response.people[i].imageUrl, function(texture){
+
+
+            var material = new THREE.MeshPhongMaterial( {
+
+                color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
+                map: texture
+                // shading: THREE.FlatShading
+
+              } );
+
+              alltextures.push(material)
+
+
+            }) //loader callback ends
+
+          }
+
+        }
+
+        manager.onLoad = function(){
+          console.log(alltextures)
+
+          for ( var i =  0; i < response.people.length; i ++ ) {
+
+
+
+            if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/') ){
+
+
+
+              var scene = new THREE.Scene();
+
+              // make a list item
+              var element = document.createElement( "div" );
+              element.className = "list-item";
+
+              // //check the names, add them or add a placeholder word
+              if (response.people[i].name){
+                element.innerHTML = template.replace( '$', response.people[i].name);
+              } else {
+                element.innerHTML = template.replace( '$', 'unindentified');
+              }
+
+              //check the scores
+              if (response.people[i].score){
+                element.innerHTML += 'Score: ' + response.people[i].score;
+              } else {
+                element.innerHTML += 'Score: 0';
+              }
+
+              // Look up the element that represents the area
+              // we want to render the scene
+              scene.userData.element = element.querySelector( ".scene" );
+              content.appendChild( element );
+
+              var camera = new THREE.PerspectiveCamera( 50, 1, 1, 10 );
+              camera.position.z = 2;
+              scene.userData.camera = camera;
+
+              var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
+              controls.minDistance = 2;
+              controls.maxDistance = 5;
+              controls.enablePan = false;
+              controls.enableZoom = false;
+              scene.userData.controls = controls;
+
+              // add one random mesh to each scene
+              var geometry = geometries[ geometries.length * Math.random() | 0 ];
+
+
+
+                scene.add( new THREE.Mesh( geometry, alltextures[i] ) );
+
+                scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
+
+                var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+                light.position.set( 1, 1, 1 );
+                scene.add( light );
+
+                scenes.push( scene );
+
+
+
+
+
+            }//if statement ends
+
+            else {
+              console.log('skipped this non-image person')
+            }
+          }//for loop ends
+
+
+          // only do this once
+          renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true, alpha: true } );
+          renderer.setClearColor( 0xffffff, .5 );
+          renderer.setPixelRatio( window.devicePixelRatio );
+
+
+            animate();
+
+
+
+        }
+
+
+
+
+
+
+
+        //without texture
+        // var material = new THREE.MeshStandardMaterial( {
+        //
+        //   color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
+        //   roughness: 0.5,
+        //   metalness: 0,
+        //   shading: THREE.FlatShading
+        //
+        // } );
+
+        // scene.add( new THREE.Mesh( geometry, material ) );
+        //
+        // scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
+        //
+        // var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        // light.position.set( 1, 1, 1 );
+        // scene.add( light );
+        //
+        // scenes.push( scene );
+
+
+
 
 
 
@@ -175,10 +257,7 @@ function render() {
 
     var camera = scene.userData.camera;
 
-    //camera.aspect = width / height; // not changing in this example
-    //camera.updateProjectionMatrix();
 
-    //scene.userData.controls.update();
 
     renderer.render( scene, camera );
 
