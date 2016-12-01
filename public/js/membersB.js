@@ -2,171 +2,60 @@
 
 var canvas;
 var scenes = [], renderer;
+var sceneNum = 0;
+var moveon = false;
+var i = 0;
+var geometries = [
+  new THREE.BoxGeometry( 1, 1, 1 ),
+  new THREE.SphereGeometry( 0.5, 12, 8 ),
+  new THREE.DodecahedronGeometry( 0.5 ),
+  new THREE.CylinderGeometry( 0.5, 0.5, 1, 12 ),
+];
+var video_geo = new THREE.BoxGeometry(1,1,1);
 
-init();
+var template = document.getElementById( "template" ).text;
+var content = document.getElementById( "content" );
+var loader2 = new THREE.TextureLoader();
+
+
+
+
+//get data from mongoLab database!!
+
+jQuery.ajax({
+  url : '/api/get',
+  dataType : 'json',
+  success : function(response) {
+
+    //when we have it, then init the scene
+    // console.log(response.people.length) <---- returns 23
+
+    init();
+  loopingfunction(response)
+
+
+
+    renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true } );
+    renderer.setClearColor( 0xffffff, 1 );
+    renderer.setPixelRatio( window.devicePixelRatio );
+
+    animate();
+  },//success fucntion over
+});//ajax request over
+
+
 
 
 function init() {
 
   canvas = document.getElementById( "c" );
 
-  var geometries = [
-    new THREE.BoxGeometry( 1, 1, 1 ),
-    new THREE.SphereGeometry( 0.5, 12, 8 ),
-    new THREE.DodecahedronGeometry( 0.5 ),
-    new THREE.CylinderGeometry( 0.5, 0.5, 1, 12 ),
-  ];
-  var video_geo = new THREE.BoxGeometry(1,1,1);
-
-  var template = document.getElementById( "template" ).text;
-  var content = document.getElementById( "content" );
-  var loader2 = new THREE.TextureLoader();
 
 
 
 
 
 
-
-
-
-  //get data from mongoLab database!!
-  jQuery.ajax({
-    url : '/api/get',
-    dataType : 'json',
-    success : function(response) {
-      // console.log(response)
-
-
-      for (var i in response.people){
-        // console.log(response.people[i])
-
-        var person = response.people[i];
-
-
-
-
-          var scene = new THREE.Scene();
-
-          //create a div with class name scene
-          // make a list item
-          var element = document.createElement( "div" );
-          element.className = "list-item";
-
-
-          //check the names, add them or add a placeholder word
-          if (response.people[i].name){
-            // console.log(response.people[i].name)
-            element.innerHTML = template.replace( '$', response.people[i].name);
-          } else {
-            element.innerHTML = template.replace( '$', 'unindentified');
-            // console.log('unindentified')
-          }
-
-
-          //check the scores
-          if (response.people[i].score){
-            // console.log(response.people[i].score)
-            element.innerHTML += 'Score: ' + response.people[i].score;
-          } else {
-            element.innerHTML += 'Score: 0';
-          }
-
-          scene.userData.element = element.querySelector( ".scene" );
-          content.appendChild( element );
-
-          var camera = new THREE.PerspectiveCamera( 50, 1, 1, 10 );
-          camera.position.z = 2;
-          scene.userData.camera = camera;
-
-
-          var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
-          controls.minDistance = 2;
-          controls.maxDistance = 5;
-          controls.enablePan = false;
-          controls.enableZoom = false;
-          scene.userData.controls = controls;
-
-
-          scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
-
-          var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-          light.position.set( 1, 1, 1 );
-          scene.add( light );
-
-
-
-
-
-
-
-
-
-
-
-        if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/')){
-          // console.log('image is '+ response.people[i].imageUrl)
-
-          console.log(i);
-          loader2.load(response.people[i].imageUrl, function ( texture ) {
-            // do something with the texture
-            console.log(i);
-            createScene(texture, scene);
-          },
-          // Function called when download progresses
-          function ( xhr ) {
-            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-          },
-          // Function called when download errors
-          function ( xhr ) {
-            console.log( 'An error happened' );
-          });
-
-
-
-
-
-
-
-
-        }
-        else {
-
-          console.log('else');
-
-          //   var scene = new THREE.Scene();
-          //
-          // // console.log('image no good')
-          // // add one random mesh to each scene
-          // var geometry = geometries[ geometries.length * Math.random() | 0 ];
-          //
-          // var material = new THREE.MeshStandardMaterial( {
-          //
-          //   color: new THREE.Color().setHSL( Math.random(), 1, 0.75 ),
-          //   roughness: 0.5,
-          //   metalness: 0,
-          //   shading: THREE.FlatShading
-          //
-          // } );
-          // var t = new THREE.Mesh( geometry, material )
-          // scene.add(t);
-          // scenes.push( scene );
-
-        } //else over
-
-
-
-
-
-      } //loop over
-
-      renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true } );
-      renderer.setClearColor( 0xffffff, 1 );
-      renderer.setPixelRatio( window.devicePixelRatio );
-
-      animate();
-    },//success fucntion over
-  });//ajax request over
 
 
 
@@ -176,8 +65,52 @@ function init() {
 
 
 
-function createScene(texture, scene){
-  console.log(i,scene);
+function createScene(texture, i, response){
+  console.log('scene: ', i );
+  console.log('texture: ',texture);
+
+  var person = response.people[i];
+
+  var scene = new THREE.Scene();
+
+  //create a div with class name scene
+  // make a list item
+  var element = document.createElement( "div" );
+  element.className = "list-item";
+  scene.userData.element = element.querySelector( ".scene" );
+  content.appendChild( element );
+
+
+            // //check the names, add them or add a placeholder word
+            // if (response.people[i].name){
+            //   element.innerHTML = template.replace( '$', response.people[i].name);
+            // } else {
+            //   element.innerHTML = template.replace( '$', 'unindentified');
+            // }
+            //
+            // //check the scores
+            // if (response.people[i].score){
+            //   element.innerHTML += 'Score: ' + response.people[i].score;
+            // } else {
+            //   element.innerHTML += 'Score: 0';
+            // }
+
+
+  var camera = new THREE.PerspectiveCamera( 50, 1, 1, 10 );
+  camera.position.z = 2;
+  scene.userData.camera = camera;
+
+  // var controls = new THREE.OrbitControls( scene.userData.camera, scene.userData.element );
+  // controls.minDistance = 2;
+  // controls.maxDistance = 5;
+  // controls.enablePan = false;
+  // controls.enableZoom = false;
+  // scene.userData.controls = controls;
+
+  scene.add( new THREE.HemisphereLight( 0xaaaaaa, 0x444444 ) );
+  var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+  light.position.set( 1, 1, 1 );
+  scene.add( light );
 
 
 
@@ -198,18 +131,15 @@ function createScene(texture, scene){
 
   //should i add this here? or outside of the else?
   scenes.push( scene );
+  // sceneNum++
+  // moveon = true;
+  i++
+  console.log(i)
 
 }
 
 
 
-
-function textureLoaded(texture){
-
-  createScene(texture)
-
-
-}//texture loader
 
 
 
@@ -281,6 +211,47 @@ function render() {
 
     }); //for each over
 
+  }
+
+
+  function loopingfunction(response){
+
+    if(i < response.people.length-1) {
+      console.log(i)
+      if (response.people[i].imageUrl && response.people[i].imageUrl.includes('https://s3.amazonaws.com/eternalcloudbucket/')){
+        // console.log('image is '+ response.people[i].imageUrl)
+
+        //this is asynchronous, go into here and pause forloop until it's done
+        loader2.load(response.people[i].imageUrl, function ( texture ) {
+          // do something with the texture
+          createScene(texture, i, response);
+        },
+        // Function called when download progresses
+        function ( xhr ) {
+          console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+        },
+        // Function called when download errors
+        function ( xhr ) {
+          console.log( 'An error happened' );
+        });
+
+
+          i++
+      } //if done
+
+
+      else {
+          console.log('we moved on, ignored this person');
+          i++
+      } //else over
+
+
+
+
+
+    } //loop over
+
+    loopingfunction(response)
   }
 
 
