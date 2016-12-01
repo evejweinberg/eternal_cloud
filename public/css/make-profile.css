@@ -56,8 +56,8 @@ p{
 
 #botton-button{
 	position: absolute;
-	bottom: 10%;
-	left: 40%;
+	left: 50%;
+	transform: translateX(-110px);
 }
 
 .blue{
@@ -99,6 +99,12 @@ p{
 	background-color: #009fc6;
 	color: white;
 	text-align: center;
+}
+
+#form-button-login{
+	left: 50%;
+transform: translateX(-200px);
+width: 400px;
 }
 
 #container{
