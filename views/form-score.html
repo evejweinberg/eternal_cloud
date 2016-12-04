@@ -140,7 +140,7 @@ left: 15%;
             <p>Perentage of annual income you donate:</p>
             <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control"
             id="percentIncome" placeholder="10" name="percentIncome">
-            <button type="submit" onclick="philanthropyOne()" id="temp" class="btn btn-default">Submit</button>
+            <button type="submit" onclick="philanthropyOne(event)" id="temp" class="btn btn-default">Submit</button>
           </div>
         </div>
       </div>
@@ -171,7 +171,7 @@ left: 15%;
             <br>
             <input type="radio" name="compost" class="compost" value="no"> No
             <br>
-            <button type="submit" onclick="compostSubmit()" class="btn btn-default">Submit</button>
+            <button type="submit" onclick="compostSubmit(event)" class="btn btn-default">Submit</button>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ left: 15%;
             <br>
             <input type="radio" name="career" class="career" value="no"> No
             <br>
-            <button id="career_id" onclick="careerChoice()" type="submit" class="btn btn-default">Submit</button>
+            <button id="career_id" onclick="careerChoice(event)" type="submit" class="btn btn-default">Submit</button>
           </div>
         </div>
       </div>
@@ -227,7 +227,7 @@ left: 15%;
             <input type="radio" name="trump" class="trump" value="no"> No
             <br>
 
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" onclick="trumpSubmit(event)" class="btn btn-default">Submit</button>
 
           </div>
         </div>
@@ -250,7 +250,7 @@ left: 15%;
               <option class="education-highest" value="phd">PhD or higher</option>
             </select>
             <!-- <input type="text" class="form-control" id="educationlevel" placeholder="" name="educationlevel"> -->
-            <button type="submit" onclick="intelligenceSubmit()" class="btn btn-default">Submit</button>
+            <button type="submit" onclick="intelligenceSubmit(event)" class="btn btn-default">Submit</button>
           </div>
         </div>
       </div>
@@ -262,24 +262,42 @@ left: 15%;
             <h2>SALVATION OPPORTUNITY</h2>
             <p>Earn 25 GB by donating to the Red Cross right now</p>
 
-            <button type="submit" class="btn btn-default" return false;>Donate</button>
+            <button type="submit" class="btn btn-default" return false;
+            onclick="window.open('https://www.redcross.org/donate/donation')"
+
+            >Donate</button>
           </div>
         </div>
       </div>
 
 
 
-      <div class="masonry-layout__panel philanthropy-bg">
+      <div class="masonry-layout__panel activism-bg">
         <div class="masonry-layout__panel-content">
           <div id="Everyday" name="">
+            <h2>ACTIVISM</h2>
 
             <p>
               Name something you do every day that makes you a good person.
             </p>
 
             <input type="text" class="form-control" id="everyday" placeholder="" name="everyday">
-            <button type="submit" onclick="everydaySubmit()"class="btn btn-default">Submit</button>
+            <button type="submit" onclick="everydaySubmit(event)"class="btn btn-default">Submit</button>
 
+          </div>
+        </div>
+      </div>
+
+      <div class="masonry-layout__panel career-bg">
+        <div class="masonry-layout__panel-content">
+          <div id="">
+            <h2>CAREER CHOICE</h2>
+            <p>Do you work in public service or non-profit?</p>
+            <input type="radio" name="service" class="service" value="yes"> Yes
+            <br>
+            <input type="radio" name="service" class="service" value="no"> No
+            <br>
+            <button id="career_id" onclick="serviceForm(event)" type="submit" class="btn btn-default">Submit</button>
           </div>
         </div>
       </div>
@@ -297,7 +315,7 @@ left: 15%;
             <input type="radio" name="fundraiser" class="fundraiser" value="no"> No
             <br>
 
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" onclick="fundraiserForm(event)" class="btn btn-default">Submit</button>
 
           </div>
         </div>
@@ -306,7 +324,8 @@ left: 15%;
 
       <div class="masonry-layout__panel philanthropy-bg">
         <div class="masonry-layout__panel-content">
-          <form id="selfscore" name="">
+          <div id="selfscore" name="">
+            <h2>PHILANTHROPY</h2>
 
             <p>
               What humanitarian score would you give yourself?
@@ -321,7 +340,7 @@ left: 15%;
 
             <button type="submit" class="btn btn-default">Submit</button>
 
-          </form>
+          </div>
         </div>
       </div>
 
@@ -334,8 +353,8 @@ left: 15%;
             <h2>ACTIVISM</h2>
             <p>Name one organization or cause that you have donated time or money to,
               in the last year?</p>
-              <input type="text" class="form-control" id="activism" placeholder="" name="activism">
-              <button type="submit" class="btn btn-default">Submit</button>
+              <input type="text" class="form-control" id="orgformed" placeholder="" name="orgformed">
+              <button type="submit" onclick="namedOrgForm(event)" class="btn btn-default">Submit</button>
 
             </div>
           </div>
@@ -344,17 +363,17 @@ left: 15%;
 
         <div class="masonry-layout__panel career-bg">
           <div class="masonry-layout__panel-content">
-            <div id="recycling-form" name="">
+            <div id="daraprim-form" name="">
 
               <h2>CAREER</h2>
-              <p> Have you ever increased the price of a life-saving grug by 5500%?
+              <p> Have you ever increased the price of a life-saving drug by 5500%?
 </p>
               <input type="radio" name="daraprim" class="daraprim" value="yes"> Yes
               <br>
               <input type="radio" name="daraprim" class="daraprim" value="no"> No
               <br>
 
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" onclick="daraprimSubmit(event)" class="btn btn-default">Submit</button>
 
             </div>
           </div>
@@ -373,7 +392,7 @@ left: 15%;
               <input type="radio" name="blood" class="blood" value="no"> No
               <br>
 
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" onclick="bloodForm(event)" class="btn btn-default">Submit</button>
 
             </div>
           </div>
@@ -395,7 +414,7 @@ left: 15%;
               <input type="radio" name="globalwarming" class="globalwarming" value="no"> No
               <br>
 
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" onclick="globalwarmingForm(event)" class="btn btn-default">Submit</button>
 
             </div>
           </div>
@@ -413,7 +432,7 @@ left: 15%;
               <input type="radio" name="oil" class="oil" value="no"> No
               <br>
 
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit" onclick="oilForm(event)" class="btn btn-default">Submit</button>
 
             </div>
           </div>
@@ -434,13 +453,13 @@ left: 15%;
               <input type="radio" name="recycle" class="recycle" value="no"> No
               <br>
 
-              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="submit"  onclick="recycleForm(event)" class="btn btn-default">Submit</button>
 
             </div>
           </div>
         </div>
 
-        <div class="masonry-layout__panel intelligence-bg">
+        <!-- <div class="masonry-layout__panel intelligence-bg">
           <div class="masonry-layout__panel-content">
             <div id="IntelligenceForm" name="IntelligenceForm">
               <h2>INTELLIGENCE</h2>
@@ -450,11 +469,12 @@ left: 15%;
           </div>
 
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="masonry-layout__panel intelligence-bg">
+      <div class="masonry-layout__panel career-bg">
         <div class="masonry-layout__panel-content">
+            <h2>CAREER</h2>
           <div class="capta-container">
       <div class="reCAPTCHA">
         <div onclick="yep()" id="checkBox" class="checkBox"></div>
