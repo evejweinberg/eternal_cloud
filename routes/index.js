@@ -447,13 +447,25 @@ router.post('/api/update/:id', function(req, res) {
     // console.warn(req.body)
 
 
-
+//change this to a mapping value
+//map (req.body.percentIncome,0,30,-20,200);
     if (parseInt(req.body.percentIncome) > 10){
       console.log('updating donation percentage score factor')
       data.score += 20
-    } else {
+    } else if (parseInt(req.body.percentIncome) <= 10){
       data.score -= 20
     }
+
+    if (req.body.compost == 'yes' || req.body.recycle == 'yes' || req.body.career == 'yes' || req.body.fundraiser == 'yes' || req.body.globalwarming == 'yes'){
+      console.log( 'adding 88 points')
+      data.score += 88
+    }
+
+    if (req.body.everyday){
+      console.log( 'added sometihng to everyday')
+      data.score += 70
+    }
+
 
     if (req.body.intelligence == 'col'){
       data.score += 23
