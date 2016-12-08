@@ -4,8 +4,52 @@ var mongoose = require('mongoose');
 var Pusher = require('pusher');
 var env = require('node-env-file');
 var moment = require('moment');
-
+var nodemailer = require('nodemailer');
 var facebookUtil = require('./../utils/facebook');
+
+
+//add fancy addons, like email and web sockets
+///////////////////////////////////////////
+var transporter = nodemailer.createTransport(transport[, defaults])
+
+
+
+
+var smtpConfig = {
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false, // dont use SSL
+    auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD
+    }
+};
+
+var transporter = nodeMailer.createTransport(smtpConfig);
+
+
+// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: "Fred Foo ✔ <foo@blurdybloop.com>", // sender address
+    to: 'evejweinberg@gmail.com', // list of receivers
+    subject: "Eternal Cloud ✔", // Subject line
+    text: "Hello world ✔", // plaintext body
+    html: "<b>Hello world ✔</b>" // html body
+}
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, response){
+    if(error){
+        console.log(error);
+    }else{
+        console.log("Message sent: " + response.message);
+    }
+});
+
+
+
+
+
 
 
 //keep this shit secret
@@ -14,6 +58,8 @@ var pusher = new Pusher({
   key: process.env.pusher_key,
   secret: process.env.pusher_secret
 });
+
+////////////////////////addons done ////////////////
 
 
 // our db models
@@ -64,24 +110,15 @@ var upload = multer({
 
 
 
-/**
-* GET '/'
-* Default home route. Just relays a success message back.
-* @param  {Object} req
-* @return {Object} json
-*/
 
+//Default home route. Just relays a success message back.
 
 
 router.get('/', function(req, res) {
   res.render('start.html')
 });
 
-// router.get('/first', function(req, res) {
-//   res.render('start.html')
-// })
-
-
+//staging front end website
 router.get('/second', function(req, res) {
   res.redirect('/pre-profile')
 });
@@ -456,9 +493,18 @@ router.post('/api/update/:id', function(req, res) {
       data.score -= 20
     }
 
-    if (req.body.compost == 'yes' || req.body.recycle == 'yes' || req.body.career == 'yes' || req.body.fundraiser == 'yes' || req.body.globalwarming == 'yes'){
+    if (req.body.compost == 'yes' || req.body.recycle == 'yes' || req.body.career == 'yes' || req.body.fundraiser == 'yes' || req.body.daraprim == 'no' || req.body.globalwarming == 'yes' || req.body.blood == 'yes' || req.body.oil == 'no' || req.body.trump == 'no'){
       console.log( 'adding 88 points')
       data.score += 88
+    }
+
+    if (req.body.compost == 'no' || req.body.recycle == 'no' || req.body.career == 'no' || req.body.fundraiser == 'no' || req.body.daraprim == 'yes' || req.body.globalwarming == 'no' || req.body.blood == 'no' || req.body.oil == 'yes' || req.body.trump == 'no'){
+      console.log( 'adding 88 points')
+      data.score -= 12
+    }
+
+    if (req.body.robot == 'no'){
+      data.score += 7
     }
 
     if (req.body.everyday){
@@ -469,10 +515,8 @@ router.post('/api/update/:id', function(req, res) {
 
     if (req.body.intelligence == 'col'){
       data.score += 23
-      // dataToUpdate.score = data.score+23;
     } else if (req.body.intelligence == 'hs') {
       data.score += 3
-      // dataToUpdate.score = data.score+13;
     } else if (req.body.intelligence == 'grad') {
       data.score += 13
     } else {

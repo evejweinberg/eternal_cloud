@@ -449,6 +449,27 @@ function yep() {
 		documentgetElementById('cap-res').className = "container";
 		documentgetElementById('cap-res').style.fontSize = "15px";
 	},3000);
+
+  jQuery.ajax({
+    url : '/api/update/'+personId,
+    dataType : 'json',
+    type : 'POST',
+    data : {
+      robot: "no",
+      personId:personId
+    },
+    success : function(response){
+        // success
+        console.log('success in posting career response:');
+        console.log(response);
+
+    },
+    error : function(err){
+      // do error checking
+      alert("something went wrong");
+      console.error(err);
+    }
+  });
   checkifFinished();
 
 }

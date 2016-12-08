@@ -32,6 +32,9 @@ jQuery.ajax({
 
 
       canvas = document.getElementById( "c" );
+      // canvas = document.createElement('canvas')
+      // document.body.append(canvas)
+      // canvas.
 
       var geometries = [
         new THREE.BoxGeometry( 1, 1, 1 ),
@@ -149,9 +152,13 @@ jQuery.ajax({
 
 
           // only do this once
-          renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true, alpha: true } );
-          renderer.setClearColor( 0xffffff, .5 );
+          renderer = new THREE.WebGLRenderer(
+            { canvas: canvas,
+              antialias: true,
+              alpha: true } );
+          renderer.setClearColor( 0x008000, 1 );
           renderer.setPixelRatio( window.devicePixelRatio );
+          renderer.clear()
 
 
             animate();
