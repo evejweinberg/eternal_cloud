@@ -1,18 +1,23 @@
 var express = require('express');
-var router = express.Router();
+// var router = express.Router();
+var router = express();
 var mongoose = require('mongoose');
 var Pusher = require('pusher');
 var env = require('node-env-file');
 var moment = require('moment');
 var nodemailer = require('nodemailer');
 var facebookUtil = require('./../utils/facebook');
+var requestify = require('requestify');
+var http = require('http')
+http = http.Server(router)
 
 
 //add fancy addons, like email and web sockets
 ///////////////////////////////////////////
-var transporter = nodemailer.createTransport(transport[, defaults])
+// var transporter = nodemailer.createTransport(transport[, defaults])
 
-
+// Mail Module
+var mailModule = require('./mail')();
 
 
 var smtpConfig = {
@@ -25,26 +30,9 @@ var smtpConfig = {
     }
 };
 
-var transporter = nodeMailer.createTransport(smtpConfig);
 
 
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: "Fred Foo ✔ <foo@blurdybloop.com>", // sender address
-    to: 'evejweinberg@gmail.com', // list of receivers
-    subject: "Eternal Cloud ✔", // Subject line
-    text: "Hello world ✔", // plaintext body
-    html: "<b>Hello world ✔</b>" // html body
-}
 
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, response){
-    if(error){
-        console.log(error);
-    }else{
-        console.log("Message sent: " + response.message);
-    }
-});
 
 
 
@@ -552,6 +540,15 @@ router.post('/api/update/:id', function(req, res) {
 
 
 
+})
+
+
+router.get('/sendMail', function(req,res){
+  console.log('at least we hit the route')
+  console.log(req.body)
+  // mailModule.sendEmail();
+  return res.json({'yo':'yo'})
+  // res.send('emails been sent');
 })
 
 

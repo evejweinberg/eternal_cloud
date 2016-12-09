@@ -307,3 +307,39 @@ function callMainVideo(){
 
   scene.add(mainVidLady)
 }
+
+
+
+function sendMail(){
+  console.log('button hit')
+  var emailToSendTo = $("#users-email").val();
+  console.log(emailToSendTo)
+  var personId = '5839c8ca21702e03667f0021'
+
+  // $.post('/sendMail', function(data, status){
+  //   console.log(data + ' ' + status);
+  // })
+
+  $.ajax({
+    url : '/sendMail',
+    dataType : 'json',
+    type : 'POST',
+    data : {
+      emailToSendTo: emailToSendTo,
+      personId:personId
+    }
+  })
+    .done(function(response){
+        // success
+        console.log('success in hitting send mail route');
+        console.log(response);
+
+    })
+    .fail(function(err){
+      // do error checking
+      alert(err);
+      console.error(err);
+    })
+
+
+}

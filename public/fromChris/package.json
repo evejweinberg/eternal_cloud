@@ -1,0 +1,19 @@
+{
+  "name": "simple-server",
+  "version": "1.0.0",
+  "description": "a simple server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mailgun-js": "^0.7.13",
+    "nodemon": "^1.11.0",
+    "requestify": "^0.2.5"
+  }
+}

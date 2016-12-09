@@ -1,0 +1,38 @@
+/*
+
+Maill app using Mailgun
+
+*/
+
+module.exports = function(){
+  var mail = {};
+  console.log(process.env.MAIL_SB_KEY)
+  console.log(process.env.SB_DOMAIN)
+  var api_key = process.env.MAIL_SB_KEY
+  var domain = process.env.SB_DOMAIN
+
+  var mailgun = require('mailgun-js')({
+    apiKey: api_key,
+    domain: domain
+  });
+
+  mail.sendEmail = function(){
+
+    var data = {
+      from: 'Eternal Cloud <redeemyourself@eternalcloud.org>',
+      to: 'evejweinberg@gmail.com',
+      subject: 'You have requested a Life Plan from Eternal Cloud',
+      text: "We're so glad that you want to help the Earth and your fellow species members with your remaining 29 years on Earth. Based on our records, here is what you will need to do: 1) Donate to a cause of your choice with recoccuring monthly donations of at least $20/month. 2) Once a week, when you see someone in your community in need, lend at least 15 minutes of your time. 3) Divest all of your stocks from oil comapnies. 4) Smile more. We'll be watching. 5) Recycle! Reduce! Reuse! We can't thank you enough for making the right choices. Have a nice life. See you again in 2045. -- Eyes in the Sky/ EC"
+    };
+
+    mailgun.messages().send(data, function (error, body) {
+      if(error){
+        console.log(error);
+        console.log(body);
+      }
+
+    });
+  };
+
+  return mail;
+};

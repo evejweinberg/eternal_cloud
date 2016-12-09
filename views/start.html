@@ -46,6 +46,10 @@
               <p class="top-nav-text buttons" id="login" style="display:none">
                   Log in
               </p>
+
+              <!-- <p class="top-nav-text buttons" onclick="sendMail" id="send-mail" style="display:none">
+                  Mail Me
+              </p> -->
           </div>
         </nav>
 
@@ -64,49 +68,15 @@
 
         <div class="form-group">
             <label for="email">Email me my plan:</label>
-            <input type="email" class="form-control" id="email">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <input type="email" class="form-control" id="users-email">
+            <div class="top-nav-text buttons" onclick="sendMail()" id="send-mail" >
+                Mail Me
+            </div>
+            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
         </div>
 
       </div>
 
-      <!-- <div id="access-score">
-        <h1 class = 'access-score-type'><mark>YOUR HUMANITARIAN SCORE</mark></h1>
-      <br>
-      <table>
-        <tr>
-<td class="ra"><span id= "access-1-gb">0</span> GB</span></td>
-<td>
-  <h1 class = 'access-score-type' id="access-1"><mark>Philanthropy: <span id="access-1-score">😭 </span></mark></h1>
-
-</td>
-  </tr>
-  <tr>
-  <td class="ra"><span id= "access-2-gb">0</span>GB</td>
-  <td> <h1 class = 'access-score-type' id="access-2"><mark>Career Choice: <span id="access-2-score">😭 </span></mark></h1>
-  </td>
-  </tr>
-
-</tr>
-<tr>
-<td class="ra"><span id= "access-3-gb">0 </span>GB</td>
-<td>
-  <h1 class = 'access-score-type' id="access-3"><mark>Intelligence: <span id="access-3-score">😭 </span></mark></h1>
-</td>
-</tr>
-
-</tr>
-<tr>
-<td class="ra"><span id= "access-4-gb">0 </span>GB</td>
-<td>
-  <h1 class = 'access-score-type' id="access-4"><mark>Activism Level: <span id="access-4-score">😭 </span></mark></h1>
-</td>
-</tr>
-      </table>
-<br>
-<h1 class = 'access-score-type'><mark>TOTAL VALUE TO ETERNAL CLOUD: </mark><span id="hc-total"></span></h1>
-
-    </div> -->
 
 
   			<div id="instructions">
@@ -118,9 +88,7 @@
               <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first" id="explore">
                   EXPLORE </div>
           </div>
-  				<!-- <span style="font-size:40px; color:red">Click to play</span>
-  				<br />
-  				(W, A, S, D = Move, SPACE = Jump, MOUSE = Look around) -->
+
   			</div>
 
   	  	</div>
@@ -140,29 +108,7 @@
         </p>
     </div>
 
-  <!-- //more bootstrap stuff here -->
-  <!-- <div class="col-md-4">
-    <h1>Community Members</h1>
 
-    <button type="button" class="buttons" name="button">Who you will be connected to? </button>
-    <p>  Please remember that your humanitarian score will determine the strength of the links
-  </p>
-</div> -->
-<!-- <div class="col-md-4">
-  <h1>What</h1>
-  <p>
-    I dont know yet
-  </p>
-</div> -->
-<!-- <div class="col-md-4">
-  <h1>FAQ</h1>
-  <p>
-    <ul>
-      <li>Can I buy my way in?</li>
-      <li>Can I do anything to reverse my past actions?</li>
-    </ul>
-  </p>
-</div> -->
 
 <!-- these videos get triggered in the threejs scene -->
     <video id="video1"  loop webkit-playsinline style="display:none">
