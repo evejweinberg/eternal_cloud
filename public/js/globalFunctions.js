@@ -320,7 +320,7 @@ function sendMail(){
 
   $.ajax({
     url : '/sendMail/',
-  
+    // dataType : 'json',
     type : 'POST',
     data : {
       emailToSendTo: emailToSendTo,
