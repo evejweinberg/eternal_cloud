@@ -316,13 +316,11 @@ function sendMail(){
   console.log(emailToSendTo)
   var personId = '5839c8ca21702e03667f0021'
 
-  // $.post('/sendMail', function(data, status){
-  //   console.log(data + ' ' + status);
-  // })
+
 
   $.ajax({
-    url : '/sendMail',
-    dataType : 'json',
+    url : '/sendMail/',
+  
     type : 'POST',
     data : {
       emailToSendTo: emailToSendTo,
@@ -338,7 +336,6 @@ function sendMail(){
     .fail(function(err){
       // do error checking
       alert(err);
-      console.error(err);
     })
 
 

@@ -69,13 +69,20 @@
         <div class="form-group">
             <label for="email">Email me my plan:</label>
             <input type="email" class="form-control" id="users-email">
-            <div class="top-nav-text buttons" onclick="sendMail()" id="send-mail" >
+            <div class="top-nav-text buttons" id="send-mail" >
                 Mail Me
             </div>
-            <!-- <button type="submit" class="btn btn-default">Submit</button> -->
         </div>
 
       </div>
+
+      <script type="text/javascript">
+      $('#send-mail').click(function(event){
+        //find this function in 'globalFunction.js' which i KNOW it is hitting bc I've console logged it
+        sendMail();
+        event.preventDefault();
+        });
+      </script>
 
 
 
