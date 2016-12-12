@@ -199,7 +199,7 @@ function init() {
         var geometry = new THREE.PlaneGeometry(512, 512);
 
         var material = new THREE.MeshPhongMaterial({
-      
+
             metalness: .81,
             transparent: false,
             opacity: 1,
@@ -419,7 +419,8 @@ for (var i=0;i<6;i++){
         havenotHitLady = false;
       }
       setTimeout(function(){
-        scene.add(LeoGroup)
+        scene.add(LeoGeo)
+        LeoGeo.rotation.z = 2
 
       },3000)
 
@@ -430,7 +431,7 @@ for (var i=0;i<6;i++){
     }
 
 
-    LeoGeo.lookAt(cameraWorldMatrix)
+    // LeoGeo.lookAt(cameraWorldMatrix)
     // LeoGroup.rotation.x += .1
     // LeoGroup.rotation.y += .2
     // LeoGroup.rotation.z += .2

@@ -34,7 +34,7 @@ loader.load('../img/leo.jpg',function ( texture ) {
      LeoGeo = new THREE.Mesh(geo, leoTxt)
      LeoGeo.name = 'leogeo'
      LeoGeo.position.set(68* Math.cos(toRadians(350)), 5, 68* Math.sin(toRadians(350)))
-     LeoGroup.add(LeoGeo)
+    //  LeoGroup.add(LeoGeo)
 
    })
 
@@ -314,12 +314,13 @@ function sendMail(){
   console.log('button hit')
   var emailToSendTo = $("#users-email").val();
   console.log(emailToSendTo)
-  var personId = '5839c8ca21702e03667f0021'
+  $('#send-mail').innerHTML = "GOODBYE"
+  // var personId = '5839c8ca21702e03667f0021'
 
 
 
   $.ajax({
-    url : '/sendMail/',
+    url : '/sendMail',
     // dataType : 'json',
     type : 'POST',
     data : {
@@ -334,6 +335,7 @@ function sendMail(){
 
     })
     .fail(function(err){
+      console.log(err)
       // do error checking
       alert(err);
     })

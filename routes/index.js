@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Pusher = require('pusher');
 var env = require('node-env-file');
 var moment = require('moment');
-var nodemailer = require('nodemailer');
+// var nodemailer = require('nodemailer');
 var facebookUtil = require('./../utils/facebook');
 var requestify = require('requestify');
 var http = require('http')
@@ -543,12 +543,16 @@ router.post('/api/update/:id', function(req, res) {
 })
 
 
-router.get('/sendMail', function(req,res){
-  console.log('at least we hit the route')
-  console.log(req.body)
-  // mailModule.sendEmail();
+router.post('/sendMail', function(req,res){
+  // console.log('at least we hit the route')
+  console.log(req.body.emailToSendTo)
+  mailModule.sendEmail(req.body.emailToSendTo);
   return res.json({'yo':'yo'})
   // res.send('emails been sent');
+})
+
+router.post('/gameOver', function(req,res){
+  console.log('game over')
 })
 
 

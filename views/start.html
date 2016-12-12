@@ -67,6 +67,7 @@
 
 
         <div class="form-group">
+          <p id="end-button">X</p>
             <label for="email">Email me my plan:</label>
             <input type="email" class="form-control" id="users-email">
             <div class="top-nav-text buttons" id="send-mail" >
@@ -77,11 +78,37 @@
       </div>
 
       <script type="text/javascript">
+        $("#your-plan").fadeIn();
       $('#send-mail').click(function(event){
         //find this function in 'globalFunction.js' which i KNOW it is hitting bc I've console logged it
         sendMail();
-        event.preventDefault();
+        // event.preventDefault();
         });
+
+        $('#end-button').click(function(event){
+          console.log('game over')
+
+            $.ajax({
+              url : '/gameOver',
+              // dataType : 'json',
+              type : 'POST',
+              data : {
+                gameOver: yes,
+
+              }
+            })
+              .done(function(response){
+                  // success
+                  console.log('success in hitting send mail route');
+                  console.log(response);
+
+              })
+              .fail(function(err){
+                console.log(err)
+                // do error checking
+                alert(err);
+              })
+        })
       </script>
 
 
