@@ -19,6 +19,9 @@
 		<script src="js/three.js/TrackballControls.js"></script>
 		<script src="js/webcam.js"></script>
 
+		<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+
+
 		<link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -304,6 +307,43 @@
 	</div>
 
 	<br>
+
+	<script type="text/javascript">
+
+
+	    $.ajax({
+	      url: '/getKey',
+	      method: 'get',
+	    })
+	    .done(function(data){
+
+	      makePusher(data)
+	    })
+	    .fail(function(err){
+	      console.log(err)
+	    })
+
+	    //If a channel has been subscribed to already it is possible to access channels by name,
+	    //through the pusher.channel function:
+	    //The name of the channel to retrieve
+	  function makePusher(key){
+	    var pusherFront = new Pusher(key);
+
+	var channel2 = pusherFront.subscribe("gameOverCh");
+
+
+	channel2.bind('gameOver',
+		function(data) {
+			console.log(data);
+
+			//change the route
+			location.href = '/pre-profile';
+
+		})
+
+	}
+
+	</script>
 
 
 

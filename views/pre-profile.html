@@ -72,6 +72,7 @@
 			var pusherFront = new Pusher(key);
 
 			var channel1 = pusherFront.subscribe("loginPressedCh");
+			var channel2 = pusherFront.subscribe("gameOver");
 
 
 			channel1.bind('loginPressed',

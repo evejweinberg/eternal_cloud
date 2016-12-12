@@ -20,15 +20,15 @@ http = http.Server(router)
 var mailModule = require('./mail')();
 
 
-var smtpConfig = {
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: false, // dont use SSL
-    auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD
-    }
-};
+// var smtpConfig = {
+//     host: process.env.SMTP_HOST,
+//     port: process.env.SMTP_PORT,
+//     secure: false, // dont use SSL
+//     auth: {
+//         user: process.env.EMAIL_USERNAME,
+//         pass: process.env.EMAIL_PASSWORD
+//     }
+// };
 
 
 
@@ -552,7 +552,10 @@ router.post('/sendMail', function(req,res){
 })
 
 router.post('/gameOver', function(req,res){
+  pusher.trigger('gameOverCh', 'gameOver', {pressed:'yes'});
+
   console.log('game over')
+  return res.json({'yo':'yo'})
 })
 
 

@@ -314,8 +314,9 @@ function sendMail(){
   console.log('button hit')
   var emailToSendTo = $("#users-email").val();
   console.log(emailToSendTo)
-  $('#send-mail').innerHTML = "GOODBYE"
-  // var personId = '5839c8ca21702e03667f0021'
+  $('#send-mail').html('SENT! GOODBYE.')
+  $('#end-button').fadeIn();
+  var personId = '5839c8ca21702e03667f0021'
 
 
 

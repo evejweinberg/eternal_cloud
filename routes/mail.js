@@ -7,7 +7,6 @@ Maill app using Mailgun
 module.exports = function(){
   var mail = {};
   console.log(process.env.MAIL_SB_KEY)
-  console.log(process.env.SB_DOMAIN)
   var api_key = process.env.MAIL_SB_KEY
   var domain = process.env.SB_DOMAIN
 
