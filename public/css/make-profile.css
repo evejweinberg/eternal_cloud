@@ -1,18 +1,22 @@
 html{
 	overflow-x: hidden;
 	overflow-y: auto;
-	font: 'Rubik'
+	font: 'Rubik';
+	width: 100%;
+	height:100%;
 }
 
 body {
 	overflow	: hidden;
 	padding		: 0;
 	margin		: 0;
+	width: 100%;
+	height:100%;
 
 	color		: #222;
-	background-image: url('../img/bg.gif');
+	/*background-image: url('../img/bg.gif');*/
 	font-family	: "Rubik";
-	font-size	: 100%;
+
 }
 
 .FB-findout {
@@ -25,6 +29,10 @@ body {
 	position: absolute;
 	/*right: 0px;*/
 	/*text-align: center;*/
+}
+
+.blue{
+	color: #009fc6;
 }
 
 p{
@@ -88,13 +96,23 @@ p{
 #info a:hover {
 	text-decoration	: underline;
 }
+
+#login-embed{
+	width: 100%;
+	height:100%;
+}
 #info .bottom {
 	position	: absolute;
 	bottom		: 0px;
 	right		: 5px;
 	padding		: 5px;
 }
+.center-text{
+	text-align: center;
+}
 
+
+<<<<<<< HEAD
 .header{
 	background-color: #009fc6;
 	color: white;
@@ -108,8 +126,14 @@ width: 400px;
 }
 
 #container{
+=======
+#container-for-camera{
+>>>>>>> master
 	z-index: -20;
 	position: absolute;
+	width: 100%;
+	border: 4px solid red;
+	height:100%;
 }
 
 

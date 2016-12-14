@@ -13,9 +13,6 @@
 		<script src="js/three.js/Detector.js"></script>
 		<script src="js/three.js/Stats.js"></script>
 
-		<script src="js/threex/THREEx.screenshot.js"></script>
-		<!-- <script src="js/threex/THREEx.FullScreen.js"></script> -->
-		<script src="js/threex/THREEx.WindowResize.js"></script>
 		<script src="js/three.js/TrackballControls.js"></script>
 		<script src="js/webcam.js"></script>
 
@@ -29,25 +26,30 @@
 	</head>
 <body>
 
+<<<<<<< HEAD
 
 
 	<div id="my_camera" style="display:none"></div>
 	<div id="container"></div>
+=======
+	<div id="my_camera" style='display:none'></div>
+	<div id="container-for-camera"></div>
+>>>>>>> master
 
 
 	<script type="text/javascript">
 	var stage = 0;
-	var image_tex, video, buffer, pre_video_tex, video_tex, video_mat, video_mesh, video_geo, buffer_mat, buffer_geo, buffer_mesh;
+	var image_tex, videoWC, buffer, pre_video_tex, video_tex, video_mat, video_mesh, video_geo, buffer_mat, buffer_geo, buffer_mesh;
 	var newImage;
 	var ortho_width = 1920, ortho_height = 1080, ortho_near = -1, ortho_far = 1;
 
 	var get_webcam = function(){
-	video = document.createElement('video');
-	video.width = ortho_width;
-	video.height = ortho_width;
-	video.autoplay = true;
-	video.muted = true; //- to prevent create feedback from mic input ***
-	video_tex = new THREE.Texture( video );
+	videoWC = document.createElement('video');
+	videoWC.width = ortho_width;
+	videoWC.height = ortho_width;
+	videoWC.autoplay = true;
+	videoWC.muted = true; //- to prevent create feedback from mic input ***
+	video_tex = new THREE.Texture( videoWC );
 	    video_tex.minFilter = THREE.LinearFilter //- to use non powers of two image
 
 	    video_mat = new THREE.MeshPhongMaterial(
@@ -56,8 +58,8 @@
 	    );
 	if(navigator.getUserMedia){
 		navigator.getUserMedia({ audio: true, video:{ width: ortho_width, height: ortho_height, facingMode: { exact: "environment" } } }, function(stream){
-			video.src = window.URL.createObjectURL(stream);
-			video.play();
+			videoWC.src = window.URL.createObjectURL(stream);
+			videoWC.play();
 		}, function(err){
 			console.log('failed to get a steram : ', err );
 		});
@@ -83,6 +85,7 @@
 					antialias		: true,	// to get smoother output
 					alpha: true,
 					transparent: true,
+					// canvas:document.getElementById("container-for-camera"),
 
 					preserveDrawingBuffer	: true	// to allow screenshot
 				});
@@ -91,9 +94,11 @@
 				Detector.addGetWebGLMessage();
 				return true;
 			}
-			renderer.setSize( window.innerWidth, window.innerHeight );
+			// renderer.setSize( window.innerWidth, window.innerHeight );
+			renderer.setSize(document.getElementById("container-for-camera").offsetWidth, document.getElementById("container-for-camera").offsetHeight);
+
 			renderer.setClearColorHex( 0x000000, 0 );
-			document.getElementById('container').appendChild(renderer.domElement);
+			document.getElementById('container-for-camera').appendChild(renderer.domElement);
 
 			// add Stats.js - https://github.com/mrdoob/stats.js
 			// stats = new Stats();
@@ -109,31 +114,10 @@
 			camera.position.set(0, 0, 150);
 			scene.add(camera);
 
-			// create a camera contol
-			// cameraControls	= new THREE.TrackballControls( camera )
-
-			// transparently support window resize
-			THREEx.WindowResize.bind(renderer, camera);
-			// allow 'p' to make screenshot
-			// THREEx.Screenshot.bindKey(renderer);
-			// allow 'f' to go fullscreen where this feature is supported
-			// if( THREEx.FullScreen.available() ){
-			// 	THREEx.FullScreen.bindKey();
-			// 	// document.getElementById('inlineDoc').innerHTML	+= "- <i>f</i> for fullscreen";
-			// }
-
-			// here you add your objects
-			// - you will most likely replace this part by your own
 			var light	= new THREE.AmbientLight( Math.random() * 0xffffff );
 			scene.add( light );
 			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
 			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
-			// scene.add( light );
-			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
-			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
-			// scene.add( light );
-			var light	= new THREE.DirectionalLight( Math.random() * 0xffffff );
-			light.position.set( Math.random(), Math.random(), Math.random() ).normalize();
 			scene.add( light );
 			var light	= new THREE.PointLight( Math.random() * 0xffffff );
 			light.position.set( Math.random()-0.5, Math.random()-0.5, Math.random()-0.5 )
@@ -146,15 +130,15 @@
 
 
 
-			video_geo = new THREE.BoxGeometry( 30,30,30 );
-			video_mesh = new THREE.Mesh( video_geo, video_mat );
+			var video_geo = new THREE.BoxGeometry( 30,30,30 );
+			var video_mesh = new THREE.Mesh( video_geo, video_mat );
 			scene.add(video_mesh);
 
 		}
 
 		// animation loop
 		function animate() {
-			if(video.readyState === video.HAVE_ENOUGH_DATA) { video_tex.needsUpdate = true; }
+			if(videoWC.readyState === videoWC.HAVE_ENOUGH_DATA) { video_tex.needsUpdate = true; }
 
 			requestAnimationFrame( animate );
 			render();
@@ -282,6 +266,7 @@
 
 
 
+<<<<<<< HEAD
 	<!-- <div class="container"> -->
 		<div class="header">
 
@@ -291,11 +276,19 @@
 
 				</div>
 
+=======
+	<div class="container-webcamStage">
+		<div class="row">
+			<h1 class="blue center-text">MEMBERSHIP: STEP 1</h1>
+			<h2 class="blue center-text">We need your <strike>data</strike>  photo</h2>
+			<div class="col-md-12">
+>>>>>>> master
 				<form method="post" action="/api/create" id="myForm" enctype="multipart/form-data">
 
 					<div class="form-group" style="position:absolute" id="form-button-login">
 						<label for="name"></label>
 						<input type="text" class="form-control" id="name" placeholder="Name" name="name">
+<<<<<<< HEAD
 						<input id="botton-button" type=button class="btn" value="Submit Name & Photo" onClick="take_snapshot()">
 
 					</div>
@@ -305,6 +298,16 @@
 
 			<!-- </div> -->
 	</div>
+=======
+					</div>
+						<input type=button class="btn" value="Take Snapshot" onClick="take_snapshot()">
+
+
+				</form>
+			</div>
+		</div>
+	 </div>
+>>>>>>> master
 
 	<br>
 

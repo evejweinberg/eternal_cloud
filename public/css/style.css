@@ -1,3 +1,4 @@
+
 .activism-bg {
   background-color: white;
   color: #009fc6;
@@ -40,6 +41,15 @@
 #pink {
   color: #ffbdb8; }
 
+/*=======
+#pink {
+  color: #f68f83; }*/
+
+#rect {
+  z-index: 1000;
+  text-align: center; }
+
+
 #date {
   position: absolute;
   color: #009fc6;
@@ -47,7 +57,19 @@
   transform: translateX(-85px); }
 
 #canvasBox {
-  overflow: hidden; }
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; }
+
+canvas {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%; }
 
 #image-cursor {
   position: absolute;
@@ -110,13 +132,14 @@ mark {
 
 .tagline-holder {
   position: relative;
-  top: -10%; }
+  top: -10%;
+  z-index: 500; }
 
 #audio-toggle {
   width: 5%;
   float: right;
   display: inline-block;
-  margin-right: 14px;
+  margin-right: 0px;
   vertical-align: middle; }
 
 #vide-2 {
@@ -213,7 +236,8 @@ mark {
   color: #009fc6;
   margin: auto;
   text-align: center;
-  margin: 5px; }
+  margin: 5px;
+  white-space: pre; }
 
 html,
 body {
@@ -224,7 +248,9 @@ body {
   background-color: white;
   margin: 0;
   font-family: "Rubik", sans-serif;
-  color: #f68f83; }
+  color: #f68f83;
+  overflow: hidden;
+  padding: 0; }
 
 #container {
   width: 100%;

@@ -16,6 +16,17 @@
   <!-- my style sheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/section2.css">
+
+    <link rel="stylesheet" href="css/sidebar.css">
+
+    <style media="screen">
+#rect{
+  z-index: 3000;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+    </style>
 </head>
 
 <body>
@@ -56,6 +67,7 @@
 
     </div>
 
+<<<<<<< HEAD
 
 
     <div id="blocker">
@@ -111,8 +123,52 @@
         })
       </script>
 
+=======
+    <div id="access-score">
+      <h1 class = 'access-score-type'><mark>YOUR HUMANITARIAN SCORE</mark></h1>
+    <br>
+    <table>
+      <tr>
+<td class="ra"><span id= "access-1-gb">0</span> GB</span></td>
+<td>
+<h1 class = 'access-score-type' id="access-1"><mark>Philanthropy: <span id="access-1-score">😭 </span></mark></h1>
+
+</td>
+</tr>
+<tr>
+<td class="ra"><span id= "access-2-gb">0</span>GB</td>
+<td> <h1 class = 'access-score-type' id="access-2"><mark>Career Choice: <span id="access-2-score">😭 </span></mark></h1>
+</td>
+</tr>
+
+</tr>
+<tr>
+<td class="ra"><span id= "access-3-gb">0 </span>GB</td>
+<td>
+<h1 class = 'access-score-type' id="access-3"><mark>Intelligence: <span id="access-3-score">😭 </span></mark></h1>
+</td>
+</tr>
+
+</tr>
+<tr>
+<td class="ra"><span id= "access-4-gb">0 </span>GB</td>
+<td>
+<h1 class = 'access-score-type' id="access-4"><mark>Activism Level: <span id="access-4-score">😭 </span></mark></h1>
+</td>
+</tr>
+    </table>
+<br>
+<h1 class = 'access-score-type'><mark>TOTAL VALUE TO ETERNAL CLOUD: </mark><span id="hc-total"></span></h1>
+
+  </div>
 
 
+
+>>>>>>> master
+
+
+
+<!-- //this is what triggers pointer lock -->
   			<div id="instructions">
 
           <div class="tagline-holder" id="tagline-holder">
@@ -122,27 +178,134 @@
               <div onmousedown="mDown(this)" onmouseup="mUp(this)" onmouseout="mOut(this)" onmouseover="mOver(this)" class="buttons button-first" id="explore">
                   EXPLORE </div>
           </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   			</div>
 
-  	  	</div>
+  	  	<!-- </div> -->
+
+ <div id="hiddenDiv" style="display:none">{{desiredSection}}</div>
+        <!-- <a id="nav-toggleB" href="#"><span></span></a> -->
+        <div id="about-side-info">
+
+          <!-- <iframe id="login-embed" src="/login" frameBorder="0">
+
+          </iframe> -->
+
+          <div class="header">
+              <h1 class="centered-type">Current Candidate</h1>
+              <div class="progress">
+              <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+              aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                PROGRESS - YOU MUST FINISH
+              </div>
+            </div>
+
+          </div>
+
+         <!-- <div id="my_camera"></div>
+          <div id="container-for-camera"></div>
+          <div class="container-webcamStage">
+            <div class="row">
+              <h1 class="blue">MEMBERSHIP: STEP 1</h1>
+              <h2 class="blue">We need your <strike>data</strike>  photo</h2>
+              <div class="col-md-3"> -->
+
+                <form method="post" action="/api/create" id="myForm" enctype="multipart/form-data">
+
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Name" name="name">
+                  </div>
+                    <input type=button class="btn" value="Take Snapshot" onClick="take_snapshot()">
+
+
+                 </form>
 
 
 
+          <div class="container" id="full-form">
 
+        			<div class="col-xs-6 col-sm-2 col-md-3">
+                  <button type="submit" onclick="Done()" id="done" class="buttons" style="display:none">DONE</button>
+
+                <form id="ActivismForm" style="display:none">
+                            <div class="form-group">
+                                  <h2>ACTIVISM</h2>
+                                  <p>Name one organization or cause that you have donated time or money to, in the last year?
+                                  </p>
+                              <input type="text" class="form-control" id="activism" placeholder="" name="activism">
+                              <button type="submit" class="btn btn-default">Submit</button>
+
+                            </div>
+
+                        </form>
+
+                    <form id="IntelligenceForm" style="display:none">
+                              <div class="form-group">
+                                    <h2>INTELLIGENCE</h2>
+                                    <p>
+                                      What is your highest form of education?
+                                    </p>
+                                    <input type="text" class="form-control" id="intelligence" placeholder="" name="intelligence">
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                     <button type="submit" class="btn btn-default">I Don't have a github</button> -->
+                             </div>
+
+                            </form>
+
+
+              <form id="CareerForm" style="display:none">
+                  <div class="form-group">
+                        <h2>CAREER CHOICE</h2>
+                      <p>Are you a banker?</p>
+                      <input type="radio" name="career" class="career" value="yes"> Yes<br>
+                      <input type="radio" name="career" class="career" value="no"> No<br>
+                      <button type="submit" class="btn btn-default">Submit</button>
+
+                  </div>
+
+                </form>
+
+                <form id="candidateForm">
+                  <div class="form-group">
+                      <h2>PHILANTHROPY</h2>
+                      <p>Perentage of annual income you donate:</p>
+                    <input type="number" min='0' style="width:100px" max='100' step='1' class="form-control" id="philanthropy" placeholder="10" name="philanthropy">
+                  </div>
+
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+         </div>
+        </div>
+
+  </div>
 
     <!-- //three js to be added here -->
     <div id="canvasBox"></div>
 
     <!-- //more bootstrap stuff here -->
-    <div class="row" id="all-projects">
+    <footer id = "footer" style="position: absolute; bottom: -100px; width: 100%; height: 60px; background-color: white;">
+
         <p id="walking-instructions" style="display:none">
+<<<<<<< HEAD
           Mouse/Trackpad  👁👁 Around   <span id="pink">  ||   </span>   ← ↑ ↓ →   🚶🚶  around    <span id="pink">  ||</span>     ESC to deactivate controls
 
+=======
+            Mouse/Trackpad  👁👁 Around   <span id="pink">  ||   </span>   ← ↑ ↓ →   🚶🚶  around    <span id="pink">  ||</span>     ESC to deactivate controls
+>>>>>>> master
         </p>
-    </div>
+  </footer>
 
 
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
 
 <!-- these videos get triggered in the threejs scene -->
     <video id="video1"  loop webkit-playsinline style="display:none">
@@ -161,29 +324,34 @@
     <!-- //do I need these here at all? -->
     <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 
-<!-- //a boiler plate i used had this, not sure if i still need it -->
-    <!-- <script src="node_modules/es6-promise/dist/es6-promise.js"></script> -->
+
 
     <!-- //threejs stuff -->
     <script src="js/three.min.js"></script>
     <script src="js/AsciiEffect.js"></script>
     <script src="js/PointerLockControls.js"></script>
     <script src="js/loaders/JSONLoader.js"></script>
+    <script src="js/three.js/Detector.js"></script>
+    <script src="js/three.js/Stats.js"></script>
 
     <!-- //green sock and jquery -->
     <script src="js/lib/TweenMax.min.js"></script>
 
+    <script src="js/webcam.js"></script>
 
     <!-- //my JS stuff -->
     <script src="js/globalVars.js"></script>
     <script src="js/globalFunctions.js"></script>
+    <script src="js/sidebar.js"></script>
     <script src="js/scene1.js"></script>
+    <script src="js/pusherStuff.js"></script>
     <script src="js/popUp.js"></script>
     <script src="js/eventHandlers.js"></script>
 
     <!-- //add bootstrap JS -->
     <script src="js/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
     <script>
 
     $.ajax({
@@ -251,8 +419,10 @@
 
   }
 //bind an event to this channel
+=======
 
-    </script>
+>>>>>>> master
+
 
 
 

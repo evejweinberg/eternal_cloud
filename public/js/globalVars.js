@@ -29,6 +29,10 @@ var controlsEnabled = false;
 var blocker = document.getElementById( 'explore' );
 var canvasElement = document.getElementById('canvasBox');
 var instructions = document.getElementById( 'instructions' );
+<<<<<<< HEAD
+=======
+var canvasElement = document.getElementById('canvasBox');
+>>>>>>> master
 var tooglePointerLock = [instructions, canvasElement];
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
@@ -113,3 +117,14 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 today = 'TODAY: ' +monthNames[mm]+' '+dd+', '+2045 ;
+
+var sideBarScene1 = false;
+
+
+
+
+
+
+
+
+// document.getElementById("login-embed").contentWindow.document.createElement('form');

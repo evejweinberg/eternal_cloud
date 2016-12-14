@@ -310,6 +310,7 @@ function callMainVideo(){
 
 
 
+<<<<<<< HEAD
 function sendMail(){
   console.log('button hit')
   var emailToSendTo = $("#users-email").val();
@@ -342,4 +343,51 @@ function sendMail(){
     })
 
 
+=======
+function uploadBlob()
+{
+  // console.log('uploading Blob with ajax request');
+
+  //make a new javascript native blob
+ var blob = new Blob();
+ //make a file reader
+ var reader = new FileReader();
+
+ // this function is triggered once a call to readAsDataURL returns ???
+ reader.onload = function(event){
+
+     // create the formData object and add our data to it
+     var fd = new FormData();
+     fd.append('name', $('#name').val());
+     fd.append('data', globalBlob.split(',')[1]); // splitting the URL removes the 'base64' prefix and sends just the necessary data
+
+    //  console.log('fd is: ' , fd)
+     $.ajax({
+         type: 'POST',
+         //hit this route
+         url: '/submitProfile',
+         data: fd,
+         processData: false,
+         contentType: false
+     }).done(function(data) {
+
+       console.log(data)
+
+        //if the status from the backend is 'OK' then do this
+        //change it on both sides if you change the string 'ok'
+         if (data.status == 'OK') {
+           //replace this with a new route
+            window.location = '/candidate';
+         } else {
+           console.log('data was not OK')
+         }
+
+
+     });
+
+ };
+
+   // trigger the read from the reader...
+   reader.readAsDataURL(blob); // this creates a base64 encoded URL
+>>>>>>> master
 }

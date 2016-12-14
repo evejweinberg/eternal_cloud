@@ -103,8 +103,31 @@ var upload = multer({
 
 
 router.get('/', function(req, res) {
+<<<<<<< HEAD
   res.render('start.html')
 });
+=======
+   res.render('start.html')
+ });
+
+ router.get('/login', function(req,res){
+   // by passing in pageData as the 2nd argument below
+   // we are able to print values on the page
+   // we will use this to tell our page which section to go to
+   // see the HTML file; it will read section1 and direct accordingly
+   var pageData = {
+     desiredSection: "about-side-info",
+   }
+
+   res.render('login.html', pageData)
+ })
+
+
+ router.get('/allScenes', function(req,res){
+   res.render('allScenes.html')
+ })
+
+>>>>>>> master
 
 //staging front end website
 router.get('/second', function(req, res) {
@@ -456,8 +479,12 @@ router.get('/api/get', function(req, res) {
 
 
 
+<<<<<<< HEAD
 //all scoring updates happen here
 router.post('/api/update/:id', function(req, res) {
+=======
+
+>>>>>>> master
 
   var requestedId = req.body.personId;
   // var requestedId = req.body._id;
