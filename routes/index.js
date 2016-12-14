@@ -155,7 +155,7 @@ router.get('/form-score/:id/likes', function(req, res) {
     };
     // console.log(Object.keys(resp.data))
     for (var key in resp.data){
-      console.log(resp.data[key])
+      // console.log(resp.data[key])
       // console.log( Object.keys(resp.data[i]))
     }
 
