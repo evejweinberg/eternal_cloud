@@ -309,7 +309,7 @@ router.post('/submitProfile', upload.single('file'), function(req, res) {
   var publicUrl = process.env.AWS_S3_PATH + tempName;
   console.log('public url: ' + publicUrl);
 
-  // console.log(req.body.imageUrl)
+  console.log(req.body.imageUrl)
 
   //save a data object
   var personObj = {

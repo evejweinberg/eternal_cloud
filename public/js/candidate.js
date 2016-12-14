@@ -172,9 +172,10 @@ var group = new THREE.Group();
   		url : '/api/get',
   		dataType : 'json',
   		success : function(response) {
+        console.log(response)
   			var person = response.people[response.people.length-1];
         personId = person._id;
-        console.log('we are updating person with ID ' + personId);
+        console.log('we are updating person: ' , person);
         var loader = new THREE.TextureLoader();
         // console.log(person)
           var video_geo = new THREE.BoxGeometry( boxSize,boxSize,boxSize );
