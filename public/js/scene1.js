@@ -7,7 +7,7 @@ window.onload = function(){
 
 
 if ( havePointerLock ) {
-  console.log('has pointer')
+  // console.log('has pointer')
 				var element = document.body;
 				var pointerlockchange = function ( event ) {
 					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
@@ -26,7 +26,7 @@ if ( havePointerLock ) {
 				};
 				var pointerlockerror = function ( event ) {
 					// instructions.style.display = '';
-          console.log('we have a pointer lock situation yo');
+          // console.log('we have a pointer lock situation yo');
 				};
 				// Hook pointer lock state change events
 				document.addEventListener( 'pointerlockchange', pointerlockchange, false );
@@ -50,7 +50,7 @@ if ( havePointerLock ) {
 }
 
 function aquirePointer( event ) {
-  console.log('aquire pointer was clicked')
+  // console.log('aquire pointer was clicked')
   //  instructions.style.display = 'none';
       // Ask the browser to lock the pointer
       element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
@@ -156,12 +156,12 @@ function init() {
 						case 38: // up
 						case 87: // w
 							moveForward = true;
-              console.log('forward')
+              // console.log('forward')
 							break;
 						case 37: // left
 						case 65: // a
 							moveLeft = true;
-              console.log("left")
+              // console.log("left")
               break;
 						case 40: // down
 						case 83: // s
@@ -406,7 +406,9 @@ function animate(timestamp) {
 
 
 
-if (camera.matrixWorld)cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld );
+if (cameraWorldMatrix){
+  cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld);
+  }
 
     if (mainVidLady){
       // TweenMax.fromTo( mainVidLady.position, 4, 	{y:0}, {y:20, repeat: -1, yoyo:true});
@@ -439,7 +441,7 @@ for (var i=0;i<6;i++){
         scene.add(mainVidLady)
 
         video2.play()
-        video2.addEventListener('ended',ThirdScene)
+
 
         havenotHitLady = false;
       }
@@ -465,7 +467,7 @@ for (var i=0;i<6;i++){
     }
 
     if ( controlsEnabled ) {
-      console.log('controls engabled')
+      // console.log('controls engabled')
     					raycaster.ray.origin.copy( controls.getObject().position );
     					raycaster.ray.origin.y -= 10;
     					var intersections = raycaster.intersectObjects( objects );

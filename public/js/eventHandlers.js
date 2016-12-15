@@ -39,7 +39,7 @@ window.addEventListener("load", function(){
 
 });
 
-window.addEventListener('resize', onResize, true);
+window.addEventListener('resize', onResize, false);
 
 
 //add form to fill out HemisphereLight
