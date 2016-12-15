@@ -7,22 +7,26 @@ window.onload = function(){
 
 
 if ( havePointerLock ) {
+  console.log('has pointer')
 				var element = document.body;
 				var pointerlockchange = function ( event ) {
 					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
 						controlsEnabled = true;
 						controls.enabled = true;
-						blocker.style.display = 'none';
+						// blocker.style.display = 'none';
 					} else {
 						controls.enabled = false;
-						blocker.style.display = '-webkit-box';
-						blocker.style.display = '-moz-box';
-						blocker.style.display = 'box';
+            controlsEnabled = false;
+            //sghow blocker
+						// blocker.style.display = '-webkit-box';
+						// blocker.style.display = '-moz-box';
+						// blocker.style.display = 'box';
 						// instructions.style.display = '';
 					}
 				};
 				var pointerlockerror = function ( event ) {
 					// instructions.style.display = '';
+          console.log('we have a pointer lock situation yo');
 				};
 				// Hook pointer lock state change events
 				document.addEventListener( 'pointerlockchange', pointerlockchange, false );
@@ -32,18 +36,41 @@ if ( havePointerLock ) {
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-for(var i = 0; i < tooglePointerLock.length; i++){
+      for(var i = 0; i < tooglePointerLock.length; i++){
+      //call this once to establish it if instructions or canvas box are clicked
+        tooglePointerLock[i].addEventListener( 'click', aquirePointer, false );
 
-  tooglePointerLock[i].addEventListener( 'click', function ( event ) {
-        instructions.style.display = 'none';
-        // Ask the browser to lock the pointer
-        element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
-        if ( /Firefox/i.test( navigator.userAgent ) ) {
+      }
+
+
+} else {
+
+  instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
+
+}
+
+function aquirePointer( event ) {
+  console.log('aquire pointer was clicked')
+  //  instructions.style.display = 'none';
+      // Ask the browser to lock the pointer
+      element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock || element.webkitRequestPointerLock;
+
+      // if(controls.enabled === true){
+      //
+      //   console.log('I have controls already');
+      //
+      // }else{
+      //
+      //   element.requestPointerLock();
+      //
+      // }
+
+      if ( /Firefox/i.test( navigator.userAgent ) ) {
           var fullscreenchange = function ( event ) {
             if ( document.fullscreenElement === element || document.mozFullscreenElement === element || document.mozFullScreenElement === element ) {
               document.removeEventListener( 'fullscreenchange', fullscreenchange );
               document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
-              element.requestPointerLock();
+              // element.requestPointerLock();
             }
           };
           document.addEventListener( 'fullscreenchange', fullscreenchange, false );
@@ -53,15 +80,10 @@ for(var i = 0; i < tooglePointerLock.length; i++){
         } else {
           element.requestPointerLock();
         }
-      }, false );
+
+
 
 }
-
-
-
-      } else {
-				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
-			}
 
 
 
@@ -134,10 +156,13 @@ function init() {
 						case 38: // up
 						case 87: // w
 							moveForward = true;
+              console.log('forward')
 							break;
 						case 37: // left
 						case 65: // a
-							moveLeft = true; break;
+							moveLeft = true;
+              console.log("left")
+              break;
 						case 40: // down
 						case 83: // s
 							moveBackward = true;
@@ -440,23 +465,25 @@ for (var i=0;i<6;i++){
     }
 
     if ( controlsEnabled ) {
+      console.log('controls engabled')
     					raycaster.ray.origin.copy( controls.getObject().position );
     					raycaster.ray.origin.y -= 10;
     					var intersections = raycaster.intersectObjects( objects );
     					var isOnObject = intersections.length > 0;
     					var time = performance.now();
     					var delta = ( time - prevTime ) / 1000;
-    					velocity.x -= velocity.x * 10.0 * delta;
-    					velocity.z -= velocity.z * 10.0 * delta;
+    //           //try zeroing out the velociry values
+    					velocity.x -= velocity.x * 12.0 * delta;
+    					velocity.z -= velocity.z * 12.0 * delta;
     					velocity.y -= 9.8 * 100.0 * delta; // 100.0 = mass
     					if ( moveForward ) velocity.z -= 400.0 * delta;
     					if ( moveBackward ) velocity.z += 400.0 * delta;
     					if ( moveLeft ) velocity.x -= 400.0 * delta;
     					if ( moveRight ) velocity.x += 400.0 * delta;
-    					if ( isOnObject === true ) {
-    						velocity.y = Math.max( 0, velocity.y );
-    						canJump = true;
-    					}
+    // 					if ( isOnObject === true ) {
+    // 						velocity.y = Math.max( 0, velocity.y );
+    // 						canJump = true;
+    // 					}
     					controls.getObject().translateX( velocity.x * delta );
     					controls.getObject().translateY( velocity.y * delta );
     					controls.getObject().translateZ( velocity.z * delta );
@@ -467,7 +494,7 @@ for (var i=0;i<6;i++){
     					}
     					prevTime = time;
     				}
-
+    //
 
 
 

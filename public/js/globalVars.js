@@ -32,7 +32,6 @@ var instructions = document.getElementById( 'instructions' );
 var tooglePointerLock = [instructions, canvasElement];
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
-var controlsEnabled = false;
 var moveForward = false;
 var moveBackward = false;
 var moveLeft = false;

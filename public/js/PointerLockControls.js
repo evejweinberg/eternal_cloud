@@ -2,6 +2,9 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
+ //pointerlock is it's own api that talks to the browser
+ //if that API is not working, none of this willwork,....
+
 THREE.PointerLockControls = function ( camera ) {
 
 	var scope = this;
@@ -31,6 +34,9 @@ THREE.PointerLockControls = function ( camera ) {
 
 	};
 
+
+//in my scene, we call 'var controls = ...' dispose removes event listeener
+//this neer gets triggered unless i outwardly say this.dispose()
 	this.dispose = function() {
 
 		document.removeEventListener( 'mousemove', onMouseMove, false );
@@ -46,7 +52,8 @@ THREE.PointerLockControls = function ( camera ) {
 		return yawObject;
 
 	};
-
+//this is a useful one, returns a vecrtor wirh the position its' looking at
+//controls.getDirection()
 	this.getDirection = function() {
 
 		// assumes the camera itself is not rotated

@@ -257,7 +257,6 @@ function newVidLady(){
   newLady.material.map.image.play()
   allLadies.push(newLady)
   scene.add(newLady)
-  console.log('add a new lady')
   // mainVidLady.clone()
 }
 
@@ -274,6 +273,7 @@ function callMainVideo(){
 	textureLady1.format = THREE.RGBFormat;
 
   video2 = document.getElementById( 'video2' );
+  video2.addEventListener('ended',ThirdScene)
 	textureLady2 = new THREE.VideoTexture( video2 );
 	textureLady2.minFilter = THREE.LinearFilter;
 	textureLady2.magFilter = THREE.LinearFilter;
