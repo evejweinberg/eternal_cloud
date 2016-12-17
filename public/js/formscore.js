@@ -10,10 +10,11 @@ function anyFormSubmitted(e){
   answeredQuestions ++;
   document.getElementById('num-answered').innerHTML = answeredQuestions
   personId = document.getElementById('personId').innerHTML;
+  console.log($("#num-answered").text())
 }
-console.log(parseInt(document.getElementById('num-answered')))
+
 function checkifFinished(){
-if ( parseInt(document.getElementById('num-answered')).innerHTML == 12){
+if ( parseInt($("#num-answered").text()) == 12){
   console.log('12 answers')
   jQuery.ajax({
     url : '/api/done',
