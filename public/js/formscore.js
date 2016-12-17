@@ -11,9 +11,9 @@ function anyFormSubmitted(e){
   document.getElementById('num-answered').innerHTML = answeredQuestions
   personId = document.getElementById('personId').innerHTML;
 }
-
+console.log(parseInt(document.getElementById('num-answered'))
 function checkifFinished(){
-if ( parseInt($("#num-answered").text()) == 12){
+if ( parseInt(document.getElementById('num-answered')).innerHTML == 12){
   console.log('12 answers')
   jQuery.ajax({
     url : '/api/done',
