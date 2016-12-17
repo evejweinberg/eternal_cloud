@@ -44,25 +44,35 @@
 
 
     </div>
-    <img src="../img/candidate.gif" id="candidate-gif" alt=""/>
-    <img src="../img/candidate.gif" id="candidate-gif-2" alt=""/>
+
+    <div class="gif-holder">
+      <img src="../img/candidate.gif" class="gif" alt=""/>
+      <img src="../img/candidate.gif" class="gif" alt=""/>
+      <img src="../img/candidate.gif" class="gif" alt=""/>
+      <img src="../img/candidate.gif" class="gif" alt=""/>
+      <img src="../img/candidate.gif" class="gif" alt=""/>
+      <!-- <img src="../img/candidate.gif" class="gif" alt=""/> -->
+
+    </div>
+    <!-- <img src="../img/candidate.gif" id="candidate-gif" alt=""/>
+    <img src="../img/candidate.gif" id="candidate-gif-2" alt=""/> -->
 
     <div class="container" id="candidate-container"></div>
 
     <div id="score-update">
-      <p>
+      <!-- <p>
         {
-      </p>
+      </p> -->
       <br>
       <p>
-        score: <span id="score">0</span> GB,
+        your score: <span id="score">0</span> GB
       </p>
-      <br>
-      <p>  minimum acceptable score: 1,000 GB</p>
+
+      <p>  min acceptable score: 1,000 GB</p>
     <br>
-      <p>
+      <!-- <p>
       }
-      </p>
+      </p> -->
 
     </div>
 
@@ -102,7 +112,7 @@
     //create a channel from nothing like this.
     //events are past tense "thing was created"
     var channel1 = pusherFront.subscribe("channelName");
-  
+
 
     var channel2 = pusherFront.subscribe("gameOverCh");
 
