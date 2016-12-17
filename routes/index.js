@@ -109,6 +109,11 @@ var upload = multer({
 
 router.get('/', function(req, res) {
   res.render('start.html')
+  pusher.trigger('gameOverCh', 'gameOver', {pressed:'yes'});
+
+  // pusher.trigger('GameStartedCh', 'gameStarted', data);
+
+  //push the other pages to change now
 });
 
 //staging front end website
