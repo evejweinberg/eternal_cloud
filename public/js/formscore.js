@@ -14,7 +14,7 @@ function anyFormSubmitted(e){
 }
 
 function checkifFinished(){
-if ( parseInt($("#num-answered").text()) == 12){
+if ( $("#num-answered").text() == 12){
   console.log('12 answers')
   jQuery.ajax({
     url : '/api/done',
