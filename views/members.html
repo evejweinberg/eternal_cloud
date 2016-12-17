@@ -108,9 +108,6 @@
 		</script>
 
 
-				<script type="text/javascript" src="/js/membersC.js">	</script>
-
-
 				<script type="text/javascript">
 
 				$.ajax({
@@ -118,6 +115,7 @@
 		      method: 'get',
 		    })
 		    .done(function(data){
+					console.log('pusher working')
 
 		      makePusher(data)
 		    })
@@ -139,16 +137,12 @@
 		    channel2.bind('gameOver',
 		    function(data) {
 		      console.log(data);
+					  console.log('game over from backend');
 
 		      //change the route
 		      location.href = '/second';
 
 		    })
-
-
-
-
-
 
 		  }
 
@@ -156,6 +150,9 @@
 
 
 				</script>
+
+				<script type="text/javascript" src="/js/membersC.js">	</script>
+
 
 
 
