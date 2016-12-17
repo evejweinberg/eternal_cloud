@@ -170,6 +170,39 @@ function drawServers(rad,num){
 
 
 
+function drawTV(){
+  console.log(objectLoader3)
+
+  objectLoader3.load(
+	// resource URL
+	'img/tv2.json',loadTV);
+
+
+
+}
+
+function loadTV(obj){
+
+    tv = obj
+    tv.castShadow = true;
+    console.log("tv", textureFlaming)
+    console.log(tv)
+    tv.material = new THREE.MeshBasicMaterial({map: textureFlaming, color: mint})
+//     // serverObject.children[0].material = reflectionMatBrain
+//
+//     //see what's inside of it
+    tv.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+            // console.log(child)
+        }
+    })
+    tv.scale.set(.02,.02,.02)
+    tv.position.set(0,8,0)
+    // scene.add(tv)
+  }
+
+
+
 
 function loadfont() {
   var loader = new THREE.FontLoader(loadingManager);
@@ -311,12 +344,18 @@ function callMainVideo(){
 
 
 function sendMail(){
-  console.log('button hit')
+  // console.log('button hit')
   var emailToSendTo = $("#users-email").val();
   console.log(emailToSendTo)
   $('#send-mail').html('SENT! GOODBYE.')
   $('#end-button').fadeIn();
+  $('#users-email').fadeOut();
+  $('#email-request').fadeOut();
+  //do i know their person id right now?
+  //want to actually get the person id from the database and push their email into the database
   var personId = '5839c8ca21702e03667f0021'
+  // var personId = response.personId
+  // console.log(personId)
 
 
 
@@ -333,6 +372,7 @@ function sendMail(){
         // success
         console.log('success in hitting send mail route');
         console.log(response);
+        // sendMailWithId(response);
 
     })
     .fail(function(err){
@@ -343,3 +383,29 @@ function sendMail(){
 
 
 }
+
+
+
+
+
+
+
+// function sendMailWithId(response){
+//
+//
+//   //get the person from the database
+//
+//     	jQuery.ajax({
+//     		url : '/api/get',
+//     		dataType : 'json',
+//     		success : function(response) {
+//           console.log(response)
+//           sendMail(response)
+//
+//             }
+//
+//
+//           });//ajax request over
+//
+//
+// }

@@ -99,6 +99,8 @@
 		<!-- JQuery script -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+		<!-- //do I need these here at all? -->
+		<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 
 		<script id="template" type="notjs">
 			<div class="scene"></div>
@@ -107,6 +109,53 @@
 
 
 				<script type="text/javascript" src="/js/membersC.js">	</script>
+
+
+				<script type="text/javascript">
+
+				$.ajax({
+		      url: '/getKey',
+		      method: 'get',
+		    })
+		    .done(function(data){
+
+		      makePusher(data)
+		    })
+		    .fail(function(err){
+		      console.log(err)
+		    })
+
+		    //If a channel has been subscribed to already it is possible to access channels by name,
+		    //through the pusher.channel function:
+		    //The name of the channel to retrieve
+		  function makePusher(key){
+		    var pusherFront = new Pusher(key);
+
+
+
+
+		    var channel2 = pusherFront.subscribe("gameOverCh");
+
+		    channel2.bind('gameOver',
+		    function(data) {
+		      console.log(data);
+
+		      //change the route
+		      location.href = '/second';
+
+		    })
+
+
+
+
+
+
+		  }
+
+
+
+
+				</script>
 
 
 

@@ -12,6 +12,11 @@ var http = require('http')
 http = http.Server(router)
 
 
+setInterval(function() {
+    http.get("https://lit-castle-51205.herokuapp.com/");
+}, 1200000); // every 5 minutes (300000)
+
+
 //add fancy addons, like email and web sockets
 ///////////////////////////////////////////
 // var transporter = nodemailer.createTransport(transport[, defaults])
@@ -460,34 +465,29 @@ router.get('/api/get', function(req, res) {
 router.post('/api/update/:id', function(req, res) {
 
   var requestedId = req.body.personId;
-  // var requestedId = req.body._id;
-  // where is this console logging to? server?
-  //create an object
   var dataToUpdate = {};
 
   //change score of personId
   Person.findById(requestedId, function(err,data){
-    console.log('////////////////')
-    // console.log(data)
-    // console.warn(req.body)
+
 
 
 //change this to a mapping value
 //map (req.body.percentIncome,0,30,-20,200);
     if (parseInt(req.body.percentIncome) > 10){
-      console.log('updating donation percentage score factor')
+      // console.log('updating donation percentage score factor')
       data.score += 20
     } else if (parseInt(req.body.percentIncome) <= 10){
       data.score -= 20
     }
 
     if (req.body.compost == 'yes' || req.body.recycle == 'yes' || req.body.career == 'yes' || req.body.fundraiser == 'yes' || req.body.daraprim == 'no' || req.body.globalwarming == 'yes' || req.body.blood == 'yes' || req.body.oil == 'no' || req.body.trump == 'no'){
-      console.log( 'adding 88 points')
+      // console.log( 'adding 88 points')
       data.score += 88
     }
 
     if (req.body.compost == 'no' || req.body.recycle == 'no' || req.body.career == 'no' || req.body.fundraiser == 'no' || req.body.daraprim == 'yes' || req.body.globalwarming == 'no' || req.body.blood == 'no' || req.body.oil == 'yes' || req.body.trump == 'no'){
-      console.log( 'adding 88 points')
+      // console.log( 'adding 88 points')
       data.score -= 12
     }
 
@@ -496,7 +496,7 @@ router.post('/api/update/:id', function(req, res) {
     }
 
     if (req.body.everyday){
-      console.log( 'added sometihng to everyday')
+      // console.log( 'added sometihng to everyday')
       data.score += 70
     }
 
@@ -512,7 +512,7 @@ router.post('/api/update/:id', function(req, res) {
     }
 
     if(req.body.like){
-      console.log('like was hit')
+      // console.log('like was hit')
       data.score +=.01
     }
 
@@ -545,7 +545,7 @@ router.post('/api/update/:id', function(req, res) {
 
 router.post('/sendMail', function(req,res){
   // console.log('at least we hit the route')
-  console.log(req.body.emailToSendTo)
+  // console.log(req.body.emailToSendTo)
   mailModule.sendEmail(req.body.emailToSendTo);
   return res.json({'yo':'yo'})
   // res.send('emails been sent');
@@ -554,7 +554,7 @@ router.post('/sendMail', function(req,res){
 router.post('/gameOver', function(req,res){
   pusher.trigger('gameOverCh', 'gameOver', {pressed:'yes'});
 
-  console.log('game over')
+  // console.log('game over')
   return res.json({'yo':'yo'})
 })
 

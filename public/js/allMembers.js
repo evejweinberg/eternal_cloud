@@ -182,7 +182,7 @@ var carriage = 0;
         //
         //
           if (response.people[i].imageUrl.includes('eternalcloudbucket')){
-            console.log('image is good')
+            // console.log('image is good')
         //
         //     //create a loader
             var loader2 = new THREE.TextureLoader();

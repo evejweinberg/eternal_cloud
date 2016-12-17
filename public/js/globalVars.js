@@ -3,6 +3,7 @@ var lastRender = 0;
 var controls;
 var yourValue = 0;
 var elementStyle;
+var showingLive = true;
   // var oscillator;
 var LeoGroup = new THREE.Group();
 var raycaster;
@@ -55,6 +56,14 @@ var currentVideo;
 var scene4= false;
 var video4 = document.getElementById( 'video4' );
 
+var tv;
+var flamingVideo = document.getElementById( 'flamingWorld' );
+// var textureFlaming = videoImage.getContext( '2d' );
+        // background color if no video present
+        // textureFlaming.fillStyle = '#000000';
+        // textureFlaming.fillRect( 0, 0, videoImage.width, videoImage.height );
+var textureFlaming = new THREE.VideoTexture( flamingVideo );
+
 
 
 var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
@@ -92,6 +101,8 @@ var switchedYet = false;
 //Loading manager - decides when to render the scene in onProgress under the loaders
 var loadingManager = new THREE.LoadingManager();
 var cameraWorldMatrix = new THREE.Vector3();
+var objectLoader3 = new THREE.ObjectLoader(loadingManager);
+// var objectLoader3 = new THREE.JSONLoader();
 
 var r = "img/";
 
@@ -107,8 +118,21 @@ var dd = today.getDate();
 var mm = today.getMonth(); //January is 0!
 var yyyy = today.getFullYear();
 var goUp = today.getFullYear()
+var hr = today.getHours()
+var min =  today.getMinutes()
+var sec = today.getSeconds()
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
+var monthNamesAb = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+  "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+];
 
-today = 'TODAY: ' +monthNames[mm]+' '+dd+', '+2045 ;
+today = monthNames[mm]+' '+dd+', '+2045 ;
+var todayAbr = monthNamesAb[mm]+' '+dd+', '+2045 ;
+var topDate = monthNamesAb[mm]+' '+dd+', '+ '2045 '+ hr+':'+ min
+
+
+
+$('#date').html('TODAY: ' +today)
+$('#date-top').html(topDate)

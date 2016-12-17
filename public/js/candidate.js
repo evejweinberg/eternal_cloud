@@ -162,10 +162,6 @@ var group = new THREE.Group();
 //for now lets just get one image mapped, to prove I cab do that.
   function renderCandidate(texture){
 
-
-
-
-
 //get the person from the database
 
   	jQuery.ajax({
@@ -314,7 +310,7 @@ $('#CareerForm').fadeIn();
 // });
 
 jQuery("#CareerForm").submit(function(e){
-  console.log('done forst one')
+  // console.log('done forst one')
   $('.progress-bar').attr("style","width:60%");
 // $("#candidateForm").fadeOut()
 $('#IntelligenceForm').fadeIn();
@@ -331,8 +327,8 @@ $('#IntelligenceForm').fadeIn();
   	},
   	success : function(response){
 	  		// success
-        console.log('success in posting career response:');
-	  		console.log(response);
+        // console.log('success in posting career response:');
+	  		// console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
   	},
@@ -367,8 +363,8 @@ jQuery("#ActivismForm").submit(function(e){
   	},
   	success : function(response){
 	  		// success
-        console.log('success in posting activism');
-	  		console.log(response);
+        // console.log('success in posting activism');
+	  		// console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
   	},
@@ -389,7 +385,7 @@ jQuery("#ActivismForm").submit(function(e){
 
 
 jQuery("#IntelligenceForm").submit(function(e){
-  console.log(typeof $("#intelligence").val())
+  // console.log(typeof $("#intelligence").val())
   // if (typeof $("#intelligence").val() === String){
       var intelligence = $("#intelligence").val();
       // console.log(intelligence + 'is the intelligence')
@@ -412,7 +408,7 @@ jQuery("#IntelligenceForm").submit(function(e){
   	success : function(response){
 	  		// success
         console.log('success in posting intelligence')
-	  		console.log(response);
+	  		// console.log(response);
 	  		// now, clear the input fields
 	  		// jQuery("#candidateForm input").val('');
   	},

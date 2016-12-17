@@ -112,7 +112,7 @@ function init() {
         alpha: false
             // antialias: true
     });
-    renderer.setSize(window.innerWidth, 600);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     // renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
     renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -135,7 +135,7 @@ function init() {
     renderer.domElement.id = "three-scene";
 
     effect = new THREE.AsciiEffect( renderer );
-    effect.setSize(window.innerWidth, 600);
+    effect.setSize(window.innerWidth, window.innerHeight);
     // container.appendChild( effect.domElement );
 
 
@@ -308,16 +308,14 @@ function init() {
             }
         })
 
+
         drawServers(6,24)
         drawServers(10,30)
-        drawServers(13,47)
-        // drawServers(16,63)
         drawServers(19,80)
-        // drawServers(23,90)
         drawServers(26,50)
-        // drawServers(30,160)
-        // drawServers(33,130)
-        drawServers(36,170)
+        drawServers(36,150)
+
+
 
 
 
@@ -350,6 +348,8 @@ function init() {
     });
 
 
+
+
     // draw all the hexes on the sky
 for (var i=0; i<70; i++){
 var rnd = [pink, pinkDrk, mint, purple]
@@ -362,6 +362,8 @@ scene.add(Hexes[i])
 
 
     addLights()
+      // drawTV();
+
     camera.parent.rotation.x = .2
 
     // addHelpers(1000, 100, [light,lightA,directionalLight,directionalLightR,directionalLight2])
@@ -383,6 +385,7 @@ scene.add(Hexes[i])
 function animate(timestamp) {
 
     requestAnimationFrame(animate);
+
 
   //  counter ++;
 
@@ -407,7 +410,7 @@ function animate(timestamp) {
 
 
 if (cameraWorldMatrix){
-  cameraWorldMatrix.setFromMatrixPosition( camera.matrixWorld);
+  cameraWorldMatrix.setFromMatrixPosition(camera.matrixWorld);
   }
 
     if (mainVidLady){
@@ -433,6 +436,7 @@ for (var i=0;i<6;i++){
 
     // console.log(dist);
     if (dist < 25){
+      // console.log('close enough')
       if (havenotHitLady){
         Login()
         video1.pause()
@@ -549,8 +553,8 @@ function onResize(e) {
     camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
-        renderer.setSize( window.innerWidth, 600);
-        	effect.setSize( window.innerWidth, 600);
+        renderer.setSize( window.innerWidth, window.innerHeight);
+        	effect.setSize( window.innerWidth, window.innerHeight);
 }
 
 function addHelpers(grid_width, dims, light_name) {

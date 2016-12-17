@@ -102,24 +102,22 @@
     //create a channel from nothing like this.
     //events are past tense "thing was created"
     var channel1 = pusherFront.subscribe("channelName");
-    // var channel2 = pusherFront.subscribe("formFinishedCh");
-    //
-    // channel2.bind('formFinished',
-    //   function(data) {
-    //     console.log(data);
-    //
-    //     //change the route
-    //     location.href = '/members';
-    //
-    //   })
+  
+
+    var channel2 = pusherFront.subscribe("gameOverCh");
+
+    channel2.bind('gameOver',
+    function(data) {
+      console.log(data);
+
+      //change the route
+      location.href = '/third';
+
+    })
 
 
 
 
-//events are published to channels.
-//all events on a channel are pushed to all subscribers of that channel
-//use channels to filter
-//bind with a callback;
     channel1.bind('addedInfo',
       function(data) {
         // add new price into the APPL widget

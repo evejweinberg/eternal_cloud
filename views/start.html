@@ -39,17 +39,19 @@
               <!-- //button to turn audio on and off -->
               <img src="img/audio.png" id='audio-toggle' onclick="toggleAudio()" name="button"></img>
 
-              <p class="top-nav-text buttons" id='your-value'>
+              <!-- <p class="top-nav-text buttons" id='your-value'>
                   Your Value
+              </p> -->
+
+              <p class="top-nav-text" id='date-top'>
+
               </p>
 
               <p class="top-nav-text buttons" id="login" style="display:none">
                   Log in
               </p>
 
-              <!-- <p class="top-nav-text buttons" onclick="sendMail" id="send-mail" style="display:none">
-                  Mail Me
-              </p> -->
+
           </div>
         </nav>
 
@@ -67,13 +69,14 @@
 
 
         <div class="form-group">
-          <p id="end-button" style="display:none" class="buttons">DONE</p>
-            <label for="email">Email me my plan:</label>
+
+            <label for="email" id="email-request">Email me my plan:</label>
             <input type="email" class="form-control" id="users-email">
             <div class="top-nav-text buttons" id="send-mail" >
                 Mail Me
             </div>
         </div>
+        <p id="end-button" style="display:none" class="buttons">RESTART</p>
 
       </div>
 
@@ -153,6 +156,8 @@
     <source src="img/login.mp4"></video>
     <video id="video4" webkit-playsinline style="display:none">
     <source src="img/toolow.mp4"></video>
+      <video id="flamingWorld" webkit-playsinline style="display:none">
+      <source src="img/flamingWorld.mp4"></video>
 
 <!-- //audio for the whole scene -->
   <audio loop audio autoplay id="myTune" volume=".1"> <source src="img/PurpleVortex.mp3"></audio>
@@ -235,14 +240,19 @@
 
       channel2.bind('photoTaken',function(data){
         console.log('photo was taken')
+          if (showingLive == false){
         thirdScreen.location.href="/candidate-solo"
+        }
 
       })
 
+      //this is triggered ont he server's route /gameOver
       channel5.bind('gameOver',function(data){
         //switch this route back to the beginning
+          if (showingLive == false){
         thirdScreen.location.href="/third"
         secondScreen.location.href="/pre-profile"
+        }
         $("#your-plan").fadeOut();
         location.reload(true);
 

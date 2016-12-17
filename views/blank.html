@@ -34,14 +34,24 @@
 				margin: auto;
 				text-align: center;
 			}
+			#flamingWorld{
+			  margin: auto 0;
+			width: 80vw;
+			position: relative;
+			left: 10vw;
+			}
+
 		</style>
 	</head>
 <body>
 
 
 <div class="center">
-<h1>DO NOT CLOSE THIS WINDOW</h1>
+<h1>GOOD MORNING</h1>
 </div>
+
+<video id="flamingWorld" class="center" webkit-playsinline autoplay loop>
+<source src="img/flamingWorld.mp4"></video>
 
 
 	<div id="my_camera"></div>
@@ -65,6 +75,17 @@
 			var pusherFront = new Pusher(key);
 
 			var channel1 = pusherFront.subscribe("photoTakenCh");
+			// var channel2 = pusherFront.subscribe("gameOverCh");
+			//
+			// channel2.bind('gameOver',
+			// function(data) {
+			// 	console.log(data);
+			//
+			// 	//change the route
+			// 	location.href = '/third';
+			//
+			// })
+
 
 
 

@@ -532,6 +532,18 @@ left: 15%;
           })
 
 
+          var channel3 = pusherFront.subscribe("gameOverCh");
+
+          channel3.bind('gameOver',
+          function(data) {
+            console.log(data);
+
+            //change the route
+            location.href = '/pre-profile';
+
+          })
+
+
       }
     </script>
 

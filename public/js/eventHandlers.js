@@ -26,14 +26,16 @@ function mOut(obj) {
 }
 
 
-document.getElementById('your-value').addEventListener('click', function(){
-  window.alert('your value to Eternal Cloud is '+ yourValue+ ' Login to earn value')
-})
+// document.getElementById('your-value').addEventListener('click', function(){
+  // window.alert('your value to Eternal Cloud is '+ yourValue+ ' Login to earn value')
+// })
 
 window.addEventListener("load", function(){
+  if (showingLive == false){
   secondScreen = window.open('/pre-profile', "loginScreen", "width=500,height=700,scrollbars=1,status=1")
   thirdScreen = window.open('/third', "thirdScreen", "width=500,height=700,scrollbars=1,status=1")
-  document.getElementById('date').innerHTML = today
+  }
+
 
 
 
@@ -51,8 +53,9 @@ function Scene4(data){
   console.log('finished form as triggered')
   console.log(data)
   listen_to_plan = true;
-
-  secondScreen.location.href="/members"
+    if (showingLive == false){
+      secondScreen.location.href="/members"
+    }
   asciiOn = false;
   switchBackfromAscii = true;
 
