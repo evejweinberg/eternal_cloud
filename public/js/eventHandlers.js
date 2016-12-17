@@ -96,7 +96,10 @@ function LoginPressed(){
       }
     });
 
-    secondScreen.location.href="/login"
+    if (showingLive == false){
+      secondScreen.location.href="/login"
+    }
+
   }
   })
 

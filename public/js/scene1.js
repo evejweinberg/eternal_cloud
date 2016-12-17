@@ -112,7 +112,7 @@ function init() {
         alpha: false
             // antialias: true
     });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight* lowerTheHeight);
     // renderer.setSize(window.innerWidth, window.innerHeight*ThreeSceneHghtRation);
     renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -135,7 +135,7 @@ function init() {
     renderer.domElement.id = "three-scene";
 
     effect = new THREE.AsciiEffect( renderer );
-    effect.setSize(window.innerWidth, window.innerHeight);
+    effect.setSize(window.innerWidth, window.innerHeight *lowerTheHeight);
     // container.appendChild( effect.domElement );
 
 
@@ -550,11 +550,23 @@ for (var i=0;i<6;i++){
 
 
 function onResize(e) {
-    camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+
+  if (asciiOn){
+    camera.aspect = window.innerWidth / window.innerHeight *1;
+    camera.updateProjectionMatrix();
       // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
-        renderer.setSize( window.innerWidth, window.innerHeight);
-        	effect.setSize( window.innerWidth, window.innerHeight);
+    renderer.setSize( window.innerWidth, window.innerHeight* 1);
+    effect.setSize( window.innerWidth, window.innerHeight* 1);
+
+  } else {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+      // renderer.setSize( window.innerWidth, window.innerHeight*ThreeSceneHghtRation );
+    renderer.setSize( window.innerWidth, window.innerWidth*lowerTheHeight);
+    effect.setSize( window.innerWidth, window.innerWidth*lowerTheHeight);
+
+  }
+
 }
 
 function addHelpers(grid_width, dims, light_name) {

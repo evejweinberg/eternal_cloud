@@ -4,6 +4,7 @@ var controls;
 var yourValue = 0;
 var elementStyle;
 var showingLive = true;
+var lowerTheHeight = .85
   // var oscillator;
 var LeoGroup = new THREE.Group();
 var raycaster;
