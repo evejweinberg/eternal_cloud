@@ -10,12 +10,12 @@ function anyFormSubmitted(e){
   answeredQuestions ++;
   document.getElementById('num-answered').innerHTML = answeredQuestions
   personId = document.getElementById('personId').innerHTML;
-  console.log($("#num-answered").text())
+  // console.log($("#num-answered").text())
 }
 
 function checkifFinished(){
-if ( $("#num-answered").text() == 12){
-  console.log('12 answers')
+if ( $("#num-answered").text() == 7){
+  // console.log('12 answers')
   jQuery.ajax({
     url : '/api/done',
     dataType : 'json',
@@ -26,7 +26,7 @@ if ( $("#num-answered").text() == 12){
     },
     success : function(response){
         // success
-        console.log('success in finishing 12 answers')
+        // console.log('success in finishing 12 answers')
         console.log(response);
     },
     error : function(err){
@@ -42,7 +42,7 @@ if ( $("#num-answered").text() == 12){
 
 function intelligenceSubmit(e){
   var intelligence = $(".education-highest:selected").val();
-  console.log(intelligence)
+  // console.log(intelligence)
   anyFormSubmitted(e);
   $.ajax({
     url: '/api/update/'+personId,
