@@ -399,9 +399,9 @@ function animate(timestamp) {
 
     camera.rotation.y += .005
   }
-  // else{
-  //   camera.rotation.y = 0
-  // }
+  else{
+    camera.rotation.y = 0
+  }
 
   if (first_descend){
     TweenMax.to(camera.rotation,3,{y:0})
