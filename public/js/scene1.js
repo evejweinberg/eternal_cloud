@@ -266,7 +266,7 @@ function init() {
             side: THREE.BackSide
         });
 
-        var geometry = new THREE.SphereGeometry(340, 32, 32);
+        var geometry = new THREE.SphereGeometry(300, 32, 32);
         var skysphere = new THREE.Mesh(geometry, material);
         scene.add(skysphere);
 
@@ -369,7 +369,7 @@ scene.add(Hexes[i])
     // addHelpers(1000, 100, [light,lightA,directionalLight,directionalLightR,directionalLight2])
 
 
-
+camera.rotation.x = 0;
 
 
 }
@@ -386,15 +386,26 @@ function animate(timestamp) {
 
     requestAnimationFrame(animate);
 
+  if (preface){
+    // console.log(preface)
 
-  //  counter ++;
+    // if(camera.rotation.x == 0){
+    //   TweenMax.to( camera.rotation, 20, 	{x:-2});
+    //
+    // }
+    // if(camera.rotation.x == -2){
+    //   TweenMax.to( camera.rotation, 20, 	{x:0})
+    // }
 
-    // mainVidLady.position.y = counter;
-
-
+    camera.rotation.y += .005
+  }
+  // else{
+  //   camera.rotation.y = 0
+  // }
 
   if (first_descend){
-    TweenMax.to(camera.position, 3,{z: 0, y: -7},function(){first_descend=false})
+    TweenMax.to(camera.rotation,3,{y:0})
+    TweenMax.to(camera.position, 3,{z: 0, y: -7, x:0},function(){first_descend=false})
   }
 
   if (listen_to_plan){

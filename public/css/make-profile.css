@@ -70,9 +70,14 @@ body {
 }
 
 #botton-button{
+	margin-top: 20px;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-110px);
+}
+
+#botton-button:hover{
+	background-color: white;
 }
 
 .blue{

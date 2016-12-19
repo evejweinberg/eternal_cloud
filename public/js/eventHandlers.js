@@ -129,6 +129,10 @@ function ThirdScene(){
   scene.add(mainVidLady)
   TweenMax.to(mainVidLady.rotation,4,{y:360})
   video3.play()
+  // aquirePointer()
+  // pointerlockchange()
+  document.exitPointerLock();
+  // setTimeout(aquirePointer(), 4000)
   // loginPrompt = setInterval(newVidLady, 3000)
 }
 
@@ -143,6 +147,7 @@ function startExperience(){
   video1.play()
   TweenMax.to("#logo",2,{width:"11%", ease: Strong.easeInOut})
     //allow animation loop to tween camera
+    preface = false;
   first_descend = true;
   //move tagline out of the way -- up, and fade out
   var tagline = document.getElementById('tagline-holder')

@@ -81,6 +81,7 @@ var purple = 0xb9a0b1;
 // BOOLEANS
 
 var first_descend = false;
+var preface = true;
 var listen_to_plan = false;
 var playFirstvideo = false;
 var havenotHitLady = true;
